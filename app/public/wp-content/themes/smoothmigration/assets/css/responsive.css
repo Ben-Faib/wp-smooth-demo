@@ -1,0 +1,21 @@
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .service-card {
+    padding: 1.5rem;
+  }
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  .hero .container {
+      padding: 0 0.5rem;
+  }
+  .container {
+      padding: 0 0.75rem;
+  }
+  .hero .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+  }
+} 

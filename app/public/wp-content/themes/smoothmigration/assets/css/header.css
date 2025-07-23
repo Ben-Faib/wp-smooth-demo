@@ -1,0 +1,52 @@
+/* Modern Header */
+.site-header {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none; /* removed blur so hero colour shows cleanly */
+  position: fixed; /* overlay hero */
+  top: 0;
+  z-index: 1020;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-color) !important;
+  text-decoration: none;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: var(--text-dark) !important;
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.25rem;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: var(--bg-light);
+  color: var(--primary-color) !important;
+}
+
+/* Header style when scrolled */
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Brand & nav link colors for transparent header */
+.site-header .navbar-brand,
+.site-header .nav-link {
+  color: #ffffff !important;
+}
+
+.site-header.scrolled .navbar-brand {
+  color: var(--primary-color) !important;
+}
+
+.site-header.scrolled .nav-link {
+  color: var(--text-dark) !important;
+} 
