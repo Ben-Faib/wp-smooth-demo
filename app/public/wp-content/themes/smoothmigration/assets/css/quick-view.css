@@ -1,0 +1,36 @@
+/* --- Quick View Modal --- */
+
+.modal-header {
+    border-bottom: 1px solid var(--border-light);
+    padding: 1rem 1.5rem;
+}
+
+.modal-title {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body .list-group-item {
+    border-color: var(--border-light);
+    padding: 1rem 0;
+}
+
+.modal-body .list-group-item:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.modal-body .list-group-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.modal-body h5 {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--primary-color);
+} 

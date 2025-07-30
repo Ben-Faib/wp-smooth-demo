@@ -1,0 +1,14 @@
+{
+    "name": "smoothmigrant/wp-smooth-demo",
+    "description": "A demo WordPress project showcasing advanced theme, plugin, REST API, and WP-CLI usage",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Smoothmigrant\\WpSmoothDemo\\": "wp-content/plugins/system-tools/src/"
+        }
+    },
+    "require-dev": {
+        "wp-cli/wp-cli-bundle": "^2.12"
+    }
+}

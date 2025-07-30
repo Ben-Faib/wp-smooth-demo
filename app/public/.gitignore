@@ -1,0 +1,46 @@
+# Ignore WordPress core files and folders
+/wp-admin/
+/wp-includes/
+/index.php
+/license.txt
+/readme.html
+/wp-*.php
+
+# Ignore all plugins except your own (if any)
+wp-content/plugins/*
+!wp-content/plugins/your-custom-plugin-folder/
+
+# Ignore all themes except your own
+wp-content/themes/*
+!wp-content/themes/smoothmigration/
+
+# Ignore uploads, backups, and cache
+wp-content/uploads/
+wp-content/ai1wm-backups/
+wp-content/backups/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+wp-content/debug.log
+
+# Ignore database exports and local dev files
+*.sql
+*.sqlite
+*.log
+*.zip
+*.tar.gz
+*.wpress
+*.bak
+*.tmp
+
+# Ignore OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Node and Composer dependencies (if used)
+node_modules/
+vendor/ 

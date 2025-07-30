@@ -1,0 +1,296 @@
+/* Enhanced Footer Styles - Fixed Logo & Simplified */
+.site-footer {
+    background: var(--text-dark);
+    color: white;
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+}
+
+/* Fixed Footer Brand Section */
+.footer-brand {
+    margin-bottom: 2rem;
+}
+
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1); /* Make logo white */
+}
+
+.footer-brand-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0;
+}
+
+/* Footer Headings */
+.footer-heading {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Footer Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Special styling for AI Relocation Checklist */
+.footer-links li:first-child .footer-link {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.footer-links li:first-child .footer-link:hover {
+    color: #e6b008;
+}
+
+/* Footer Divider */
+.footer-divider {
+    border-color: rgba(255, 255, 255, 0.2);
+    margin: 2.5rem 0 1.5rem;
+}
+
+/* Footer Bottom Section */
+.footer-copyright {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Social Links */
+.footer-social {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: var(--accent-color);
+    color: var(--text-dark);
+    transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 2rem 0 1rem;
+        text-align: center;
+    }
+    
+    .footer-logo-container {
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-brand {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .footer-description {
+        max-width: none;
+        text-align: center;
+    }
+    
+    .footer-social {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    .footer-heading {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-links li {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .site-footer {
+        padding: 1.5rem 0 1rem;
+    }
+    
+    .footer-logo {
+        height: 40px;
+        width: 40px;
+    }
+    
+    .footer-brand-text {
+        font-size: 1.1rem;
+    }
+    
+    .footer-heading {
+        font-size: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .footer-copyright {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .site-footer {
+        background: black;
+        border-top: 2px solid white;
+    }
+    
+    .footer-link:hover {
+        color: white;
+    }
+    
+    .social-link {
+        border: 1px solid white;
+    }
+    
+    .footer-links li:first-child .footer-link {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .footer-link,
+    .social-link {
+        transition: none;
+    }
+    
+    .social-link:hover {
+        transform: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .site-footer {
+        background: white !important;
+        color: black !important;
+        border-top: 2px solid black;
+    }
+    
+    .footer-logo {
+        filter: none;
+    }
+    
+    .footer-brand-text,
+    .footer-heading {
+        color: black !important;
+    }
+    
+    .footer-link {
+        color: black !important;
+    }
+    
+    .social-link {
+        display: none;
+    }
+}
+
+/* Focus states for accessibility */
+.footer-link:focus,
+.social-link:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Loading animation for footer content */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-brand,
+.footer-links {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Hover effect for footer sections */
+.footer-links:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-brand,
+    .footer-links {
+        animation: none;
+    }
+    
+    .footer-links:hover {
+        transform: none;
+    }
+}
