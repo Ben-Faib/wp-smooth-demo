@@ -1,15 +1,12 @@
 # Comprehensive Project Overview
-
-This repository hosts a **WordPress** web-site that runs under a custom theme called **`smoothmigration`**.  The goal of this document is to give editors and developers a **single point of reference** that explains *what lives where*, *why it matters*, and *how to change it safely*.
-
 ---
 ## 1. Repository Layout (top-level)
 
 | Path | Purpose |
 |------|---------|
 | `app/` | All runtime assets that power the site (WordPress core + SQL dump). |
-| `app/public/` | The **document-root** served by the web server – a full Composer-controlled WordPress installation. |
-| `app/sql/local.sql` | A **2 MB** database dump that can be imported for local development. |
+| `app/public/` | The **document-root** served by the web server – Composer controlled for easy CLI usage. |
+| `app/sql/local.sql` | Database. |
 | `vendor/` | PHP dependencies installed by Composer at the repository root (tools / CI helpers). |
 | `composer.json` | Root composer file – currently pulls in the WP-CLI *widget-command* package. |
 
@@ -24,7 +21,7 @@ Inside `app/public` you will find the usual WordPress core directories (`wp-admi
 |------|-------|
 | `composer.json` + `composer.lock` | Defines the site as a Composer project (`type: project`). Autoloads namespace **`Smoothmigrant\WpSmoothDemo\`** from a custom plugin (`wp-content/plugins/system-tools`). |
 | `wp-config.php` | Standard configuration file – DB credentials, salts, etc. |
-| `create-all-services.php` | A CLI helper that bulk-creates Service posts (useful for seeding the DB).
+| `create-all-services.php` | A CLI helper that bulk-creates Service posts. Was Placeholder 
 | `vendor/` | Dependencies specific to the runtime WP site (installed via the *public* composer.json). |
 
 ---
@@ -41,7 +38,7 @@ Inside `app/public` you will find the usual WordPress core directories (`wp-admi
 | `taxonomy-service_type.php` | Renders archive pages for the custom *Service Type* taxonomy. |
 | `index.php`, `page.php` | Generic fall-backs that WordPress uses when no more specific template applies. |
 | `header.php`, `footer.php` | Site-wide header & footer markup. |
-| `style.css` | Required WordPress stylesheet header + global CSS.  (Use the existing color palette for visual consistency [[memory:4176996]].) |
+| `style.css` | Required WordPress stylesheet header + global CSS.  (Use the existing color palette for visual consistency.) |
 | `functions.php` | **Bootstrap file** that loads everything under `/inc`; keeps itself intentionally short (≈ 27 lines). |
 
 ### 3.2 `/inc` – Keep PHP logic organised
@@ -54,7 +51,7 @@ Inside `app/public` you will find the usual WordPress core directories (`wp-admi
 | `ajax.php` | Defines **AJAX endpoints** (both front-end and admin) – check here if you need custom dynamic behaviour. |
 | `seo-meta.php` | Inserts `<meta>` tags (OpenGraph, Twitter cards) based on post/page context for better SEO. |
 | `cpt-service.php` | *Registers* the custom post type **Service** and its taxonomy **Service Type**, adds Gutenberg-compatible meta boxes, custom columns, and REST exposure. |
-| `elementor.php` | Lightweight glue so the theme plays nicely with the Elementor page-builder. |
+| `elementor.php` | Leftover from previous tries. Will delete soon |
 | `demo-content.php` | Programmatic content import for demos / previews.
 
 ### 3.3 `/assets`
@@ -80,7 +77,7 @@ assets/
 > **Editing styles**: create a new `.css` (or `.scss`) file inside `assets/css` and enqueue it from `inc/enqueue.php`.  JavaScript follows the same pattern.
 
 ### 3.4 `/template-parts`
-Currently only `content-none.php` (fallback message *“Nothing found”*).  Feel free to add reusable chunks here (hero, testimonial, etc.) and include them from templates via `get_template_part()`.
+Currently only `content-none.php` (fallback message *“Nothing found”*). Might be good to add reusable chunks here (hero, testimonial, etc.) and include them from templates via `get_template_part()`.
 
 ---
 ## 4. Custom Functionality at a Glance
@@ -98,10 +95,10 @@ Currently only `content-none.php` (fallback message *“Nothing found”*).  Fee
    Registered in `inc/ajax.php` – both unauthenticated (`wp_ajax_nopriv_*`) and admin (`wp_ajax_*`).  Useful for dynamic forms, quick-view, etc.
 
 4. **Elementor Integration**  
-   Adds theme styles & swaps nav walker when Elementor Canvas is active so styling stays consistent.
+   Needs to be removed
 
 ---
-## 5. Working Locally / Deployment
+## 5. Working Locally / Deployment (IF NOT USING SOMETHING LIKE LOCAL BY FLYWHEEL)
 
 1. **Clone the repo** and run `composer install` at *both* the repo root **and** `app/public`.
 2. Import `app/sql/local.sql` into your local MySQL instance (`wp-smooth-demo` recommended DB name).
@@ -119,7 +116,7 @@ Currently only `content-none.php` (fallback message *“Nothing found”*).  Fee
 2. **Open the template** under `wp-content/themes/smoothmigration/`.
 3. **Adjust markup / PHP** as needed.  *Keep business logic out of templates – move to `/inc` when possible.*
 4. **Style it** by editing/adding a file in `assets/css` and enqueueing it.
-5. **Respect the colour palette** defined in `style.css` to maintain brand cohesion [[memory:4176996]].
+5. **Respect the colour palette** defined in `style.css` to maintain brand cohesion.
 6. **Save & refresh** – in dev the site auto-reloads; in production remember to purge caches.
 
 ---
@@ -133,8 +130,3 @@ Currently only `content-none.php` (fallback message *“Nothing found”*).  Fee
 | Override button styles site-wide | `assets/css/buttons.css` |
 | Register a new JS file | Add file to `assets/js` **and** enqueue via `inc/enqueue.php` |
 | Update footer credits | `footer.php` |
-
----
-## 8. Need More Info?
-
-Search the codebase for `TODO:` comments – they mark areas that might need developer attention.  And of course, don’t hesitate to ask further questions!
