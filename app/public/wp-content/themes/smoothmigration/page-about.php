@@ -6,6 +6,49 @@
  * @package smoothmigration
  */
 
+/**
+ * Get team member image by searching for filename
+ */
+function get_team_member_image($search_term, $alt_text = '', $class = 'team-image') {
+    // Search for attachments that match the search term
+    $attachments = get_posts(array(
+        'post_type' => 'attachment',
+        'post_mime_type' => 'image',
+        'post_status' => 'inherit',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key' => '_wp_attached_file',
+                'value' => $search_term,
+                'compare' => 'LIKE'
+            )
+        )
+    ));
+    
+    // Also search by post title
+    if (empty($attachments)) {
+        $attachments = get_posts(array(
+            'post_type' => 'attachment',
+            'post_mime_type' => 'image',
+            'post_status' => 'inherit',
+            'posts_per_page' => 1,
+            's' => $search_term
+        ));
+    }
+    
+    if (!empty($attachments)) {
+        $attachment = $attachments[0];
+        $image_url = wp_get_attachment_image_url($attachment->ID, 'full');
+        if ($image_url) {
+            return '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($alt_text) . '" class="' . esc_attr($class) . '" />';
+        }
+    }
+    
+    // Fallback: return placeholder if image not found
+    return '<div class="photo-placeholder"><i class="fas fa-user"></i></div>';
+}
+
 get_header();
 ?>
 
@@ -256,7 +299,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll">
                         <div class="team-photo">
-                            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/team-photos/Grant headshot.jpg" alt="Grant Sakinofsky" class="team-image" />
+                            <?php echo get_team_member_image('Grant', 'Grant Sakinofsky'); ?>
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
@@ -280,7 +323,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.2s;">
                         <div class="team-photo">
-                            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/team-photos/Erin Digital.jpg" alt="Erin Copeland" class="team-image" />
+                            <?php echo get_team_member_image('Erin', 'Erin Copeland'); ?>
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
@@ -304,7 +347,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.4s;">
                         <div class="team-photo">
-                            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/team-photos/Christian-Harbeck.png" alt="Christian Harmbeck" class="team-image" />
+                            <?php echo get_team_member_image('Christian', 'Christian Harmbeck'); ?>
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
@@ -328,7 +371,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.1s;">
                         <div class="team-photo">
-                            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/team-photos/rob 3.jpg" alt="Robert Wood" class="team-image" />
+                            <?php echo get_team_member_image('rob', 'Robert Wood'); ?>
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
