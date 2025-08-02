@@ -484,7 +484,7 @@ get_header();
                 <div class="col-lg-10">
                     <div class="ai-faq-accordion">
                         <div class="faq-item">
-                            <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#aiFaq1">
+                            <div class="faq-header" data-target="#aiFaq1">
                                 <h4>How does the AI understand my specific needs?</h4>
                                 <i class="fas fa-plus"></i>
                             </div>
@@ -496,7 +496,7 @@ get_header();
                         </div>
                         
                         <div class="faq-item">
-                            <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#aiFaq2">
+                            <div class="faq-header" data-target="#aiFaq2">
                                 <h4>Is my personal data safe with AI processing?</h4>
                                 <i class="fas fa-plus"></i>
                             </div>
@@ -508,7 +508,7 @@ get_header();
                         </div>
                         
                         <div class="faq-item">
-                            <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#aiFaq3">
+                            <div class="faq-header" data-target="#aiFaq3">
                                 <h4>Will AI replace human support entirely?</h4>
                                 <i class="fas fa-plus"></i>
                             </div>
@@ -520,7 +520,7 @@ get_header();
                         </div>
                         
                         <div class="faq-item">
-                            <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#aiFaq4">
+                            <div class="faq-header" data-target="#aiFaq4">
                                 <h4>What makes this different from chatbots?</h4>
                                 <i class="fas fa-plus"></i>
                             </div>
@@ -532,7 +532,7 @@ get_header();
                         </div>
                         
                         <div class="faq-item">
-                            <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#aiFaq5">
+                            <div class="faq-header" data-target="#aiFaq5">
                                 <h4>When will the AI Relocator be available?</h4>
                                 <i class="fas fa-plus"></i>
                             </div>
@@ -1303,7 +1303,13 @@ get_header();
     border-radius: var(--border-radius-xl);
     margin-bottom: 1rem;
     overflow: hidden;
+    transition: all 0.3s ease;
     box-shadow: var(--shadow-sm);
+}
+
+.ai-faq-accordion .faq-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
 }
 
 .ai-faq-accordion .faq-header {
@@ -1331,10 +1337,66 @@ get_header();
     transition: transform 0.3s ease;
 }
 
+/* Professional Fade + Slide Animation for AI FAQ */
+.ai-faq-accordion .collapse {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease 0.1s,
+                transform 0.3s ease 0.1s;
+}
+
+.ai-faq-accordion .collapse.show {
+    max-height: 1000px; /* Generous height for content */
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease 0.05s,
+                transform 0.4s ease 0.05s;
+}
+
 .ai-faq-accordion .faq-answer {
     padding: 0 2rem 2rem;
     color: var(--text-medium);
     line-height: 1.7;
+}
+
+/* Subtle content staggering for premium feel */
+.ai-faq-accordion .collapse.show .faq-answer > *:nth-child(1) {
+    animation: fadeInUp 0.4s ease 0.1s both;
+}
+
+.ai-faq-accordion .collapse.show .faq-answer > *:nth-child(2) {
+    animation: fadeInUp 0.4s ease 0.15s both;
+}
+
+.ai-faq-accordion .collapse.show .faq-answer > *:nth-child(3) {
+    animation: fadeInUp 0.4s ease 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .ai-faq-accordion .collapse,
+    .ai-faq-accordion .collapse.show,
+    .ai-faq-accordion .faq-answer,
+    .ai-faq-accordion .collapse.show .faq-answer > * {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+    }
 }
 
 /* Responsive Design */
@@ -1441,14 +1503,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     faqHeaders.forEach(header => {
         header.addEventListener('click', function() {
-            const target = this.getAttribute('data-bs-target');
+            const target = this.getAttribute('data-target');
             const targetElement = document.querySelector(target);
             const icon = this.querySelector('i');
             
             // Close other open items
             faqHeaders.forEach(otherHeader => {
                 if (otherHeader !== this) {
-                    const otherTarget = otherHeader.getAttribute('data-bs-target');
+                    const otherTarget = otherHeader.getAttribute('data-target');
                     const otherElement = document.querySelector(otherTarget);
                     const otherIcon = otherHeader.querySelector('i');
                     

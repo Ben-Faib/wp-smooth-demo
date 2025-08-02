@@ -33,12 +33,12 @@ get_header();
                         
                         <div class="hero-stats d-flex flex-wrap justify-content-center gap-4">
                             <div class="stat-item">
-                                <div class="stat-number">50+</div>
-                                <div class="stat-label">Questions Answered</div>
+                                <div class="stat-number">16</div>
+                                <div class="stat-label">Key Questions Answered</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">95%</div>
-                                <div class="stat-label">Find Their Answer</div>
+                                <div class="stat-number">365</div>
+                                <div class="stat-label">Days of Support</div>
                             </div>
                         </div>
                     </div>
@@ -80,60 +80,69 @@ get_header();
                             <h3 class="section-title">General Questions</h3>
                             
                             <div class="faq-item" data-faq-id="1">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                    <h4 class="faq-question">What is Smooth Migration Global?</h4>
+                                <div class="faq-header" data-target="#faq1">
+                                    <h4 class="faq-question">What is international relocation to Smooth Migration Global?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq1" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq1">
                                     <div class="faq-answer">
-                                        <p>Smooth Migration Global is a comprehensive relocation platform founded by expats, for expats. We provide personalized support and trusted service connections to make international moves seamless and stress-free.</p>
-                                        <p>Our platform connects you with vetted professionals across 50+ countries, offering everything from housing and banking to visa support and school searches.</p>
+                                        <p>At Smooth Migration Global, we deliver expert-driven, customized solutions that support seamless transitions and long-term success for individuals and businesses alike.</p>
+                                        <p>International relocation and cross-border business expansion involve complex processes as well as successfully adapting to new cultures, work environments, and lifestyles. We understand these challenges because we've lived them ourselves.</p>
+                                        <div class="services-grid">
+                                            <div class="service-item">🌍 Cultural Adaptation</div>
+                                            <div class="service-item">💼 Work Environment Integration</div>
+                                            <div class="service-item">🏠 Lifestyle Transition</div>
+                                            <div class="service-item">📋 Complex Process Management</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="faq-item" data-faq-id="2">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                    <h4 class="faq-question">How is Smooth Migration different from other relocation companies?</h4>
+                                <div class="faq-header" data-target="#faq2">
+                                    <h4 class="faq-question">What services do you provide? Are you an immigration agency?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq2" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq2">
                                     <div class="faq-answer">
-                                        <p>We're founded by expats who have personally experienced international relocation. This gives us unique insights into the real challenges families face.</p>
-                                        <ul>
-                                            <li>Personal experience-driven approach</li>
-                                            <li>Technology-enabled efficiency</li>
-                                            <li>Transparent pricing with no hidden fees</li>
-                                            <li>Global network of vetted partners</li>
-                                            <li>24/7 support throughout your journey</li>
-                                        </ul>
+                                        <p><strong>We are not an immigration agency.</strong> Immigration agencies offer legal services for visas, while shipping companies only manage moving goods.</p>
+                                        <p>We work with immigration agencies and shipping companies to provide a comprehensive range of relocation services necessary for moving countries successfully.</p>
+                                        <div class="country-list">
+                                            <div class="country-group">
+                                                <strong>Our Role:</strong> Comprehensive relocation coordination and support services
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Immigration Agencies:</strong> Legal visa and documentation services
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Shipping Companies:</strong> Moving goods and belongings internationally
+                                            </div>
+                                        </div>
+                                        <p>Think of us as your relocation concierge - we coordinate with all the specialists you need for a smooth transition.</p>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="faq-item" data-faq-id="3">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                    <h4 class="faq-question">Which countries do you cover?</h4>
+                                <div class="faq-header" data-target="#faq3">
+                                    <h4 class="faq-question">Can anyone contact Smooth Migration or only referred clients?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq3" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq3">
                                     <div class="faq-answer">
-                                        <p>We currently serve 50+ countries across all major continents, with our strongest presence in:</p>
-                                        <div class="country-list">
-                                            <div class="country-group">
-                                                <strong>Europe:</strong> UK, Germany, France, Spain, Netherlands, Switzerland, Ireland
+                                        <p><strong>Anyone can contact us!</strong> You don't need a referral or special invitation.</p>
+                                        <p>Whether you're moving from any country to one of our service countries, we're here to provide free assistance and guidance. Our doors are open to everyone who needs support with international relocation.</p>
+                                        <div class="pricing-options">
+                                            <div class="pricing-item">
+                                                <strong>Free Initial Consultation:</strong> No cost to explore how we can help
                                             </div>
-                                            <div class="country-group">
-                                                <strong>Asia-Pacific:</strong> Singapore, Australia, Japan, Hong Kong, New Zealand, Malaysia
+                                            <div class="pricing-item">
+                                                <strong>No Referral Required:</strong> Direct access to our services
                                             </div>
-                                            <div class="country-group">
-                                                <strong>North America:</strong> United States, Canada
-                                            </div>
-                                            <div class="country-group">
-                                                <strong>Middle East:</strong> UAE, Qatar, Saudi Arabia
+                                            <div class="pricing-item">
+                                                <strong>Global Accessibility:</strong> Support for moves from any country to our service locations
                                             </div>
                                         </div>
-                                        <p>Don't see your destination? <a href="/contact">Contact us</a> - we're constantly expanding our network.</p>
                                     </div>
                                 </div>
                             </div>
@@ -144,66 +153,185 @@ get_header();
                             <h3 class="section-title">Services</h3>
                             
                             <div class="faq-item" data-faq-id="4">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                    <h4 class="faq-question">What services do you offer?</h4>
+                                <div class="faq-header" data-target="#faq4">
+                                    <h4 class="faq-question">How does your insurance work?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq4" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq4">
                                     <div class="faq-answer">
-                                        <p>We offer comprehensive relocation services including:</p>
+                                        <p>We partner with some of the best international insurance providers to offer a comprehensive variety of insurance types, with their extensive support teams working alongside us.</p>
                                         <div class="services-grid">
-                                            <div class="service-item">🏠 Housing & Real Estate</div>
-                                            <div class="service-item">🏦 Banking & Finance</div>
-                                            <div class="service-item">📋 Visa & Immigration</div>
-                                            <div class="service-item">🛡️ Insurance</div>
-                                            <div class="service-item">🚚 International Moving</div>
-                                            <div class="service-item">🎓 School Search</div>
-                                            <div class="service-item">🐕 Pet Relocation</div>
-                                            <div class="service-item">📱 Telecommunications</div>
-                                            <div class="service-item">🚗 Vehicle Services</div>
-                                            <div class="service-item">💼 Business Setup</div>
+                                            <div class="service-item">🛡️ Travel Insurance</div>
+                                            <div class="service-item">🏥 Health Insurance</div>
+                                            <div class="service-item">🏠 Property Insurance</div>
+                                            <div class="service-item">🚗 Vehicle Insurance</div>
+                                            <div class="service-item">💼 Business Insurance</div>
+                                            <div class="service-item">🔒 Personal Liability</div>
                                         </div>
-                                        <p><a href="/services">View all services</a> for detailed information.</p>
+                                        <p>Generally, everyone should consider one of our travel insurance options, but there are additional coverage types depending on your individual needs. Our immigration agency partners often recommend starting with our insurance consultation.</p>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="faq-item" data-faq-id="5">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                    <h4 class="faq-question">Can I choose individual services or do I need a complete package?</h4>
+                                <div class="faq-header" data-target="#faq5">
+                                    <h4 class="faq-question">How do you help teachers relocate?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq5" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq5">
                                     <div class="faq-answer">
-                                        <p>You have complete flexibility! You can:</p>
-                                        <ul>
-                                            <li>Select individual services as needed</li>
-                                            <li>Choose pre-designed packages for common scenarios</li>
-                                            <li>Work with our team to create a custom package</li>
-                                            <li>Add or modify services throughout your relocation process</li>
-                                        </ul>
-                                        <p>Our platform is designed to adapt to your unique needs and timeline.</p>
+                                        <p><strong>We provide comprehensive support for educators - completely free!</strong></p>
+                                        <p>We work closely with schools, colleges, and immigration agencies to assist new teachers in getting settled in their destination country.</p>
+                                        <div class="services-grid">
+                                            <div class="service-item">🏠 Rental Assistance</div>
+                                            <div class="service-item">🚗 Vehicle Purchase Support</div>
+                                            <div class="service-item">🛡️ Travel Insurance</div>
+                                            <div class="service-item">🏦 Banking Setup</div>
+                                            <div class="service-item">📱 Phone & Internet</div>
+                                            <div class="service-item">🎓 School Integration</div>
+                                        </div>
+                                        <p>Our teacher relocation program recognizes the vital role educators play in our communities, which is why we provide these essential services at no cost.</p>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="faq-item" data-faq-id="6">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq6">
-                                    <h4 class="faq-question">How do you vet your service partners?</h4>
+                                <div class="faq-header" data-target="#faq6">
+                                    <h4 class="faq-question">Do you offer business services?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq6" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq6">
                                     <div class="faq-answer">
-                                        <p>We have a rigorous vetting process for all partners:</p>
-                                        <ul>
-                                            <li>Verification of licenses and certifications</li>
-                                            <li>Reference checks and testimonials</li>
-                                            <li>Financial stability assessment</li>
-                                            <li>Quality of service evaluation</li>
-                                            <li>Ongoing performance monitoring</li>
-                                            <li>Regular client feedback reviews</li>
-                                        </ul>
-                                        <p>Only partners who meet our high standards become part of our network.</p>
+                                        <p><strong>Yes, we do!</strong> Our business services are managed on a case-by-case basis to ensure personalized solutions.</p>
+                                        <p>We have a comprehensive range of business-specific services available in all of our locations. Whether you're expanding internationally or setting up a new venture, we can help.</p>
+                                        <div class="country-list">
+                                            <div class="country-group">
+                                                <strong>Company Registration:</strong> Legal entity setup and compliance
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Tax Requirements:</strong> Inter-country tax planning and setup
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Banking Solutions:</strong> Business account setup and financial services
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Compliance Support:</strong> Regulatory requirements and ongoing compliance
+                                            </div>
+                                        </div>
+                                        <p>Ready to expand your business internationally? <a href="/contact">Reach out via our contact form</a> to discuss your specific requirements.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item" data-faq-id="7">
+                                <div class="faq-header" data-target="#faq7">
+                                    <h4 class="faq-question">Can you assist in setting up our company when we arrive?</h4>
+                                    <i class="fas fa-plus faq-icon"></i>
+                                </div>
+                                <div class="collapse" id="faq7">
+                                    <div class="faq-answer">
+                                        <p><strong>Absolutely!</strong> We have some of the most innovative partners in our service countries who can assist with various aspects of company setup and business establishment.</p>
+                                        <div class="process-steps">
+                                            <div class="process-step">
+                                                <div class="step-number">1</div>
+                                                <div class="step-content">
+                                                    <h5>Company Registration</h5>
+                                                    <p>Complete legal entity setup with all required documentation and registrations.</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">2</div>
+                                                <div class="step-content">
+                                                    <h5>Tax Setup</h5>
+                                                    <p>Inter-country tax requirements, structures, and ongoing compliance planning.</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">3</div>
+                                                <div class="step-content">
+                                                    <h5>Banking & Finance</h5>
+                                                    <p>Business banking setup, merchant services, and financial infrastructure.</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">4</div>
+                                                <div class="step-content">
+                                                    <h5>Ongoing Support</h5>
+                                                    <p>Continued guidance for regulatory compliance and business operations.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item" data-faq-id="8">
+                                <div class="faq-header" data-target="#faq8">
+                                    <h4 class="faq-question">Our immigration agency recommended that we ask Smooth Migration which insurance options we need - where do we start?</h4>
+                                    <i class="fas fa-plus faq-icon"></i>
+                                </div>
+                                <div class="collapse" id="faq8">
+                                    <div class="faq-answer">
+                                        <p><strong>Great question!</strong> Immigration agencies often recommend us because we specialize in helping new residents understand their insurance needs in their destination country.</p>
+                                        <p>Generally, everyone should look at one of our travel insurance options as a starting point, but there are a number of other coverage types depending on your individual needs and circumstances.</p>
+                                        <div class="services-grid">
+                                            <div class="service-item">🛡️ Travel Insurance (Essential)</div>
+                                            <div class="service-item">🏥 Health Insurance</div>
+                                            <div class="service-item">🏠 Property Insurance</div>
+                                            <div class="service-item">🚗 Vehicle Insurance</div>
+                                            <div class="service-item">💼 Business Insurance</div>
+                                            <div class="service-item">👨‍👩‍👧‍👦 Family Coverage Plans</div>
+                                        </div>
+                                        <p><strong>Recommended Starting Process:</strong></p>
+                                        <div class="process-steps">
+                                            <div class="process-step">
+                                                <div class="step-number">1</div>
+                                                <div class="step-content">
+                                                    <h5>Travel Insurance First</h5>
+                                                    <p>Secure travel insurance for your journey and initial period in the new country.</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">2</div>
+                                                <div class="step-content">
+                                                    <h5>Personal Consultation</h5>
+                                                    <p>Discuss your specific situation, family needs, and destination requirements.</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">3</div>
+                                                <div class="step-content">
+                                                    <h5>Customized Recommendations</h5>
+                                                    <p>Receive tailored insurance options that match your individual circumstances.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p><a href="/contact">Contact us today</a> for a personalized insurance consultation - we'll work with your immigration agency to ensure you have the right coverage from day one.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item" data-faq-id="9">
+                                <div class="faq-header" data-target="#faq9">
+                                    <h4 class="faq-question">How do I get a shipping quote if it's not on your website?</h4>
+                                    <i class="fas fa-plus faq-icon"></i>
+                                </div>
+                                <div class="collapse" id="faq9">
+                                    <div class="faq-answer">
+                                        <p>We have recently changed web providers and our new website is currently under development with enhanced features and functionality.</p>
+                                        <p><strong>For all service queries, including shipping quotes, please complete our contact form on any of our websites.</strong></p>
+                                        <div class="pricing-options">
+                                            <div class="pricing-item">
+                                                <strong>Quick Response:</strong> We'll get back to you within 24 hours with a detailed quote
+                                            </div>
+                                            <div class="pricing-item">
+                                                <strong>Comprehensive Assessment:</strong> We'll review your specific shipping needs and provide options
+                                            </div>
+                                            <div class="pricing-item">
+                                                <strong>Competitive Pricing:</strong> Benefit from our negotiated rates with trusted shipping partners
+                                            </div>
+                                        </div>
+                                        <p>Thank you for your patience as we improve our digital experience!</p>
                                     </div>
                                 </div>
                             </div>
@@ -213,73 +341,30 @@ get_header();
                         <div class="faq-section" data-category="pricing">
                             <h3 class="section-title">Pricing</h3>
                             
-                            <div class="faq-item" data-faq-id="7">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq7">
-                                    <h4 class="faq-question">How much do your services cost?</h4>
+                            <div class="faq-item" data-faq-id="10">
+                                <div class="faq-header" data-target="#faq10">
+                                    <h4 class="faq-question">How does Smooth Migration negotiate better pricing?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq7" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq10">
                                     <div class="faq-answer">
-                                        <p>Our pricing varies based on:</p>
-                                        <ul>
-                                            <li>Services selected</li>
-                                            <li>Destination country</li>
-                                            <li>Timeline requirements</li>
-                                            <li>Complexity of your move</li>
-                                        </ul>
-                                        <p>We offer:</p>
+                                        <p><strong>Volume and strategic partnerships are key to our cost savings.</strong></p>
+                                        <p>We operate across numerous locations and work with high volumes of people, which allows us to negotiate significantly better rates that we then pass directly onto our clients.</p>
                                         <div class="pricing-options">
                                             <div class="pricing-item">
-                                                <strong>Individual Services:</strong> Starting from $299 per service
+                                                <strong>Volume Discounts:</strong> Our scale allows us to secure wholesale pricing across services
                                             </div>
                                             <div class="pricing-item">
-                                                <strong>Basic Package:</strong> $1,999 (3-5 core services)
+                                                <strong>Strategic Partnerships:</strong> Long-term relationships with trusted providers mean better rates
                                             </div>
                                             <div class="pricing-item">
-                                                <strong>Complete Package:</strong> $3,999 (comprehensive support)
+                                                <strong>Direct Savings:</strong> We pass these negotiated savings directly to you - no markup
+                                            </div>
+                                            <div class="pricing-item">
+                                                <strong>Package Benefits:</strong> Bundling services often provides additional cost efficiencies
                                             </div>
                                         </div>
-                                        <p><a href="/contact">Contact us</a> for a personalized quote based on your specific needs.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item" data-faq-id="8">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq8">
-                                    <h4 class="faq-question">Are there any hidden fees?</h4>
-                                    <i class="fas fa-plus faq-icon"></i>
-                                </div>
-                                <div class="collapse" id="faq8" data-bs-parent="#faqAccordion">
-                                    <div class="faq-answer">
-                                        <p><strong>No hidden fees, ever.</strong> We believe in complete transparency.</p>
-                                        <p>Your quote includes:</p>
-                                        <ul>
-                                            <li>Service coordination and management</li>
-                                            <li>Partner vetting and quality assurance</li>
-                                            <li>24/7 customer support</li>
-                                            <li>Progress tracking and updates</li>
-                                            <li>Documentation and reporting</li>
-                                        </ul>
-                                        <p>The only additional costs would be third-party fees (like government charges for visas) which are clearly itemized upfront.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item" data-faq-id="9">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq9">
-                                    <h4 class="faq-question">Do you offer payment plans?</h4>
-                                    <i class="fas fa-plus faq-icon"></i>
-                                </div>
-                                <div class="collapse" id="faq9" data-bs-parent="#faqAccordion">
-                                    <div class="faq-answer">
-                                        <p>Yes! We offer flexible payment options:</p>
-                                        <ul>
-                                            <li><strong>Pay as you go:</strong> Pay for each service as it's delivered</li>
-                                            <li><strong>Milestone payments:</strong> Split into 2-3 payments based on progress</li>
-                                            <li><strong>Monthly installments:</strong> Spread costs over 6-12 months</li>
-                                            <li><strong>Corporate billing:</strong> Direct billing to employers</li>
-                                        </ul>
-                                        <p>We accept all major credit cards, bank transfers, and corporate payment methods.</p>
+                                        <p>In many cases, you'll find our package pricing is more competitive than sourcing services individually, while providing the added benefit of coordinated, seamless service delivery.</p>
                                     </div>
                                 </div>
                             </div>
@@ -289,41 +374,42 @@ get_header();
                         <div class="faq-section" data-category="process">
                             <h3 class="section-title">Process</h3>
                             
-                            <div class="faq-item" data-faq-id="10">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq10">
-                                    <h4 class="faq-question">How does the process work?</h4>
+                            <div class="faq-item" data-faq-id="11">
+                                <div class="faq-header" data-target="#faq11">
+                                    <h4 class="faq-question">How does Smooth Migration work?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq10" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq11">
                                     <div class="faq-answer">
-                                        <p>Our streamlined 4-step process:</p>
+                                        <p><strong>Over the last four years, we have been researching, negotiating, and building something special.</strong></p>
+                                        <p>We think outside the box to provide the best solutions, specifically tailored for the millions of people that relocate internationally every year.</p>
                                         <div class="process-steps">
                                             <div class="process-step">
                                                 <div class="step-number">1</div>
                                                 <div class="step-content">
-                                                    <h5>Consultation</h5>
-                                                    <p>Free 30-minute consultation to understand your needs, timeline, and destination.</p>
+                                                    <h5>Research-Driven Approach</h5>
+                                                    <p>Four years of research into what international relocators actually need and want.</p>
                                                 </div>
                                             </div>
                                             <div class="process-step">
                                                 <div class="step-number">2</div>
                                                 <div class="step-content">
-                                                    <h5>Custom Plan</h5>
-                                                    <p>We create a personalized relocation plan with recommended services and timeline.</p>
+                                                    <h5>Strategic Partnerships</h5>
+                                                    <p>Carefully negotiated relationships with the best service providers worldwide.</p>
                                                 </div>
                                             </div>
                                             <div class="process-step">
                                                 <div class="step-number">3</div>
                                                 <div class="step-content">
-                                                    <h5>Service Delivery</h5>
-                                                    <p>Our vetted partners execute your plan while we coordinate and monitor progress.</p>
+                                                    <h5>Innovative Solutions</h5>
+                                                    <p>Creative, outside-the-box thinking applied to complex relocation challenges.</p>
                                                 </div>
                                             </div>
                                             <div class="process-step">
                                                 <div class="step-number">4</div>
                                                 <div class="step-content">
-                                                    <h5>Arrival Support</h5>
-                                                    <p>Continued support for 90 days after arrival to ensure smooth settling-in.</p>
+                                                    <h5>Tailored Experience</h5>
+                                                    <p>Every solution is customized for your specific situation and destination.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -331,26 +417,103 @@ get_header();
                                 </div>
                             </div>
                             
-                            <div class="faq-item" data-faq-id="11">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq11">
-                                    <h4 class="faq-question">How long does the relocation process take?</h4>
+                            <div class="faq-item" data-faq-id="12">
+                                <div class="faq-header" data-target="#faq12">
+                                    <h4 class="faq-question">How long do I have to be in my new country before I can apply for a mortgage?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq11" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq12">
                                     <div class="faq-answer">
-                                        <p>Timelines vary by destination and services required:</p>
+                                        <p><strong>Great news!</strong> While there are exceptions to standard timelines, some of our partners offer competitive mortgage financing from as soon as 90 days of residency.</p>
                                         <div class="timeline-examples">
                                             <div class="timeline-item">
-                                                <strong>Express (4-6 weeks):</strong> Basic services for simple relocations
+                                                <strong>90 Days:</strong> Some lenders offer financing to qualified new residents
                                             </div>
                                             <div class="timeline-item">
-                                                <strong>Standard (8-12 weeks):</strong> Comprehensive package with most services
+                                                <strong>6 Months:</strong> More lenders become available with established credit history
                                             </div>
                                             <div class="timeline-item">
-                                                <strong>Complex (16-20 weeks):</strong> Full-service including visas, business setup, family needs
+                                                <strong>12+ Months:</strong> Full range of mortgage products and best rates typically available
                                             </div>
                                         </div>
-                                        <p>Our average completion time is 45 days for standard relocations. We'll provide a detailed timeline during your consultation.</p>
+                                        <p>Each country and lender has different requirements, but we work with partners who specialize in new resident financing. <a href="/contact">Contact us</a> to explore your specific options.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item" data-faq-id="13">
+                                <div class="faq-header" data-target="#faq13">
+                                    <h4 class="faq-question">What are the best ways to build a credit record in my new country?</h4>
+                                    <i class="fas fa-plus faq-icon"></i>
+                                </div>
+                                <div class="collapse" id="faq13">
+                                    <div class="faq-answer">
+                                        <p><strong>Building credit is essential for your financial future.</strong> There are several easy ways to get started, and we can help you arrange these options at no charge!</p>
+                                        <div class="services-grid">
+                                            <div class="service-item">💳 Secured Credit Cards</div>
+                                            <div class="service-item">🏦 Bank Account History</div>
+                                            <div class="service-item">📱 Utility Account Setup</div>
+                                            <div class="service-item">📞 Mobile Phone Contracts</div>
+                                            <div class="service-item">🏠 Rental Payment History</div>
+                                            <div class="service-item">💼 Credit Builder Loans</div>
+                                        </div>
+                                        <p>Each country has slightly different credit systems, but the fundamentals are similar. We'll guide you through the most effective strategies for your destination.</p>
+                                        <p><strong><a href="/contact">Contact us today</a> to discuss easy-to-arrange credit building options that won't cost you anything!</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item" data-faq-id="14">
+                                <div class="faq-header" data-target="#faq14">
+                                    <h4 class="faq-question">Could I get financing for used vehicles as a new resident?</h4>
+                                    <i class="fas fa-plus faq-icon"></i>
+                                </div>
+                                <div class="collapse" id="faq14">
+                                    <div class="faq-answer">
+                                        <p><strong>Yes, absolutely!</strong> Vehicle financing for new residents is available in all of our service locations.</p>
+                                        <div class="country-list">
+                                            <div class="country-group">
+                                                <strong>New Resident Programs:</strong> Special financing options designed for people without local credit history
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Competitive Rates:</strong> Our partners offer fair rates even for new residents
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Used Vehicle Focus:</strong> Financing available for quality used vehicles, not just new cars
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Quick Approval:</strong> Streamlined process for faster vehicle access
+                                            </div>
+                                        </div>
+                                        <p>Getting reliable transportation is often one of the first priorities when relocating, and we've made sure financing options are available regardless of your credit history in the new country.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item" data-faq-id="15">
+                                <div class="faq-header" data-target="#faq15">
+                                    <h4 class="faq-question">Does mortgage financing work the same in every country that you cover?</h4>
+                                    <i class="fas fa-plus faq-icon"></i>
+                                </div>
+                                <div class="collapse" id="faq15">
+                                    <div class="faq-answer">
+                                        <p><strong>The basic principles of mortgages are similar in many countries, with some important exceptions.</strong></p>
+                                        <p>The most notable difference is in Canada, where there is a key distinction between the term and amortization period that doesn't exist in most other countries.</p>
+                                        <div class="country-list">
+                                            <div class="country-group">
+                                                <strong>Most Countries:</strong> Mortgage term equals the amortization period (e.g., 30-year mortgage)
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Canada:</strong> Term (1-5 years) is separate from amortization (25-30 years)
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Down Payments:</strong> Vary significantly by country (5% to 20%+ required)
+                                            </div>
+                                            <div class="country-group">
+                                                <strong>Interest Rates:</strong> Fixed vs. variable options differ by market
+                                            </div>
+                                        </div>
+                                        <p>Our mortgage specialists understand these country-specific differences and will guide you through the process that applies to your destination.</p>
                                     </div>
                                 </div>
                             </div>
@@ -360,64 +523,46 @@ get_header();
                         <div class="faq-section" data-category="support">
                             <h3 class="section-title">Support</h3>
                             
-                            <div class="faq-item" data-faq-id="12">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq12">
-                                    <h4 class="faq-question">What kind of support do you provide?</h4>
+                            <div class="faq-item" data-faq-id="16">
+                                <div class="faq-header" data-target="#faq16">
+                                    <h4 class="faq-question">Does Smooth Migration have support if there is a problem?</h4>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
-                                <div class="collapse" id="faq12" data-bs-parent="#faqAccordion">
+                                <div class="collapse" id="faq16">
                                     <div class="faq-answer">
-                                        <p>Comprehensive support throughout your journey:</p>
-                                        <ul>
-                                            <li><strong>Dedicated Account Manager:</strong> Single point of contact</li>
-                                            <li><strong>24/7 Emergency Support:</strong> For urgent issues</li>
-                                            <li><strong>Progress Tracking:</strong> Real-time updates on all services</li>
-                                            <li><strong>Documentation Support:</strong> Help with paperwork and applications</li>
-                                            <li><strong>Cultural Orientation:</strong> Tips for adapting to your new country</li>
-                                            <li><strong>Post-Arrival Support:</strong> 90 days of continued assistance</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="faq-item" data-faq-id="13">
-                                <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq13">
-                                    <h4 class="faq-question">How can I contact support?</h4>
-                                    <i class="fas fa-plus faq-icon"></i>
-                                </div>
-                                <div class="collapse" id="faq13" data-bs-parent="#faqAccordion">
-                                    <div class="faq-answer">
-                                        <p>Multiple ways to reach us:</p>
+                                        <p><strong>Absolutely!</strong> We have dedicated support staff available 365 days a year by email who will work to resolve all queries with support from our trusted partners.</p>
                                         <div class="contact-methods">
                                             <div class="contact-method">
-                                                <i class="fas fa-phone"></i>
+                                                <i class="fas fa-calendar"></i>
                                                 <div>
-                                                    <strong>Phone Support</strong>
-                                                    <p>24/7 hotline: +1-800-SMOOTH-1</p>
+                                                    <strong>365-Day Availability</strong>
+                                                    <p>Support every single day of the year - no exceptions</p>
                                                 </div>
                                             </div>
                                             <div class="contact-method">
                                                 <i class="fas fa-envelope"></i>
                                                 <div>
                                                     <strong>Email Support</strong>
-                                                    <p>support@smoothmigration.global</p>
+                                                    <p>Direct access to our support team who know your case</p>
                                                 </div>
                                             </div>
                                             <div class="contact-method">
-                                                <i class="fas fa-comments"></i>
+                                                <i class="fas fa-users"></i>
                                                 <div>
-                                                    <strong>Live Chat</strong>
-                                                    <p>Available on our website 9 AM - 9 PM GMT</p>
+                                                    <strong>Partner Network</strong>
+                                                    <p>Our support team coordinates with our global partner network</p>
                                                 </div>
                                             </div>
                                             <div class="contact-method">
-                                                <i class="fas fa-mobile-alt"></i>
+                                                <i class="fas fa-clock"></i>
                                                 <div>
-                                                    <strong>WhatsApp</strong>
-                                                    <p>Quick messages and updates</p>
+                                                    <strong>Quick Resolution</strong>
+                                                    <p>We work diligently to resolve issues as quickly as possible</p>
                                                 </div>
                                             </div>
                                         </div>
+                                        <p>Whether it's a service issue, documentation problem, or any challenge that arises during your relocation, our support team is here to help you navigate through it successfully.</p>
+                                        <p><strong>Remember:</strong> You're never alone in your relocation journey - we're here to support you every step of the way.</p>
                                     </div>
                                 </div>
                             </div>
@@ -660,17 +805,86 @@ get_header();
 .faq-icon {
     color: var(--primary-color);
     font-size: 1.2rem;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    user-select: none;
+}
+
+.faq-icon:hover {
+    background: rgba(59, 78, 162, 0.1);
+    transform: scale(1.1);
 }
 
 .faq-header[aria-expanded="true"] .faq-icon {
     transform: rotate(45deg);
 }
 
+.faq-header[aria-expanded="true"] .faq-icon:hover {
+    transform: rotate(45deg) scale(1.1);
+}
+
+/* Professional Fade + Slide Animation */
+.collapse {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease 0.1s,
+                transform 0.3s ease 0.1s;
+}
+
+.collapse.show {
+    max-height: 1000px; /* Generous height for content */
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease 0.05s,
+                transform 0.4s ease 0.05s;
+}
+
 .faq-answer {
     padding: 0 2rem 2rem;
     color: var(--text-medium);
     line-height: 1.7;
+}
+
+/* Subtle content staggering for premium feel */
+.collapse.show .faq-answer > *:nth-child(1) {
+    animation: fadeInUp 0.4s ease 0.1s both;
+}
+
+.collapse.show .faq-answer > *:nth-child(2) {
+    animation: fadeInUp 0.4s ease 0.15s both;
+}
+
+.collapse.show .faq-answer > *:nth-child(3) {
+    animation: fadeInUp 0.4s ease 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .collapse,
+    .collapse.show,
+    .faq-answer,
+    .collapse.show .faq-answer > * {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+    }
 }
 
 .faq-answer p {
@@ -974,36 +1188,64 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Accordion functionality
     const faqHeaders = document.querySelectorAll('.faq-header');
+    const faqIcons = document.querySelectorAll('.faq-icon');
     
+    // Initialize all FAQ headers with proper aria-expanded state
     faqHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const targetId = this.dataset.bsTarget;
-            const targetElement = document.querySelector(targetId);
-            const icon = this.querySelector('.faq-icon');
+        if (!header.hasAttribute('aria-expanded')) {
+            header.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    // Function to toggle FAQ item
+    function toggleFaqItem(header) {
+        const targetId = header.dataset.target;
+        const targetElement = document.querySelector(targetId);
+        const icon = header.querySelector('.faq-icon');
+        
+        // Check current state
+        const isCurrentlyExpanded = targetElement.classList.contains('show');
+        
+        if (isCurrentlyExpanded) {
+            // Close this item
+            targetElement.classList.remove('show');
+            header.setAttribute('aria-expanded', 'false');
+            icon.style.transform = 'rotate(0deg)';
+        } else {
+            // Close all other open items first
+            document.querySelectorAll('.collapse.show').forEach(openItem => {
+                openItem.classList.remove('show');
+                const openHeader = document.querySelector(`[data-target="#${openItem.id}"]`);
+                if (openHeader) {
+                    openHeader.setAttribute('aria-expanded', 'false');
+                    openHeader.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                }
+            });
             
-            // Toggle aria-expanded
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            
-            // Toggle collapse
-            if (targetElement.classList.contains('show')) {
-                targetElement.classList.remove('show');
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                // Close other open items
-                document.querySelectorAll('.collapse.show').forEach(openItem => {
-                    if (openItem !== targetElement) {
-                        openItem.classList.remove('show');
-                        const openHeader = document.querySelector(`[data-bs-target="#${openItem.id}"]`);
-                        if (openHeader) {
-                            openHeader.setAttribute('aria-expanded', 'false');
-                            openHeader.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
-                        }
-                    }
-                });
-                
-                targetElement.classList.add('show');
-                icon.style.transform = 'rotate(45deg)';
+            // Open this item
+            targetElement.classList.add('show');
+            header.setAttribute('aria-expanded', 'true');
+            icon.style.transform = 'rotate(45deg)';
+        }
+    }
+    
+    // Add event listeners to headers
+    faqHeaders.forEach(header => {
+        header.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleFaqItem(this);
+        });
+    });
+    
+    // Add specific event listeners to icons to ensure they work
+    faqIcons.forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const header = this.closest('.faq-header');
+            if (header) {
+                toggleFaqItem(header);
             }
         });
     });
@@ -1049,4 +1291,5 @@ function clearSearch() {
 </script>
 
 <?php
+get_footer(); 
 get_footer(); 

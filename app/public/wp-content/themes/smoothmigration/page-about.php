@@ -21,7 +21,7 @@ get_header();
                             <span class="badge-about">🌍 Our Story</span>
                         </div>
                         <h1 class="display-2 fw-bold mb-4">About Smooth Migration</h1>
-                        <p class="lead fs-4 mb-4 opacity-90">Founded by expats, for expats. We understand the challenges of international relocation because we've lived them ourselves.</p>
+                        <p class="lead fs-4 mb-4 opacity-90">Founded by global professionals who have navigated international relocations across multiple continents. We bring decades of real-world experience to make your move seamless.</p>
                         
                         <div class="hero-stats d-flex flex-wrap gap-4 mb-4">
                             <div class="stat-item">
@@ -29,12 +29,12 @@ get_header();
                                 <div class="stat-label">Founded</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">50+</div>
-                                <div class="stat-label">Countries</div>
+                                <div class="stat-number">15+</div>
+                                <div class="stat-label">Countries Lived</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">3,200+</div>
-                                <div class="stat-label">Happy Families</div>
+                                <div class="stat-number">35+</div>
+                                <div class="stat-label">Years Experience</div>
                             </div>
                         </div>
                         
@@ -82,7 +82,7 @@ get_header();
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8 text-center">
                     <h2 class="section-title">Our Story</h2>
-                    <p class="section-subtitle">How a group of international expats came together to solve the relocation challenge.</p>
+                    <p class="section-subtitle">Born from personal experience across four continents, Smooth Migration was founded to solve the challenges we faced ourselves.</p>
                 </div>
             </div>
             
@@ -95,8 +95,8 @@ get_header();
                                     <i class="fas fa-lightbulb"></i>
                                 </div>
                                 <div class="timeline-content">
-                                    <h4>The Problem</h4>
-                                    <p>In 2018, our founders experienced firsthand the overwhelming complexity of international relocation. Countless hours were spent researching, comparing, and coordinating with dozens of service providers across multiple countries.</p>
+                                    <h4>The Experience</h4>
+                                    <p>Our founder's journey spans four countries - from South Africa to England at 17, becoming one of the youngest foreigners licensed before the Supreme Court in London, then to the USA in 2019 where Smooth Migration was born.</p>
                                 </div>
                             </div>
                             
@@ -105,8 +105,8 @@ get_header();
                                     <i class="fas fa-rocket"></i>
                                 </div>
                                 <div class="timeline-content">
-                                    <h4>The Solution</h4>
-                                    <p>We realized there had to be a better way. By combining our collective expat experience with extensive research, we began building a platform that would streamline the entire relocation process.</p>
+                                    <h4>The Vision</h4>
+                                    <p>Drawing from 35+ years of work experience across multiple countries and industries, we realized the need for a comprehensive relocation service that truly understands the expat experience.</p>
                                 </div>
                             </div>
                             
@@ -115,8 +115,8 @@ get_header();
                                     <i class="fas fa-globe"></i>
                                 </div>
                                 <div class="timeline-content">
-                                    <h4>The Impact</h4>
-                                    <p>Today, we've helped over 3,200 families successfully relocate to their new countries, building a network of trusted partners and creating resources that make international moves smooth and stress-free.</p>
+                                    <h4>The Team</h4>
+                                    <p>Today, our team of international professionals across North America, Southern Africa, and the UK brings collective experience from over 15 countries to help families navigate their relocation journey with confidence.</p>
                                 </div>
                             </div>
                         </div>
@@ -127,38 +127,38 @@ get_header();
                         <div class="story-stats-grid">
                             <div class="story-stat">
                                 <div class="stat-icon">
-                                    <i class="fas fa-users"></i>
+                                    <i class="fas fa-globe"></i>
                                 </div>
                                 <div class="stat-details">
-                                    <h3>3,200+</h3>
-                                    <p>Families Relocated</p>
+                                    <h3>15+</h3>
+                                    <p>Countries Lived In</p>
                                 </div>
                             </div>
                             <div class="story-stat">
                                 <div class="stat-icon">
-                                    <i class="fas fa-handshake"></i>
+                                    <i class="fas fa-briefcase"></i>
                                 </div>
                                 <div class="stat-details">
-                                    <h3>500+</h3>
-                                    <p>Trusted Partners</p>
+                                    <h3>60+</h3>
+                                    <p>Years Combined Experience</p>
                                 </div>
                             </div>
                             <div class="story-stat">
                                 <div class="stat-icon">
-                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-language"></i>
                                 </div>
                                 <div class="stat-details">
-                                    <h3>98%</h3>
-                                    <p>Satisfaction Rate</p>
+                                    <h3>8+</h3>
+                                    <p>Languages Spoken</p>
                                 </div>
                             </div>
                             <div class="story-stat">
                                 <div class="stat-icon">
-                                    <i class="fas fa-clock"></i>
+                                    <i class="fas fa-award"></i>
                                 </div>
                                 <div class="stat-details">
-                                    <h3>45</h3>
-                                    <p>Avg. Days to Complete</p>
+                                    <h3>4</h3>
+                                    <p>Regional Experts</p>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +248,7 @@ get_header();
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8 text-center">
                     <h2 class="section-title">Meet Our Team</h2>
-                    <p class="section-subtitle">The international expats behind Smooth Migration Global.</p>
+                    <p class="section-subtitle">Experienced international professionals who have lived and worked across the globe.</p>
                 </div>
             </div>
             
@@ -256,21 +256,22 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll">
                         <div class="team-photo">
-                            <div class="photo-placeholder">
-                                <i class="fas fa-user"></i>
-                            </div>
+                            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/team-photos/Grant headshot.jpg" alt="Grant Sakinofsky" class="team-image" />
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                             </div>
                         </div>
                         <div class="team-info">
-                            <h4 class="team-name">Sarah Chen</h4>
-                            <p class="team-role">Co-Founder & CEO</p>
-                            <p class="team-description">Former expat who moved from Toronto to Singapore. Passionate about making international relocation seamless for families worldwide.</p>
+                            <h4 class="team-name">Grant Sakinofsky</h4>
+                            <p class="team-role">Founder & Director</p>
+                            <p class="team-description">Grant's journey began early - working since age 8, he graduated at 17 and used his savings to move to England, where he became one of the youngest foreigners in British history to be licensed before the Supreme Court in London. A former national age group champion in springboard diving, provincial gymnast, and rock climber, Grant brings both athletic discipline and legal precision to international relocation.</p>
+                            <p class="team-description">After excelling across South Africa and England, Grant moved to the USA in 2019 where he got licensed in real estate and founded Smooth Migration. In 2022, he relocated to Canada, earning additional qualifications from UBC and becoming one of the only non-US, non-Canadian citizens to hold real estate licenses in both countries. Currently serving on a Canadian non-profit board, Grant's 35+ years span four countries and multiple industries.</p>
                             <div class="team-expertise">
-                                <span class="expertise-tag">Strategy</span>
-                                <span class="expertise-tag">Operations</span>
+                                <span class="expertise-tag">Supreme Court Licensed</span>
+                                <span class="expertise-tag">Dual Real Estate Licenses</span>
+                                <span class="expertise-tag">Former Athlete</span>
+                                <span class="expertise-tag">Non-Profit Director</span>
                             </div>
                         </div>
                     </div>
@@ -279,21 +280,22 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.2s;">
                         <div class="team-photo">
-                            <div class="photo-placeholder">
-                                <i class="fas fa-user"></i>
-                            </div>
+                            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/team-photos/Erin Digital.jpg" alt="Erin Copeland" class="team-image" />
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                             </div>
                         </div>
                         <div class="team-info">
-                            <h4 class="team-name">Marcus Rodriguez</h4>
-                            <p class="team-role">Co-Founder & CTO</p>
-                            <p class="team-description">Tech entrepreneur who relocated from Madrid to London. Leads our technology development and platform innovation.</p>
+                            <h4 class="team-name">Erin Copeland</h4>
+                            <p class="team-role">Operations Manager - North America</p>
+                            <p class="team-description">Erin is a true veteran of international living, having navigated relocations across seven different countries. Her unique background as a former Science and Biology teacher gives her exceptional organizational skills and attention to detail that proves invaluable in managing complex relocations.</p>
+                            <p class="team-description">With teaching qualifications from the University of Waterloo in Canada and a Master's in Education from Griffith University in Australia, Erin combines academic rigor with practical experience. She currently runs an established online tutoring company serving clients across multiple countries, demonstrating her ability to manage international operations and cross-cultural communication. Her strong background in logistics, organization, and communication makes her the perfect bridge between our clients and their new destinations.</p>
                             <div class="team-expertise">
-                                <span class="expertise-tag">Technology</span>
-                                <span class="expertise-tag">Product</span>
+                                <span class="expertise-tag">7 Countries Experience</span>
+                                <span class="expertise-tag">Master's in Education</span>
+                                <span class="expertise-tag">International Tutoring</span>
+                                <span class="expertise-tag">Logistics Expert</span>
                             </div>
                         </div>
                     </div>
@@ -302,21 +304,22 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.4s;">
                         <div class="team-photo">
-                            <div class="photo-placeholder">
-                                <i class="fas fa-user"></i>
-                            </div>
+                            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/team-photos/Christian-Harbeck.png" alt="Christian Harmbeck" class="team-image" />
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                             </div>
                         </div>
                         <div class="team-info">
-                            <h4 class="team-name">Priya Patel</h4>
-                            <p class="team-role">Head of Customer Success</p>
-                            <p class="team-description">Expat from Mumbai who moved to Dubai. Ensures every client receives personalized support throughout their journey.</p>
+                            <h4 class="team-name">Christian Harmbeck</h4>
+                            <p class="team-role">Operations Manager - Southern Africa</p>
+                            <p class="team-description">Christian brings a wealth of international business expertise, having lived and worked across several countries while mastering three languages. As a driven business leader with a remarkable 25+ year track record, he has successfully scaled profitable companies and achieved successful exits across both hospitality and retail sectors.</p>
+                            <p class="team-description">As a globally certified business and executive coach, Christian excels at empowering teams and business owners to reach their full potential. He's a versatile business generalist who specializes in systemizing workflows and creating independent, self-sustaining operations. His passion lies in driving organizational success through empowered teams, streamlined processes, and deep industry-specific knowledge. Christian's strength in building robust customer relations and fostering positive company cultures makes him invaluable for clients navigating new business environments.</p>
                             <div class="team-expertise">
-                                <span class="expertise-tag">Customer Success</span>
-                                <span class="expertise-tag">Support</span>
+                                <span class="expertise-tag">Trilingual</span>
+                                <span class="expertise-tag">Certified Executive Coach</span>
+                                <span class="expertise-tag">Successful Exits</span>
+                                <span class="expertise-tag">Workflow Systems</span>
                             </div>
                         </div>
                     </div>
@@ -325,71 +328,27 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.1s;">
                         <div class="team-photo">
-                            <div class="photo-placeholder">
-                                <i class="fas fa-user"></i>
-                            </div>
+                            <img src="<?php echo wp_upload_dir()['baseurl']; ?>/team-photos/rob 3.jpg" alt="Robert Wood" class="team-image" />
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                             </div>
                         </div>
                         <div class="team-info">
-                            <h4 class="team-name">James Thompson</h4>
-                            <p class="team-role">Head of Partnerships</p>
-                            <p class="team-description">British expat living in Australia. Builds and maintains relationships with our global network of service partners.</p>
+                            <h4 class="team-name">Robert Wood</h4>
+                            <p class="team-role">Operations Manager - United Kingdom</p>
+                            <p class="team-description">Originally from Australia, Robert has made the United Kingdom his home for over 20 years, working extensively across both England and Scotland with a focus on customer-facing roles. His international perspective expanded further during his time in Italy, where he provided ongoing business support to locally-based companies, gaining invaluable insight into European business culture.</p>
+                            <p class="team-description">With over two decades of experience spanning Hospitality, New Business Development, and Customer Relations, Robert has developed an exceptional ability to connect with people from all backgrounds. As a highly skilled customer relations expert and experienced marketing professional, he brings his own unique flair to everything he does. His deep understanding of what it means to build a life in a new country, combined with his natural talent for making people feel at ease, makes him the perfect advocate for our UK-bound clients.</p>
                             <div class="team-expertise">
-                                <span class="expertise-tag">Partnerships</span>
-                                <span class="expertise-tag">Business Development</span>
+                                <span class="expertise-tag">20+ Years UK Experience</span>
+                                <span class="expertise-tag">Cross-European Business</span>
+                                <span class="expertise-tag">Customer Relations Expert</span>
+                                <span class="expertise-tag">Marketing Professional</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="team-card animate-on-scroll" style="animation-delay: 0.3s;">
-                        <div class="team-photo">
-                            <div class="photo-placeholder">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="team-social">
-                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h4 class="team-name">Lisa Kim</h4>
-                            <p class="team-role">Marketing Director</p>
-                            <p class="team-description">Korean-American expat based in Berlin. Creates content and campaigns that resonate with the international community.</p>
-                            <div class="team-expertise">
-                                <span class="expertise-tag">Marketing</span>
-                                <span class="expertise-tag">Content</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="team-card animate-on-scroll" style="animation-delay: 0.5s;">
-                        <div class="team-photo">
-                            <div class="photo-placeholder">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="team-social">
-                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h4 class="team-name">Ahmed Hassan</h4>
-                            <p class="team-role">Regional Manager - MENA</p>
-                            <p class="team-description">Egyptian expat with extensive knowledge of Middle East and North Africa relocation requirements and cultural nuances.</p>
-                            <div class="team-expertise">
-                                <span class="expertise-tag">Regional Expertise</span>
-                                <span class="expertise-tag">Cultural Consulting</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
@@ -404,19 +363,19 @@ get_header();
                             <i class="fas fa-bullseye display-3 text-accent"></i>
                         </div>
                         <h3 class="content-title">Our Mission</h3>
-                        <p class="content-description">To eliminate the stress and complexity of international relocation by providing personalized, comprehensive support that makes every move smooth and successful.</p>
+                        <p class="content-description">To leverage our team's collective 60+ years of international living and working experience to eliminate the stress and complexity of relocation for professionals and families worldwide.</p>
                         <div class="mission-points">
                             <div class="point-item">
                                 <i class="fas fa-check-circle text-accent"></i>
-                                <span>Simplify complex processes</span>
+                                <span>Draw from real expat experience</span>
                             </div>
                             <div class="point-item">
                                 <i class="fas fa-check-circle text-accent"></i>
-                                <span>Provide trusted partnerships</span>
+                                <span>Provide expert regional knowledge</span>
                             </div>
                             <div class="point-item">
                                 <i class="fas fa-check-circle text-accent"></i>
-                                <span>Deliver personalized support</span>
+                                <span>Deliver comprehensive relocation solutions</span>
                             </div>
                         </div>
                     </div>
@@ -427,15 +386,15 @@ get_header();
                             <i class="fas fa-eye display-3 text-accent"></i>
                         </div>
                         <h3 class="content-title">Our Vision</h3>
-                        <p class="content-description">To become the world's most trusted platform for international relocation, empowering millions of families to pursue their global dreams with confidence.</p>
+                        <p class="content-description">To be the leading relocation service powered by professionals who have lived the expat experience, providing unmatched expertise and genuine understanding of international moves.</p>
                         <div class="vision-goals">
                             <div class="goal-item">
-                                <div class="goal-number">100+</div>
-                                <div class="goal-label">Countries Covered</div>
+                                <div class="goal-number">4</div>
+                                <div class="goal-label">Key Regions</div>
                             </div>
                             <div class="goal-item">
-                                <div class="goal-number">1M+</div>
-                                <div class="goal-label">Families Served</div>
+                                <div class="goal-number">15+</div>
+                                <div class="goal-label">Countries Experienced</div>
                             </div>
                         </div>
                     </div>
@@ -451,19 +410,19 @@ get_header();
                 <div class="col-lg-8">
                     <div class="cta-content">
                         <h2 class="display-5 fw-bold mb-3">Ready to Start Your Journey?</h2>
-                        <p class="lead mb-4">Join thousands of families who have made their international relocation smooth and stress-free with our expert guidance.</p>
+                        <p class="lead mb-4">Work with professionals who have lived the expat experience across four continents. Let our personal knowledge guide your successful relocation.</p>
                         <div class="cta-features d-flex flex-wrap gap-4">
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-phone-alt text-primary me-2"></i>
-                                <span>Free Consultation</span>
+                                <span>Personal Consultation</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-clock text-primary me-2"></i>
-                                <span>24/7 Support</span>
+                                <i class="fas fa-globe text-primary me-2"></i>
+                                <span>Global Experience</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-shield-alt text-primary me-2"></i>
-                                <span>Trusted Partners</span>
+                                <i class="fas fa-users text-primary me-2"></i>
+                                <span>Expat Team</span>
                             </div>
                         </div>
                     </div>
@@ -756,7 +715,10 @@ get_header();
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-light);
     transition: all 0.4s ease;
-    height: 100%;
+    height: auto;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
 }
 
 .team-card:hover {
@@ -766,12 +728,13 @@ get_header();
 
 .team-photo {
     position: relative;
-    height: 250px;
+    height: 280px;
     background: var(--bg-light);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .photo-placeholder {
@@ -785,6 +748,19 @@ get_header();
     color: white;
     font-size: 3rem;
     box-shadow: var(--shadow-lg);
+}
+
+.team-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0;
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-image {
+    transform: scale(1.02);
 }
 
 .team-social {
@@ -822,7 +798,11 @@ get_header();
 }
 
 .team-info {
-    padding: 2rem;
+    padding: 2.5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
 .team-name {
@@ -835,30 +815,64 @@ get_header();
 .team-role {
     color: var(--primary-color);
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .team-description {
     color: var(--text-light);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 1rem;
+    font-size: 0.92rem;
+    flex-grow: 1;
+}
+
+.team-description:last-of-type {
+    margin-bottom: 2rem;
 }
 
 .team-expertise {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1rem;
 }
 
 .expertise-tag {
     background: var(--primary-lighter);
     color: var(--primary-color);
-    padding: 0.3rem 0.8rem;
+    padding: 0.4rem 1rem;
     border-radius: var(--border-radius-2xl);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+}
+
+.expertise-tag:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Enhanced paragraph spacing for team descriptions */
+.team-description + .team-description {
+    margin-top: 1.2rem;
+}
+
+/* Add subtle divider between multiple paragraphs */
+.team-description:not(:last-of-type)::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-lighter);
+    margin: 1rem 0 0.5rem 0;
+    border-radius: 2px;
 }
 
 .mission-vision {
@@ -1000,6 +1014,33 @@ get_header();
     .cta-features {
         justify-content: center;
         gap: 1rem !important;
+    }
+    
+    .team-card {
+        min-height: auto;
+    }
+    
+    .team-info {
+        padding: 2rem 1.5rem 1.5rem;
+        min-height: auto;
+    }
+    
+    .team-photo {
+        height: 220px;
+    }
+    
+    .team-name {
+        font-size: 1.2rem;
+    }
+    
+    .team-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .team-description:not(:last-of-type)::after {
+        width: 20px;
+        margin: 0.8rem 0 0.3rem 0;
     }
 }
 </style>
