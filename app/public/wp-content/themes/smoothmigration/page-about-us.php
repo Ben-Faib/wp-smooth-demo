@@ -1,7 +1,8 @@
 <?php
 /**
  * About Us Page Template
- * Modern about page with team showcase and company story
+ * Modern about us page with team showcase and company story
+ * Template Name: About Us
  *
  * @package smoothmigration
  */
