@@ -18,6 +18,17 @@ $term = get_queried_object();
         <?php if ( ! empty( $term->description ) ) : ?>
             <p class="lead text-muted"><?php echo esc_html( $term->description ); ?></p>
         <?php endif; ?>
+        <?php if ( has_nav_menu( 'section_category_links' ) ) : ?>
+            <nav aria-label="Category quick links" class="mt-3">
+                <?php wp_nav_menu( array(
+                    'theme_location' => 'section_category_links',
+                    'container'      => false,
+                    'menu_class'     => 'nav justify-content-center gap-2 flex-wrap',
+                    'depth'          => 1,
+                    'fallback_cb'    => false,
+                ) ); ?>
+            </nav>
+        <?php endif; ?>
     </div>
 </header>
 
