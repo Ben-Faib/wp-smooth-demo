@@ -44,7 +44,7 @@ get_header(); ?>
                             Become a Partner
                         </a>
                     </div>
-                    
+                    <div class="small text-light" style="opacity:.95">100% free to use. We’re paid by partners for referrals—and we rigorously vet every partner. No hidden costs.</div>
                     <!-- Urgency without pressure -->
                     <div class="urgency-signals mt-3">
                         <p class="urgency-text">
@@ -83,31 +83,31 @@ get_header(); ?>
     <div class="container">
         <div class="text-center mb-5">
             <h2 id="how-it-works-title" class="section-title">How It Works</h2>
-            <p class="section-subtitle">Choose the service you need or filter by category</p>
+            <p class="section-subtitle">Answer a few questions, get a plan, and connect to vetted partners—see quick category links below.</p>
         </div>
         
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="step-card interactive-card text-center" tabindex="0">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Tell us your destination & timeline</h3>
-                    <p class="step-description">Share where you're moving and when, so we can create your personalized roadmap.</p>
+                    <h3 class="step-title">Complete our questionnaire</h3>
+                    <p class="step-description">Tell us your relocation specifics—destination, timing, family, and priorities.</p>
                 </div>
             </div>
             
             <div class="col-lg-4">
                 <div class="step-card interactive-card text-center" tabindex="0">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Pick only the services you need</h3>
-                    <p class="step-description">Choose from our curated services, or let our <a href="/ai-relocator" class="text-primary fw-bold">AI suggest the perfect package</a> for your move.</p>
+                    <h3 class="step-title">Select services from your plan</h3>
+                    <p class="step-description">Use your custom plan to pick services and see tasks at each stage. Try the <a href="/ai-relocator" class="text-primary fw-bold">AI Relocator</a> for suggestions.</p>
                 </div>
             </div>
             
             <div class="col-lg-4">
                 <div class="step-card interactive-card text-center" tabindex="0">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Sit back while we deliver</h3>
-                    <p class="step-description">Our vetted partners handle everything at locked-in, expat-negotiated rates.</p>
+                    <h3 class="step-title">Get preferred-rate quotes</h3>
+                    <p class="step-description">Receive quotes directly from our vetted partners—often at preferred expat rates.</p>
                 </div>
             </div>
         </div>

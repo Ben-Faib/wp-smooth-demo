@@ -75,12 +75,11 @@ function smoothmigration_landing_page_meta_tags() {
     echo '<meta property="og:site_name" content="Smooth Migration Global">' . "\n";
     echo '<meta property="og:locale" content="en_US">' . "\n";
     
-    // Twitter Card tags
-    echo '<!-- Twitter Card Meta Tags -->' . "\n";
-    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
-    echo '<meta name="twitter:title" content="International Relocation Services | Smooth Migration Global">' . "\n";
-    echo '<meta name="twitter:description" content="' . esc_attr( $meta_description ) . '">' . "\n";
-    echo '<meta name="twitter:image" content="' . esc_url( $logo_url ) . '">' . "\n";
+    // Social preview meta (generic, no platform-specific branding)
+    echo '<meta property="og:type" content="website">' . "\n";
+    echo '<meta property="og:title" content="International Relocation Services | Smooth Migration Global">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr( $meta_description ) . '">' . "\n";
+    echo '<meta property="og:image" content="' . esc_url( $logo_url ) . '">' . "\n";
     
     // Additional SEO tags
     echo '<!-- Additional SEO Tags -->' . "\n";
