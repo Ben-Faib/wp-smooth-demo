@@ -82,21 +82,7 @@ function smoothmigration_accessible_menu_link_atts( $atts, $item, $args ) {
 }
 add_filter( 'nav_menu_link_attributes', 'smoothmigration_accessible_menu_link_atts', 10, 3 );
 
-/**
- * Ensure Canada flag appears first in the country flags menu without changing admin order.
- */
-function smoothmigration_country_flags_canada_first( $items, $args ) {
-    if ( isset( $args->theme_location ) && 'country_flags' === $args->theme_location && is_array( $items ) ) {
-        usort( $items, function( $a, $b ) {
-            $a_is_canada = ( stripos( $a->title ?? '', 'canada' ) !== false ) || ( isset( $a->url ) && stripos( $a->url, 'canada' ) !== false );
-            $b_is_canada = ( stripos( $b->title ?? '', 'canada' ) !== false ) || ( isset( $b->url ) && stripos( $b->url, 'canada' ) !== false );
-            if ( $a_is_canada === $b_is_canada ) { return 0; }
-            return $a_is_canada ? -1 : 1;
-        } );
-    }
-    return $items;
-}
-add_filter( 'wp_nav_menu_objects', 'smoothmigration_country_flags_canada_first', 10, 2 );
+// Note: Country flags order is now controlled entirely via Appearance > Menus.
 
 /**
  * Register widget area.
