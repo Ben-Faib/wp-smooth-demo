@@ -19,11 +19,12 @@ function smoothmigration_enqueue_assets() {
     // Font Awesome for icons
     wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1' );
     
-    // Google Fonts - Aileron (body) and a serif accent for headings (Playfair Display as an accessible, elegant serif)
-    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Aileron:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap', array(), null );
+    // Typography: Aileron (via CDNFonts) and Playfair Display (Google)
+    wp_enqueue_style( 'aileron-font', 'https://fonts.cdnfonts.com/css/aileron', array(), null );
+    wp_enqueue_style( 'playfair-font', 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap', array(), null );
 
-    // Theme stylesheet (depends on Bootstrap so we place it after)
-    wp_enqueue_style( 'smoothmigration-style', get_stylesheet_uri(), array( 'bootstrap', 'font-awesome', 'google-fonts' ), SMOOTHMIGRATION_VERSION );
+    // Theme stylesheet (depends on Bootstrap and fonts so we place it after)
+    wp_enqueue_style( 'smoothmigration-style', get_stylesheet_uri(), array( 'bootstrap', 'font-awesome', 'aileron-font', 'playfair-font' ), SMOOTHMIGRATION_VERSION );
 
     // Bootstrap bundle (includes Popper)
     wp_enqueue_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), '5.3.3', true );
