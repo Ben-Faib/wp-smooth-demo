@@ -32,3 +32,8 @@ require_once get_template_directory() . '/inc/service-import.php';
 require_once get_template_directory() . '/inc/service-helpers.php';
 // Options page for data-driven content
 require_once get_template_directory() . '/inc/options.php';
+
+// Media taxonomies (Asset Type: Brand Logo)
+require_once get_template_directory() . '/inc/media-taxonomies.php';
+// Media bulk assignment tool
+require_once get_template_directory() . '/inc/media-bulk-assign.php';
