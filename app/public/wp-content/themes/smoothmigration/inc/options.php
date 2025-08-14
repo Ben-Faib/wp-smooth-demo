@@ -49,6 +49,12 @@ function smoothmigration_register_settings() {
         'sanitize_callback' => 'sanitize_text_field',
         'default'           => '',
     ) );
+    // Asset nonce used for cache-busting CSS/JS
+    register_setting( 'smoothmigration_options', 'sm_asset_nonce', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => '1',
+    ) );
 
     add_settings_section(
         'smoothmigration_stats_section',
@@ -141,6 +147,18 @@ function smoothmigration_register_settings() {
         'smoothmigration_options',
         'smoothmigration_stats_section'
     );
+
+    add_settings_field(
+        'sm_asset_nonce',
+        __( 'Assets cache-buster (nonce)', 'smoothmigration' ),
+        function() {
+            $val = get_option( 'sm_asset_nonce', '1' );
+            echo '<input type="text" class="regular-text" name="sm_asset_nonce" value="' . esc_attr( $val ) . '" />';
+            echo '<p class="description">' . esc_html__( 'Increment and save to force-refresh theme CSS/JS across the site.', 'smoothmigration' ) . '</p>';
+        },
+        'smoothmigration_options',
+        'smoothmigration_stats_section'
+    );
 }
 add_action( 'admin_init', 'smoothmigration_register_settings' );
 
@@ -168,6 +186,9 @@ function smoothmigration_render_options_page() {
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Smooth Migration Options', 'smoothmigration' ); ?></h1>
+        <?php if ( isset($_GET['sm_cache_purged']) ) : ?>
+            <div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'Caches purged, rewrites flushed, and assets cache-buster incremented.', 'smoothmigration' ); ?></p></div>
+        <?php endif; ?>
         <form action="options.php" method="post">
             <?php
             settings_fields( 'smoothmigration_options' );
@@ -175,8 +196,38 @@ function smoothmigration_render_options_page() {
             submit_button();
             ?>
         </form>
+        <hr />
+        <h2><?php esc_html_e( 'Maintenance', 'smoothmigration' ); ?></h2>
+        <p><?php esc_html_e( 'Use this to flush permalinks/rewrite rules, clear transients, and force a fresh load of CSS/JS.', 'smoothmigration' ); ?></p>
+        <form method="post">
+            <?php wp_nonce_field( 'sm_purge_caches', 'sm_purge_caches_nonce' ); ?>
+            <input type="hidden" name="sm_action" value="purge_caches" />
+            <?php submit_button( __( 'Purge Caches & Flush Permalinks', 'smoothmigration' ), 'secondary', 'submit', false ); ?>
+        </form>
     </div>
     <?php
 }
+
+// Handle maintenance actions
+add_action( 'admin_init', function(){
+    if ( ! is_admin() ) return;
+    if ( isset($_POST['sm_action']) && $_POST['sm_action'] === 'purge_caches' ) {
+        if ( ! current_user_can( 'manage_options' ) ) return;
+        check_admin_referer( 'sm_purge_caches', 'sm_purge_caches_nonce' );
+        // 1) Flush rewrite rules
+        flush_rewrite_rules();
+        // 2) Clear transients
+        global $wpdb;
+        $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_%' OR option_name LIKE '_site_transient_%'" );
+        // 3) Bump asset nonce
+        $val = (string) ( (int) get_option( 'sm_asset_nonce', '1' ) + 1 );
+        update_option( 'sm_asset_nonce', $val );
+        // 4) Try to flush object cache if available
+        if ( function_exists( 'wp_cache_flush' ) ) { wp_cache_flush(); }
+        // Redirect to avoid resubmission and show notice
+        wp_safe_redirect( add_query_arg( 'sm_cache_purged', '1', menu_page_url( 'smoothmigration-options', false ) ) );
+        exit;
+    }
+} );
 
 
