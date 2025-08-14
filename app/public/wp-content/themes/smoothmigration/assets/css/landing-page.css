@@ -965,6 +965,20 @@ section {
 .service-card--core .service-image img { height: 240px; }
 .service-card--core:hover { transform: translateY(-7px); box-shadow: var(--shadow-2xl); }
 
+/* Simple icon / illustration blocks for services when images are disabled */
+.service-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+    border-radius: 12px;
+    background: var(--bg-section);
+    border: 1px solid var(--border-light);
+    margin-bottom: 1rem;
+}
+.service-illustration i { font-size: 48px; color: var(--primary-color); opacity: .9; }
+.service-card--core .service-illustration { background: linear-gradient(180deg,#f8fbff 0%,#eef5ff 100%); border-color: var(--primary-light); }
+
 
 .service-card:hover {
     box-shadow: var(--shadow-lg);

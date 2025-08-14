@@ -140,98 +140,45 @@ get_header(); ?>
         </div>
         
         <div class="row g-4 services-grid-limited">
-            <?php
-            // Build slots: left featured service, center Realtor Locator card, right featured service
-            $featured_services = get_posts(array(
-                'post_type'      => 'service',
-                'posts_per_page' => 2,
-                'meta_key'       => '_service_featured',
-                'meta_value'     => '1',
-                'orderby'        => 'menu_order',
-                'order'          => 'ASC',
-            ));
-
-            // Slot 1: left featured service
-            if ( isset($featured_services[0]) ) :
-                $post = $featured_services[0]; setup_postdata($post);
-                $service_id = get_the_ID();
-                $min_days = (int) get_post_meta( $service_id, '_service_timeline_min_days', true );
-                $max_days = (int) get_post_meta( $service_id, '_service_timeline_max_days', true );
-                $timeline_text = get_post_meta( $service_id, '_service_timeline', true );
-                if ( $min_days && $max_days ) {
-                    $timeline_text = sprintf( __( 'Typical timeline: %1$d–%2$d days', 'smoothmigration' ), $min_days, $max_days );
-                }
-                $timeline_text = $timeline_text ? $timeline_text : get_option( 'sm_default_timeline', __( 'Typical timeline: 2–6 weeks', 'smoothmigration' ) );
-                $thumb      = get_the_post_thumbnail_url( $service_id, 'large' );
-                $thumb_alt  = the_title_attribute( array( 'echo' => false ) );
-                ?>
-                <div class="col-lg-4 col-md-6">
-                    <a href="<?php the_permalink(); ?>" class="service-card-link">
-                        <div class="service-card interactive-card">
-                            <div class="service-image">
-                                <?php if ( $thumb ) : ?>
-                                    <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $thumb_alt ); ?>" loading="lazy">
-                                <?php endif; ?>
-                                <div class="service-overlay"><span class="timeline-badge"><?php echo esc_html( $timeline_text ); ?></span></div>
-                            </div>
-                            <div class="service-content">
-                                <h3 class="service-title"><?php the_title(); ?></h3>
-                                <p class="service-description"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 14 ) ); ?></p>
-                            </div>
+            <!-- Left: Money Services (taxonomy link) -->
+            <div class="col-lg-4 col-md-6">
+                <a href="/service-type/money-services/" class="service-card-link">
+                    <div class="service-card interactive-card" aria-describedby="money-services-desc">
+                        <div class="service-illustration" aria-hidden="true"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                        <div class="service-content">
+                            <h3 class="service-title">Money Services</h3>
+                            <p id="money-services-desc" class="service-description">Banking, transfers, and multi-currency accounts set up for expats.</p>
                         </div>
-                    </a>
-                </div>
-                <?php wp_reset_postdata(); endif; ?>
-
-                <!-- Slot 2: Center Realtor Locator (high emphasis) -->
-                <div class="col-lg-4 col-md-6">
-                    <a href="/realtor-form" class="service-card-link">
-                        <div class="service-card service-card--core interactive-card" aria-describedby="realtor-core-desc">
-                            <span class="core-badge">Core</span>
-                            <div class="service-image">
-                                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/pexels-vlada-karpovich-7368308.jpg' ); ?>" alt="Find a trusted realtor – Realtor Locator" loading="lazy">
-                                <div class="service-overlay"><span class="timeline-badge"><?php echo esc_html( get_option( 'sm_default_timeline', __( 'Typical timeline: 2–6 weeks', 'smoothmigration' ) ) ); ?></span></div>
-                            </div>
-                            <div class="service-content">
-                                <h3 class="service-title">Realtor Locator</h3>
-                                <p id="realtor-core-desc" class="service-description">Match with a vetted local realtor fast—get pre-arrival walk-throughs and neighborhood insight.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <?php
-                // Slot 3: right featured service
-                if ( isset($featured_services[1]) ) :
-                    $post = $featured_services[1]; setup_postdata($post);
-                    $service_id = get_the_ID();
-                    $min_days = (int) get_post_meta( $service_id, '_service_timeline_min_days', true );
-                    $max_days = (int) get_post_meta( $service_id, '_service_timeline_max_days', true );
-                    $timeline_text = get_post_meta( $service_id, '_service_timeline', true );
-                    if ( $min_days && $max_days ) {
-                        $timeline_text = sprintf( __( 'Typical timeline: %1$d–%2$d days', 'smoothmigration' ), $min_days, $max_days );
-                    }
-                    $timeline_text = $timeline_text ? $timeline_text : get_option( 'sm_default_timeline', __( 'Typical timeline: 2–6 weeks', 'smoothmigration' ) );
-                    $thumb      = get_the_post_thumbnail_url( $service_id, 'large' );
-                    $thumb_alt  = the_title_attribute( array( 'echo' => false ) );
-                    ?>
-                    <div class="col-lg-4 col-md-6">
-                        <a href="<?php the_permalink(); ?>" class="service-card-link">
-                            <div class="service-card interactive-card">
-                                <div class="service-image">
-                                    <?php if ( $thumb ) : ?>
-                                        <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $thumb_alt ); ?>" loading="lazy">
-                                    <?php endif; ?>
-                                    <div class="service-overlay"><span class="timeline-badge"><?php echo esc_html( $timeline_text ); ?></span></div>
-                                </div>
-                                <div class="service-content">
-                                    <h3 class="service-title"><?php the_title(); ?></h3>
-                                    <p class="service-description"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 14 ) ); ?></p>
-                                </div>
-                            </div>
-                        </a>
                     </div>
-                    <?php wp_reset_postdata(); endif; ?>
+                </a>
+            </div>
+
+            <!-- Center: Realtor Locator (core) -->
+            <div class="col-lg-4 col-md-6">
+                <a href="/realtor-form" class="service-card-link">
+                    <div class="service-card service-card--core interactive-card" aria-describedby="realtor-core-desc">
+                        <span class="core-badge">Core</span>
+                        <div class="service-illustration" aria-hidden="true"><i class="fa-solid fa-house-chimney-user"></i></div>
+                        <div class="service-content">
+                            <h3 class="service-title">Realtor Locator</h3>
+                            <p id="realtor-core-desc" class="service-description">Match with a vetted local realtor fast—get pre-arrival walk-throughs and insights.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right: Insurance Coverage (taxonomy link) -->
+            <div class="col-lg-4 col-md-6">
+                <a href="/service-type/insurance/" class="service-card-link">
+                    <div class="service-card interactive-card" aria-describedby="insurance-desc">
+                        <div class="service-illustration" aria-hidden="true"><i class="fa-solid fa-shield-heart"></i></div>
+                        <div class="service-content">
+                            <h3 class="service-title">Insurance Coverage</h3>
+                            <p id="insurance-desc" class="service-description">Health and travel insurance options tailored for international moves.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
         
         <div class="text-center mt-4">
