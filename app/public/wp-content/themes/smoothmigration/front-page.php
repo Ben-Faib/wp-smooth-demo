@@ -324,7 +324,7 @@ get_header(); ?>
                     
                     if ($services) {
                         foreach ($services as $service) {
-                            $thumbnail = get_the_post_thumbnail($service->ID, 'medium', array('class' => 'partner-logo'));
+                            $thumbnail = get_the_post_thumbnail($service->ID, 'medium', array('class' => 'partner-logo', 'loading' => 'lazy'));
                             if ($thumbnail) {
                                 echo '<div class="partner-item" data-service-id="' . $service->ID . '">';
                                 echo '<a href="' . get_permalink($service->ID) . '" class="partner-link">';
