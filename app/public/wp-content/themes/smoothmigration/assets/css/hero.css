@@ -230,16 +230,16 @@
 }
 
 .hero-cta-group .btn-primary {
-  background: var(--gradient-accent);
-  border: 2px solid var(--accent-light);
-  color: var(--text-dark);
+  background: var(--gradient-primary);
+  border: 2px solid var(--primary-light);
+  color: #fff;
   font-weight: 700;
 }
 
 .hero-cta-group .btn-primary:hover {
-  background: var(--accent-dark);
-  border-color: var(--accent-dark);
-  color: white;
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #fff;
   transform: translateY(-3px);
   box-shadow: var(--shadow-2xl);
 }
