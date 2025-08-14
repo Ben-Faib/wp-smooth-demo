@@ -61,21 +61,35 @@ get_header();
     <section class="services-grid py-6">
         <div class="container">
             <?php
-            // Get all service types
-            $service_types = get_terms( array(
-                'taxonomy'   => 'service_type',
-                'hide_empty' => false,
-                'orderby'    => 'name',
-                'order'      => 'ASC'
-            ) );
+            // Curated list of service categories (reduced set)
+            $curated_slugs = array('realtor','money-services','telecommunication','vehicles','international-moving','insurance');
+
+            // Build curated service types array, including a virtual "realtor" card
+            $service_types = array();
+            foreach ( $curated_slugs as $slug ) {
+                if ( $slug === 'realtor' ) {
+                    $service_types[] = (object) array(
+                        'slug' => 'realtor',
+                        'name' => 'Realtor Locator',
+                        'description' => 'Find your perfect home with our vetted real estate partners.',
+                        '__virtual' => true,
+                    );
+                    continue;
+                }
+
+                $term = get_term_by( 'slug', $slug, 'service_type' );
+                if ( $term && ! is_wp_error( $term ) ) {
+                    $service_types[] = $term;
+                }
+            }
 
             // Enhanced service mapping with better icons and descriptions
             $service_enhancements = array(
-                'banking' => array(
-                    'icon' => '🏦',
-                    'name' => 'Banking Services',
-                    'description' => 'Complete banking setup and financial services for your new location.',
-                    'features' => ['Account Opening', 'Credit Setup', 'Investment Options'],
+                'money-services' => array(
+                    'icon' => '💳',
+                    'name' => 'Money Services',
+                    'description' => 'Banking and international transfers set up for expats.',
+                    'features' => ['Account Opening', 'Cards & Payments', 'International Transfers'],
                     'timeline' => '1-2 weeks',
                     'color' => 'primary'
                 ),
@@ -111,14 +125,7 @@ get_header();
                     'timeline' => '1 week',
                     'color' => 'secondary'
                 ),
-                'money-transfer' => array(
-                    'icon' => '💸',
-                    'name' => 'International Transfers',
-                    'description' => 'Secure and efficient international money transfer services.',
-                    'features' => ['Currency Exchange', 'Wire Transfers', 'Multi-Currency Accounts'],
-                    'timeline' => '1-2 days',
-                    'color' => 'success'
-                ),
+                
                 'international-moving' => array(
                     'icon' => '📦',
                     'name' => 'International Moving',
@@ -182,7 +189,7 @@ get_header();
                 <div class="row g-4" id="servicesGrid">
                     <?php
                     foreach ( $service_types as $index => $type ) :
-                        $term_link = get_term_link( $type );
+                        $term_link = isset( $type->__virtual ) ? '/realtor-form' : get_term_link( $type );
                         $enhancement = $service_enhancements[$type->slug] ?? null;
                         
                         // Use enhanced data if available, otherwise fallback to original

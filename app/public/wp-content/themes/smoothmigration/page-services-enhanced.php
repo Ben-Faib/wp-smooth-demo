@@ -38,14 +38,14 @@ get_header();
                         'icon' => '🏠',
                         'description' => 'Find your perfect home with our vetted real estate partners and housing specialists.',
                         'existing' => 'realtor', 
-                        'link' => '/service-type/realtor/'
+                        'link' => '/realtor-form'
                     ),
-                    'banking' => array(
-                        'name' => 'Banking & Financial',
-                        'icon' => '🏦',
-                        'description' => 'Complete banking setup and financial services for your new location.',
-                        'existing' => 'banking',
-                        'link' => '/service-type/banking/'
+                    'money-services' => array(
+                        'name' => 'Money Services',
+                        'icon' => '💳',
+                        'description' => 'Banking and international transfers set up for expats.',
+                        'existing' => 'money-services',
+                        'link' => '/service-type/money-services/'
                     ),
                     'visas' => array(
                         'name' => 'Visas & Immigration',
@@ -65,8 +65,8 @@ get_header();
                         'name' => 'International Moving',
                         'icon' => '📦',
                         'description' => 'Professional international moving services with trusted global partners.',
-                        'existing' => 'transfer',
-                        'link' => '/service-type/transfer/'
+                        'existing' => 'international-moving',
+                        'link' => '/service-type/international-moving/'
                     ),
                     'school-search' => array(
                         'name' => 'School Search',
@@ -79,15 +79,15 @@ get_header();
                         'name' => 'Vehicle Services',
                         'icon' => '🚗',
                         'description' => 'Complete vehicle solutions including import, purchase, and registration.',
-                        'existing' => 'vehicle',
-                        'link' => '/service-type/vehicle/'
+                        'existing' => 'vehicles',
+                        'link' => '/service-type/vehicles/'
                     ),
                     'mobile-cellular' => array(
                         'name' => 'Mobile & Connectivity',
                         'icon' => '📱',
                         'description' => 'Mobile plans and connectivity solutions for seamless communication.',
-                        'existing' => 'mobile',
-                        'link' => '/service-type/mobile/'
+                        'existing' => 'telecommunication',
+                        'link' => '/service-type/telecommunication/'
                     ),
                     'insurance' => array(
                         'name' => 'Insurance & Protection',

@@ -25,3 +25,8 @@ require_once get_template_directory() . '/inc/elementor.php';
 
 // Demo content.
 require_once get_template_directory() . '/inc/demo-content.php';
+
+// Importer utilities for creating services from uploaded logos.
+require_once get_template_directory() . '/inc/service-import.php';
+// Helpers for logos and rendering choices
+require_once get_template_directory() . '/inc/service-helpers.php';

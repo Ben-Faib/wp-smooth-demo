@@ -1,0 +1,18 @@
+{
+  "slide_id": 3,
+  "image_file": "3.png",
+  "notes": [
+    {
+      "num": 1,
+      "note": "font size and colour and background colour.  Looks good and clean but text should be v easy to read,"
+    },
+    {
+      "num": 2,
+      "note": "are these the 3 first services we want as buttons?"
+    },
+    {
+      "num": 3,
+      "note": "check the blurb text and timelines to ensure accuracy - is there anyway to get the typical timeline to auto update?"
+    }
+  ]
+}

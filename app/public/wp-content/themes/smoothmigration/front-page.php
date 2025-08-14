@@ -117,7 +117,7 @@ get_header(); ?>
         
         <div class="row g-4 services-grid-limited">
             <div class="col-lg-4 col-md-6">
-                <a href="/service-type/realtor/" class="service-card-link">
+                <a href="/realtor-form" class="service-card-link">
                     <div class="service-card interactive-card">
                         <div class="service-image">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/pexels-vlada-karpovich-7368308.jpg" alt="Housing services - Find your perfect home" loading="lazy">
@@ -134,7 +134,7 @@ get_header(); ?>
             </div>
             
             <div class="col-lg-4 col-md-6">
-                <a href="/service-type/banking/" class="service-card-link">
+                <a href="/service-type/money-services/" class="service-card-link">
                     <div class="service-card interactive-card">
                         <div class="service-image">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/pexels-element5-1051075.jpg" alt="Banking services - International banking setup" loading="lazy">
@@ -143,8 +143,8 @@ get_header(); ?>
                             </div>
                         </div>
                         <div class="service-content">
-                            <h3 class="service-title">Banking</h3>
-                            <p class="service-description">Set up international banking seamlessly</p>
+                            <h3 class="service-title">Money Services</h3>
+                            <p class="service-description">Banking and international transfers</p>
                         </div>
                     </div>
                 </a>
@@ -328,11 +328,21 @@ get_header(); ?>
                             }
                         }
                     } else {
-                        // Fallback placeholder logos
-                        for ($i = 1; $i <= 8; $i++) {
-                            echo '<div class="partner-item placeholder">';
-                            echo '<div class="partner-placeholder">Service ' . $i . '</div>';
-                            echo '</div>';
+                        // Fallback: show uploaded partner logos from Services/Logos USA copied to uploads
+                        $uploads_dir = '/wp-content/uploads/services-logos/usa';
+                        $absolute_dir = ABSPATH . 'wp-content/uploads/services-logos/usa';
+                        if (is_dir($absolute_dir)) {
+                            $files = array_values(array_filter(scandir($absolute_dir), function($f) use ($absolute_dir) {
+                                return !in_array($f, array('.', '..')) && is_file($absolute_dir . DIRECTORY_SEPARATOR . $f);
+                            }));
+                            foreach ($files as $file) {
+                                $src = $uploads_dir . '/' . rawurlencode($file);
+                                echo '<div class="partner-item">';
+                                echo '<div class="partner-placeholder">';
+                                echo '<img src="' . esc_url($src) . '" alt="Partner logo" class="partner-logo" style="max-height:60px;object-fit:contain;">';
+                                echo '</div>';
+                                echo '</div>';
+                            }
                         }
                     }
                     ?>

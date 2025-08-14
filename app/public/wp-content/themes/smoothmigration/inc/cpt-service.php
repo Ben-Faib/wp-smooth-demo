@@ -111,6 +111,22 @@ function smoothmigration_add_service_meta_boxes() {
         'side',
         'default'
     );
+    add_meta_box(
+        'service_affiliate',
+        __( 'Affiliate Link', 'smoothmigration' ),
+        'smoothmigration_service_affiliate_callback',
+        'service',
+        'side',
+        'default'
+    );
+    add_meta_box(
+        'service_logos_variants',
+        __( 'Logo Variants', 'smoothmigration' ),
+        'smoothmigration_service_logo_variants_callback',
+        'service',
+        'side',
+        'default'
+    );
 }
 add_action( 'add_meta_boxes', 'smoothmigration_add_service_meta_boxes' );
 
@@ -219,6 +235,51 @@ function smoothmigration_service_branding_callback( $post ) {
 }
 
 /**
+ * Callback for Affiliate Link meta box.
+ */
+function smoothmigration_service_affiliate_callback( $post ) {
+    $affiliate_url = get_post_meta( $post->ID, '_service_affiliate_url', true );
+    ?>
+    <p>
+        <label for="service_affiliate_url"><?php _e( 'Referral/Affiliate URL', 'smoothmigration' ); ?></label>
+        <input type="url" id="service_affiliate_url" name="service_affiliate_url" value="<?php echo esc_attr( $affiliate_url ); ?>" class="widefat" placeholder="https://...">
+    </p>
+    <?php
+}
+
+/**
+ * Logo variants meta box.
+ */
+function smoothmigration_service_logo_variants_callback( $post ) {
+    $fields = array(
+        'service_logo_primary' => 'Primary',
+        'service_logo_on_light' => 'On Light Background',
+        'service_logo_on_dark' => 'On Dark Background',
+        'service_logo_square' => 'Square/Badge',
+    );
+    foreach ( $fields as $key => $label ) {
+        $val = get_post_meta( $post->ID, '_' . $key, true );
+        echo '<p><label for="'.$key.'">'.esc_html( $label ).'</label><br/>';
+        echo '<input type="number" id="'.$key.'" name="'.$key.'" value="'.esc_attr( $val ).'" class="small-text" /> ';
+        echo '<button type="button" class="button js-select-media" data-target="'.$key.'">Select</button></p>';
+    }
+    ?>
+    <script>
+    (function(){
+        document.querySelectorAll('#service_logos_variants .js-select-media, .js-select-media').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                var target = document.getElementById(this.dataset.target);
+                var frame = wp.media({title: 'Select Logo', button: {text: 'Use this logo'}, multiple: false});
+                frame.on('select', function(){ var a = frame.state().get('selection').first().toJSON(); target.value = a.id; });
+                frame.open();
+            });
+        });
+    })();
+    </script>
+    <?php
+}
+
+/**
  * Save meta box data.
  */
 function smoothmigration_save_service_meta( $post_id ) {
@@ -253,6 +314,11 @@ function smoothmigration_save_service_meta( $post_id ) {
         'service_company_url' => 'esc_url_raw',
         'service_company_logo' => 'absint',
         'service_brand_color' => 'sanitize_hex_color',
+        'service_affiliate_url' => 'esc_url_raw',
+        'service_logo_primary' => 'absint',
+        'service_logo_on_light' => 'absint',
+        'service_logo_on_dark' => 'absint',
+        'service_logo_square' => 'absint',
     );
 
     foreach ( $fields as $field => $sanitize_callback ) {
