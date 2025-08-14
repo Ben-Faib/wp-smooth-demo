@@ -296,24 +296,38 @@ get_header(); ?>
         </div>
         
         <div class="row g-4">
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-6">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Smooth Migration made our move effortless. Their team handled everything perfectly — and the service was free."</div>
+                    <div class="testimonial-text">"Smooth Migration made our move effortless — and the service was free."</div>
                     <div class="testimonial-author">— Sarah M., UK → Canada</div>
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-6">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"The cost savings alone paid for their service twice over. Highly recommend — free guidance, trusted partners."</div>
-                    <div class="testimonial-author">— James R., SA → Canada</div>
+                    <div class="testimonial-text">"Free guidance and preferred-rate partners saved us time and money."</div>
+                    <div class="testimonial-author">— James R., SA → USA</div>
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-6">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Finally, someone who understands the expat experience. The guidance was free and spot‑on for our move."</div>
-                    <div class="testimonial-author">— Maria L., UK → Canada</div>
+                    <div class="testimonial-text">"Clear plan, trusted providers, no extra fees to us — just what we needed."</div>
+                    <div class="testimonial-author">— Emily W., USA → UK</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Great experience from start to finish. The guidance was free and practical."</div>
+                    <div class="testimonial-author">— Oliver P., UK → Australia</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"They connected us to vetted partners quickly — and at expat-friendly rates."</div>
+                    <div class="testimonial-author">— Naledi K., SA → Australia</div>
                 </div>
             </div>
         </div>
