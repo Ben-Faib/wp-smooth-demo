@@ -306,7 +306,7 @@ function smoothmigration_import_services_from_logos(): array {
 
 	$absolute_dir = trailingslashit( WP_CONTENT_DIR ) . 'uploads/services-logos/usa';
 	if ( ! is_dir( $absolute_dir ) ) {
-		return array( 'success' => false, 'message' => 'Logos directory not found: ' . $absolute_dir );
+		return array( 'success' => false, 'message' => 'Filesystem logo folder not found. Use the Media Library importer instead.' );
 	}
 
 	$files = array_values( array_filter( scandir( $absolute_dir ), function( $f ) use ( $absolute_dir ) {
@@ -319,7 +319,46 @@ function smoothmigration_import_services_from_logos(): array {
 		$count++;
 	}
 
-	return array( 'success' => true, 'message' => sprintf( 'Processed %d logo files.', $count ) );
+	return array( 'success' => true, 'message' => sprintf( 'Processed %d filesystem logo files.', $count ) );
+}
+
+/**
+ * Import services by scanning the Media Library for likely brand logos.
+ */
+function smoothmigration_import_services_from_media_library(): array {
+	smoothmigration_ensure_core_service_terms();
+
+	$keywords = array(
+		'wise','remit','remitly','chime','bank','homeloan','home loan','xe',
+		'verizon','visible','boost','mobile',
+		'carvana','avis','discovercars','rentcars','intlauto','international auto',
+		'sirelo','intercoastal','trigl','experts in moving','move',
+		'lemonade','figo','visitor','visitors','insur',
+		'airalo','realtor'
+	);
+
+	$attachments = get_posts( array(
+		'post_type'      => 'attachment',
+		'post_mime_type' => 'image',
+		'posts_per_page' => -1,
+		'post_status'    => 'inherit',
+		'fields'         => 'ids',
+	) );
+
+	$processed = 0; $skipped = 0;
+	foreach ( $attachments as $att_id ) {
+		$file_rel = get_post_meta( $att_id, '_wp_attached_file', true );
+		$filename = $file_rel ? basename( $file_rel ) : basename( (string) get_attached_file( $att_id ) );
+		$title    = get_the_title( $att_id );
+		$haystack = strtolower( $filename . ' ' . $title );
+		$matched  = false;
+		foreach ( $keywords as $k ) { if ( $k !== '' && strpos( $haystack, strtolower( $k ) ) !== false ) { $matched = true; break; } }
+		if ( ! $matched ) { $skipped++; continue; }
+		smoothmigration_upsert_service_from_logo( $filename, '' );
+		$processed++;
+	}
+
+	return array( 'success' => true, 'message' => sprintf( 'Processed %d Media Library logos, skipped %d.', $processed, $skipped ) );
 }
 
 /**
@@ -391,15 +430,16 @@ function smoothmigration_render_service_importer_page(): void {
 		echo '<div class="notice notice-warning"><p>Deleted ' . intval( $deleted ) . ' service posts. Service Types preserved.</p></div>';
 	}
 	if ( isset( $_POST['smoothmigration_run_import'] ) && check_admin_referer( 'smoothmigration_service_import' ) ) {
-		$result = smoothmigration_import_services_from_logos();
+		$result = smoothmigration_import_services_from_media_library();
 		$message = $result['message'] ?? '';
 		$ok = ! empty( $result['success'] );
 		echo '<div class="notice notice-' . ( $ok ? 'success' : 'error' ) . '"><p>' . esc_html( $message ) . '</p></div>';
 	}
 	?>
 	<div class="wrap">
-		<h1>Import Services from Uploaded Logos</h1>
-		<p>This tool will create/update Service posts based on the brand logos found in <code>wp-content/uploads/services-logos/usa</code> and assign them to the 6 overarching Service Types.</p>
+		<h1>Import Services from Media Library</h1>
+		<p>This tool creates/updates Service posts by scanning your Media Library for brand logos (Wise, XE, Lemonade, etc.). It auto-assigns the Service Type and attaches the logo.</p>
+		<p><strong>How to use:</strong> Upload brand logos to the Media Library with recognizable filenames (e.g., <code>wise.png</code>). Then click Run Import.</p>
 		<form method="post" style="margin-bottom:1rem;">
 			<?php wp_nonce_field( 'smoothmigration_service_import' ); ?>
 			<p><input type="submit" name="smoothmigration_delete_all_services" class="button button-secondary" value="Delete ALL Services (keep Service Types)" onclick="return confirm('Delete all service posts? This cannot be undone.');"></p>
@@ -410,7 +450,7 @@ function smoothmigration_render_service_importer_page(): void {
         </form>
 		<form method="post">
 			<?php wp_nonce_field( 'smoothmigration_service_import' ); ?>
-			<p><input type="submit" name="smoothmigration_run_import" class="button button-primary" value="Run Import"></p>
+			<p><input type="submit" name="smoothmigration_run_import" class="button button-primary" value="Run Import from Media Library"></p>
 		</form>
 	</div>
 	<?php
