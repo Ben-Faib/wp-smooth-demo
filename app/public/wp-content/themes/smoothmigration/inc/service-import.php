@@ -343,6 +343,13 @@ function smoothmigration_import_services_from_media_library(): array {
 		'posts_per_page' => -1,
 		'post_status'    => 'inherit',
 		'fields'         => 'ids',
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'sm_asset_type',
+				'field'    => 'slug',
+				'terms'    => array( 'brand-logo' ),
+			),
+		),
 	) );
 
 	$processed = 0; $skipped = 0;
@@ -358,7 +365,7 @@ function smoothmigration_import_services_from_media_library(): array {
 		$processed++;
 	}
 
-	return array( 'success' => true, 'message' => sprintf( 'Processed %d Media Library logos, skipped %d.', $processed, $skipped ) );
+	return array( 'success' => true, 'message' => sprintf( 'Processed %d Brand Logo attachments, skipped %d.', $processed, $skipped ) );
 }
 
 /**
@@ -439,7 +446,7 @@ function smoothmigration_render_service_importer_page(): void {
 	<div class="wrap">
 		<h1>Import Services from Media Library</h1>
 		<p>This tool creates/updates Service posts by scanning your Media Library for brand logos (Wise, XE, Lemonade, etc.). It auto-assigns the Service Type and attaches the logo.</p>
-		<p><strong>How to use:</strong> Upload brand logos to the Media Library with recognizable filenames (e.g., <code>wise.png</code>). Then click Run Import.</p>
+		<p><strong>How to use:</strong> Upload brand logos to the Media Library, set <em>Asset Type</em> to <strong>Brand Logo</strong> on each logo, then click <em>Run Import from Media Library</em>. Filenames like <code>wise.png</code> help with matching.</p>
 		<form method="post" style="margin-bottom:1rem;">
 			<?php wp_nonce_field( 'smoothmigration_service_import' ); ?>
 			<p><input type="submit" name="smoothmigration_delete_all_services" class="button button-secondary" value="Delete ALL Services (keep Service Types)" onclick="return confirm('Delete all service posts? This cannot be undone.');"></p>
