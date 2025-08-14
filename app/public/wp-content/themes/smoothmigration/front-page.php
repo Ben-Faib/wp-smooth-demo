@@ -289,23 +289,6 @@ get_header(); ?>
                                 echo '</div>';
                             }
                         }
-                    } else {
-                        // Fallback: show uploaded partner logos from Services/Logos USA copied to uploads
-                        $uploads_dir = '/wp-content/uploads/services-logos/usa';
-                        $absolute_dir = ABSPATH . 'wp-content/uploads/services-logos/usa';
-                        if (is_dir($absolute_dir)) {
-                            $files = array_values(array_filter(scandir($absolute_dir), function($f) use ($absolute_dir) {
-                                return !in_array($f, array('.', '..')) && is_file($absolute_dir . DIRECTORY_SEPARATOR . $f);
-                            }));
-                            foreach ($files as $file) {
-                                $src = $uploads_dir . '/' . rawurlencode($file);
-                                echo '<div class="partner-item">';
-                                echo '<div class="partner-placeholder">';
-                                echo '<img src="' . esc_url($src) . '" alt="Partner logo" class="partner-logo" style="max-height:60px;object-fit:contain;">';
-                                echo '</div>';
-                                echo '</div>';
-                            }
-                        }
                     }
                     ?>
                 </div>
