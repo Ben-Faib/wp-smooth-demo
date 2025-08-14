@@ -1,6 +1,6 @@
 /* Enhanced Footer Styles - Fixed Logo & Simplified */
 .site-footer {
-    background: #131722;
+    background: var(--text-dark);
     color: white;
     padding: 3rem 0 1.5rem;
     margin-top: 4rem;
@@ -63,9 +63,10 @@
 }
 
 .footer-link {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    line-height: 1.6;
     transition: color 0.3s ease;
     display: inline-block;
 }
@@ -156,9 +157,7 @@
         margin-bottom: 1rem;
     }
     
-    .footer-links li {
-        margin-bottom: 0.5rem;
-    }
+    .footer-links li { margin-bottom: 0.75rem; }
 }
 
 @media (max-width: 576px) {
