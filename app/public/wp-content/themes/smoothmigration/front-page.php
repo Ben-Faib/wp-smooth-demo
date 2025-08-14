@@ -24,6 +24,7 @@ get_header(); ?>
                             <span class="trust-metric"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?> successful relocations</span>
                         </div>
                     </div>
+                    <div class="small text-light" style="opacity:.9">No additional or hidden costs.</div>
                     
                     <h1 class="hero-headline">Moving to a new country? We understand the overwhelm.</h1>
                     <p class="hero-subheadline">Let's make it smooth together. Our expert team turns relocation chaos into a clear, step-by-step plan—tailored specifically to your destination and timeline.</p>
@@ -63,7 +64,16 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
+            <?php $expats = trim( (string) get_option( 'sm_expats_count', '' ) ); if ( $expats !== '' ) : ?>
+            <div class="stat-item">
+                <div class="stat-number"><?php echo esc_html( $expats ); ?></div>
+                <div class="stat-label">Expats In Our Community</div>
+            </div>
+            <?php endif; ?>
         </div>
+        <?php $updated = trim( (string) get_option( 'sm_stats_last_updated', '' ) ); if ( $updated !== '' ) : ?>
+        <p class="text-muted small mt-2"><?php echo esc_html( $updated ); ?> <a class="text-muted" href="/methodology" aria-label="See methodology details">Methodology</a></p>
+        <?php endif; ?>
     </div>
 </section>
 
@@ -280,7 +290,7 @@ get_header(); ?>
         <div class="text-center mb-5">
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-number"><?php echo esc_html( preg_replace('/\D+$/', '', get_option( 'sm_successful_relocations', '2500+' ) ) ); ?>+</div>
+                    <div class="stat-number"><?php echo esc_html( preg_replace('/\D+$/', '', get_option( 'sm_successful_relocations', '2500+' ) ) ); ?>+<sup class="ms-1"><a class="text-muted" href="/methodology" aria-label="See methodology">*</a></sup></div>
                     <div class="stat-label">Successful Moves</div>
                 </div>
                 <div class="stat-item">
@@ -288,7 +298,7 @@ get_header(); ?>
                     <div class="stat-label">Customer Satisfaction</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number"><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?></div>
+                    <div class="stat-number"><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?><sup class="ms-1"><a class="text-muted" href="/methodology" aria-label="See methodology">*</a></sup></div>
                     <div class="stat-label">Countries Served</div>
                 </div>
             </div>
@@ -350,22 +360,22 @@ get_header(); ?>
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Smooth Migration made our move from London to Singapore effortless. Their team handled everything perfectly."</div>
-                    <div class="testimonial-author">— Sarah M., Marketing Director</div>
+                    <div class="testimonial-text">"Smooth Migration made our move effortless. Their team handled everything perfectly."</div>
+                    <div class="testimonial-author">— Sarah M., UK → Singapore</div>
                 </div>
             </div>
             
             <div class="col-lg-4">
                 <div class="testimonial-card">
                     <div class="testimonial-text">"The cost savings alone paid for their service twice over. Highly recommend for any international move."</div>
-                    <div class="testimonial-author">— James R., Software Engineer</div>
+                    <div class="testimonial-author">— James R., SA → Canada</div>
                 </div>
             </div>
             
             <div class="col-lg-4">
                 <div class="testimonial-card">
                     <div class="testimonial-text">"Finally, someone who understands the expat experience. They anticipated needs we didn't even know we had."</div>
-                    <div class="testimonial-author">— Maria L., Teacher</div>
+                    <div class="testimonial-author">— Maria L., Spain → Australia</div>
                 </div>
             </div>
         </div>
