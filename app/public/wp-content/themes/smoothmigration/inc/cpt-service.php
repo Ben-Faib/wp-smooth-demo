@@ -42,7 +42,7 @@ function smoothmigration_register_services_cpt() {
         'has_archive'        => true,
         'hierarchical'       => false,
         'menu_position'      => null,
-        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'page-attributes' ),
         'menu_icon'          => 'dashicons-admin-tools',
         'show_in_rest'       => true, // Enable Gutenberg editor
     );
@@ -141,12 +141,27 @@ function smoothmigration_service_details_callback( $post ) {
     $price = get_post_meta( $post->ID, '_service_price', true );
     $duration = get_post_meta( $post->ID, '_service_duration', true );
     $featured = get_post_meta( $post->ID, '_service_featured', true );
+    $timeline = get_post_meta( $post->ID, '_service_timeline', true );
+    $timeline_min = get_post_meta( $post->ID, '_service_timeline_min_days', true );
+    $timeline_max = get_post_meta( $post->ID, '_service_timeline_max_days', true );
 
     ?>
     <table class="form-table">
         <tr>
             <th><label for="service_price"><?php _e( 'Price', 'smoothmigration' ); ?></label></th>
             <td><input type="text" id="service_price" name="service_price" value="<?php echo esc_attr( $price ); ?>" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th><label for="service_timeline"><?php _e( 'Typical Timeline (fallback text)', 'smoothmigration' ); ?></label></th>
+            <td><input type="text" id="service_timeline" name="service_timeline" value="<?php echo esc_attr( $timeline ); ?>" class="regular-text" placeholder="e.g., Typical timeline: 2–6 weeks"></td>
+        </tr>
+        <tr>
+            <th><label for="service_timeline_min_days"><?php _e( 'Timeline Minimum (days)', 'smoothmigration' ); ?></label></th>
+            <td><input type="number" id="service_timeline_min_days" name="service_timeline_min_days" value="<?php echo esc_attr( $timeline_min ); ?>" class="small-text" min="0"></td>
+        </tr>
+        <tr>
+            <th><label for="service_timeline_max_days"><?php _e( 'Timeline Maximum (days)', 'smoothmigration' ); ?></label></th>
+            <td><input type="number" id="service_timeline_max_days" name="service_timeline_max_days" value="<?php echo esc_attr( $timeline_max ); ?>" class="small-text" min="0"></td>
         </tr>
         <tr>
             <th><label for="service_duration"><?php _e( 'Duration', 'smoothmigration' ); ?></label></th>
@@ -309,6 +324,9 @@ function smoothmigration_save_service_meta( $post_id ) {
     $fields = array(
         'service_price' => 'sanitize_text_field',
         'service_duration' => 'sanitize_text_field',
+        'service_timeline' => 'sanitize_text_field',
+        'service_timeline_min_days' => 'absint',
+        'service_timeline_max_days' => 'absint',
         'service_options' => 'sanitize_textarea_field',
         'service_company_name' => 'sanitize_text_field',
         'service_company_url' => 'esc_url_raw',

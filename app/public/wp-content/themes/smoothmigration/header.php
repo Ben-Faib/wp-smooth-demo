@@ -13,7 +13,7 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<header id="masthead" class="site-header sticky-header">
+<header id="masthead" class="site-header sticky-header" role="banner">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
@@ -33,6 +33,19 @@
                     'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
                     'walker'          => new WP_Bootstrap_Navwalker(),
                 ) );
+                ?>
+
+                <?php
+                // Country flags menu (Canada first via menu order in Appearance > Menus)
+                if ( has_nav_menu( 'country_flags' ) ) {
+                    wp_nav_menu( array(
+                        'theme_location' => 'country_flags',
+                        'container'      => false,
+                        'menu_class'     => 'navbar-nav country-flags-menu ms-lg-3',
+                        'depth'          => 1,
+                        'fallback_cb'    => false,
+                    ) );
+                }
                 ?>
                 
                 <!-- Get in Touch CTA Button -->

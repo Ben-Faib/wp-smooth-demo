@@ -8,7 +8,7 @@
   font-weight: 600;
   text-decoration: none;
   border: none;
-  border-radius: var(--border-radius-lg);
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
@@ -56,14 +56,14 @@
   padding: 1.25rem 2.5rem;
   font-size: 1.1rem;
   font-weight: 700;
-  border-radius: var(--border-radius-xl);
+  border-radius: 12px;
 }
 
 .btn-xl {
   padding: 1.5rem 3rem;
   font-size: 1.2rem;
   font-weight: 700;
-  border-radius: var(--border-radius-2xl);
+  border-radius: 12px;
 }
 
 /* Fixed Loading State Enhancements */
@@ -419,7 +419,7 @@
   background: var(--gradient-primary);
   color: #fff;
   border: 1px solid var(--primary-light);
-  border-radius: var(--border-radius);
+  border-radius: 12px;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
 }

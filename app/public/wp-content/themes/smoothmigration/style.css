@@ -90,8 +90,8 @@ Tags: custom-theme, responsive, bootstrap
 
 /* Enhanced Modern Typography */
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.6;
+  font-family: "Aileron", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.55;
   color: var(--text-dark);
   font-size: 16px;
   background: var(--bg-white);
@@ -102,26 +102,27 @@ body {
 
 /* Typography Scale */
 h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", Times, serif;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   color: var(--text-dark);
   margin-bottom: 1rem;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 900;
-  line-height: 1.1;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
 }
 
 h3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
   font-weight: 700;
 }
 
@@ -217,6 +218,47 @@ section {
   color: var(--text-light) !important;
 }
 
+
+/* Global Flag Menu styles (accessible, warm) */
+.country-flags-menu {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.country-flags-menu .menu-item > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 24px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xs);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.country-flags-menu .menu-item > a:hover,
+.country-flags-menu .menu-item > a:focus {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.country-flags-menu img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Hero overlay helpers */
+.hero-landing .hero-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.55) 100%);
+  z-index: 1;
+}
+.hero-landing .hero-content { position: relative; z-index: 2; }
 
 /* Realtor Form Page specific styles */
 .realtor-form-wrapper {

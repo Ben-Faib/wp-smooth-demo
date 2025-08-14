@@ -11,6 +11,7 @@ get_header(); ?>
 
 <!-- 1. Enhanced Hero Section -->
 <section class="hero-landing">
+    <div class="hero-overlay-dark" aria-hidden="true"></div>
     <div class="container">
         <div class="row align-items-center min-vh-100">
             <div class="col-lg-8">
@@ -19,8 +20,8 @@ get_header(); ?>
                     <div class="trust-signals mb-4">
                         <div class="trust-badges">
                             <span class="trust-badge">🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇿🇦</span>
-                            <span class="trust-metric">Average move completion: 45 days</span>
-                            <span class="trust-metric">3,200+ successful relocations</span>
+                            <span class="trust-metric"><?php echo esc_html( get_option( 'sm_avg_relocation_time', '45 days' ) ); ?></span>
+                            <span class="trust-metric"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?> successful relocations</span>
                         </div>
                     </div>
                     
@@ -46,7 +47,7 @@ get_header(); ?>
                     <!-- Urgency without pressure -->
                     <div class="urgency-signals mt-3">
                         <p class="urgency-text">
-                            <strong>Join 200+ families who started their move this month</strong><br>
+                            <strong>Join <?php echo esc_html( get_option( 'sm_monthly_signups', '200+' ) ); ?> families who started their move this month</strong><br>
                             <small class="text-light">Next available consultation: Today at 3 PM</small>
                         </p>
                     </div>
@@ -102,6 +103,19 @@ get_header(); ?>
         </div>
         
         <div class="text-center mt-4">
+            <?php if ( has_nav_menu( 'how_it_works_links' ) ) : ?>
+                <nav aria-label="How it works quick links">
+                    <?php
+                    wp_nav_menu( array(
+                        'theme_location' => 'how_it_works_links',
+                        'container'      => false,
+                        'menu_class'     => 'nav justify-content-center gap-2 mb-3',
+                        'fallback_cb'    => false,
+                        'depth'          => 1,
+                    ) );
+                    ?>
+                </nav>
+            <?php endif; ?>
             <a href="/services" class="btn btn-outline-primary">See available services →</a>
         </div>
     </div>
@@ -116,107 +130,90 @@ get_header(); ?>
         </div>
         
         <div class="row g-4 services-grid-limited">
-            <div class="col-lg-4 col-md-6">
-                <a href="/realtor-form" class="service-card-link">
-                    <div class="service-card interactive-card">
-                        <div class="service-image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/pexels-vlada-karpovich-7368308.jpg" alt="Housing services - Find your perfect home" loading="lazy">
-                            <div class="service-overlay">
-                                <span class="timeline-badge">Typical timeline: 2-4 weeks</span>
+            <?php
+            $featured_services = new WP_Query(array(
+                'post_type'      => 'service',
+                'posts_per_page' => 3,
+                'meta_key'       => '_service_featured',
+                'meta_value'     => '1',
+                'orderby'        => 'menu_order',
+                'order'          => 'ASC',
+            ));
+
+            if ( $featured_services->have_posts() ) :
+                while ( $featured_services->have_posts() ) : $featured_services->the_post();
+                    $service_id = get_the_ID();
+                    $min_days = (int) get_post_meta( $service_id, '_service_timeline_min_days', true );
+                    $max_days = (int) get_post_meta( $service_id, '_service_timeline_max_days', true );
+                    $timeline_text = get_post_meta( $service_id, '_service_timeline', true );
+                    if ( $min_days && $max_days ) {
+                        $timeline_text = sprintf( /* translators: %1$d and %2$d are day counts */ __( 'Typical timeline: %1$d–%2$d days', 'smoothmigration' ), $min_days, $max_days );
+                    }
+                    $timeline_text = $timeline_text ? $timeline_text : get_option( 'sm_default_timeline', __( 'Typical timeline: 2–6 weeks', 'smoothmigration' ) );
+                    $thumb      = get_the_post_thumbnail_url( $service_id, 'large' );
+                    $thumb_alt  = the_title_attribute( array( 'echo' => false ) );
+                    ?>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="<?php the_permalink(); ?>" class="service-card-link">
+                            <div class="service-card interactive-card">
+                                <div class="service-image">
+                                    <?php if ( $thumb ) : ?>
+                                        <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $thumb_alt ); ?>" loading="lazy">
+                                    <?php endif; ?>
+                                    <div class="service-overlay">
+                                        <span class="timeline-badge"><?php echo esc_html( $timeline_text ); ?></span>
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <h3 class="service-title"><?php the_title(); ?></h3>
+                                    <p class="service-description"><?php echo esc_html( get_the_excerpt() ); ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">Housing</h3>
-                            <p class="service-description">Find your perfect home before you arrive</p>
-                        </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <a href="/service-type/money-services/" class="service-card-link">
-                    <div class="service-card interactive-card">
-                        <div class="service-image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/pexels-element5-1051075.jpg" alt="Banking services - International banking setup" loading="lazy">
-                            <div class="service-overlay">
-                                <span class="timeline-badge">Typical timeline: 1-2 weeks</span>
+                    <?php
+                endwhile; wp_reset_postdata();
+            else :
+                $fallback = new WP_Query(array(
+                    'post_type'      => 'service',
+                    'posts_per_page' => 3,
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
+                ));
+                while ( $fallback->have_posts() ) : $fallback->the_post();
+                    $service_id = get_the_ID();
+                    $min_days = (int) get_post_meta( $service_id, '_service_timeline_min_days', true );
+                    $max_days = (int) get_post_meta( $service_id, '_service_timeline_max_days', true );
+                    $timeline_text = get_post_meta( $service_id, '_service_timeline', true );
+                    if ( $min_days && $max_days ) {
+                        $timeline_text = sprintf( __( 'Typical timeline: %1$d–%2$d days', 'smoothmigration' ), $min_days, $max_days );
+                    }
+                    $timeline_text = $timeline_text ? $timeline_text : get_option( 'sm_default_timeline', __( 'Typical timeline: 2–6 weeks', 'smoothmigration' ) );
+                    $thumb      = get_the_post_thumbnail_url( $service_id, 'large' );
+                    $thumb_alt  = the_title_attribute( array( 'echo' => false ) );
+                    ?>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="<?php the_permalink(); ?>" class="service-card-link">
+                            <div class="service-card interactive-card">
+                                <div class="service-image">
+                                    <?php if ( $thumb ) : ?>
+                                        <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $thumb_alt ); ?>" loading="lazy">
+                                    <?php endif; ?>
+                                    <div class="service-overlay">
+                                        <span class="timeline-badge"><?php echo esc_html( $timeline_text ); ?></span>
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <h3 class="service-title"><?php the_title(); ?></h3>
+                                    <p class="service-description"><?php echo esc_html( get_the_excerpt() ); ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">Money Services</h3>
-                            <p class="service-description">Banking and international transfers</p>
-                        </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <a href="/service-type/visas-immigration/" class="service-card-link">
-                    <div class="service-card interactive-card">
-                        <div class="service-image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/pexels-freestockpro-1008155.jpg" alt="Visa services - Navigate immigration requirements" loading="lazy">
-                            <div class="service-overlay">
-                                <span class="timeline-badge">Typical timeline: 4-12 weeks</span>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">Visas</h3>
-                            <p class="service-description">Navigate complex visa requirements</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <a href="/service-type/pet-relocation/" class="service-card-link">
-                    <div class="service-card interactive-card">
-                        <div class="service-image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/pexels-cottonbro-5077049.jpg" alt="Pet relocation - Safe transport for pets" loading="lazy">
-                            <div class="service-overlay">
-                                <span class="timeline-badge">Typical timeline: 3-6 weeks</span>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">Pet Relocation</h3>
-                            <p class="service-description">Safe transport for your furry family</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <a href="/service-type/international-moving/" class="service-card-link">
-                    <div class="service-card interactive-card">
-                        <div class="service-image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/pexels-riciardus-307008.jpg" alt="International moving - Global shipping services" loading="lazy">
-                            <div class="service-overlay">
-                                <span class="timeline-badge">Typical timeline: 6-8 weeks</span>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">International Moving</h3>
-                            <p class="service-description">Trusted global shipping partners</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <a href="/service-type/school-search/" class="service-card-link">
-                    <div class="service-card interactive-card">
-                        <div class="service-image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/pexels-mart-production-7251084.jpg" alt="School search - Find the right schools for children" loading="lazy">
-                            <div class="service-overlay">
-                                <span class="timeline-badge">Typical timeline: 2-6 weeks</span>
-                            </div>
-                        </div>
-                        <div class="service-content">
-                            <h3 class="service-title">School Search</h3>
-                            <p class="service-description">Find the right schools for your children</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    <?php
+                endwhile; wp_reset_postdata();
+            endif;
+            ?>
         </div>
         
         <div class="text-center mt-4">
@@ -283,7 +280,7 @@ get_header(); ?>
         <div class="text-center mb-5">
             <div class="stats-row">
                 <div class="stat-item">
-                    <div class="stat-number">3,200</div>
+                    <div class="stat-number"><?php echo esc_html( preg_replace('/\D+$/', '', get_option( 'sm_successful_relocations', '2500+' ) ) ); ?>+</div>
                     <div class="stat-label">Successful Moves</div>
                 </div>
                 <div class="stat-item">
@@ -457,6 +454,22 @@ get_header(); ?>
 </section>
 
 </main>
+
+<!-- Sticky consult box -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+    <div class="toast show shadow" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-body d-flex align-items-center gap-3">
+            <div class="flex-shrink-0" aria-hidden="true">💬</div>
+            <div>
+                <strong>Consult available services</strong>
+                <div class="small text-muted">Talk to a specialist today</div>
+            </div>
+            <a class="btn btn-primary btn-sm" href="/contact">Book now</a>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Dismiss"></button>
+        </div>
+    </div>
+    <script>document.addEventListener('DOMContentLoaded',function(){var t=document.querySelector('.toast'); if(t&&bootstrap?.Toast){ new bootstrap.Toast(t,{autohide:false}).show(); }});</script>
+</div>
 
 <script>
 function downloadChecklist() {

@@ -30,3 +30,5 @@ require_once get_template_directory() . '/inc/demo-content.php';
 require_once get_template_directory() . '/inc/service-import.php';
 // Helpers for logos and rendering choices
 require_once get_template_directory() . '/inc/service-helpers.php';
+// Options page for data-driven content
+require_once get_template_directory() . '/inc/options.php';
