@@ -19,7 +19,7 @@ get_header(); ?>
                     <!-- Trust Signals -->
                     <div class="trust-signals mb-4">
                         <div class="trust-badges">
-                            <span class="trust-badge">🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇿🇦</span>
+                            <span class="trust-badge">🇨🇦 🇺🇸 🇬🇧 🇦🇺 🇿🇦</span>
                             <span class="trust-metric"><?php echo esc_html( get_option( 'sm_avg_relocation_time', '45 days' ) ); ?></span>
                             <span class="trust-metric"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?> successful relocations</span>
                         </div>
