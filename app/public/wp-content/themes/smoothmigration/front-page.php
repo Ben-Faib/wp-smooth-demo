@@ -288,7 +288,7 @@ get_header(); ?>
                     <div class="stat-label">Customer Satisfaction</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">50+</div>
+                    <div class="stat-number"><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?></div>
                     <div class="stat-label">Countries Served</div>
                 </div>
             </div>

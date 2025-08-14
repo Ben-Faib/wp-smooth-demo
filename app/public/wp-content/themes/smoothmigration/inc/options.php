@@ -29,6 +29,26 @@ function smoothmigration_register_settings() {
         'sanitize_callback' => 'sanitize_text_field',
         'default'           => '200+',
     ) );
+    register_setting( 'smoothmigration_options', 'sm_countries_served', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => '5+',
+    ) );
+    register_setting( 'smoothmigration_options', 'sm_default_timeline', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => __( 'Typical timeline: 2–6 weeks', 'smoothmigration' ),
+    ) );
+    register_setting( 'smoothmigration_options', 'sm_expats_count', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => '',
+    ) );
+    register_setting( 'smoothmigration_options', 'sm_stats_last_updated', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => '',
+    ) );
 
     add_settings_section(
         'smoothmigration_stats_section',
@@ -70,6 +90,53 @@ function smoothmigration_register_settings() {
             $val = get_option( 'sm_monthly_signups', '200+' );
             echo '<input type="text" class="regular-text" name="sm_monthly_signups" value="' . esc_attr( $val ) . '" />';
             echo '<p class="description">' . esc_html__( "Example: 200+", 'smoothmigration' ) . '</p>';
+        },
+        'smoothmigration_options',
+        'smoothmigration_stats_section'
+    );
+
+    add_settings_field(
+        'sm_countries_served',
+        __( 'Countries served', 'smoothmigration' ),
+        function() {
+            $val = get_option( 'sm_countries_served', '5+' );
+            echo '<input type="text" class="regular-text" name="sm_countries_served" value="' . esc_attr( $val ) . '" />';
+            echo '<p class="description">' . esc_html__( "Example: 5+", 'smoothmigration' ) . '</p>';
+        },
+        'smoothmigration_options',
+        'smoothmigration_stats_section'
+    );
+
+    add_settings_field(
+        'sm_default_timeline',
+        __( 'Default service timeline text', 'smoothmigration' ),
+        function() {
+            $val = get_option( 'sm_default_timeline', __( 'Typical timeline: 2–6 weeks', 'smoothmigration' ) );
+            echo '<input type="text" class="regular-text" name="sm_default_timeline" value="' . esc_attr( $val ) . '" />';
+        },
+        'smoothmigration_options',
+        'smoothmigration_stats_section'
+    );
+
+    add_settings_field(
+        'sm_expats_count',
+        __( 'Expats in the group (optional)', 'smoothmigration' ),
+        function() {
+            $val = get_option( 'sm_expats_count', '' );
+            echo '<input type="text" class="regular-text" name="sm_expats_count" value="' . esc_attr( $val ) . '" />';
+            echo '<p class="description">' . esc_html__( "Leave blank to hide.", 'smoothmigration' ) . '</p>';
+        },
+        'smoothmigration_options',
+        'smoothmigration_stats_section'
+    );
+
+    add_settings_field(
+        'sm_stats_last_updated',
+        __( 'Stats last updated (optional note)', 'smoothmigration' ),
+        function() {
+            $val = get_option( 'sm_stats_last_updated', '' );
+            echo '<input type="text" class="regular-text" name="sm_stats_last_updated" value="' . esc_attr( $val ) . '" />';
+            echo '<p class="description">' . esc_html__( "e.g., Updated Aug 2025", 'smoothmigration' ) . '</p>';
         },
         'smoothmigration_options',
         'smoothmigration_stats_section'
