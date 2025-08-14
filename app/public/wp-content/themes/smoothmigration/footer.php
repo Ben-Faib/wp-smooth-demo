@@ -104,6 +104,7 @@
             </svg>
           </a>
         </div>
+        <p class="text-end text-muted small mb-0 d-none d-md-block">Smooth Migration is free to use. We’re paid by partners; we only work with vetted providers.</p>
       </div>
     </div>
   </div>

@@ -126,7 +126,7 @@ get_header(); ?>
                     ?>
                 </nav>
             <?php endif; ?>
-            <a href="/services" class="btn btn-outline-primary">See available services →</a>
+            <a href="/services" class="btn btn-outline-primary">Browse all categories (free) →</a>
         </div>
     </div>
 </section>
@@ -136,7 +136,7 @@ get_header(); ?>
     <div class="container">
         <div class="text-center mb-5">
             <h2 id="services-title" class="section-title">Core Services</h2>
-            <p class="section-subtitle">Everything you need for a smooth international move</p>
+            <p class="section-subtitle">Everything you need for a smooth international move — and it’s free to use.</p>
         </div>
         
         <div class="row g-4 services-grid-limited">
@@ -298,22 +298,22 @@ get_header(); ?>
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Smooth Migration made our move effortless. Their team handled everything perfectly."</div>
-                    <div class="testimonial-author">— Sarah M., UK → Singapore</div>
+                    <div class="testimonial-text">"Smooth Migration made our move effortless. Their team handled everything perfectly — and the service was free."</div>
+                    <div class="testimonial-author">— Sarah M., UK → Canada</div>
                 </div>
             </div>
             
             <div class="col-lg-4">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"The cost savings alone paid for their service twice over. Highly recommend for any international move."</div>
+                    <div class="testimonial-text">"The cost savings alone paid for their service twice over. Highly recommend — free guidance, trusted partners."</div>
                     <div class="testimonial-author">— James R., SA → Canada</div>
                 </div>
             </div>
             
             <div class="col-lg-4">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Finally, someone who understands the expat experience. They anticipated needs we didn't even know we had."</div>
-                    <div class="testimonial-author">— Maria L., Spain → Australia</div>
+                    <div class="testimonial-text">"Finally, someone who understands the expat experience. The guidance was free and spot‑on for our move."</div>
+                    <div class="testimonial-author">— Maria L., UK → Canada</div>
                 </div>
             </div>
         </div>
