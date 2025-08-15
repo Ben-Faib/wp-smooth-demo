@@ -88,6 +88,26 @@ get_header();
                                     echo '<div class="contact-form-section mt-5">';
                                     echo do_shortcode('[contact-form-7 id="1" title="Contact form 1"]'); // Adjust ID as needed
                                     echo '</div>';
+
+                                    // Company contact details
+                                    echo '<div class="row g-4 mt-4">';
+                                    echo '  <div class="col-md-6"><div class="card h-100 p-3">';
+                                    echo '    <h5 class="mb-3">Head Office</h5>';
+                                    echo '    <p class="mb-1">1011-5307 Victoria Drive</p>';
+                                    echo '    <p class="mb-1">Vancouver, BC V5P 3V6</p>';
+                                    echo '    <p class="mb-3">Canada</p>';
+                                    echo '    <p class="mb-1"><strong>Phone:</strong> +1 604 283 7626</p>';
+                                    echo '    <p class="mb-0"><strong>Email:</strong> <a href="mailto:contact@smoothmigration.net">contact@smoothmigration.net</a></p>';
+                                    echo '  </div></div>';
+                                    echo '  <div class="col-md-6"><div class="card h-100 p-3">';
+                                    echo '    <h5 class="mb-3">England Office</h5>';
+                                    echo '    <p class="mb-1">Bournevale Rd</p>';
+                                    echo '    <p class="mb-1">SW16, London</p>';
+                                    echo '    <p class="mb-3">England</p>';
+                                    echo '    <p class="mb-1"><strong>General:</strong> <a href="mailto:hello@smoothmigration.net">hello@smoothmigration.net</a></p>';
+                                    echo '    <p class="mb-0"><strong>Realtor:</strong> <a href="mailto:realtor@smoothmigration.net">realtor@smoothmigration.net</a></p>';
+                                    echo '  </div></div>';
+                                    echo '</div>';
                                 }
                                 ?>
                             </div>

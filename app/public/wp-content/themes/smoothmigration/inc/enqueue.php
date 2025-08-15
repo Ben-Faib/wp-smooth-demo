@@ -43,6 +43,12 @@ function smoothmigration_enqueue_assets() {
     // Custom theme JavaScript
     wp_enqueue_script( 'smoothmigration-js', get_template_directory_uri() . '/assets/js/theme.js', array( 'bootstrap' ), $ver, true );
 
+    // Global AJAX config (available site-wide)
+    wp_localize_script( 'smoothmigration-js', 'smAjax', array(
+        'ajax_url' => admin_url( 'admin-ajax.php' ),
+        'nonce'    => wp_create_nonce( 'smoothmigration_contact_nonce' )
+    ) );
+
     // Landing Page specific styles and scripts (only load on front page)
     if ( is_front_page() ) {
         wp_enqueue_style( 'landing-page', get_template_directory_uri() . '/assets/css/landing-page.css', array( 'smoothmigration-style' ), $ver );

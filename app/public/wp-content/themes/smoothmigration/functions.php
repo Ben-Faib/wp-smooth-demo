@@ -16,6 +16,7 @@ require_once get_template_directory() . '/inc/theme-setup.php';
 require_once get_template_directory() . '/inc/enqueue.php';
 require_once get_template_directory() . '/inc/ajax.php';
 require_once get_template_directory() . '/inc/seo-meta.php';
+require_once get_template_directory() . '/inc/locale-modal.php';
 
 // Custom post types and taxonomies.
 require_once get_template_directory() . '/inc/cpt-service.php';

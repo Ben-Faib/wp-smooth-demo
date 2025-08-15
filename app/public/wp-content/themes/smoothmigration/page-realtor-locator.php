@@ -1487,16 +1487,31 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show loading state
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
         submitBtn.disabled = true;
-        
-        // Simulate form submission
-        setTimeout(() => {
-            alert('Thank you for your property search request! We\'ll match you with a qualified realtor within 24 hours and send you curated property listings based on your preferences.');
-            form.reset();
-            currentStep = 1;
-            showStep(currentStep);
+
+        const formData = new FormData(form);
+        formData.append('action', 'submit_realtor_form');
+        formData.append('nonce', (window.smAjax && smAjax.nonce) ? smAjax.nonce : '');
+
+        fetch((window.smAjax && smAjax.ajax_url) ? smAjax.ajax_url : '/wp-admin/admin-ajax.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(r => r.json())
+        .then(resp => {
+            if (resp && resp.success) {
+                alert('Thank you for your property search request! We\'ll match you with a qualified realtor within 24 hours.');
+                form.reset();
+                currentStep = 1;
+                showStep(currentStep);
+            } else {
+                alert((resp && resp.data && resp.data.message) ? resp.data.message : 'Sorry, there was an error. Please try again.');
+            }
+        })
+        .catch(() => alert('Sorry, there was an error sending your request. Please try again.'))
+        .finally(() => {
             submitBtn.innerHTML = '<i class="fas fa-search me-2"></i>Find My Property';
             submitBtn.disabled = false;
-        }, 2000);
+        });
     });
     
     // Initialize form

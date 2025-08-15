@@ -115,7 +115,7 @@ function smoothmigration_submit_contact_form() {
     }
 
     // Prepare email content
-    $to = get_option( 'admin_email' ); // You can change this to a specific email
+    $to = 'contact@smoothmigration.net';
     $subject = 'New Contact Form Submission - ' . get_bloginfo( 'name' );
     
     $email_content = "New contact form submission:\n\n";
@@ -129,7 +129,7 @@ function smoothmigration_submit_contact_form() {
 
     $headers = array(
         'Content-Type: text/plain; charset=UTF-8',
-        'From: ' . get_bloginfo( 'name' ) . ' <' . get_option( 'admin_email' ) . '>',
+        'From: ' . get_bloginfo( 'name' ) . ' <hello@smoothmigration.net>',
         'Reply-To: ' . $name . ' <' . $email . '>'
     );
 
@@ -162,3 +162,51 @@ function smoothmigration_submit_contact_form() {
 }
 add_action( 'wp_ajax_submit_contact_form', 'smoothmigration_submit_contact_form' );
 add_action( 'wp_ajax_nopriv_submit_contact_form', 'smoothmigration_submit_contact_form' ); 
+
+/**
+ * AJAX handler for Realtor Locator submissions.
+ */
+function smoothmigration_submit_realtor_form() {
+    check_ajax_referer( 'smoothmigration_contact_nonce', 'nonce' );
+
+    $name         = sanitize_text_field( $_POST['name'] ?? '' );
+    $email        = sanitize_email( $_POST['email'] ?? '' );
+    $phone        = sanitize_text_field( $_POST['phone'] ?? '' );
+    $country      = sanitize_text_field( $_POST['country'] ?? '' );
+    $city         = sanitize_text_field( $_POST['city'] ?? '' );
+    $propertyType = sanitize_text_field( $_POST['propertyType'] ?? '' );
+    $budgetMin    = sanitize_text_field( $_POST['budgetMin'] ?? '' );
+    $budgetMax    = sanitize_text_field( $_POST['budgetMax'] ?? '' );
+    $message      = sanitize_textarea_field( $_POST['message'] ?? '' );
+
+    $to      = 'realtor@smoothmigration.net';
+    $subject = 'Realtor Locator Submission - ' . get_bloginfo( 'name' );
+
+    $email_content  = "New Realtor Locator submission:\n\n";
+    $email_content .= "Name: {$name}\n";
+    $email_content .= "Email: {$email}\n";
+    $email_content .= "Phone: {$phone}\n";
+    $email_content .= "Country: {$country}\n";
+    $email_content .= "City: {$city}\n";
+    $email_content .= "Property Type: {$propertyType}\n";
+    $email_content .= "Budget: {$budgetMin} - {$budgetMax}\n";
+    $email_content .= "Message:\n{$message}\n\n";
+    $email_content .= 'Submitted from: ' . home_url() . "\n";
+    $email_content .= 'Date: ' . current_time( 'mysql' );
+
+    $headers = array(
+        'Content-Type: text/plain; charset=UTF-8',
+        'From: ' . get_bloginfo( 'name' ) . ' <hello@smoothmigration.net>',
+        'Reply-To: ' . $name . ' <' . $email . '>'
+    );
+
+    $mail_sent = wp_mail( $to, $subject, $email_content, $headers );
+
+    if ( $mail_sent ) {
+        wp_send_json_success( array( 'message' => 'Thanks! We’ll match you with a vetted realtor within 24 hours.' ) );
+    } else {
+        wp_send_json_error( array( 'message' => 'Sorry, there was an error sending your request. Please try again.' ) );
+    }
+}
+add_action( 'wp_ajax_submit_realtor_form', 'smoothmigration_submit_realtor_form' );
+add_action( 'wp_ajax_nopriv_submit_realtor_form', 'smoothmigration_submit_realtor_form' );
