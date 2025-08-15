@@ -35,70 +35,70 @@ get_header();
                 $enhanced_services = array(
                     'housing' => array(
                         'name' => 'Housing & Real Estate',
-                        'icon' => '🏠',
+                        'icon' => 'fa-solid fa-house',
                         'description' => 'Find your perfect home with our vetted real estate partners and housing specialists.',
                         'existing' => 'realtor', 
                         'link' => '/realtor-form'
                     ),
                     'money-services' => array(
                         'name' => 'Money Services',
-                        'icon' => '💳',
+                        'icon' => 'fa-solid fa-credit-card',
                         'description' => 'Banking and international transfers set up for expats.',
                         'existing' => 'money-services',
                         'link' => '/service-type/money-services/'
                     ),
                     'visas' => array(
                         'name' => 'Visas & Immigration',
-                        'icon' => '📋',
+                        'icon' => 'fa-solid fa-clipboard-list',
                         'description' => 'Navigate complex visa requirements with expert immigration guidance.',
                         'existing' => false,
                         'link' => '/contact'
                     ),
                     'pet-relocation' => array(
                         'name' => 'Pet Relocation',
-                        'icon' => '🐕',
+                        'icon' => 'fa-solid fa-dog',
                         'description' => 'Safe and stress-free relocation services for your beloved pets.',
                         'existing' => false,
                         'link' => '/contact'
                     ),
                     'international-moving' => array(
                         'name' => 'International Moving',
-                        'icon' => '📦',
+                        'icon' => 'fa-solid fa-box',
                         'description' => 'Professional international moving services with trusted global partners.',
                         'existing' => 'international-moving',
                         'link' => '/service-type/international-moving/'
                     ),
                     'school-search' => array(
                         'name' => 'School Search',
-                        'icon' => '🎓',
+                        'icon' => 'fa-solid fa-graduation-cap',
                         'description' => 'Find the right schools and educational opportunities for your children.',
                         'existing' => false,
                         'link' => '/contact'
                     ),
                     'vehicle-import' => array(
                         'name' => 'Vehicle Services',
-                        'icon' => '🚗',
+                        'icon' => 'fa-solid fa-car',
                         'description' => 'Complete vehicle solutions including import, purchase, and registration.',
                         'existing' => 'vehicles',
                         'link' => '/service-type/vehicles/'
                     ),
                     'mobile-cellular' => array(
                         'name' => 'Mobile & Connectivity',
-                        'icon' => '📱',
+                        'icon' => 'fa-solid fa-mobile-screen',
                         'description' => 'Mobile plans and connectivity solutions for seamless communication.',
                         'existing' => 'telecommunication',
                         'link' => '/service-type/telecommunication/'
                     ),
                     'insurance' => array(
                         'name' => 'Insurance & Protection',
-                        'icon' => '🛡️',
+                        'icon' => 'fa-solid fa-shield-halved',
                         'description' => 'Comprehensive insurance solutions for your peace of mind.',
                         'existing' => 'insurance',
                         'link' => '/service-type/insurance/'
                     ),
                     'more-services' => array(
                         'name' => 'Custom Solutions',
-                        'icon' => '➕',
+                        'icon' => 'fa-solid fa-plus',
                         'description' => 'Need something specific? We provide custom relocation solutions tailored to your unique needs.',
                         'existing' => false,
                         'link' => '/contact'
@@ -113,7 +113,11 @@ get_header();
                     <div class="col-lg-4 col-md-6">
                         <div class="<?php echo esc_attr( $card_class ); ?> h-100">
                             <div class="service-icon-enhanced">
-                                <span class="service-emoji"><?php echo $service['icon']; ?></span>
+                                <?php if ( strpos( $service['icon'], 'fa-' ) !== false ) : ?>
+                                    <i class="<?php echo esc_attr( $service['icon'] ); ?>"></i>
+                                <?php else : ?>
+                                    <span class="service-emoji"><?php echo esc_html( $service['icon'] ); ?></span>
+                                <?php endif; ?>
                             </div>
                             <h4 class="service-title"><?php echo esc_html( $service['name'] ); ?></h4>
                             <p class="service-description"><?php echo esc_html( $service['description'] ); ?></p>

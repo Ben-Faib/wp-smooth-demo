@@ -828,6 +828,22 @@ section {
     transform: translateX(5px);
 }
 
+/* Ensure nested text/icons remain readable on hover */
+.resource-link:hover .resource-link-content strong,
+.resource-link:hover .resource-link-content small,
+.resource-link:hover .resource-link-icon {
+    color: #ffffff;
+    opacity: 0.95;
+}
+
+/* Improve outline button hover contrast where used */
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+}
+
 .resource-link-icon {
     font-size: 1.5rem;
     flex-shrink: 0;

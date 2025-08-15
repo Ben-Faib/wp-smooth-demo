@@ -18,7 +18,7 @@ get_header();
                 <div class="col-lg-7">
                     <div class="hero-content animate-on-scroll">
                         <div class="hero-badge mb-4">
-                            <span class="badge-partner">🤝 Partnership Opportunity</span>
+                            <span class="badge-partner"><?php echo sm_icon('handshake', 'solid', 'me-2 icon'); ?> Partnership Opportunity</span>
                         </div>
                         <h1 class="display-2 fw-bold mb-4">Become a Partner</h1>
                         <p class="lead fs-4 mb-4 opacity-90">Join our global network of trusted service providers and help expats navigate their international relocations with confidence.</p>
@@ -145,7 +145,7 @@ get_header();
             <div class="row g-4">
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="category-card">
-                        <div class="category-icon">🏠</div>
+                        <div class="category-icon"><?php echo sm_icon('house', 'solid', 'icon'); ?></div>
                         <h4 class="category-title">Real Estate</h4>
                         <p class="category-description">Realtors, property managers, rental agencies</p>
                     </div>
@@ -153,7 +153,7 @@ get_header();
                 
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="category-card">
-                        <div class="category-icon">🏦</div>
+                        <div class="category-icon"><?php echo sm_icon('landmark', 'solid', 'icon'); ?></div>
                         <h4 class="category-title">Banking & Finance</h4>
                         <p class="category-description">Banks, financial advisors, money transfer services</p>
                     </div>
@@ -161,7 +161,7 @@ get_header();
                 
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="category-card">
-                        <div class="category-icon">🚚</div>
+                        <div class="category-icon"><?php echo sm_icon('truck-moving', 'solid', 'icon'); ?></div>
                         <h4 class="category-title">Moving Services</h4>
                         <p class="category-description">International movers, shipping companies</p>
                     </div>
@@ -169,7 +169,7 @@ get_header();
                 
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="category-card">
-                        <div class="category-icon">🛡️</div>
+                        <div class="category-icon"><?php echo sm_icon('shield-halved', 'solid', 'icon'); ?></div>
                         <h4 class="category-title">Insurance</h4>
                         <p class="category-description">Health, property, and life insurance providers</p>
                     </div>
@@ -177,7 +177,7 @@ get_header();
                 
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="category-card">
-                        <div class="category-icon">📋</div>
+                        <div class="category-icon"><?php echo sm_icon('clipboard-list', 'solid', 'icon'); ?></div>
                         <h4 class="category-title">Legal Services</h4>
                         <p class="category-description">Immigration lawyers, legal consultants</p>
                     </div>
@@ -185,7 +185,7 @@ get_header();
                 
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="category-card">
-                        <div class="category-icon">🎓</div>
+                        <div class="category-icon"><?php echo sm_icon('graduation-cap', 'solid', 'icon'); ?></div>
                         <h4 class="category-title">Education</h4>
                         <p class="category-description">Schools, universities, education consultants</p>
                     </div>
@@ -193,7 +193,7 @@ get_header();
                 
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="category-card">
-                        <div class="category-icon">🚗</div>
+                        <div class="category-icon"><?php echo sm_icon('car', 'solid', 'icon'); ?></div>
                         <h4 class="category-title">Transportation</h4>
                         <p class="category-description">Car dealers, vehicle registration services</p>
                     </div>
@@ -201,7 +201,7 @@ get_header();
                 
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="category-card">
-                        <div class="category-icon">💼</div>
+                        <div class="category-icon"><?php echo sm_icon('briefcase', 'solid', 'icon'); ?></div>
                         <h4 class="category-title">Business Services</h4>
                         <p class="category-description">Accountants, business setup consultants</p>
                     </div>

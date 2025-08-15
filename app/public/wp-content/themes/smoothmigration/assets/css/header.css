@@ -82,13 +82,16 @@
 }
 
 .header-logo {
-    height: 45px;
+    height: auto;
+    width: auto;
+    max-height: 45px;
+    max-width: 220px;
     transition: all 0.3s ease;
     /* Remove the white filter - show logo in original colors */
 }
 
 .site-header.scrolled .header-logo {
-    height: 40px;
+    max-height: 40px;
 }
 
 .navbar-brand {

@@ -29,7 +29,7 @@ get_header();
                 <div class="col-lg-7">
                     <div class="hero-content animate-on-scroll">
                         <div class="hero-badge mb-4">
-                            <span class="badge-ai">🤖 AI-Powered</span>
+                            <span class="badge-ai"><?php echo sm_icon('robot', 'solid', 'me-2 icon'); ?> AI-Powered</span>
                         </div>
                         <h1 class="display-1 fw-bold mb-4">AI Relocator</h1>
                         <p class="lead fs-3 mb-4 opacity-90">Experience the future of international relocation with our intelligent AI assistant that personalizes your entire moving journey.</p>
@@ -106,10 +106,10 @@ get_header();
                                 </div>
                             </div>
                             <div class="floating-elements">
-                                <div class="floating-icon icon-1">🏠</div>
-                                <div class="floating-icon icon-2">🏦</div>
-                                <div class="floating-icon icon-3">✈️</div>
-                                <div class="floating-icon icon-4">📋</div>
+                                <div class="floating-icon icon-1"><?php echo sm_icon('house', 'solid', 'icon'); ?></div>
+                                <div class="floating-icon icon-2"><?php echo sm_icon('landmark', 'solid', 'icon'); ?></div>
+                                <div class="floating-icon icon-3"><?php echo sm_icon('plane', 'solid', 'icon'); ?></div>
+                                <div class="floating-icon icon-4"><?php echo sm_icon('clipboard-list', 'solid', 'icon'); ?></div>
                             </div>
                         </div>
                     </div>

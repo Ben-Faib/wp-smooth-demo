@@ -62,7 +62,7 @@ get_header();
                 <div class="col-lg-7">
                     <div class="hero-content animate-on-scroll">
                         <div class="hero-badge mb-4">
-                            <span class="badge-about">🌍 Our Story</span>
+                            <span class="badge-about"><?php echo sm_icon('earth-americas', 'solid', 'me-2 icon'); ?> Our Story</span>
                         </div>
                         <h1 class="display-2 fw-bold mb-4">About Smooth Migration</h1>
                         <p class="lead fs-4 mb-4 opacity-90">Founded by global professionals who have navigated international relocations across multiple continents. We bring decades of real-world experience to make your move seamless.</p>

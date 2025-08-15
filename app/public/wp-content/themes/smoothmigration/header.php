@@ -16,9 +16,17 @@
 <header id="masthead" class="site-header sticky-header" role="banner">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/smooth-migration-logo.png" alt="Smooth Migration Logo" class="header-logo">
-            </a>
+            <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+                <?php
+                $custom_logo_id = get_theme_mod( 'custom_logo' );
+                $logo_img = wp_get_attachment_image( $custom_logo_id, 'full', false, array( 'class' => 'header-logo', 'alt' => get_bloginfo( 'name', 'display' ) ) );
+                ?>
+                <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo $logo_img; ?></a>
+            <?php else : ?>
+                <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/smooth-migration-logo.png" alt="Smooth Migration Logo" class="header-logo">
+                </a>
+            <?php endif; ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primary-menu" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,7 +59,7 @@
                 <!-- Get in Touch CTA Button -->
                 <div class="navbar-nav">
                     <a href="/contact" class="btn btn-primary btn-sm nav-cta-btn">
-                        <span class="cta-icon">💬</span>
+                        <span class="icon-glow me-2"><?php echo sm_icon('comment-dots', 'solid', ''); ?></span>
                         Get in Touch
                     </a>
                 </div>
@@ -78,7 +86,7 @@
     ?>
     <div class="mt-3">
         <a href="/contact" class="btn btn-primary btn-sm w-100">
-            <span class="cta-icon">💬</span>
+            <span class="icon-glow me-2"><?php echo sm_icon('comment-dots', 'solid', ''); ?></span>
             Get in Touch
         </a>
     </div>

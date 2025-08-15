@@ -20,9 +20,9 @@ get_header();
                         <h1 class="display-2 fw-bold mb-4">Our Services</h1>
                         <p class="lead fs-4 mb-4 opacity-90">Comprehensive relocation services designed to make your international move seamless and stress-free.</p>
                         <div class="hero-badges d-flex flex-wrap justify-content-center gap-3 mb-4">
-                            <span class="badge-modern">✨ 50+ Countries Served</span>
-                            <span class="badge-modern">🏆 3,200+ Successful Moves</span>
-                            <span class="badge-modern">⚡ 98% Customer Satisfaction</span>
+                            <span class="badge-modern"><?php echo sm_icon('earth-americas', 'solid', 'me-2 icon'); ?> 50+ Countries Served</span>
+                            <span class="badge-modern"><?php echo sm_icon('trophy', 'solid', 'me-2 icon'); ?> 3,200+ Successful Moves</span>
+                            <span class="badge-modern"><?php echo sm_icon('bolt', 'solid', 'me-2 icon'); ?> 98% Customer Satisfaction</span>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@ get_header();
             // Enhanced service mapping with better icons and descriptions
             $service_enhancements = array(
                 'money-services' => array(
-                    'icon' => '💳',
+                    'icon' => 'fa-solid fa-credit-card',
                     'name' => 'Money Services',
                     'description' => 'Banking and international transfers set up for expats.',
                     'features' => ['Account Opening', 'Cards & Payments', 'International Transfers'],
@@ -94,7 +94,7 @@ get_header();
                     'color' => 'primary'
                 ),
                 'realtor' => array(
-                    'icon' => '🏠',
+                    'icon' => 'fa-solid fa-house',
                     'name' => 'Realtor Locator',
                     'description' => 'Find your perfect home with our vetted real estate partners.',
                     'features' => ['Property Search', 'Virtual Tours', 'Legal Support'],
@@ -102,7 +102,7 @@ get_header();
                     'color' => 'success'
                 ),
                 'insurance' => array(
-                    'icon' => '🛡️',
+                    'icon' => 'fa-solid fa-shield-heart',
                     'name' => 'Insurance Coverage',
                     'description' => 'Comprehensive insurance solutions for your peace of mind.',
                     'features' => ['Health Insurance', 'Property Coverage', 'Life Insurance'],
@@ -110,7 +110,7 @@ get_header();
                     'color' => 'info'
                 ),
                 'vehicles' => array(
-                    'icon' => '🚗',
+                    'icon' => 'fa-solid fa-car',
                     'name' => 'Vehicle Services',
                     'description' => 'Complete vehicle solutions including import, purchase, and registration.',
                     'features' => ['Import Services', 'Purchase Assistance', 'Registration'],
@@ -118,7 +118,7 @@ get_header();
                     'color' => 'warning'
                 ),
                 'telecommunication' => array(
-                    'icon' => '📱',
+                    'icon' => 'fa-solid fa-mobile-screen',
                     'name' => 'Mobile & Cellular Plans',
                     'description' => 'Mobile plans and connectivity solutions for seamless communication.',
                     'features' => ['Plan Selection', 'Device Setup', 'Network Optimization'],
@@ -127,7 +127,7 @@ get_header();
                 ),
                 
                 'international-moving' => array(
-                    'icon' => '📦',
+                    'icon' => 'fa-solid fa-box',
                     'name' => 'International Moving',
                     'description' => 'Professional international moving services with trusted global partners.',
                     'features' => ['Packing Services', 'Customs Clearance', 'Door-to-Door'],
@@ -135,7 +135,7 @@ get_header();
                     'color' => 'primary'
                 ),
                 'visas-immigration' => array(
-                    'icon' => '📋',
+                    'icon' => 'fa-solid fa-clipboard-list',
                     'name' => 'Visas & Immigration',
                     'description' => 'Navigate complex visa requirements with expert immigration guidance.',
                     'features' => ['Visa Applications', 'Document Preparation', 'Legal Support'],
@@ -143,7 +143,7 @@ get_header();
                     'color' => 'info'
                 ),
                 'pet-relocation' => array(
-                    'icon' => '🐕',
+                    'icon' => 'fa-solid fa-dog',
                     'name' => 'Pet Relocation',
                     'description' => 'Safe and stress-free relocation services for your beloved pets.',
                     'features' => ['Health Certificates', 'Travel Arrangements', 'Quarantine Support'],
@@ -151,7 +151,7 @@ get_header();
                     'color' => 'warning'
                 ),
                 'school-search' => array(
-                    'icon' => '🎓',
+                    'icon' => 'fa-solid fa-graduation-cap',
                     'name' => 'School Search',
                     'description' => 'Find the right schools and educational opportunities for your children.',
                     'features' => ['School Research', 'Application Support', 'Enrollment Assistance'],
@@ -159,7 +159,7 @@ get_header();
                     'color' => 'success'
                 ),
                 'tax-legal' => array(
-                    'icon' => '⚖️',
+                    'icon' => 'fa-solid fa-scale-balanced',
                     'name' => 'Tax & Legal Services',
                     'description' => 'International tax advice and legal services for expats.',
                     'features' => ['Tax Planning', 'Legal Consultation', 'Compliance Support'],
@@ -167,7 +167,7 @@ get_header();
                     'color' => 'secondary'
                 ),
                 'business-setup' => array(
-                    'icon' => '💼',
+                    'icon' => 'fa-solid fa-briefcase',
                     'name' => 'Business Setup',
                     'description' => 'Company formation and business setup in your new country.',
                     'features' => ['Company Registration', 'Banking Setup', 'Compliance'],
@@ -175,7 +175,7 @@ get_header();
                     'color' => 'primary'
                 ),
                 'utilities-services' => array(
-                    'icon' => '⚡',
+                    'icon' => 'fa-solid fa-bolt',
                     'name' => 'Utilities & Services',
                     'description' => 'Internet, electricity, water, and essential service connections.',
                     'features' => ['Utility Connections', 'Service Activation', 'Account Setup'],
@@ -194,7 +194,7 @@ get_header();
                         
                         // Use enhanced data if available, otherwise fallback to original
                         $display_name = $enhancement ? $enhancement['name'] : $type->name;
-                        $icon = $enhancement ? $enhancement['icon'] : '🔧';
+                        $icon = $enhancement ? $enhancement['icon'] : 'fa-solid fa-wrench';
                         $description = $enhancement ? $enhancement['description'] : ($type->description ?: 'Explore our ' . strtolower($type->name) . ' options.');
                         $features = $enhancement ? $enhancement['features'] : ['Professional Service', 'Expert Support', 'Quality Guarantee'];
                         $timeline = $enhancement ? $enhancement['timeline'] : '2-4 weeks';
@@ -204,7 +204,11 @@ get_header();
                             <div class="enhanced-service-card animate-on-scroll" style="animation-delay: <?php echo $index * 0.1; ?>s;">
                                 <div class="service-card-header">
                                     <div class="service-icon-modern bg-<?php echo $color; ?>">
-                                        <span class="service-emoji"><?php echo $icon; ?></span>
+                                        <?php if ( strpos( $icon, 'fa-' ) !== false ) : ?>
+                                            <i class="<?php echo esc_attr( $icon ); ?>"></i>
+                                        <?php else : ?>
+                                            <span class="service-emoji"><?php echo esc_html( $icon ); ?></span>
+                                        <?php endif; ?>
                                     </div>
                                     <div class="service-timeline">
                                         <small class="text-muted">Typical timeline</small>

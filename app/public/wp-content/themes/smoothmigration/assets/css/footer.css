@@ -19,11 +19,13 @@
 }
 
 .footer-logo {
-    height: 50px;
-    width: 50px;
+    height: auto;
+    width: auto;
+    max-height: 50px;
+    max-width: 220px;
     object-fit: contain;
     flex-shrink: 0;
-    filter: brightness(0) invert(1); /* Make logo white */
+    filter: none;
 }
 
 .footer-brand-text {
@@ -166,8 +168,9 @@
     }
     
     .footer-logo {
-        height: 40px;
-        width: 40px;
+        max-height: 40px;
+        height: auto;
+        width: auto;
     }
     
     .footer-brand-text {

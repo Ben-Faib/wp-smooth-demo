@@ -18,7 +18,7 @@ get_header();
                 <div class="col-lg-7">
                     <div class="hero-content animate-on-scroll">
                         <div class="hero-badge mb-4">
-                            <span class="badge-realtor">🏠 Property Services</span>
+                            <span class="badge-realtor"><?php echo sm_icon('house', 'solid', 'me-2 icon'); ?> Property Services</span>
                         </div>
                         <h1 class="display-2 fw-bold mb-4">Find Your Perfect Home</h1>
                         <p class="lead fs-4 mb-4 opacity-90">Connect with trusted real estate professionals who understand international relocations and can help you find the ideal property in your new country.</p>

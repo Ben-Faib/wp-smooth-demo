@@ -1,0 +1,57 @@
+.icon { vertical-align: -0.125em; }
+.icon-sm { font-size: 0.875rem; width: 20px; height: 20px; }
+.icon-lg { font-size: 1.5rem; width: 48px; height: 48px; }
+.icon-xl { font-size: 2rem; width: 64px; height: 64px; }
+
+@media (prefers-reduced-motion: reduce) {
+	lord-icon[trigger="loop"], lord-icon[trigger="auto"] { animation: none !important; }
+}
+
+/* Color chips for icons (adds warmth and consistent alignment) */
+.icon-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-lighter);
+  color: var(--text-dark);
+  line-height: 1;
+}
+.icon-glow { position: relative; display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; }
+.icon-glow::before { content:""; position:absolute; inset:-6px; border-radius:50%; background: radial-gradient(40% 40% at 50% 50%, var(--accent-light) 0%, transparent 70%); filter: blur(8px); }
+.icon-glow > * { position: relative; z-index: 1; }
+.icon-chip i { font-size: 18px; }
+.icon-chip lord-icon { display: inline-block; }
+
+/* Brand variants */
+.chip-primary {
+  background: var(--primary-lighter);
+  border-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+.chip-accent {
+  background: var(--accent-lighter);
+  border-color: var(--accent-light);
+  color: var(--accent-dark);
+}
+.chip-success {
+  background: var(--success-lighter);
+  border-color: var(--success-light);
+  color: var(--success-dark);
+}
+
+/* Normalize common template icon containers to center contents */
+.feature-icon,
+.resource-icon,
+.resource-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+

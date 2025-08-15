@@ -89,10 +89,10 @@ get_header();
                                         <p>At Smooth Migration Global, we deliver expert-driven, customized solutions that support seamless transitions and long-term success for individuals and businesses alike.</p>
                                         <p>International relocation and cross-border business expansion involve complex processes as well as successfully adapting to new cultures, work environments, and lifestyles. We understand these challenges because we've lived them ourselves.</p>
                                         <div class="services-grid">
-                                            <div class="service-item">🌍 Cultural Adaptation</div>
-                                            <div class="service-item">💼 Work Environment Integration</div>
-                                            <div class="service-item">🏠 Lifestyle Transition</div>
-                                            <div class="service-item">📋 Complex Process Management</div>
+                                            <div class="service-item"><?php echo sm_icon('earth-americas', 'solid', 'text-primary icon'); ?> Cultural Adaptation</div>
+                                            <div class="service-item"><?php echo sm_icon('briefcase', 'solid', 'text-primary icon'); ?> Work Environment Integration</div>
+                                            <div class="service-item"><?php echo sm_icon('house', 'solid', 'text-primary icon'); ?> Lifestyle Transition</div>
+                                            <div class="service-item"><?php echo sm_icon('clipboard-list', 'solid', 'text-primary icon'); ?> Complex Process Management</div>
                                         </div>
                                     </div>
                                 </div>
@@ -161,12 +161,12 @@ get_header();
                                     <div class="faq-answer">
                                         <p>We partner with some of the best international insurance providers to offer a comprehensive variety of insurance types, with their extensive support teams working alongside us.</p>
                                         <div class="services-grid">
-                                            <div class="service-item">🛡️ Travel Insurance</div>
-                                            <div class="service-item">🏥 Health Insurance</div>
-                                            <div class="service-item">🏠 Property Insurance</div>
-                                            <div class="service-item">🚗 Vehicle Insurance</div>
-                                            <div class="service-item">💼 Business Insurance</div>
-                                            <div class="service-item">🔒 Personal Liability</div>
+                                            <div class="service-item"><?php echo sm_icon('shield-halved', 'solid', 'text-primary icon'); ?> Travel Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('hospital', 'solid', 'text-primary icon'); ?> Health Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('house', 'solid', 'text-primary icon'); ?> Property Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('car', 'solid', 'text-primary icon'); ?> Vehicle Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('briefcase', 'solid', 'text-primary icon'); ?> Business Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('lock', 'solid', 'text-primary icon'); ?> Personal Liability</div>
                                         </div>
                                         <p>Generally, everyone should consider one of our travel insurance options, but there are additional coverage types depending on your individual needs. Our immigration agency partners often recommend starting with our insurance consultation.</p>
                                     </div>
@@ -183,12 +183,12 @@ get_header();
                                         <p><strong>We provide comprehensive support for educators - completely free!</strong></p>
                                         <p>We work closely with schools, colleges, and immigration agencies to assist new teachers in getting settled in their destination country.</p>
                                         <div class="services-grid">
-                                            <div class="service-item">🏠 Rental Assistance</div>
-                                            <div class="service-item">🚗 Vehicle Purchase Support</div>
-                                            <div class="service-item">🛡️ Travel Insurance</div>
-                                            <div class="service-item">🏦 Banking Setup</div>
-                                            <div class="service-item">📱 Phone & Internet</div>
-                                            <div class="service-item">🎓 School Integration</div>
+                                            <div class="service-item"><?php echo sm_icon('house', 'solid', 'text-primary icon'); ?> Rental Assistance</div>
+                                            <div class="service-item"><?php echo sm_icon('car', 'solid', 'text-primary icon'); ?> Vehicle Purchase Support</div>
+                                            <div class="service-item"><?php echo sm_icon('shield-halved', 'solid', 'text-primary icon'); ?> Travel Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('landmark', 'solid', 'text-primary icon'); ?> Banking Setup</div>
+                                            <div class="service-item"><?php echo sm_icon('mobile-screen', 'solid', 'text-primary icon'); ?> Phone & Internet</div>
+                                            <div class="service-item"><?php echo sm_icon('graduation-cap', 'solid', 'text-primary icon'); ?> School Integration</div>
                                         </div>
                                         <p>Our teacher relocation program recognizes the vital role educators play in our communities, which is why we provide these essential services at no cost.</p>
                                     </div>
@@ -275,12 +275,12 @@ get_header();
                                         <p><strong>Great question!</strong> Immigration agencies often recommend us because we specialize in helping new residents understand their insurance needs in their destination country.</p>
                                         <p>Generally, everyone should look at one of our travel insurance options as a starting point, but there are a number of other coverage types depending on your individual needs and circumstances.</p>
                                         <div class="services-grid">
-                                            <div class="service-item">🛡️ Travel Insurance (Essential)</div>
-                                            <div class="service-item">🏥 Health Insurance</div>
-                                            <div class="service-item">🏠 Property Insurance</div>
-                                            <div class="service-item">🚗 Vehicle Insurance</div>
-                                            <div class="service-item">💼 Business Insurance</div>
-                                            <div class="service-item">👨‍👩‍👧‍👦 Family Coverage Plans</div>
+                                            <div class="service-item"><?php echo sm_icon('shield-halved', 'solid', 'text-primary icon'); ?> Travel Insurance (Essential)</div>
+                                            <div class="service-item"><?php echo sm_icon('hospital', 'solid', 'text-primary icon'); ?> Health Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('house', 'solid', 'text-primary icon'); ?> Property Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('car', 'solid', 'text-primary icon'); ?> Vehicle Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('briefcase', 'solid', 'text-primary icon'); ?> Business Insurance</div>
+                                            <div class="service-item"><?php echo sm_icon('people-group', 'solid', 'text-primary icon'); ?> Family Coverage Plans</div>
                                         </div>
                                         <p><strong>Recommended Starting Process:</strong></p>
                                         <div class="process-steps">
@@ -450,12 +450,12 @@ get_header();
                                     <div class="faq-answer">
                                         <p><strong>Building credit is essential for your financial future.</strong> There are several easy ways to get started, and we can help you arrange these options at no charge!</p>
                                         <div class="services-grid">
-                                            <div class="service-item">💳 Secured Credit Cards</div>
-                                            <div class="service-item">🏦 Bank Account History</div>
-                                            <div class="service-item">📱 Utility Account Setup</div>
-                                            <div class="service-item">📞 Mobile Phone Contracts</div>
-                                            <div class="service-item">🏠 Rental Payment History</div>
-                                            <div class="service-item">💼 Credit Builder Loans</div>
+                                            <div class="service-item"><?php echo sm_icon('credit-card', 'solid', 'text-primary icon'); ?> Secured Credit Cards</div>
+                                            <div class="service-item"><?php echo sm_icon('landmark', 'solid', 'text-primary icon'); ?> Bank Account History</div>
+                                            <div class="service-item"><?php echo sm_icon('file-invoice', 'solid', 'text-primary icon'); ?> Utility Account Setup</div>
+                                            <div class="service-item"><?php echo sm_icon('mobile-screen', 'solid', 'text-primary icon'); ?> Mobile Phone Contracts</div>
+                                            <div class="service-item"><?php echo sm_icon('house', 'solid', 'text-primary icon'); ?> Rental Payment History</div>
+                                            <div class="service-item"><?php echo sm_icon('briefcase', 'solid', 'text-primary icon'); ?> Credit Builder Loans</div>
                                         </div>
                                         <p>Each country has slightly different credit systems, but the fundamentals are similar. We'll guide you through the most effective strategies for your destination.</p>
                                         <p><strong><a href="/contact">Contact us today</a> to discuss easy-to-arrange credit building options that won't cost you anything!</strong></p>

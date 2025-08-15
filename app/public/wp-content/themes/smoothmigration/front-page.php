@@ -26,21 +26,21 @@ get_header(); ?>
                     </div>
                     <div class="small text-light" style="opacity:.9">No additional or hidden costs.</div>
                     
-                    <h1 class="hero-headline">Moving to a new country? We understand the overwhelm.</h1>
-                    <p class="hero-subheadline">Let's make it smooth together. Our expert team turns relocation chaos into a clear, step-by-step plan—tailored specifically to your destination and timeline.</p>
+                    <h1 class="hero-headline">International relocation, made simple.</h1>
+                    <p class="hero-subheadline">Get a clear, step-by-step plan and vetted providers—tailored to your destination, timing, and budget.</p>
                     
                     <!-- Enhanced CTA Group with Self-Segmentation -->
                     <div class="hero-cta-group">
                         <a href="/services" class="btn btn-primary btn-lg cta-relocating">
-                            <span class="cta-icon">🏠</span>
+                            <span class="icon-glow me-2"><?php echo sm_icon('house', 'solid', ''); ?></span>
                             Get My Personal Moving Plan
                         </a>
                         <a href="/contact" class="btn btn-secondary btn-lg cta-employer">
-                            <span class="cta-icon">🏢</span>
+                            <span class="icon-glow me-2"><?php echo sm_icon('building', 'solid', ''); ?></span>
                             Relocate My Team
                         </a>
                         <a href="/become-a-partner" class="btn btn-accent btn-lg cta-partner">
-                            <span class="cta-icon">🤝</span>
+                            <span class="icon-glow me-2"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" primary="#1e40af" secondary="#f59e0b" size="24"]'); ?></span>
                             Become a Partner
                         </a>
                     </div>
@@ -107,7 +107,7 @@ get_header(); ?>
                 <div class="step-card interactive-card text-center" tabindex="0">
                     <div class="step-number">3</div>
                     <h3 class="step-title">Get preferred-rate quotes</h3>
-                    <p class="step-description">Receive quotes directly from our vetted partners—often at preferred expat rates.</p>
+                    <p class="step-description">Receive tailored quotes from our trusted partners—often at competitive pricing.</p>
                 </div>
             </div>
         </div>
@@ -198,9 +198,9 @@ get_header(); ?>
         <div class="row g-4">
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon">👥</div>
+                    <div class="feature-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/dxoycpzg.json" trigger="in-view" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
                     <div class="feature-content">
-                        <h3>Founded by expats who've done this move themselves</h3>
+                        <h3>Founder and team with extensive first hand experience</h3>
                         <p>We understand the challenges because we've lived them firsthand.</p>
                     </div>
                 </div>
@@ -208,7 +208,7 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/psnhyobz.json" trigger="in-view" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
                     <div class="feature-content">
                         <h3>4 years of data-driven research</h3>
                         <p>Insights from thousands of successful relocations inform every recommendation.</p>
@@ -218,7 +218,7 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon">💰</div>
+                    <div class="feature-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/dfhcvxwb.json" trigger="in-view" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
                     <div class="feature-content">
                         <h3>Up to 30% cheaper than going direct</h3>
                         <p>Preferred pricing from top international brands saves you money.</p>
@@ -228,7 +228,7 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon">🎯</div>
+                    <div class="feature-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/odavpkmb.json" trigger="in-view" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
                     <div class="feature-content">
                         <h3>One login, one support team</h3>
                         <p>Every stage covered with consistent, personalized support throughout your journey.</p>
@@ -341,7 +341,7 @@ get_header(); ?>
             <div class="col-lg-8 text-center">
                 <h2 class="section-title">Our Story</h2>
                 <div class="story-content">
-                    <p>In 2019, a group of internationally qualified expats set out to fix the broken relocation experience. Having navigated multiple international moves ourselves, we knew there had to be a better way.</p>
+                    <p>In 2019, a group of internationally qualified newcomers set out to fix the broken relocation experience. Having navigated multiple international moves ourselves, we knew there had to be a better way.</p>
                     <p>We combined our firsthand experience with extensive research and data from thousands of relocations to create a platform that actually works for real people making real moves.</p>
                     <a href="/about" class="btn btn-outline-primary">Read our full story →</a>
                 </div>
@@ -360,7 +360,7 @@ get_header(); ?>
                 
                 <div class="resource-options">
                     <div class="resource-item">
-                        <div class="resource-icon">🚀</div>
+                        <div class="resource-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/raqskgzt.json" trigger="hover" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
                         <div class="resource-content">
                             <h4>Start Building Your Plan</h4>
                             <p>Browse our services and create a customized relocation package.</p>
@@ -369,7 +369,7 @@ get_header(); ?>
                     </div>
                     
                     <div class="resource-item">
-                        <div class="resource-icon">💬</div>
+                        <div class="resource-icon"><span class="icon-chip chip-success"><?php echo sm_icon('comment-dots', 'solid', ''); ?></span></div>
                         <div class="resource-content">
                             <h4>Talk to an Expert</h4>
                             <p>Get personalized guidance from our relocation specialists.</p>
@@ -386,7 +386,9 @@ get_header(); ?>
                     
                     <div class="resources-list">
                         <a href="/ai-relocator" class="resource-link">
-                            <span class="resource-link-icon">🤖</span>
+                            <span class="resource-link-icon">
+                                <?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/akikqypt.json" trigger="hover" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?>
+                            </span>
                             <div class="resource-link-content">
                                 <strong>AI Relocator Assistant</strong>
                                 <small>Intelligent relocation planning</small>
@@ -394,7 +396,7 @@ get_header(); ?>
                         </a>
                         
                         <a href="/guides" class="resource-link">
-                            <span class="resource-link-icon">📚</span>
+                            <span class="resource-link-icon"><span class="icon-glow"><?php echo sm_icon('book-open', 'solid', ''); ?></span></span>
                             <div class="resource-link-content">
                                 <strong>Moving Guides</strong>
                                 <small>Country-specific advice</small>
@@ -402,7 +404,7 @@ get_header(); ?>
                         </a>
                         
                         <a href="/faq" class="resource-link">
-                            <span class="resource-link-icon">❓</span>
+                            <span class="resource-link-icon"><span class="icon-glow"><?php echo sm_icon('circle-question', 'solid', ''); ?></span></span>
                             <div class="resource-link-content">
                                 <strong>FAQ</strong>
                                 <small>Common questions answered</small>
@@ -421,7 +423,7 @@ get_header(); ?>
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
     <div class="toast show shadow" role="status" aria-live="polite" aria-atomic="true">
         <div class="toast-body d-flex align-items-center gap-3">
-            <div class="flex-shrink-0" aria-hidden="true">💬</div>
+            <div class="flex-shrink-0" aria-hidden="true"><?php echo sm_icon('comment-dots', 'solid', 'text-primary icon'); ?></div>
             <div>
                 <strong>Consult available services</strong>
                 <div class="small text-muted">Talk to a specialist today</div>
