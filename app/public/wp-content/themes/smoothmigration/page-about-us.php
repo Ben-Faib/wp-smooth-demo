@@ -103,11 +103,11 @@ get_header();
                                 </div>
                                 <div class="connection-lines"></div>
                                 <div class="location-dots">
-                                    <div class="dot dot-1" data-location="London">🇬🇧</div>
-                                    <div class="dot dot-2" data-location="Singapore">🇸🇬</div>
-                                    <div class="dot dot-3" data-location="Dubai">🇦🇪</div>
-                                    <div class="dot dot-4" data-location="Toronto">🇨🇦</div>
-                                    <div class="dot dot-5" data-location="Sydney">🇦🇺</div>
+                                    <div class="dot dot-1" data-location="London"><i class="fas fa-location-dot"></i></div>
+                                    <div class="dot dot-2" data-location="Singapore"><i class="fas fa-location-dot"></i></div>
+                                    <div class="dot dot-3" data-location="Dubai"><i class="fas fa-location-dot"></i></div>
+                                    <div class="dot dot-4" data-location="Toronto"><i class="fas fa-location-dot"></i></div>
+                                    <div class="dot dot-5" data-location="Sydney"><i class="fas fa-location-dot"></i></div>
                                 </div>
                             </div>
                         </div>

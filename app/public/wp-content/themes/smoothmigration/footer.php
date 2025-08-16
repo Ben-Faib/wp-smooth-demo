@@ -52,7 +52,7 @@
           <div class="col-md-4">
             <h5 class="footer-heading">Resources</h5>
             <ul class="footer-links">
-              <li><a href="#" onclick="downloadChecklist()" class="footer-link">AI Relocation Checklist</a></li>
+              <li><a href="/ai-relocator" class="footer-link">AI Relocation Planner</a></li>
               <li><a href="/guides" class="footer-link">Moving Guides</a></li>
               <li><a href="/faq" class="footer-link">FAQ</a></li>
             </ul>
@@ -115,12 +115,7 @@
   </div>
 </footer>
 
-<script>
-function downloadChecklist() {
-    // Implement AI checklist download
-    alert('AI Relocation Checklist download coming soon!');
-}
-</script>
+
 
 <?php wp_footer(); ?>
 </body>

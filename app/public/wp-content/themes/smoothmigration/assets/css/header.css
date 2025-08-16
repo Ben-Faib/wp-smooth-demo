@@ -1,12 +1,52 @@
-/* Modern Header */
+/* Top Bar Styles */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1031;
+  background: #f8f9fa;
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.top-bar .flag-link {
+  display: inline-block;
+  padding: 2px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.top-bar .flag-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+.top-bar .flag-link img {
+  display: block;
+  border-radius: 2px;
+}
+
+/* Hide top bar when scrolled */
+body.header-scrolled .top-bar {
+  transform: translateY(-100%);
+}
+
+/* Modern Header - Adjusted for top bar */
 .site-header {
   background: transparent;
   border-bottom: 1px solid transparent;
   backdrop-filter: none; /* removed blur so hero colour shows cleanly */
   position: fixed; /* overlay hero */
-  top: 0;
+  top: 38px; /* Account for top bar */
   z-index: 1020;
   transition: all 0.3s ease;
+}
+
+/* When scrolled, header moves to top and hides top bar */
+.site-header.scrolled {
+  top: 0;
 }
 
 .navbar-brand {
@@ -120,6 +160,35 @@
 .navbar-nav .nav-link.active {
     color: var(--primary-color) !important;
     background: var(--bg-light);
+}
+
+/* Dropdown Menu Styles */
+.navbar-nav .dropdown-menu {
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    min-width: 220px;
+}
+
+.navbar-nav .dropdown-item {
+    color: var(--text-dark);
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.navbar-nav .dropdown-item:hover {
+    background: var(--bg-light);
+    color: var(--primary-color);
+    transform: translateX(3px);
+}
+
+.navbar-nav .dropdown-divider {
+    margin: 0.5rem 0;
+    border-color: var(--border-light);
 }
 
 /* Get in Touch CTA Button in Nav */

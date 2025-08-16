@@ -1,0 +1,166 @@
+/* Floating Widget and Chat Button Fixes */
+/* Prevents floating elements from overlapping CTAs on small screens */
+
+/* Fix for any third-party chat widgets (Intercom, Tawk, Crisp, etc.) */
+/* Common selectors used by popular chat widgets */
+#intercom-container,
+#tawkTo-container,
+#crisp-chatbox,
+.fb-customerchat,
+.drift-frame-controller,
+.intercom-launcher,
+.intercom-messenger-frame,
+[id*="chat-widget"],
+[class*="chat-widget"],
+[class*="floating-chat"],
+[class*="live-chat"] {
+    /* Ensure proper z-index layering */
+    z-index: 999 !important; /* Below modal overlays (typically 1040+) */
+    
+    /* Add safe margins on mobile */
+    margin-bottom: env(safe-area-inset-bottom, 20px) !important;
+}
+
+/* Adjust position on small screens to avoid CTA overlap */
+@media (max-width: 768px) {
+    #intercom-container,
+    #tawkTo-container,
+    #crisp-chatbox,
+    .fb-customerchat,
+    .drift-frame-controller,
+    .intercom-launcher,
+    .intercom-messenger-frame,
+    [id*="chat-widget"],
+    [class*="chat-widget"],
+    [class*="floating-chat"],
+    [class*="live-chat"] {
+        /* Move up to avoid overlapping bottom CTAs */
+        bottom: 80px !important;
+        
+        /* Reduce size on mobile */
+        transform: scale(0.9);
+        transform-origin: bottom right;
+    }
+    
+    /* When chat is expanded, give it proper space */
+    .intercom-messenger-frame-enter,
+    #crisp-chatbox[data-visible="true"],
+    [class*="chat-widget"].expanded {
+        bottom: 20px !important;
+        transform: scale(1);
+    }
+}
+
+/* Fix for custom floating consultation button */
+.floating-consultation,
+.consultation-widget,
+.float-button,
+[class*="floating-btn"] {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 998; /* Just below chat widgets */
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .floating-consultation,
+    .consultation-widget,
+    .float-button,
+    [class*="floating-btn"] {
+        bottom: 100px !important; /* Move higher on mobile */
+        right: 20px !important;
+        transform: scale(0.85);
+    }
+}
+
+/* Ensure main content CTAs have breathing room */
+@media (max-width: 768px) {
+    /* Add padding to sections with CTAs when floating widgets are present */
+    body:has(#intercom-container),
+    body:has(#tawkTo-container),
+    body:has(.floating-consultation) {
+        padding-bottom: 120px !important;
+    }
+    
+    /* Adjust footer padding */
+    .site-footer {
+        padding-bottom: 100px !important;
+    }
+    
+    /* Fixed bottom CTAs need extra margin */
+    .fixed-bottom,
+    .sticky-bottom,
+    [class*="cta-fixed"] {
+        margin-bottom: 140px !important;
+    }
+}
+
+/* Hide chat widgets on very small screens if they cause issues */
+@media (max-width: 480px) {
+    /* Option to hide on very small screens - uncomment if needed */
+    /*
+    #intercom-container,
+    #tawkTo-container,
+    .floating-consultation {
+        display: none !important;
+    }
+    */
+    
+    /* Or make them smaller */
+    #intercom-container,
+    #tawkTo-container,
+    #crisp-chatbox,
+    .floating-consultation {
+        transform: scale(0.75);
+        opacity: 0.9;
+    }
+}
+
+/* Accessibility improvements for floating elements */
+@media (prefers-reduced-motion: reduce) {
+    .floating-consultation,
+    .consultation-widget,
+    [class*="floating"] {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Ensure floating elements don't cover important interactive elements */
+.hero .btn,
+.cta-section .btn,
+[class*="hero"] button,
+[class*="cta"] button {
+    position: relative;
+    z-index: 1000; /* Above floating widgets when needed */
+}
+
+/* Fix for floating properties on realtor page */
+.floating-properties {
+    pointer-events: none; /* Prevent blocking interactions */
+}
+
+.floating-properties > * {
+    pointer-events: auto; /* Re-enable for child elements */
+}
+
+@media (max-width: 768px) {
+    .floating-properties {
+        display: none; /* Hide decorative floating elements on mobile */
+    }
+}
+
+/* Print styles - hide all floating widgets */
+@media print {
+    #intercom-container,
+    #tawkTo-container,
+    #crisp-chatbox,
+    .floating-consultation,
+    .consultation-widget,
+    .floating-properties,
+    [class*="floating-"],
+    [class*="chat-widget"] {
+        display: none !important;
+    }
+}

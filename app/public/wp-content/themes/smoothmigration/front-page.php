@@ -44,7 +44,7 @@ get_header(); ?>
                     <!-- Trust Signals -->
                     <div class="trust-signals mb-4">
                         <div class="trust-badges">
-                            <span class="trust-badge">🇨🇦 🇺🇸 🇬🇧 🇦🇺 🇿🇦</span>
+                            <span class="trust-badge"><span class="icon-glow me-2"><?php echo sm_icon('earth-americas', 'solid', ''); ?></span>Global coverage</span>
                             <span class="trust-metric"><?php echo esc_html( get_option( 'sm_avg_relocation_time', '45 days' ) ); ?></span>
                             <span class="trust-metric"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?> successful relocations</span>
                         </div>
@@ -57,36 +57,15 @@ get_header(); ?>
                     <!-- Enhanced CTA Group with Self-Segmentation -->
                     <div class="hero-cta-group">
                         <a href="/services" class="btn btn-primary btn-lg cta-relocating">
-                            <span class="icon-glow me-2"><?php
-                            $icon_house = get_template_directory() . '/assets/lordicon/house.json';
-                            if ( file_exists( $icon_house ) ) {
-                                echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/house.json" primary="#1e40af" secondary="#f59e0b" size="24"]');
-                            } else {
-                                echo sm_icon('house', 'solid', '');
-                            }
-                            ?></span>
+                            <span class="icon-glow me-2"><?php echo sm_icon('house', 'solid', ''); ?></span>
                             Get My Personal Moving Plan
                         </a>
                         <a href="/contact" class="btn btn-secondary btn-lg cta-employer">
-                            <span class="icon-glow me-2"><?php
-                            $icon_building = get_template_directory() . '/assets/lordicon/building.json';
-                            if ( file_exists( $icon_building ) ) {
-                                echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/building.json" primary="#1e40af" secondary="#f59e0b" size="24"]');
-                            } else {
-                                echo sm_icon('building', 'solid', '');
-                            }
-                            ?></span>
+                            <span class="icon-glow me-2"><?php echo sm_icon('building', 'solid', ''); ?></span>
                             Relocate My Team
                         </a>
                         <a href="/become-a-partner" class="btn btn-accent btn-lg cta-partner">
-                            <span class="icon-glow me-2"><?php
-                            $icon_handshake = get_template_directory() . '/assets/lordicon/handshake.json';
-                            if ( file_exists( $icon_handshake ) ) {
-                                echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/handshake.json" primary="#1e40af" secondary="#f59e0b" size="24"]');
-                            } else {
-                                echo sm_icon('handshake', 'solid', '');
-                            }
-                            ?></span>
+                            <span class="icon-glow me-2"><?php echo sm_icon('handshake', 'solid', ''); ?></span>
                             Become a Partner
                         </a>
                     </div>
@@ -208,6 +187,8 @@ get_header(); ?>
                         $realtor_accent = get_template_directory() . '/assets/lottie/realtor-accent.json';
                         if ( file_exists( $realtor_accent ) ) {
                             echo do_shortcode('[lottie src="' . get_template_directory_uri() . '/assets/lottie/realtor-accent.json" loop="false" autoplay="false" speed="1" class="d-inline-block" style="width:36px;height:36px;"]');
+                        } else {
+                            echo sm_icon('house', 'solid', '');
                         }
                         ?></span></div>
                         <div class="service-content">
@@ -249,13 +230,7 @@ get_header(); ?>
         <div class="row g-4">
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon"><span class="icon-glow"><?php
-                    if ( file_exists( $icon_house ) ) {
-                        echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/house.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
-                    } else {
-                        echo sm_icon('house', 'solid', '');
-                    }
-                    ?></span></div>
+                    <div class="feature-icon"><span class="icon-glow"><?php echo sm_icon('house', 'solid', ''); ?></span></div>
                     <div class="feature-content">
                         <h3>Founder and team with extensive first hand experience</h3>
                         <p>We understand the challenges because we've lived them firsthand.</p>
@@ -265,13 +240,7 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon"><span class="icon-glow"><?php
-                    if ( file_exists( $icon_building ) ) {
-                        echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/building.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
-                    } else {
-                        echo sm_icon('building', 'solid', '');
-                    }
-                    ?></span></div>
+                    <div class="feature-icon"><span class="icon-glow"><?php echo sm_icon('building', 'solid', ''); ?></span></div>
                     <div class="feature-content">
                         <h3>4 years of data-driven research</h3>
                         <p>Insights from thousands of successful relocations inform every recommendation.</p>
@@ -281,14 +250,7 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon"><span class="icon-glow"><?php
-                    $icon_rocket = get_template_directory() . '/assets/lordicon/rocket.json';
-                    if ( file_exists( $icon_rocket ) ) {
-                        echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/rocket.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
-                    } else {
-                        echo sm_icon('rocket', 'solid', '');
-                    }
-                    ?></span></div>
+                    <div class="feature-icon"><span class="icon-glow"><?php echo sm_icon('rocket', 'solid', ''); ?></span></div>
                     <div class="feature-content">
                         <h3>Up to 30% cheaper than going direct</h3>
                         <p>Preferred pricing from top international brands saves you money.</p>
@@ -298,13 +260,7 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon"><span class="icon-glow"><?php
-                    if ( file_exists( $icon_handshake ) ) {
-                        echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/handshake.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
-                    } else {
-                        echo sm_icon('handshake', 'solid', '');
-                    }
-                    ?></span></div>
+                    <div class="feature-icon"><span class="icon-glow"><?php echo sm_icon('handshake', 'solid', ''); ?></span></div>
                     <div class="feature-content">
                         <h3>One login, one support team</h3>
                         <p>Every stage covered with consistent, personalized support throughout your journey.</p>
@@ -436,14 +392,7 @@ get_header(); ?>
                 
                 <div class="resource-options">
                     <div class="resource-item">
-                        <div class="resource-icon"><span class="icon-glow"><?php
-                        $icon_rocket = isset($icon_rocket) ? $icon_rocket : get_template_directory() . '/assets/lordicon/rocket.json';
-                        if ( file_exists( $icon_rocket ) ) {
-                            echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/rocket.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
-                        } else {
-                            echo sm_icon('rocket', 'solid', '');
-                        }
-                        ?></span></div>
+                        <div class="resource-icon"><span class="icon-glow"><?php echo sm_icon('rocket', 'solid', ''); ?></span></div>
                         <div class="resource-content">
                             <h4>Start Building Your Plan</h4>
                             <p>Browse our services and create a customized relocation package.</p>
@@ -469,14 +418,7 @@ get_header(); ?>
                     
                     <div class="resources-list">
                         <a href="/ai-relocator" class="resource-link">
-                            <span class="resource-link-icon"><span class="icon-glow"><?php
-                            $icon_robot = get_template_directory() . '/assets/lordicon/robot.json';
-                            if ( file_exists( $icon_robot ) ) {
-                                echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/robot.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
-                            } else {
-                                echo sm_icon('robot', 'solid', '');
-                            }
-                            ?></span></span>
+                            <span class="resource-link-icon"><span class="icon-glow"><?php echo sm_icon('robot', 'solid', ''); ?></span></span>
                             <div class="resource-link-content">
                                 <strong>AI Relocator Assistant</strong>
                                 <small>Intelligent relocation planning</small>
@@ -525,8 +467,8 @@ get_header(); ?>
 
 <script>
 function downloadChecklist() {
-    // Implement checklist download
-    alert('Relocation checklist download coming soon!');
+    // Redirect to AI Relocator page
+    window.location.href = '/ai-relocator';
 }
 
 // Enhanced button state management and scroll animations

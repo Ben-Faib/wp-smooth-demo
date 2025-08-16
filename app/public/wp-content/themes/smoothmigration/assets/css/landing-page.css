@@ -1015,7 +1015,11 @@ section {
 }
 
 .service-description { color: var(--text-light); font-size: 0.95rem; line-height: 1.5; }
-.services-snapshot .service-description { max-height: 3.6em; overflow: hidden; }
+.services-snapshot .service-description { 
+    /* Removed fixed max-height to prevent text truncation */
+    min-height: 3.6em; 
+    /* Allow text to wrap naturally */
+}
 
 /* Why Us Section */
 .why-us {

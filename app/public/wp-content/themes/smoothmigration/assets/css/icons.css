@@ -11,6 +11,23 @@
 .icon-glow { position: relative; display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; }
 .icon-glow::before { content:""; position:absolute; inset:-6px; border-radius:50%; background: radial-gradient(40% 40% at 50% 50%, var(--accent-light) 0%, transparent 70%); filter: blur(8px); }
 .icon-glow > * { position: relative; z-index: 1; }
+
+/* Free micro-animations for FA icons */
+.icon-glow i { transition: transform .25s ease, color .25s ease, opacity .25s ease; will-change: transform; }
+.icon-glow:hover i { transform: translateY(-1px) scale(1.06); }
+
+/* One-time in-view animation */
+.icon-glow.in-view i { animation: iconFadeUp .6s ease forwards; opacity: 0; }
+@keyframes iconFadeUp {
+  from { transform: translateY(8px) scale(.96); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-glow i, .icon-glow.in-view i { transition: none; animation: none; }
+}
+/* Hide glow wrapper if it has no visible content */
+.icon-glow:empty { display: none; }
 /* .icon-chip i { font-size: 18px; }
 .icon-chip lord-icon { display: inline-block; } */
 

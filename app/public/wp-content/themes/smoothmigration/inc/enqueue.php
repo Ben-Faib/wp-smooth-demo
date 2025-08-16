@@ -40,6 +40,9 @@ function smoothmigration_enqueue_assets() {
     // Icon utilities (sizes, motion preferences)
     wp_enqueue_style( 'sm-icons', get_template_directory_uri() . '/assets/css/icons.css', array( 'smoothmigration-style' ), $ver );
 
+    // Widget fixes for floating elements and chat widgets
+    wp_enqueue_style( 'widget-fixes', get_template_directory_uri() . '/assets/css/widget-fixes.css', array( 'smoothmigration-style' ), $ver );
+
     // Bootstrap bundle (includes Popper)
     wp_enqueue_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), '5.3.3', true );
     

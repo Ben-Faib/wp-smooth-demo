@@ -351,16 +351,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // CTA hover → control lord-icon inside the button
+    // CTA hover → animate icon (FA or Lordicon) inside the button
     ['.cta-relocating', '.cta-employer', '.cta-partner'].forEach(selector => {
         document.querySelectorAll(selector).forEach(button => {
-            const icon = button.querySelector('lord-icon');
-            if (!icon) return;
+            const lord = button.querySelector('lord-icon');
+            const fa = button.querySelector('.icon-glow i');
             button.addEventListener('mouseenter', () => {
-                if (!prefersReduced && icon.play) icon.play();
+                if (!prefersReduced && lord && lord.play) lord.play();
+                if (fa) fa.style.transform = 'translateY(-2px) scale(1.08)';
             });
             button.addEventListener('mouseleave', () => {
-                if (icon.stop) icon.stop();
+                if (lord && lord.stop) lord.stop();
+                if (fa) fa.style.transform = '';
             });
         });
     });
@@ -386,7 +388,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, { threshold: 0.25 });
 
+    // Observe both Lordicon and FA wrappers for in-view animation
     document.querySelectorAll('.why-us lord-icon, .resource-link lord-icon, .resource-icon lord-icon').forEach(el => iconObserver.observe(el));
+    const faIconObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const wrap = entry.target;
+            wrap.classList.add('in-view');
+            obs.unobserve(wrap);
+        });
+    }, { threshold: 0.25 });
+    document.querySelectorAll('.why-us .icon-glow, .resource-link .icon-glow, .resource-icon .icon-glow').forEach(el => faIconObserver.observe(el));
 });
 
 // Utility functions
