@@ -339,6 +339,54 @@ document.addEventListener('DOMContentLoaded', function() {
         teamBtn.textContent = 'Meet Our Team';
         heroCtaGroup.appendChild(teamBtn);
     }
+
+    // Lordicon / Lottie controls: hover + in-view, respecting reduced motion
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Respect reduced motion for lottie-player elements
+    if (prefersReduced) {
+        document.querySelectorAll('lottie-player[autoplay]').forEach(player => {
+            try { if (player.pause) player.pause(); } catch(e) {}
+            player.removeAttribute('autoplay');
+        });
+    }
+
+    // CTA hover → control lord-icon inside the button
+    ['.cta-relocating', '.cta-employer', '.cta-partner'].forEach(selector => {
+        document.querySelectorAll(selector).forEach(button => {
+            const icon = button.querySelector('lord-icon');
+            if (!icon) return;
+            button.addEventListener('mouseenter', () => {
+                if (!prefersReduced && icon.play) icon.play();
+            });
+            button.addEventListener('mouseleave', () => {
+                if (icon.stop) icon.stop();
+            });
+        });
+    });
+
+    // In-view → play once for section icons
+    const iconObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const playOnce = () => {
+                if (!prefersReduced && el.play) {
+                    try { el.play(); } catch (e) {}
+                }
+                obs.unobserve(el);
+            };
+            if (el.play) {
+                playOnce();
+            } else {
+                const onReady = () => { playOnce(); };
+                el.addEventListener('ready', onReady, { once: true });
+                el.addEventListener('load', onReady, { once: true });
+            }
+        });
+    }, { threshold: 0.25 });
+
+    document.querySelectorAll('.why-us lord-icon, .resource-link lord-icon, .resource-icon lord-icon').forEach(el => iconObserver.observe(el));
 });
 
 // Utility functions

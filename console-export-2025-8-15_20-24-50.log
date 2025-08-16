@@ -1,0 +1,52 @@
+XHRGET
+https://cdn.lordicon.com/gqzfzudp.json
+[HTTP/2 404  373ms]
+
+XHRGET
+https://cdn.lordicon.com/pczazfnl.json
+[HTTP/2 404  346ms]
+
+XHRGET
+https://cdn.lordicon.com/dfhcvxwb.json
+[HTTP/2 404  366ms]
+
+XHRGET
+https://cdn.lordicon.com/akikqypt.json
+[HTTP/2 404  362ms]
+
+XHRGET
+https://cdn.lordicon.com/raqskgzt.json
+[HTTP/2 404  360ms]
+
+XHRGET
+https://wp-smooth-demo.local/wp-content/themes/smoothmigration/assets/lottie/realtor-accent.json
+[HTTP/2 404  112ms]
+
+XHRGET
+https://wp-smooth-demo.local/wp-content/themes/smoothmigration/assets/lottie/realtor-accent.json
+[HTTP/2 404  123ms]
+
+Uncaught (in promise) Error: Can't use unregistered trigger!
+    triggerChanged https://cdn.lordicon.com/lordicon.js:1
+    createPlayer https://cdn.lordicon.com/lordicon.js:1
+    connectedCallback https://cdn.lordicon.com/lordicon.js:1
+    defineElement https://cdn.lordicon.com/lordicon.js:1
+    <anonymous> https://cdn.lordicon.com/lordicon.js:1
+    <anonymous> https://cdn.lordicon.com/lordicon.js:1
+lordicon.js:1:11512
+Uncaught (in promise) Error: Can't use unregistered trigger!
+    triggerChanged https://cdn.lordicon.com/lordicon.js:1
+    createPlayer https://cdn.lordicon.com/lordicon.js:1
+    connectedCallback https://cdn.lordicon.com/lordicon.js:1
+    defineElement https://cdn.lordicon.com/lordicon.js:1
+    <anonymous> https://cdn.lordicon.com/lordicon.js:1
+    <anonymous> https://cdn.lordicon.com/lordicon.js:1
+2 lordicon.js:1:11512
+Uncaught (in promise) SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data 5
+    createPlayer https://cdn.lordicon.com/lordicon.js:1
+    AsyncFunctionThrow self-hosted:804
+    (Async: async)
+    connectedCallback https://cdn.lordicon.com/lordicon.js:1
+    defineElement https://cdn.lordicon.com/lordicon.js:1
+    <anonymous> https://cdn.lordicon.com/lordicon.js:1
+    <anonymous> https://cdn.lordicon.com/lordicon.js:1

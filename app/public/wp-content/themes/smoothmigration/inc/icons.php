@@ -13,12 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Register Lordicon & Lottie web components (from CDN) and preconnects.
  */
 function sm_register_icon_components() {
+    // Keep CDN for web component runtime only; JSON assets are self-hosted
     wp_register_script( 'lordicon', 'https://cdn.lordicon.com/lordicon.js', array(), null, true );
     wp_register_script( 'lottie-player', 'https://cdn.jsdelivr.net/npm/@lottiefiles/lottie-player@latest/dist/lottie-player.js', array(), null, true );
-
-    add_action( 'wp_head', function() {
-        echo '<link rel="preconnect" href="https://cdn.lordicon.com" crossorigin>';
-    }, 0 );
 }
 add_action( 'init', 'sm_register_icon_components' );
 
@@ -97,14 +94,14 @@ add_shortcode( 'icon', 'sm_icon_shortcode' );
 function sm_lordicon_shortcode( $atts ) {
     $atts = shortcode_atts( array(
         'src'       => '',
-        'trigger'   => 'hover',
+        'trigger'   => 'none',
         'primary'   => '',
         'secondary' => '',
         'size'      => '32',
         'class'     => 'icon',
         'stroke'    => '2',
         'delay'     => '0',
-        'target'    => 'window',
+        'target'    => '',
     ), $atts, 'lordicon' );
 
     $colors = array();
@@ -118,17 +115,28 @@ function sm_lordicon_shortcode( $atts ) {
 
     if ( ! empty( $atts['src'] ) ) {
         wp_enqueue_script( 'lordicon' );
+
+        $trigger_attr = '';
+        if ( ! empty( $atts['trigger'] ) && strtolower( (string) $atts['trigger'] ) !== 'none' ) {
+            $trigger_attr = ' trigger="' . esc_attr( $atts['trigger'] ) . '"';
+        }
+
+        $target_attr = '';
+        if ( ! empty( $atts['target'] ) && strtolower( (string) $atts['target'] ) !== 'none' ) {
+            $target_attr = ' target="' . esc_attr( $atts['target'] ) . '"';
+        }
+
         return sprintf(
-            '<lord-icon src="%s" trigger="%s"%s style="width:%spx;height:%spx" class="%s" stroke="%s" delay="%s" target="%s" aria-hidden="true"></lord-icon>',
+            '<lord-icon src="%s"%s%s style="width:%spx;height:%spx" class="%s" stroke="%s" delay="%s"%s aria-hidden="true"></lord-icon>',
             esc_url( $atts['src'] ),
-            esc_attr( $atts['trigger'] ),
+            $trigger_attr,
             $colors_attr,
             esc_attr( $atts['size'] ),
             esc_attr( $atts['size'] ),
             esc_attr( $atts['class'] ),
             esc_attr( $atts['stroke'] ),
             esc_attr( $atts['delay'] ),
-            esc_attr( $atts['target'] )
+            $target_attr
         );
     }
     return '';

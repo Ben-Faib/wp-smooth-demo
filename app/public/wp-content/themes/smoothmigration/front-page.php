@@ -11,6 +11,31 @@ get_header(); ?>
 
 <!-- 1. Enhanced Hero Section -->
 <section class="hero-landing">
+    <div class="hero-lottie-overlay" aria-hidden="true">
+        <?php
+        $hero_lottie = get_template_directory() . '/assets/lottie/hero-world.json';
+        if ( file_exists( $hero_lottie ) ) {
+            echo do_shortcode('[lottie src="' . get_template_directory_uri() . '/assets/lottie/hero-world.json" loop="true" autoplay="true" speed="1" class="hero-lottie" ]');
+        }
+        ?>
+        <div class="flight-overlay" aria-hidden="true">
+            <svg viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#f59e0b"/>
+                        <stop offset="100%" stop-color="#1e40af"/>
+                    </linearGradient>
+                </defs>
+                <path id="flightPath" d="M100 450 C 300 350, 500 550, 700 420 S 1000 350, 1100 200" stroke="url(#routeGrad)" stroke-width="3" stroke-dasharray="6 8" stroke-linecap="round"/>
+                <g id="plane" transform="translate(100,450)">
+                    <path d="M0 -6 L18 0 L0 6 L3 0 Z" fill="#ffffff" stroke="#1e40af" stroke-width="1.5"/>
+                </g>
+                <animateMotion xlink:href="#plane" dur="8s" repeatCount="indefinite" rotate="auto">
+                    <mpath xlink:href="#flightPath"/>
+                </animateMotion>
+            </svg>
+        </div>
+    </div>
     <div class="hero-overlay-dark" aria-hidden="true"></div>
     <div class="container">
         <div class="row align-items-center min-vh-100">
@@ -32,15 +57,36 @@ get_header(); ?>
                     <!-- Enhanced CTA Group with Self-Segmentation -->
                     <div class="hero-cta-group">
                         <a href="/services" class="btn btn-primary btn-lg cta-relocating">
-                            <span class="icon-glow me-2"><?php echo sm_icon('house', 'solid', ''); ?></span>
+                            <span class="icon-glow me-2"><?php
+                            $icon_house = get_template_directory() . '/assets/lordicon/house.json';
+                            if ( file_exists( $icon_house ) ) {
+                                echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/house.json" primary="#1e40af" secondary="#f59e0b" size="24"]');
+                            } else {
+                                echo sm_icon('house', 'solid', '');
+                            }
+                            ?></span>
                             Get My Personal Moving Plan
                         </a>
                         <a href="/contact" class="btn btn-secondary btn-lg cta-employer">
-                            <span class="icon-glow me-2"><?php echo sm_icon('building', 'solid', ''); ?></span>
+                            <span class="icon-glow me-2"><?php
+                            $icon_building = get_template_directory() . '/assets/lordicon/building.json';
+                            if ( file_exists( $icon_building ) ) {
+                                echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/building.json" primary="#1e40af" secondary="#f59e0b" size="24"]');
+                            } else {
+                                echo sm_icon('building', 'solid', '');
+                            }
+                            ?></span>
                             Relocate My Team
                         </a>
                         <a href="/become-a-partner" class="btn btn-accent btn-lg cta-partner">
-                            <span class="icon-glow me-2"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" primary="#1e40af" secondary="#f59e0b" size="24"]'); ?></span>
+                            <span class="icon-glow me-2"><?php
+                            $icon_handshake = get_template_directory() . '/assets/lordicon/handshake.json';
+                            if ( file_exists( $icon_handshake ) ) {
+                                echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/handshake.json" primary="#1e40af" secondary="#f59e0b" size="24"]');
+                            } else {
+                                echo sm_icon('handshake', 'solid', '');
+                            }
+                            ?></span>
                             Become a Partner
                         </a>
                     </div>
@@ -158,7 +204,12 @@ get_header(); ?>
                 <a href="/realtor-form" class="service-card-link">
                     <div class="service-card service-card--core interactive-card" aria-describedby="realtor-core-desc">
                         <span class="core-badge">Core</span>
-                        <div class="service-illustration" aria-hidden="true"><i class="fa-solid fa-house-chimney-user"></i></div>
+                        <div class="service-illustration" aria-hidden="true"><span class="icon-glow"><?php
+                        $realtor_accent = get_template_directory() . '/assets/lottie/realtor-accent.json';
+                        if ( file_exists( $realtor_accent ) ) {
+                            echo do_shortcode('[lottie src="' . get_template_directory_uri() . '/assets/lottie/realtor-accent.json" loop="false" autoplay="false" speed="1" class="d-inline-block" style="width:36px;height:36px;"]');
+                        }
+                        ?></span></div>
                         <div class="service-content">
                             <h3 class="service-title">Realtor Locator</h3>
                             <p id="realtor-core-desc" class="service-description">Match with a vetted local realtor fast—get pre-arrival walk-throughs and insights.</p>
@@ -198,7 +249,13 @@ get_header(); ?>
         <div class="row g-4">
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/dxoycpzg.json" trigger="in-view" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
+                    <div class="feature-icon"><span class="icon-glow"><?php
+                    if ( file_exists( $icon_house ) ) {
+                        echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/house.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
+                    } else {
+                        echo sm_icon('house', 'solid', '');
+                    }
+                    ?></span></div>
                     <div class="feature-content">
                         <h3>Founder and team with extensive first hand experience</h3>
                         <p>We understand the challenges because we've lived them firsthand.</p>
@@ -208,7 +265,13 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/psnhyobz.json" trigger="in-view" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
+                    <div class="feature-icon"><span class="icon-glow"><?php
+                    if ( file_exists( $icon_building ) ) {
+                        echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/building.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
+                    } else {
+                        echo sm_icon('building', 'solid', '');
+                    }
+                    ?></span></div>
                     <div class="feature-content">
                         <h3>4 years of data-driven research</h3>
                         <p>Insights from thousands of successful relocations inform every recommendation.</p>
@@ -218,7 +281,14 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/dfhcvxwb.json" trigger="in-view" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
+                    <div class="feature-icon"><span class="icon-glow"><?php
+                    $icon_rocket = get_template_directory() . '/assets/lordicon/rocket.json';
+                    if ( file_exists( $icon_rocket ) ) {
+                        echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/rocket.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
+                    } else {
+                        echo sm_icon('rocket', 'solid', '');
+                    }
+                    ?></span></div>
                     <div class="feature-content">
                         <h3>Up to 30% cheaper than going direct</h3>
                         <p>Preferred pricing from top international brands saves you money.</p>
@@ -228,7 +298,13 @@ get_header(); ?>
             
             <div class="col-lg-6">
                 <div class="feature-item interactive-card">
-                    <div class="feature-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/odavpkmb.json" trigger="in-view" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
+                    <div class="feature-icon"><span class="icon-glow"><?php
+                    if ( file_exists( $icon_handshake ) ) {
+                        echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/handshake.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
+                    } else {
+                        echo sm_icon('handshake', 'solid', '');
+                    }
+                    ?></span></div>
                     <div class="feature-content">
                         <h3>One login, one support team</h3>
                         <p>Every stage covered with consistent, personalized support throughout your journey.</p>
@@ -360,7 +436,14 @@ get_header(); ?>
                 
                 <div class="resource-options">
                     <div class="resource-item">
-                        <div class="resource-icon"><span class="icon-glow"><?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/raqskgzt.json" trigger="hover" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?></span></div>
+                        <div class="resource-icon"><span class="icon-glow"><?php
+                        $icon_rocket = isset($icon_rocket) ? $icon_rocket : get_template_directory() . '/assets/lordicon/rocket.json';
+                        if ( file_exists( $icon_rocket ) ) {
+                            echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/rocket.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
+                        } else {
+                            echo sm_icon('rocket', 'solid', '');
+                        }
+                        ?></span></div>
                         <div class="resource-content">
                             <h4>Start Building Your Plan</h4>
                             <p>Browse our services and create a customized relocation package.</p>
@@ -369,7 +452,7 @@ get_header(); ?>
                     </div>
                     
                     <div class="resource-item">
-                        <div class="resource-icon"><span class="icon-chip chip-success"><?php echo sm_icon('comment-dots', 'solid', ''); ?></span></div>
+                        <div class="resource-icon"><span class="icon-glow"><?php echo sm_icon('comment-dots', 'solid', ''); ?></span></div>
                         <div class="resource-content">
                             <h4>Talk to an Expert</h4>
                             <p>Get personalized guidance from our relocation specialists.</p>
@@ -386,9 +469,14 @@ get_header(); ?>
                     
                     <div class="resources-list">
                         <a href="/ai-relocator" class="resource-link">
-                            <span class="resource-link-icon">
-                                <?php echo do_shortcode('[lordicon src="https://cdn.lordicon.com/akikqypt.json" trigger="hover" primary="#1e40af" secondary="#f59e0b" size="28"]'); ?>
-                            </span>
+                            <span class="resource-link-icon"><span class="icon-glow"><?php
+                            $icon_robot = get_template_directory() . '/assets/lordicon/robot.json';
+                            if ( file_exists( $icon_robot ) ) {
+                                echo do_shortcode('[lordicon src="' . get_template_directory_uri() . '/assets/lordicon/robot.json" primary="#1e40af" secondary="#f59e0b" size="28"]');
+                            } else {
+                                echo sm_icon('robot', 'solid', '');
+                            }
+                            ?></span></span>
                             <div class="resource-link-content">
                                 <strong>AI Relocator Assistant</strong>
                                 <small>Intelligent relocation planning</small>
