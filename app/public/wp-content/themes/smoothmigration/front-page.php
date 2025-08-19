@@ -281,7 +281,7 @@ get_header(); ?>
                     <div class="stat-label">Successful Moves</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">98%</div>
+                    <div class="stat-number"><?php echo esc_html( get_option( 'sm_customer_satisfaction', '98%' ) ); ?></div>
                     <div class="stat-label">Customer Satisfaction</div>
                 </div>
                 <div class="stat-item">

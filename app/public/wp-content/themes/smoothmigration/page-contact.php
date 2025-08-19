@@ -55,15 +55,15 @@ get_header();
                         
                         <div class="contact-stats mt-4">
                             <div class="stat-item">
-                                <div class="stat-number">2,500+</div>
+                                <div class="stat-number"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?></div>
                                 <div class="stat-label">Clients Helped</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">98%</div>
+                                <div class="stat-number"><?php echo esc_html( get_option( 'sm_customer_satisfaction', '98%' ) ); ?></div>
                                 <div class="stat-label">Satisfaction Rate</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">5+</div>
+                                <div class="stat-number"><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?></div>
                                 <div class="stat-label">Countries</div>
                             </div>
                         </div>
@@ -347,7 +347,7 @@ get_header();
                                     <strong>25</strong><span>Team Members</span>
                                 </div>
                                 <div class="team-stat">
-                                    <strong>50+</strong><span>Global Partners</span>
+                                    <strong><?php echo esc_html( get_option( 'sm_global_partners', '60+' ) ); ?></strong><span>Global Partners</span>
                                 </div>
                             </div>
                         </div>

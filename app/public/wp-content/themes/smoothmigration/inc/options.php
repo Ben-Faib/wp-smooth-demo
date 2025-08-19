@@ -34,6 +34,16 @@ function smoothmigration_register_settings() {
         'sanitize_callback' => 'sanitize_text_field',
         'default'           => '5+',
     ) );
+    register_setting( 'smoothmigration_options', 'sm_global_partners', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => '60+',
+    ) );
+    register_setting( 'smoothmigration_options', 'sm_customer_satisfaction', array(
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_text_field',
+        'default'           => '98%',
+    ) );
     register_setting( 'smoothmigration_options', 'sm_default_timeline', array(
         'type'              => 'string',
         'sanitize_callback' => 'sanitize_text_field',
@@ -108,6 +118,30 @@ function smoothmigration_register_settings() {
             $val = get_option( 'sm_countries_served', '5+' );
             echo '<input type="text" class="regular-text" name="sm_countries_served" value="' . esc_attr( $val ) . '" />';
             echo '<p class="description">' . esc_html__( "Example: 5+", 'smoothmigration' ) . '</p>';
+        },
+        'smoothmigration_options',
+        'smoothmigration_stats_section'
+    );
+
+    add_settings_field(
+        'sm_global_partners',
+        __( 'Global partners', 'smoothmigration' ),
+        function() {
+            $val = get_option( 'sm_global_partners', '60+' );
+            echo '<input type="text" class="regular-text" name="sm_global_partners" value="' . esc_attr( $val ) . '" />';
+            echo '<p class="description">' . esc_html__( "Example: 60+", 'smoothmigration' ) . '</p>';
+        },
+        'smoothmigration_options',
+        'smoothmigration_stats_section'
+    );
+
+    add_settings_field(
+        'sm_customer_satisfaction',
+        __( 'Customer satisfaction', 'smoothmigration' ),
+        function() {
+            $val = get_option( 'sm_customer_satisfaction', '98%' );
+            echo '<input type="text" class="regular-text" name="sm_customer_satisfaction" value="' . esc_attr( $val ) . '" />';
+            echo '<p class="description">' . esc_html__( "Example: 98%", 'smoothmigration' ) . '</p>';
         },
         'smoothmigration_options',
         'smoothmigration_stats_section'

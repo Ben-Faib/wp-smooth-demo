@@ -160,7 +160,7 @@ get_header();
                     <div class="guide-meta">
                         <div class="guide-meta-item">
                             <i class="fas fa-flag"></i>
-                            <span>50+ Countries</span>
+                            <span><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?> Countries</span>
                         </div>
                         <div class="guide-meta-item">
                             <i class="fas fa-update"></i>

@@ -20,9 +20,9 @@ get_header();
                         <h1 class="display-2 fw-bold mb-4">Our Services</h1>
                         <p class="lead fs-4 mb-4 opacity-90">Comprehensive relocation services designed to make your international move seamless and stress-free.</p>
                         <div class="hero-badges d-flex flex-wrap justify-content-center gap-3 mb-4">
-                            <span class="badge-modern"><?php echo sm_icon('earth-americas', 'solid', 'me-2 icon'); ?> 50+ Countries Served</span>
-                            <span class="badge-modern"><?php echo sm_icon('trophy', 'solid', 'me-2 icon'); ?> 3,200+ Successful Moves</span>
-                            <span class="badge-modern"><?php echo sm_icon('bolt', 'solid', 'me-2 icon'); ?> 98% Customer Satisfaction</span>
+                            <span class="badge-modern"><?php echo sm_icon('earth-americas', 'solid', 'me-2 icon'); ?> <?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?> Countries Served</span>
+                            <span class="badge-modern"><?php echo sm_icon('trophy', 'solid', 'me-2 icon'); ?> <?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?> Successful Moves</span>
+                            <span class="badge-modern"><?php echo sm_icon('bolt', 'solid', 'me-2 icon'); ?> <?php echo esc_html( get_option( 'sm_customer_satisfaction', '98%' ) ); ?> Customer Satisfaction</span>
                         </div>
                     </div>
                 </div>

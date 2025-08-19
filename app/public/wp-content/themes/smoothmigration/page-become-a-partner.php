@@ -25,15 +25,15 @@ get_header();
                         
                         <div class="hero-stats d-flex flex-wrap gap-4 mb-4">
                             <div class="stat-item">
-                                <div class="stat-number">500+</div>
+                                <div class="stat-number"><?php echo esc_html( get_option( 'sm_global_partners', '60+' ) ); ?></div>
                                 <div class="stat-label">Global Partners</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">50+</div>
+                                <div class="stat-number"><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?></div>
                                 <div class="stat-label">Countries</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">3,200+</div>
+                                <div class="stat-number"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?></div>
                                 <div class="stat-label">Successful Referrals</div>
                             </div>
                         </div>

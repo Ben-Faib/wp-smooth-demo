@@ -458,7 +458,7 @@ get_header();
                                 </div>
                                 <div class="col-md-4">
                                     <div class="beta-stat">
-                                        <div class="stat-number">50+</div>
+                                        <div class="stat-number"><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?></div>
                                         <div class="stat-label">Countries Ready</div>
                                     </div>
                                 </div>
