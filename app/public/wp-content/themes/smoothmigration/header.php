@@ -112,13 +112,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/ai-relocator">
                             <i class="fas fa-robot me-1"></i>
-                            AI Relocation Plan
+                            AI Relocator
                         </a>
                     </li>
                 </ul>
                 
                 <!-- Get in Touch CTA Button -->
-                <div class="navbar-nav ms-3">
+                <div class="navbar-nav ms-3 d-flex align-items-center gap-2">
+                    <?php if ( defined( 'SM_RLC_ENABLED' ) && SM_RLC_ENABLED ) { get_template_part( 'template-parts/region-language' ); } ?>
                     <a href="/contact" class="btn btn-primary btn-sm nav-cta-btn">
                         <span class="icon-glow me-2"><?php echo sm_icon('comment-dots', 'solid', ''); ?></span>
                         Get Started
@@ -170,7 +171,7 @@
         <li class="nav-item">
             <a class="nav-link" href="/ai-relocator">
                 <i class="fas fa-robot me-1"></i>
-                AI Relocation Plan
+                AI Relocator
             </a>
         </li>
     </ul>

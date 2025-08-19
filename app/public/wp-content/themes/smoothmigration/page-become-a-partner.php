@@ -21,7 +21,7 @@ get_header();
                             <span class="badge-partner"><?php echo sm_icon('handshake', 'solid', 'me-2 icon'); ?> Partnership Opportunity</span>
                         </div>
                         <h1 class="display-2 fw-bold mb-4">Become a Partner</h1>
-                        <p class="lead fs-4 mb-4 opacity-90">Join our global network of trusted service providers and help expats navigate their international relocations with confidence.</p>
+                        <p class="lead fs-4 mb-4 opacity-90">Join our global network of trusted service providers and help newcomers navigate their international relocations with confidence.</p>
                         
                         <div class="hero-stats d-flex flex-wrap gap-4 mb-4">
                             <div class="stat-item">
@@ -79,7 +79,7 @@ get_header();
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8 text-center">
                     <h2 class="section-title">Why Partner With Us?</h2>
-                    <p class="section-subtitle">Join a growing network of professionals who are making international relocation seamless for thousands of families worldwide.</p>
+                    <p class="section-subtitle">Join a growing network of professionals who are making international relocation seamless for thousands relocating worldwide.</p>
                 </div>
             </div>
             
@@ -292,7 +292,7 @@ get_header();
                     <div class="form-container">
                         <div class="form-header text-center mb-5">
                             <h2 class="section-title">Apply for Partnership</h2>
-                            <p class="section-subtitle">Ready to join our network? Complete the application below and we'll be in touch within 48 hours.</p>
+                            <p class="section-subtitle">Apply to become a preferred partner by completing the application form below. Our team will review your application and respond within 2 business days.</p>
                         </div>
                         
                         <div class="forminator-integration">
