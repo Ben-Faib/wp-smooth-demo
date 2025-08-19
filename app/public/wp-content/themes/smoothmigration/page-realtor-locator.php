@@ -130,299 +130,11 @@ get_header();
                             <h2 class="section-title">Find Your Ideal Property</h2>
                             <p class="section-subtitle">Tell us about your preferences and we'll connect you with the perfect realtor and properties.</p>
                         </div>
-                        
-                        <form class="property-search-form" id="propertySearchForm">
-                            <div class="form-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 0%"></div>
-                                </div>
-                                <div class="progress-steps">
-                                    <div class="step active" data-step="1">Location</div>
-                                    <div class="step" data-step="2">Property</div>
-                                    <div class="step" data-step="3">Budget</div>
-                                    <div class="step" data-step="4">Contact</div>
-                                </div>
-                            </div>
-                            
-                            <!-- Step 1: Location -->
-                            <div class="form-step active" data-step="1">
-                                <h3 class="step-title">Where are you looking to move?</h3>
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="country" class="form-label">Country *</label>
-                                            <select class="form-control" id="country" name="country" required>
-                                                <option value="">Select your destination country</option>
-                                                <option value="singapore">Singapore</option>
-                                                <option value="uk">United Kingdom</option>
-                                                <option value="australia">Australia</option>
-                                                <option value="canada">Canada</option>
-                                                <option value="usa">United States</option>
-                                                <option value="uae">United Arab Emirates</option>
-                                                <option value="germany">Germany</option>
-                                                <option value="netherlands">Netherlands</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="city" class="form-label">City/Area *</label>
-                                            <input type="text" class="form-control" id="city" name="city" placeholder="e.g., Central Business District" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="preferredAreas" class="form-label">Preferred Neighborhoods (Optional)</label>
-                                            <textarea class="form-control" id="preferredAreas" name="preferredAreas" rows="3" placeholder="Any specific areas, districts, or neighborhoods you're interested in?"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Step 2: Property Details -->
-                            <div class="form-step" data-step="2">
-                                <h3 class="step-title">What type of property are you looking for?</h3>
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="propertyType" class="form-label">Property Type *</label>
-                                            <select class="form-control" id="propertyType" name="propertyType" required>
-                                                <option value="">Select property type</option>
-                                                <option value="apartment">Apartment</option>
-                                                <option value="condo">Condominium</option>
-                                                <option value="house">House</option>
-                                                <option value="townhouse">Townhouse</option>
-                                                <option value="studio">Studio</option>
-                                                <option value="serviced-apartment">Serviced Apartment</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="bedrooms" class="form-label">Bedrooms *</label>
-                                            <select class="form-control" id="bedrooms" name="bedrooms" required>
-                                                <option value="">Number of bedrooms</option>
-                                                <option value="studio">Studio</option>
-                                                <option value="1">1 Bedroom</option>
-                                                <option value="2">2 Bedrooms</option>
-                                                <option value="3">3 Bedrooms</option>
-                                                <option value="4">4 Bedrooms</option>
-                                                <option value="5+">5+ Bedrooms</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="moveInDate" class="form-label">Preferred Move-in Date *</label>
-                                            <input type="date" class="form-control" id="moveInDate" name="moveInDate" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="leaseDuration" class="form-label">Lease Duration</label>
-                                            <select class="form-control" id="leaseDuration" name="leaseDuration">
-                                                <option value="">Preferred lease length</option>
-                                                <option value="6-months">6 months</option>
-                                                <option value="1-year">1 year</option>
-                                                <option value="2-years">2 years</option>
-                                                <option value="3-years">3+ years</option>
-                                                <option value="flexible">Flexible</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Must-Have Features</label>
-                                            <div class="feature-checkboxes">
-                                                <div class="feature-group">
-                                                    <input type="checkbox" id="furnished" name="features[]" value="furnished">
-                                                    <label for="furnished">Furnished</label>
-                                                </div>
-                                                <div class="feature-group">
-                                                    <input type="checkbox" id="parking" name="features[]" value="parking">
-                                                    <label for="parking">Parking</label>
-                                                </div>
-                                                <div class="feature-group">
-                                                    <input type="checkbox" id="gym" name="features[]" value="gym">
-                                                    <label for="gym">Gym/Fitness</label>
-                                                </div>
-                                                <div class="feature-group">
-                                                    <input type="checkbox" id="pool" name="features[]" value="pool">
-                                                    <label for="pool">Swimming Pool</label>
-                                                </div>
-                                                <div class="feature-group">
-                                                    <input type="checkbox" id="petFriendly" name="features[]" value="pet-friendly">
-                                                    <label for="petFriendly">Pet-Friendly</label>
-                                                </div>
-                                                <div class="feature-group">
-                                                    <input type="checkbox" id="balcony" name="features[]" value="balcony">
-                                                    <label for="balcony">Balcony/Terrace</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Step 3: Budget -->
-                            <div class="form-step" data-step="3">
-                                <h3 class="step-title">What's your budget?</h3>
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="currency" class="form-label">Currency *</label>
-                                            <select class="form-control" id="currency" name="currency" required>
-                                                <option value="">Select currency</option>
-                                                <option value="USD">USD - US Dollar</option>
-                                                <option value="SGD">SGD - Singapore Dollar</option>
-                                                <option value="GBP">GBP - British Pound</option>
-                                                <option value="EUR">EUR - Euro</option>
-                                                <option value="AUD">AUD - Australian Dollar</option>
-                                                <option value="CAD">CAD - Canadian Dollar</option>
-                                                <option value="AED">AED - UAE Dirham</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="budgetRange" class="form-label">Monthly Budget Range *</label>
-                                            <select class="form-control" id="budgetRange" name="budgetRange" required>
-                                                <option value="">Select budget range</option>
-                                                <option value="under-1000">Under 1,000</option>
-                                                <option value="1000-2000">1,000 - 2,000</option>
-                                                <option value="2000-3000">2,000 - 3,000</option>
-                                                <option value="3000-5000">3,000 - 5,000</option>
-                                                <option value="5000-7500">5,000 - 7,500</option>
-                                                <option value="7500-10000">7,500 - 10,000</option>
-                                                <option value="over-10000">Over 10,000</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="form-label">What's included in your budget?</label>
-                                            <div class="budget-includes">
-                                                <div class="include-group">
-                                                    <input type="checkbox" id="includeUtilities" name="budgetIncludes[]" value="utilities">
-                                                    <label for="includeUtilities">Utilities</label>
-                                                </div>
-                                                <div class="include-group">
-                                                    <input type="checkbox" id="includeInternet" name="budgetIncludes[]" value="internet">
-                                                    <label for="includeInternet">Internet</label>
-                                                </div>
-                                                <div class="include-group">
-                                                    <input type="checkbox" id="includeFurniture" name="budgetIncludes[]" value="furniture">
-                                                    <label for="includeFurniture">Furniture</label>
-                                                </div>
-                                                <div class="include-group">
-                                                    <input type="checkbox" id="includeParking" name="budgetIncludes[]" value="parking">
-                                                    <label for="includeParking">Parking</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="additionalBudgetInfo" class="form-label">Additional Budget Information</label>
-                                            <textarea class="form-control" id="additionalBudgetInfo" name="additionalBudgetInfo" rows="3" placeholder="Any specific budget considerations or flexibility?"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Step 4: Contact Information -->
-                            <div class="form-step" data-step="4">
-                                <h3 class="step-title">How can we reach you?</h3>
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="firstName" class="form-label">First Name *</label>
-                                            <input type="text" class="form-control" id="firstName" name="firstName" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="lastName" class="form-label">Last Name *</label>
-                                            <input type="text" class="form-control" id="lastName" name="lastName" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="email" class="form-label">Email Address *</label>
-                                            <input type="email" class="form-control" id="email" name="email" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="phone" class="form-label">Phone Number</label>
-                                            <input type="tel" class="form-control" id="phone" name="phone">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="currentLocation" class="form-label">Current Location *</label>
-                                            <input type="text" class="form-control" id="currentLocation" name="currentLocation" placeholder="City, Country" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="urgency" class="form-label">How urgent is your search?</label>
-                                            <select class="form-control" id="urgency" name="urgency">
-                                                <option value="">Select urgency level</option>
-                                                <option value="immediate">Immediate (within 2 weeks)</option>
-                                                <option value="soon">Soon (within 1 month)</option>
-                                                <option value="planning">Planning (1-3 months)</option>
-                                                <option value="researching">Just researching (3+ months)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="additionalRequirements" class="form-label">Additional Requirements or Questions</label>
-                                            <textarea class="form-control" id="additionalRequirements" name="additionalRequirements" rows="4" placeholder="Tell us about any special requirements, concerns, or questions you have about your property search..."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="1" id="agreeTerms" name="agreeTerms" required>
-                                                <label class="form-check-label" for="agreeTerms">
-                                                    I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a> *
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="1" id="marketingConsent" name="marketingConsent">
-                                                <label class="form-check-label" for="marketingConsent">
-                                                    I'd like to receive property updates and relocation tips via email
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Form Navigation -->
-                            <div class="form-navigation">
-                                <button type="button" class="btn btn-outline-secondary btn-lg" id="prevBtn" style="display: none;">
-                                    <i class="fas fa-arrow-left me-2"></i>
-                                    Previous
-                                </button>
-                                <button type="button" class="btn btn-primary btn-lg" id="nextBtn">
-                                    Next
-                                    <i class="fas fa-arrow-right ms-2"></i>
-                                </button>
-                                <button type="submit" class="btn btn-success btn-lg" id="submitBtn" style="display: none;">
-                                    <i class="fas fa-search me-2"></i>
-                                    Find My Property
-                                </button>
-                            </div>
-                        </form>
+
+                        <div class="forminator-integration">
+                            <?php echo do_shortcode('[forminator_form id="387"]'); ?>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -1405,117 +1117,115 @@ get_header();
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Multi-step form functionality
+    // Multi-step form functionality (legacy form only)
     const form = document.getElementById('propertySearchForm');
-    const steps = document.querySelectorAll('.form-step');
-    const progressSteps = document.querySelectorAll('.progress-steps .step');
-    const progressFill = document.querySelector('.progress-fill');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    let currentStep = 1;
-    const totalSteps = steps.length;
-    
-    function updateProgress() {
-        const progress = (currentStep / totalSteps) * 100;
-        progressFill.style.width = progress + '%';
-        
-        progressSteps.forEach((step, index) => {
-            step.classList.remove('active', 'completed');
-            if (index + 1 < currentStep) {
-                step.classList.add('completed');
-            } else if (index + 1 === currentStep) {
-                step.classList.add('active');
+    if (form) {
+        const steps = document.querySelectorAll('.form-step');
+        const progressSteps = document.querySelectorAll('.progress-steps .step');
+        const progressFill = document.querySelector('.progress-fill');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        let currentStep = 1;
+        const totalSteps = steps.length;
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+            }
+            progressSteps.forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index + 1 < currentStep) {
+                    step.classList.add('completed');
+                } else if (index + 1 === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        function showStep(step) {
+            steps.forEach(s => s.classList.remove('active'));
+            if (steps[step - 1]) {
+                steps[step - 1].classList.add('active');
+            }
+            if (prevBtn) prevBtn.style.display = step === 1 ? 'none' : 'inline-block';
+            if (nextBtn) nextBtn.style.display = step === totalSteps ? 'none' : 'inline-block';
+            if (submitBtn) submitBtn.style.display = step === totalSteps ? 'inline-block' : 'none';
+            updateProgress();
+        }
+
+        function validateStep(step) {
+            const currentStepElement = steps[step - 1];
+            if (!currentStepElement) return true;
+            const requiredFields = currentStepElement.querySelectorAll('[required]');
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    field.style.borderColor = 'var(--danger-color, #dc3545)';
+                    setTimeout(() => {
+                        field.style.borderColor = '';
+                    }, 3000);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        nextBtn && nextBtn.addEventListener('click', function() {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
             }
         });
-    }
-    
-    function showStep(step) {
-        steps.forEach(s => s.classList.remove('active'));
-        steps[step - 1].classList.add('active');
-        
-        // Update buttons
-        prevBtn.style.display = step === 1 ? 'none' : 'inline-block';
-        nextBtn.style.display = step === totalSteps ? 'none' : 'inline-block';
-        submitBtn.style.display = step === totalSteps ? 'inline-block' : 'none';
-        
-        updateProgress();
-    }
-    
-    function validateStep(step) {
-        const currentStepElement = steps[step - 1];
-        const requiredFields = currentStepElement.querySelectorAll('[required]');
-        
-        for (let field of requiredFields) {
-            if (!field.value.trim()) {
-                field.focus();
-                field.style.borderColor = 'var(--danger-color, #dc3545)';
-                setTimeout(() => {
-                    field.style.borderColor = '';
-                }, 3000);
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    nextBtn.addEventListener('click', function() {
-        if (validateStep(currentStep)) {
-            if (currentStep < totalSteps) {
-                currentStep++;
+
+        prevBtn && prevBtn.addEventListener('click', function() {
+            if (currentStep > 1) {
+                currentStep--;
                 showStep(currentStep);
             }
-        }
-    });
-    
-    prevBtn.addEventListener('click', function() {
-        if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
-        }
-    });
-    
-    // Form submission
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (!validateStep(currentStep)) {
-            return;
-        }
-        
-        // Show loading state
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
-        submitBtn.disabled = true;
-
-        const formData = new FormData(form);
-        formData.append('action', 'submit_realtor_form');
-        formData.append('nonce', (window.smAjax && smAjax.nonce) ? smAjax.nonce : '');
-
-        fetch((window.smAjax && smAjax.ajax_url) ? smAjax.ajax_url : '/wp-admin/admin-ajax.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(r => r.json())
-        .then(resp => {
-            if (resp && resp.success) {
-                alert('Thank you for your property search request! We\'ll match you with a qualified realtor within 24 hours.');
-                form.reset();
-                currentStep = 1;
-                showStep(currentStep);
-            } else {
-                alert((resp && resp.data && resp.data.message) ? resp.data.message : 'Sorry, there was an error. Please try again.');
-            }
-        })
-        .catch(() => alert('Sorry, there was an error sending your request. Please try again.'))
-        .finally(() => {
-            submitBtn.innerHTML = '<i class="fas fa-search me-2"></i>Find My Property';
-            submitBtn.disabled = false;
         });
-    });
-    
-    // Initialize form
-    showStep(currentStep);
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!validateStep(currentStep)) {
+                return;
+            }
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+                submitBtn.disabled = true;
+            }
+            const formData = new FormData(form);
+            formData.append('action', 'submit_realtor_form');
+            formData.append('nonce', (window.smAjax && smAjax.nonce) ? smAjax.nonce : '');
+            fetch((window.smAjax && smAjax.ajax_url) ? smAjax.ajax_url : '/wp-admin/admin-ajax.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(r => r.json())
+            .then(resp => {
+                if (resp && resp.success) {
+                    alert('Thank you for your property search request! We\'ll match you with a qualified realtor within 24 hours.');
+                    form.reset();
+                    currentStep = 1;
+                    showStep(currentStep);
+                } else {
+                    alert((resp && resp.data && resp.data.message) ? resp.data.message : 'Sorry, there was an error. Please try again.');
+                }
+            })
+            .catch(() => alert('Sorry, there was an error sending your request. Please try again.'))
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<i class="fas fa-search me-2"></i>Find My Property';
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+
+        showStep(currentStep);
+    }
     
     // Scroll animations
     const observerOptions = {

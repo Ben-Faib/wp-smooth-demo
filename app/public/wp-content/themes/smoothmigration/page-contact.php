@@ -47,15 +47,15 @@ get_header();
                                 <i class="fas fa-paper-plane me-2"></i>
                                 Send Message
                             </a>
-                            <a href="tel:+16042837626" class="btn btn-outline-light btn-lg">
+                            <a href="tel:+16042837626" class="btn btn-outline-light btn-lg" aria-label="Call us now at 604 283 7626">
                                 <i class="fas fa-phone me-2"></i>
-                                604 283 7626
+                                Call Now!
                             </a>
                         </div>
                         
                         <div class="contact-stats mt-4">
                             <div class="stat-item">
-                                <div class="stat-number">3,200+</div>
+                                <div class="stat-number">2,500+</div>
                                 <div class="stat-label">Clients Helped</div>
                             </div>
                             <div class="stat-item">
@@ -63,7 +63,7 @@ get_header();
                                 <div class="stat-label">Satisfaction Rate</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">50+</div>
+                                <div class="stat-number">5+</div>
                                 <div class="stat-label">Countries</div>
                             </div>
                         </div>
@@ -124,9 +124,9 @@ get_header();
                         <h3 class="method-title">Email Us</h3>
                         <p class="method-description">Send us a detailed message and we'll respond within 24 hours.</p>
                         <div class="method-action">
-                            <a href="mailto:hello@smoothmigration.com" class="btn btn-primary">
+                            <a href="mailto:contact@smoothmigration.net" class="btn btn-primary" aria-label="Email us at contact@smoothmigration.net">
                                 <i class="fas fa-envelope me-2"></i>
-                                hello@smoothmigration.com
+                                Email Us!
                             </a>
                         </div>
                     </div>
@@ -140,9 +140,9 @@ get_header();
                         <h3 class="method-title">Call Us</h3>
                         <p class="method-description">Speak directly with our relocation experts for immediate assistance.</p>
                         <div class="method-action">
-                            <a href="tel:+16042837626" class="btn btn-secondary">
+                            <a href="tel:+16042837626" class="btn btn-secondary" aria-label="Call us now at 604 283 7626">
                                 <i class="fas fa-phone me-2"></i>
-                                604 283 7626
+                                Call Now!
                             </a>
                         </div>
                         <div class="business-hours mt-2">
@@ -251,7 +251,7 @@ get_header();
                                 </div>
                                 <div class="feature-content">
                                     <h4>Global Experience</h4>
-                                    <p>Extensive experience across 50+ countries and diverse cultures.</p>
+                                    <p>Extensive experience across 5+ countries and diverse cultures.</p>
                                 </div>
                             </div>
                             
@@ -347,7 +347,7 @@ get_header();
                                     <strong>25</strong><span>Team Members</span>
                                 </div>
                                 <div class="team-stat">
-                                    <strong>500+</strong><span>Global Partners</span>
+                                    <strong>50+</strong><span>Global Partners</span>
                                 </div>
                             </div>
                         </div>
@@ -369,13 +369,13 @@ get_header();
                         </h4>
                         <p class="contact-text">Get in touch with our team for any relocation questions or assistance:</p>
                         <div class="contact-actions">
-                            <a href="tel:+16042837626" class="btn btn-primary me-3">
+                            <a href="tel:+16042837626" class="btn btn-primary me-3" aria-label="Call us now at 604 283 7626">
                                 <i class="fas fa-phone me-2"></i>
-                                Call: 604 283 7626
+                                Call Now!
                             </a>
-                            <a href="mailto:hello@smooth.com" class="btn btn-outline-primary">
+                            <a href="mailto:contact@smoothmigration.net" class="btn btn-outline-primary" aria-label="Email us at contact@smoothmigration.net">
                                 <i class="fas fa-envelope me-2"></i>
-                                hello@smooth.com
+                                Email Us!
                             </a>
                         </div>
                         <small class="text-muted d-block mt-2">
@@ -394,6 +394,9 @@ get_header();
 .contact-hero {
     min-height: 100vh;
 }
+
+/* Prevent decorative elements from being clipped */
+.contact-hero.overflow-hidden { overflow: visible !important; }
 
 .hero-pattern {
     background: 
@@ -444,10 +447,12 @@ get_header();
     display: flex;
     gap: 3rem;
     margin-top: 3rem;
+    flex-wrap: wrap;
 }
 
 .stat-item {
     text-align: center;
+    min-width: 140px;
 }
 
 .stat-number {
@@ -456,6 +461,7 @@ get_header();
     color: var(--accent-color);
     line-height: 1;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
 }
 
 .stat-label {
@@ -575,8 +581,10 @@ get_header();
     font-size: 0.9rem;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
-    white-space: nowrap;
+    white-space: normal;
     min-width: 200px;
+    max-width: 100%;
+    width: 100%;
 }
 
 .business-hours {

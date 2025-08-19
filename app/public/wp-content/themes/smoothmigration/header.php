@@ -96,11 +96,11 @@
                             <li><a class="dropdown-item" href="/services">All Services</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/realtor-locator">Realtor Locator</a></li>
-                            <li><a class="dropdown-item" href="/services#money-services">Money Services</a></li>
-                            <li><a class="dropdown-item" href="/services#phone-plans">Phone Plans</a></li>
-                            <li><a class="dropdown-item" href="/services#vehicles">Vehicle Services</a></li>
-                            <li><a class="dropdown-item" href="/services#international-moving">International Moving</a></li>
-                            <li><a class="dropdown-item" href="/services#insurance">Insurance</a></li>
+                            <li><a class="dropdown-item" href="/service-type/money-services/">Money Services</a></li>
+                            <li><a class="dropdown-item" href="/service-type/telecommunication/">Phone Plans</a></li>
+                            <li><a class="dropdown-item" href="/service-type/vehicles/">Vehicle Services</a></li>
+                            <li><a class="dropdown-item" href="/service-type/international-moving/">International Moving</a></li>
+                            <li><a class="dropdown-item" href="/service-type/insurance/">Insurance</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -147,19 +147,19 @@
             <a class="nav-link small" href="/realtor-locator">→ Realtor Locator</a>
         </li>
         <li class="nav-item ps-3">
-            <a class="nav-link small" href="/services#money-services">→ Money Services</a>
+            <a class="nav-link small" href="/service-type/money-services/">→ Money Services</a>
         </li>
         <li class="nav-item ps-3">
-            <a class="nav-link small" href="/services#phone-plans">→ Phone Plans</a>
+            <a class="nav-link small" href="/service-type/telecommunication/">→ Phone Plans</a>
         </li>
         <li class="nav-item ps-3">
-            <a class="nav-link small" href="/services#vehicles">→ Vehicle Services</a>
+            <a class="nav-link small" href="/service-type/vehicles/">→ Vehicle Services</a>
         </li>
         <li class="nav-item ps-3">
-            <a class="nav-link small" href="/services#international-moving">→ International Moving</a>
+            <a class="nav-link small" href="/service-type/international-moving/">→ International Moving</a>
         </li>
         <li class="nav-item ps-3">
-            <a class="nav-link small" href="/services#insurance">→ Insurance</a>
+            <a class="nav-link small" href="/service-type/insurance/">→ Insurance</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
