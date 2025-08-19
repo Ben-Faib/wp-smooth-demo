@@ -48,7 +48,6 @@ get_header();
                             <a href="#third-party" class="nav-link">Third-Party Services</a>
                             <a href="#liability" class="nav-link">Liability Limitations</a>
                             <a href="#professional-advice" class="nav-link">Professional Advice</a>
-                            <a href="#contact-legal" class="nav-link">Legal Contact</a>
                         </div>
                     </nav>
                 </div>
@@ -309,86 +308,6 @@ get_header();
                             </div>
                         </div>
 
-                        <!-- Contact Information -->
-                        <div id="contact-legal" class="legal-section contact-section">
-                            <div class="section-header">
-                                <i class="fas fa-envelope"></i>
-                                <h2>Legal Contact Information</h2>
-                            </div>
-                            <div class="section-content">
-                                <p>For legal inquiries, questions about this disclaimer, or to report concerns:</p>
-                                
-                                <div class="contact-info">
-                                    <div class="contact-method">
-                                        <i class="fas fa-envelope"></i>
-                                        <div>
-                                            <strong>Legal Department</strong>
-                                            <p>legal@smoothmigration.global</p>
-                                        </div>
-                                    </div>
-                                    <div class="contact-method">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <div>
-                                            <strong>Mailing Address</strong>
-                                            <p>Smooth Migration Global<br>Legal Department<br>123 Business District<br>Singapore 018956</p>
-                                        </div>
-                                    </div>
-                                    <div class="contact-method">
-                                        <i class="fas fa-clock"></i>
-                                        <div>
-                                            <strong>Response Time</strong>
-                                            <p>We aim to respond to legal inquiries within 5-7 business days</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="legal-footer">
-                                    <p><strong>Governing Law:</strong> This disclaimer is governed by the laws of Singapore.</p>
-                                    <p><strong>Dispute Resolution:</strong> Any disputes will be resolved through arbitration in Singapore.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Need Help CTA -->
-    <section class="legal-cta py-6 bg-light">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <div class="cta-content">
-                        <h2 class="display-5 fw-bold mb-3">Questions About Our Legal Terms?</h2>
-                        <p class="lead mb-4">Our team is here to provide clarification and address any concerns you may have about our services or legal policies.</p>
-                        <div class="cta-features d-flex flex-wrap gap-4">
-                            <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-user-tie text-primary me-2"></i>
-                                <span>Legal Clarity</span>
-                            </div>
-                            <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-shield-alt text-primary me-2"></i>
-                                <span>Transparent Terms</span>
-                            </div>
-                            <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-handshake text-primary me-2"></i>
-                                <span>Fair Practices</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <div class="cta-actions">
-                        <a href="/contact" class="btn btn-primary btn-lg mb-3 w-100">
-                            <i class="fas fa-comments me-2"></i>
-                            Contact Legal Team
-                        </a>
-                        <a href="/terms" class="btn btn-outline-primary w-100">
-                            <i class="fas fa-file-contract me-2"></i>
-                            Terms of Service
-                        </a>
                     </div>
                 </div>
             </div>

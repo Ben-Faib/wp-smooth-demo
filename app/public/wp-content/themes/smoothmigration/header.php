@@ -14,54 +14,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Top Bar with Flags -->
-<div class="top-bar bg-light border-bottom">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center py-2">
-            <div class="top-bar-left">
-                <small class="text-muted">
-                    <i class="fas fa-globe me-1"></i>
-                    Select your Relocation Destination:
-                </small>
-            </div>
-            <div class="top-bar-right">
-                <?php
-                // Country flags menu
-                if ( has_nav_menu( 'country_flags' ) ) {
-                    wp_nav_menu( array(
-                        'theme_location' => 'country_flags',
-                        'container'      => false,
-                        'menu_class'     => 'country-flags-menu d-flex gap-2 mb-0',
-                        'depth'          => 1,
-                        'fallback_cb'    => false,
-                    ) );
-                } else {
-                    // Fallback flags if menu not set
-                    ?>
-                    <div class="country-flags-menu d-flex gap-2">
-                        <a href="https://www.smoothmigration.ca" class="flag-link" title="Canada" aria-label="Canada">
-                            <img src="https://flagcdn.com/24x18/ca.png" alt="Canada" width="24" height="18">
-                        </a>
-                        <a href="https://www.smoothmigration.net" class="flag-link" title="United States" aria-label="United States">
-                            <img src="https://flagcdn.com/24x18/us.png" alt="USA" width="24" height="18">
-                        </a>
-                        <a href="https://www.smoothmigration.co.uk" class="flag-link" title="United Kingdom" aria-label="United Kingdom">
-                            <img src="https://flagcdn.com/24x18/gb.png" alt="UK" width="24" height="18">
-                        </a>
-                        <a href="https://www.smoothmigration.com.au" class="flag-link" title="Australia" aria-label="Australia">
-                            <img src="https://flagcdn.com/24x18/au.png" alt="Australia" width="24" height="18">
-                        </a>
-                        <a href="https://www.smoothmigration.co.za" class="flag-link" title="South Africa" aria-label="South Africa">
-                            <img src="https://flagcdn.com/24x18/za.png" alt="South Africa" width="24" height="18">
-                        </a>
-                    </div>
-                    <?php
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Top bar removed -->
 
 <!-- Main Header -->
 <header id="masthead" class="site-header sticky-header" role="banner">
