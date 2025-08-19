@@ -3,6 +3,7 @@
 	const DATA = window.SM_LOCALE_DATA;
 	const REGIONS = DATA.regions;
 	const CURRENT_REGION = DATA.currentRegion;
+	const DEBUG = !!DATA.debugEnabled;
 
 	const qs = new URLSearchParams(location.search);
 	if (qs.has('resetLocale')) {
@@ -41,19 +42,21 @@
 	const $grid = document.getElementById('sm-region-grid');
 	const $langs = document.getElementById('sm-lang-list');
 	const $go = document.getElementById('sm-go');
+	let lastFocused = null;
 
 	let state = restorePref() || { region: CURRENT_REGION, lang: defaultLangFor(CURRENT_REGION) };
 	refreshPill();
 
-	// Populate Regions
+	// Populate Regions as compact flag buttons
 	const orderedKeys = ['us','ca','uk','au','za'].filter(k => REGIONS[k]);
 	orderedKeys.forEach(k => {
 		const b = document.createElement('button');
 		b.type = 'button';
-		b.className = 'sm-region';
-		b.textContent = REGIONS[k].label;
+		b.className = 'sm-region sm-region-flag';
 		b.setAttribute('data-region', k);
 		b.setAttribute('aria-pressed', k === state.region ? 'true' : 'false');
+		b.setAttribute('aria-label', REGIONS[k].label);
+		b.innerHTML = flagEmojiFor(k);
 		b.addEventListener('click', () => { state.region = k; state.lang = defaultLangFor(k); refreshRegions(); refreshLangs(); refreshPill(); });
 		$grid.appendChild(b);
 	});
@@ -67,7 +70,11 @@
 	// Events
 	$pill && $pill.addEventListener('click', openSheet);
 	$sheet && $sheet.addEventListener('click', (e) => { if (e.target.dataset.close) closeSheet(); });
-	document.addEventListener('keydown', (e) => { if ($sheet && $sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') closeSheet(); });
+	document.addEventListener('keydown', (e) => {
+		if ($sheet && $sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') closeSheet();
+		// focus trap
+		if ($sheet && $sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Tab') trapFocus(e);
+	});
 	$go && $go.addEventListener('click', () => {
 		savePref();
 		navigateTo(state.region, normalizedLang(state.region, state.lang));
@@ -120,14 +127,30 @@
 	function refreshPill() {
 		const r = REGIONS[state.region];
 		const langLabel = (r.languages && r.languages[state.lang]) || 'English';
-		$pillText.textContent = `${r.label} · ${langLabel}`;
+		$pillText.textContent = `${flagEmojiFor(state.region)} ${langLabel}`;
 	}
 	function openSheet() {
 		refreshPill();
 		$sheet.setAttribute('aria-hidden', 'false');
+		$pill && $pill.setAttribute('aria-expanded', 'true');
+		lastFocused = document.activeElement;
 		setTimeout(() => { try { $panel && $panel.focus(); } catch(e){} }, 0);
 	}
-	function closeSheet() { $sheet.setAttribute('aria-hidden', 'true'); }
+	function closeSheet() {
+		$sheet.setAttribute('aria-hidden', 'true');
+		$pill && $pill.setAttribute('aria-expanded', 'false');
+		try { lastFocused && lastFocused.focus(); } catch(e){}
+	}
+
+	function trapFocus(e) {
+		const focusable = $sheet.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+		const nodes = Array.from(focusable).filter(el => !el.hasAttribute('disabled'));
+		if (!nodes.length) return;
+		const first = nodes[0];
+		const last = nodes[nodes.length - 1];
+		if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+		else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+	}
 
 	function restorePref() {
 		try {
@@ -153,7 +176,7 @@
 		} else {
 			url.searchParams.delete('lang');
 		}
-		['localePrompt','resetLocale','feature.locale','region'].forEach(k => url.searchParams.delete(k));
+		['localePrompt','resetLocale','feature.locale','region','localeDebug'].forEach(k => url.searchParams.delete(k));
 
 		window.location.assign(url.toString());
 	}
@@ -193,6 +216,39 @@
 			if (l.includes('en-za')) return { region: 'za', lang: 'en-ZA' };
 		}
 		return null;
+	}
+
+	function flagEmojiFor(region) {
+		switch (region) {
+			case 'us': return '🇺🇸';
+			case 'ca': return '🇨🇦';
+			case 'uk': return '🇬🇧';
+			case 'au': return '🇦🇺';
+			case 'za': return '🇿🇦';
+			default: return '🌐';
+		}
+	}
+
+	// Debug overlay (optional)
+	if (DEBUG) {
+		const box = document.createElement('div');
+		box.style.position = 'fixed';
+		box.style.left = '14px';
+		box.style.bottom = '14px';
+		box.style.zIndex = '2147483001';
+		box.style.padding = '8px 10px';
+		box.style.font = '12px/1.25 system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+		box.style.background = 'rgba(0,0,0,.6)';
+		box.style.color = '#fff';
+		box.style.borderRadius = '10px';
+		const info = {
+			currentRegion: CURRENT_REGION,
+			inferred: inferRegionFromAcceptLanguage(),
+			state,
+			allowed: DATA.allowedDomains
+		};
+		box.textContent = 'Locale Debug: ' + JSON.stringify(info);
+		document.body.appendChild(box);
 	}
 })();
 

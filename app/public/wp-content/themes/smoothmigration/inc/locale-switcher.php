@@ -20,38 +20,40 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 				'domain'    => 'smoothmigration.net',
 				'label'     => 'United States',
 				'hreflang'  => array( 'en-US' ),
-				'languages' => array( 'en' => 'English' ),
+				'languages' => array( 'en' => 'English', 'fr' => 'Français', 'es' => 'Español', 'de' => 'Deutsch' ),
 			),
 			'ca' => array(
 				'domain'    => 'smoothmigration.ca',
 				'label'     => 'Canada',
 				'hreflang'  => array( 'en-CA', 'fr-CA' ),
-				'languages' => array( 'en' => 'English', 'fr' => 'Français' ),
+				'languages' => array( 'en' => 'English', 'fr' => 'Français', 'es' => 'Español', 'de' => 'Deutsch' ),
 			),
 			'uk' => array(
 				'domain'    => 'smoothmigration.co.uk',
 				'label'     => 'United Kingdom',
 				'hreflang'  => array( 'en-GB' ),
-				'languages' => array( 'en-GB' => 'English (UK)' ),
+				'languages' => array( 'en-GB' => 'English (UK)', 'fr' => 'Français', 'es' => 'Español', 'de' => 'Deutsch' ),
 			),
 			'au' => array(
 				'domain'    => 'smoothmigration.com.au',
 				'label'     => 'Australia',
 				'hreflang'  => array( 'en-AU' ),
-				'languages' => array( 'en-AU' => 'English (AU)' ),
+				'languages' => array( 'en-AU' => 'English (AU)', 'fr' => 'Français', 'es' => 'Español', 'de' => 'Deutsch' ),
 			),
 			'za' => array(
 				'domain'    => 'smoothmigration.co.za',
 				'label'     => 'South Africa',
 				'hreflang'  => array( 'en-ZA' ),
-				'languages' => array( 'en-ZA' => 'English (ZA)' ),
+				'languages' => array( 'en-ZA' => 'English (ZA)', 'fr' => 'Français', 'es' => 'Español', 'de' => 'Deutsch' ),
 			),
 		);
 
 		public static function init() {
 			add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_assets' ) );
 			add_action( 'wp_head', array( __CLASS__, 'output_hreflang' ), 1 );
+			add_action( 'wp_head', array( __CLASS__, 'output_og_locale' ), 2 );
 			add_action( 'wp_body_open', array( __CLASS__, 'render_ui' ) );
+			add_action( 'send_headers', array( __CLASS__, 'output_hreflang_headers' ) );
 		}
 
 		private static function allowed_domains() {
@@ -70,18 +72,25 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 		}
 
 		public static function enqueue_assets() {
-			$ver  = defined( 'SMOOTHMIGRATION_VERSION' ) ? SMOOTHMIGRATION_VERSION : '1.0.0';
-			$base = get_template_directory_uri();
-			wp_enqueue_style( 'sm-locale', $base . '/assets/css/locale.css', array(), $ver );
-			wp_enqueue_script( 'sm-locale', $base . '/assets/js/locale.js', array(), $ver, true );
+			$base_uri = get_template_directory_uri();
+			$base_dir = get_template_directory();
+			$css_rel  = '/assets/css/locale.css';
+			$js_rel   = '/assets/js/locale.js';
+			$css_ver  = @filemtime( $base_dir . $css_rel ) ?: ( defined( 'SMOOTHMIGRATION_VERSION' ) ? SMOOTHMIGRATION_VERSION : '1.0.0' );
+			$js_ver   = @filemtime( $base_dir . $js_rel ) ?: ( defined( 'SMOOTHMIGRATION_VERSION' ) ? SMOOTHMIGRATION_VERSION : '1.0.0' );
+
+			wp_enqueue_style( 'sm-locale', $base_uri . $css_rel, array(), $css_ver );
+			wp_enqueue_script( 'sm-locale', $base_uri . $js_rel, array(), $js_ver, true );
 
 			$data = array(
-				'regions'        => self::public_regions(),
-				'currentRegion'  => self::region_from_host(),
-				'currentHost'    => isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : '',
-				'currentPath'    => isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '/',
-				'allowedDomains' => self::allowed_domains(),
-				'xDefaultDomain' => self::$regions['us']['domain'],
+				'regions'           => self::public_regions(),
+				'currentRegion'     => self::region_from_host(),
+				'currentHost'       => isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : '',
+				'currentPath'       => isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '/',
+				'allowedDomains'    => self::allowed_domains(),
+				'xDefaultDomain'    => self::$regions['us']['domain'],
+				'debugEnabled'      => self::is_debug_enabled(),
+				'langInPath'        => (bool) apply_filters( 'sm_locale_lang_in_path', false ),
 			);
 			wp_localize_script( 'sm-locale', 'SM_LOCALE_DATA', $data );
 		}
@@ -100,12 +109,14 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 		}
 
 		public static function output_hreflang() {
+			$emit = self::should_emit_hreflang();
+			if ( ! $emit ) return;
 			$req     = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '/';
 			$current = wp_parse_url( $req );
 			$path    = isset( $current['path'] ) ? $current['path'] : '/';
 			$query   = array();
 			if ( ! empty( $current['query'] ) ) parse_str( $current['query'], $query );
-			unset( $query['localePrompt'], $query['resetLocale'], $query['feature.locale'], $query['region'] );
+			unset( $query['localePrompt'], $query['resetLocale'], $query['feature.locale'], $query['region'], $query['localeDebug'] );
 
 			foreach ( self::$regions as $key => $cfg ) {
 				$domain = $cfg['domain'];
@@ -126,6 +137,65 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 			echo '<link rel="alternate" hreflang="x-default" href="' . esc_url( $xd ) . '" />' . "\n";
 		}
 
+		public static function output_og_locale() {
+			if ( ! self::should_emit_og_locale() ) return;
+			// Open Graph locale tags
+			$current_region = self::region_from_host();
+			$hreflang = isset( self::$regions[ $current_region ]['hreflang'][0] ) ? self::$regions[ $current_region ]['hreflang'][0] : 'en-US';
+			echo '<meta property="og:locale" content="' . esc_attr( $hreflang ) . '" />' . "\n";
+			foreach ( self::$regions as $key => $cfg ) {
+				foreach ( $cfg['hreflang'] as $hl ) {
+					if ( $hl === $hreflang ) continue;
+					echo '<meta property="og:locale:alternate" content="' . esc_attr( $hl ) . '" />' . "\n";
+				}
+			}
+		}
+
+		public static function output_hreflang_headers() {
+			$emit_headers = (bool) apply_filters( 'sm_locale_emit_hreflang_headers', false );
+			if ( ! $emit_headers || headers_sent() ) return;
+			$req     = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '/';
+			$current = wp_parse_url( $req );
+			$path    = isset( $current['path'] ) ? $current['path'] : '/';
+			$query   = array();
+			if ( ! empty( $current['query'] ) ) parse_str( $current['query'], $query );
+			unset( $query['localePrompt'], $query['resetLocale'], $query['feature.locale'], $query['region'], $query['localeDebug'] );
+
+			foreach ( self::$regions as $key => $cfg ) {
+				$domain = $cfg['domain'];
+				foreach ( $cfg['hreflang'] as $hl ) {
+					$q = $query;
+					if ( $key === 'ca' && strtolower( $hl ) === 'fr-ca' ) {
+						$q['lang'] = 'fr';
+					} else {
+						unset( $q['lang'] );
+					}
+					$url = 'https://' . $domain . $path;
+					if ( ! empty( $q ) ) $url .= '?' . http_build_query( $q );
+					header( sprintf( 'Link: <%s>; rel="alternate"; hreflang="%s"', esc_url_raw( $url ), esc_attr( $hl ) ), false );
+				}
+			}
+			$xd = 'https://' . self::$regions['us']['domain'] . $path . ( ! empty( $query ) ? '?' . http_build_query( $query ) : '' );
+			header( sprintf( 'Link: <%s>; rel="alternate"; hreflang="x-default"', esc_url_raw( $xd ) ), false );
+		}
+
+		private static function should_emit_hreflang() {
+			$seo_plugin_present = defined( 'WPSEO_VERSION' ) || class_exists( '\\RankMath' ) || defined( 'RANK_MATH_VERSION' );
+			$default = $seo_plugin_present ? false : true;
+			return (bool) apply_filters( 'sm_locale_emit_hreflang', $default );
+		}
+
+		private static function should_emit_og_locale() {
+			$seo_plugin_present = defined( 'WPSEO_VERSION' ) || class_exists( '\\RankMath' ) || defined( 'RANK_MATH_VERSION' );
+			$default = $seo_plugin_present ? false : true;
+			return (bool) apply_filters( 'sm_locale_emit_og_locale', $default );
+		}
+
+		private static function is_debug_enabled() {
+			$qs_debug = isset( $_GET['localeDebug'] ) && $_GET['localeDebug'] === '1';
+			return (bool) apply_filters( 'sm_locale_debug_enabled', $qs_debug );
+		}
+
 		public static function render_ui() {
 			?>
 			<div id="sm-locale-root" class="sm-locale-root" aria-live="polite">
@@ -144,9 +214,9 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 
 				<div id="sm-locale-sheet" class="sm-sheet" role="dialog" aria-modal="true" aria-hidden="true">
 					<div class="sm-sheet-backdrop" data-close="1"></div>
-					<div class="sm-sheet-panel material" role="document" tabindex="-1">
+					<div class="sm-sheet-panel material" role="document" tabindex="-1" aria-labelledby="sm-sheet-title">
 						<header class="sm-sheet-header">
-							<h2 class="sm-sheet-title">Region &amp; Language</h2>
+							<h2 id="sm-sheet-title" class="sm-sheet-title">Region &amp; Language</h2>
 							<button class="sm-close" data-close="1" aria-label="Close">✕</button>
 						</header>
 						<div class="sm-sheet-body">
@@ -165,6 +235,29 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 						</footer>
 					</div>
 				</div>
+
+				<noscript>
+					<div class="sm-noscript-links">
+						<ul>
+							<?php
+							$req     = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '/';
+							$current = wp_parse_url( $req );
+							$path    = isset( $current['path'] ) ? $current['path'] : '/';
+							$query   = array();
+							if ( ! empty( $current['query'] ) ) parse_str( $current['query'], $query );
+							unset( $query['localePrompt'], $query['resetLocale'], $query['feature.locale'], $query['region'], $query['localeDebug'] );
+							foreach ( self::$regions as $key => $cfg ) {
+								$domain = $cfg['domain'];
+								$url = 'https://' . $domain . $path;
+								$qs = $query;
+								if ( $key === 'ca' ) { $qs['lang'] = 'en'; }
+								if ( ! empty( $qs ) ) $url .= '?' . http_build_query( $qs );
+								echo '<li><a href="' . esc_url( $url ) . '">' . esc_html( $cfg['label'] ) . '</a></li>';
+							}
+							?>
+						</ul>
+					</div>
+				</noscript>
 			</div>
 			<?php
 		}
