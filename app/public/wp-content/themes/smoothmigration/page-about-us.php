@@ -487,7 +487,7 @@ get_header();
         </div>
     </section>
 
-</main><!-- .site-main -->
+ </main><!-- .site-main -->
 
 <style>
 /* About Page Specific Styles */
@@ -510,8 +510,7 @@ get_header();
     border-radius: var(--border-radius-2xl);
     font-size: 0.9rem;
     font-weight: 600;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    /* blur removed for clarity */
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 

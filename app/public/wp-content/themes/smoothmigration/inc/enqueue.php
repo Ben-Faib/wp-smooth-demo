@@ -49,10 +49,7 @@ function smoothmigration_enqueue_assets() {
     // Custom theme JavaScript
     wp_enqueue_script( 'smoothmigration-js', get_template_directory_uri() . '/assets/js/theme.js', array( 'bootstrap' ), $ver, true );
 
-    // If front page, ensure Lordicon web component is available for animated icons
-    if ( is_front_page() ) {
-        wp_enqueue_script( 'lordicon' );
-    }
+    // Remove unconditional Lordicon enqueue; handled conditionally in icons.php when used
 
     // Global AJAX config (available site-wide)
     wp_localize_script( 'smoothmigration-js', 'smAjax', array(
@@ -62,14 +59,37 @@ function smoothmigration_enqueue_assets() {
 
     // Landing Page specific styles and scripts (only load on front page)
     if ( is_front_page() ) {
-        wp_enqueue_style( 'landing-page', get_template_directory_uri() . '/assets/css/landing-page.css', array( 'smoothmigration-style' ), $ver );
-        wp_enqueue_script( 'landing-page-js', get_template_directory_uri() . '/assets/js/landing-page.js', array( 'bootstrap', 'smoothmigration-js' ), $ver, true );
-        
-        // Pass data to landing page JavaScript
-        wp_localize_script( 'landing-page-js', 'smoothmigrationAjax', array(
-            'ajax_url' => admin_url( 'admin-ajax.php' ),
-            'nonce'    => wp_create_nonce( 'smoothmigration_contact_nonce' )
-        ) );
+        wp_enqueue_style( 'landing-page', get_template_directory_uri() . '/assets/css/landing-page.css', array( 'bootstrap', 'smoothmigration-style' ), $ver );
+        // Only enqueue and localize landing-page-js if it exists
+        $lp_js = get_template_directory() . '/assets/js/landing-page.js';
+        if ( file_exists( $lp_js ) ) {
+            wp_enqueue_script( 'landing-page-js', get_template_directory_uri() . '/assets/js/landing-page.js', array( 'bootstrap', 'smoothmigration-js' ), $ver, true );
+            wp_localize_script( 'landing-page-js', 'smoothmigrationAjax', array(
+                'ajax_url' => admin_url( 'admin-ajax.php' ),
+                'nonce'    => wp_create_nonce( 'smoothmigration_contact_nonce' )
+            ) );
+        }
+    }
+
+    // Page-specific styles extracted from inline <style> blocks
+    if ( is_page_template( 'page-contact.php' ) || is_page( 'contact' ) ) {
+        wp_enqueue_style( 'page-contact', get_template_directory_uri() . '/assets/css/page-contact.css', array( 'smoothmigration-style' ), $ver );
+    }
+    if ( is_page_template( 'page-services.php' ) || is_page( 'services' ) ) {
+        wp_enqueue_style( 'page-services', get_template_directory_uri() . '/assets/css/page-services.css', array( 'smoothmigration-style' ), $ver );
+    }
+    if ( is_page_template( 'page-ai-relocator.php' ) || is_page( 'ai-relocator' ) ) {
+        wp_enqueue_style( 'page-ai-relocator', get_template_directory_uri() . '/assets/css/page-ai-relocator.css', array( 'smoothmigration-style' ), $ver );
+    }
+    if ( is_page_template( 'page-faq.php' ) || is_page( 'faq' ) ) {
+        wp_enqueue_style( 'page-faq', get_template_directory_uri() . '/assets/css/page-faq.css', array( 'smoothmigration-style' ), $ver );
+    }
+    if ( is_page_template( 'page-about-us.php' ) || is_page( 'about-us' ) || is_page( 'about' ) ) {
+        wp_enqueue_style( 'page-about', get_template_directory_uri() . '/assets/css/page-about.css', array( 'smoothmigration-style' ), $ver );
+    }
+    // Fallback for default page template
+    if ( is_page() && ! is_page_template() ) {
+        wp_enqueue_style( 'page-default', get_template_directory_uri() . '/assets/css/page-default.css', array( 'smoothmigration-style' ), $ver );
     }
 
     // Quick View Assets (only load if the quick view modal is likely to be used)

@@ -2,6 +2,9 @@
  * Smooth Migration Theme JavaScript
  */
 
+// Hygge preview toggle via query param (?style=hygge)
+(function(){try{var p=new URLSearchParams(location.search);if(p.get('style')==='hygge'){document.documentElement.classList.add('hygge');}}catch(e){}})();
+
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -189,34 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Button ripple effect - Fixed to avoid conflicts
-    document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            // Skip ripple effect for loading or disabled buttons
-            if (this.classList.contains('loading') || this.disabled || this.classList.contains('btn-locked')) {
-                return;
-            }
-            
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            ripple.classList.add('ripple');
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                if (ripple.parentNode) {
-                    ripple.remove();
-                }
-            }, 600);
-        });
-    });
+    // Ripple effect removed for accessibility and calmer UI
 
     // Enhanced scroll animations
     const scrollElements = document.querySelectorAll('.animate-on-scroll');
