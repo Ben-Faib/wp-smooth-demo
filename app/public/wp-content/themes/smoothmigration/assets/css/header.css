@@ -39,7 +39,7 @@ body.header-scrolled .top-bar {
   border-bottom: 1px solid transparent;
   backdrop-filter: none; /* removed blur so hero colour shows cleanly */
   position: fixed; /* overlay hero */
-  top: 38px; /* Account for top bar */
+  top: var(--sm-topbar-height, 0px); /* dynamic top bar height (0 when absent) */
   z-index: 1020;
   transition: all 0.3s ease;
 }

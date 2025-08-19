@@ -23,17 +23,19 @@
 
 /* Pill */
 .sm-pill {
-	position: fixed; top: 14px; right: 14px;
+	position: fixed; top: calc(var(--sm-safe-top, 0px) + 14px); right: 14px;
 	padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px;
 	color: var(--text); font: 500 13px/1.2 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 	border: 0; cursor: pointer;
+	z-index: 1045;
 }
 .sm-pill-ico { font-size: 14px; }
 
 /* Suggestion chip */
 .sm-chip {
-	position: fixed; top: 54px; right: 14px; display: flex; gap: 10px; align-items: center;
+	position: fixed; top: calc(var(--sm-safe-top, 0px) + 54px); right: 14px; display: flex; gap: 10px; align-items: center;
 	padding: 10px 12px; color: var(--text);
+	z-index: 1045;
 }
 .sm-chip-actions { display: inline-flex; gap: 8px; }
 .sm-btn { border: 1px solid var(--glass-border); background: transparent; color: var(--text); border-radius: 10px; padding: 6px 10px; cursor: pointer; }
@@ -41,7 +43,7 @@
 
 /* Sheet */
 .sm-sheet[aria-hidden="true"] { display: none; }
-.sm-sheet { position: fixed; inset: 0; }
+.sm-sheet { position: fixed; inset: 0; z-index: 1050; }
 .sm-sheet-backdrop { position: absolute; inset: 0; background: var(--bg-dim); }
 .sm-sheet-panel {
 	position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);

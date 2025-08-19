@@ -9,6 +9,26 @@
 		try { localStorage.removeItem('smLocalePref'); localStorage.removeItem('smLocaleDismiss'); } catch(e){}
 	}
 
+	// Safe-area computation for fixed UI touching the top edge
+	function computeSafeTop() {
+		const adminBar = document.getElementById('wpadminbar');
+		const topBar = document.querySelector('.top-bar');
+		const adminBarH = adminBar ? adminBar.offsetHeight : 0;
+		// Consider top bar only when not translated offscreen
+		let topBarH = 0;
+		if (topBar) {
+			const cs = getComputedStyle(topBar);
+			const isHidden = cs.transform && cs.transform !== 'none';
+			topBarH = isHidden ? 0 : topBar.offsetHeight;
+		}
+		const total = adminBarH + topBarH;
+		document.documentElement.style.setProperty('--sm-safe-top', total + 'px');
+		document.documentElement.style.setProperty('--sm-topbar-height', (topBarH) + 'px');
+	}
+	computeSafeTop();
+	window.addEventListener('resize', computeSafeTop, { passive: true });
+	window.addEventListener('scroll', () => { window.requestAnimationFrame(computeSafeTop); }, { passive: true });
+
 	// Build UI
 	const $pill = document.getElementById('sm-locale-pill');
 	const $pillText = document.getElementById('sm-pill-text');
