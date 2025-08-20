@@ -548,7 +548,7 @@ get_header();
         </div>
     </section>
 
- </main><!-- .site-main -->
+</main><!-- .site-main -->
 
 <style>
 /* AI Relocator Page Specific Styles */
@@ -702,7 +702,8 @@ get_header();
     border-radius: var(--border-radius-2xl);
     font-size: 0.9rem;
     font-weight: 700;
-    /* blur removed for clarity */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 2px solid var(--accent-color);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -1240,7 +1241,8 @@ get_header();
     background: rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-2xl);
     padding: 0.5rem;
-    /* blur removed for clarity */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .early-access-form .form-control {

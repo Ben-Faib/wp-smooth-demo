@@ -624,7 +624,7 @@ get_header();
         </div>
     </section>
 
- </main><!-- .site-main -->
+</main><!-- .site-main -->
 
 <style>
 /* FAQ Page Specific Styles */
@@ -647,7 +647,8 @@ get_header();
     border-radius: var(--border-radius-2xl);
     font-size: 0.9rem;
     font-weight: 600;
-    /* blur removed for clarity */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -666,7 +667,8 @@ get_header();
     border-radius: var(--border-radius-2xl);
     padding: 1rem 3rem 1rem 1.5rem;
     font-size: 1.1rem;
-    /* blur removed for clarity */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: var(--text-dark);
 }
 
