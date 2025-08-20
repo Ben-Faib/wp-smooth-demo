@@ -200,5 +200,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+    
+    // Align dropdown pointer triangle directly under each toggle label
+    const dropdowns = document.querySelectorAll('.navbar-nav .dropdown');
+    function positionTriangle(dropdown) {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (!toggle || !menu) return;
+        const toggleRect = toggle.getBoundingClientRect();
+        const menuRect = menu.getBoundingClientRect();
+        let left = (toggleRect.left + toggleRect.width / 2) - menuRect.left;
+        // Clamp within menu bounds with 12px padding
+        left = Math.max(12, Math.min(left, Math.max(12, menuRect.width - 12)));
+        menu.style.setProperty('--triangle-left', left + 'px');
+    }
+    function positionAllTriangles() {
+        dropdowns.forEach(positionTriangle);
+    }
+    dropdowns.forEach(d => {
+        positionTriangle(d);
+        d.addEventListener('mouseenter', () => positionTriangle(d), { passive: true });
+        d.addEventListener('focusin', () => positionTriangle(d));
+    });
+    window.addEventListener('resize', positionAllTriangles, { passive: true });
 });
 </script>
