@@ -23,7 +23,7 @@
     right: 1rem;
     bottom: 0.35rem;
     height: 2px;
-    background: currentColor;
+    background: #f59e0b;
     opacity: 0;
     transform: scaleX(0);
     transform-origin: left;
@@ -76,7 +76,7 @@ body.header-scrolled .top-bar {
   position: fixed; /* overlay hero */
   top: var(--sm-topbar-height, 0px); /* dynamic top bar height (0 when absent) */
   z-index: 1020;
-  transition: all 0.3s ease;
+  transition: transform .28s ease, background-color .3s ease, box-shadow .3s ease;
 }
 
 /* When scrolled, header moves to top and hides top bar */
@@ -115,7 +115,7 @@ body.header-scrolled .top-bar {
 /* Brand & nav link colors for transparent header */
 .site-header .navbar-brand,
 .site-header .nav-link {
-  color: #ffffff !important;
+  color: var(--text-dark) !important;
 }
 
 .site-header.scrolled .navbar-brand {
@@ -129,11 +129,11 @@ body.header-scrolled .top-bar {
 /* Enhanced Header Styles - Fixed Logo Display */
 .site-header {
     position: fixed;
-    top: 0;
+    top: var(--sm-topbar-height, 0px);
     left: 0;
     right: 0;
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: transform .28s ease, background-color .3s ease, box-shadow .3s ease;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -202,7 +202,7 @@ body.header-scrolled .top-bar {
     background: white;
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-lg);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     padding: 0.5rem 0;
     margin-top: 0.5rem;
     min-width: 220px;
@@ -301,6 +301,38 @@ body.header-scrolled .top-bar {
     background: transparent !important;
 }
 
+/* Smooth hover dropdown for desktop */
+@media (min-width: 992px) {
+  /* Keep dropdown in the DOM for animation, hide visually until hover */
+  .navbar-nav .dropdown .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.98);
+    transform-origin: top center;
+    transition: opacity .2s cubic-bezier(.22,.61,.36,1), transform .2s cubic-bezier(.22,.61,.36,1), visibility .2s linear;
+    pointer-events: none;
+  }
+
+  .navbar-nav .dropdown:hover > .dropdown-menu,
+  .navbar-nav .dropdown:focus-within > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  /* Optional: rotate caret on hover */
+  .navbar-nav .dropdown-toggle::after {
+    transition: transform 0.2s ease;
+  }
+
+  .navbar-nav .dropdown:hover .dropdown-toggle::after,
+  .navbar-nav .dropdown:focus-within .dropdown-toggle::after {
+    transform: rotate(180deg);
+  }
+}
+
 /* Ensure content doesn't hide behind fixed header */
 body {
     padding-top: 0;
@@ -359,4 +391,77 @@ body {
     .navbar-nav .nav-link {
         transition: none;
     }
+    .navbar-nav .dropdown .dropdown-menu,
+    .navbar-nav .dropdown-toggle::after,
+    .navbar-nav .nav-link::before {
+        transition: none;
+    }
+}
+
+/* Performance hints */
+.top-bar,
+.site-header { will-change: transform; }
+
+/* Directional hide for header on scroll down */
+body.header-hide .site-header { transform: translateY(-100%); }
+
+/* Make desktop dropdowns more forgiving with a hover buffer
+   Use an invisible padding area to keep hover active while moving cursor down */
+@media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+  .navbar-nav .dropdown {
+    position: relative;
+  }
+  .navbar-nav .dropdown::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 14px; /* hover buffer between toggle and menu */
+  }
+}
+
+/* Dropdown menu visual tweaks: less rounded and add pointer triangle */
+.navbar-nav .dropdown-menu {
+  border-radius: 8px; /* less rounded */
+  position: absolute;
+}
+.navbar-nav .dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 24px; /* aligns under the toggle text area */
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+  filter: drop-shadow(0 -1px 0 var(--border-light));
+}
+
+/* Focus-visible rings for accessibility */
+.navbar-nav .nav-link:focus-visible,
+.dropdown-item:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Underline micro-interaction tweaks */
+.navbar-nav .nav-link::before {
+  bottom: 0.3rem;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: transform .24s cubic-bezier(.25,.8,.25,1), opacity .24s linear;
+}
+.navbar-nav .nav-link:hover::before,
+.navbar-nav .nav-link:focus-visible::before,
+.navbar-nav .nav-link.active::before {
+  opacity: .9;
+  transform: scaleX(1);
+}
+
+/* Hide desktop collapse on mobile since we use off-canvas */
+@media (max-width: 991.98px) {
+  #primary-menu { display: none !important; }
 }

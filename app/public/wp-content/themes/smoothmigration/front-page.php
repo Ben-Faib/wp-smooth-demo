@@ -60,10 +60,6 @@ get_header(); ?>
                             <span class="icon-glow me-2"><?php echo sm_icon('house', 'solid', ''); ?></span>
                             Get My Personal Moving Plan
                         </a>
-                        <a href="/contact" class="btn btn-secondary btn-lg cta-employer">
-                            <span class="icon-glow me-2"><?php echo sm_icon('building', 'solid', ''); ?></span>
-                            Relocate My Team
-                        </a>
                         <a href="/become-a-partner" class="btn btn-accent btn-lg cta-partner">
                             <span class="icon-glow me-2"><?php echo sm_icon('handshake', 'solid', ''); ?></span>
                             Become a Partner

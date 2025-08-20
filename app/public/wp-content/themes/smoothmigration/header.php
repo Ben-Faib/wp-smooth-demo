@@ -14,7 +14,12 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Top bar removed -->
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="container d-flex justify-content-end align-items-center py-1 small">
+        <?php if ( defined( 'SM_RLC_ENABLED' ) && SM_RLC_ENABLED ) { get_template_part( 'template-parts/region-language' ); } ?>
+    </div>
+    </div>
 
 <!-- Main Header -->
 <header id="masthead" class="site-header sticky-header" role="banner">
@@ -32,7 +37,7 @@
                 </a>
             <?php endif; ?>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primary-menu" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
@@ -40,6 +45,17 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/about-us">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                            <li><a class="dropdown-item" href="/faq">FAQ</a></li>
+                            <li><a class="dropdown-item" href="/guides">Guides</a></li>
+                            <li><a class="dropdown-item" href="/case-studies">Case Studies</a></li>
+                            <li><a class="dropdown-item" href="/how-it-works">How it works</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,27 +73,21 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/become-a-partner">Partner</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/ai-relocator">
                             <i class="fas fa-robot me-1"></i>
                             AI Relocator
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/become-a-partner">Want to Affiliate?</a>
+                    </li>
                 </ul>
                 
-                <!-- Get in Touch CTA Button -->
-                <div class="navbar-nav ms-3 d-flex align-items-center gap-2">
-                    <?php if ( defined( 'SM_RLC_ENABLED' ) && SM_RLC_ENABLED ) { get_template_part( 'template-parts/region-language' ); } ?>
-                    <a href="/contact" class="btn btn-primary btn-sm nav-cta-btn">
-                        <span class="icon-glow me-2"><?php echo sm_icon('comment-dots', 'solid', ''); ?></span>
-                        Get Started
-                    </a>
-                </div>
+                <!-- Right side utilities (reserved) -->
+                <div class="navbar-nav ms-3 d-flex align-items-center gap-2"></div>
             </div>
         </div>
     </nav>
@@ -93,6 +103,21 @@
     <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link" href="/about-us">About</a>
+        </li>
+        <li class="nav-item">
+            <span class="nav-link disabled">Resources</span>
+        </li>
+        <li class="nav-item ps-3">
+            <a class="nav-link small" href="/faq">→ FAQ</a>
+        </li>
+        <li class="nav-item ps-3">
+            <a class="nav-link small" href="/guides">→ Guides</a>
+        </li>
+        <li class="nav-item ps-3">
+            <a class="nav-link small" href="/case-studies">→ Case Studies</a>
+        </li>
+        <li class="nav-item ps-3">
+            <a class="nav-link small" href="/how-it-works">→ How it works</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/services">Services</a>
@@ -116,57 +141,64 @@
             <a class="nav-link small" href="/service-type/insurance/">→ Insurance</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/become-a-partner">Partner</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="/ai-relocator">
                 <i class="fas fa-robot me-1"></i>
                 AI Relocator
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/become-a-partner">Want to Affiliate?</a>
+        </li>
     </ul>
-    <div class="mt-3">
-        <a href="/contact" class="btn btn-primary btn-sm w-100">
-            <span class="icon-glow me-2"><?php echo sm_icon('comment-dots', 'solid', ''); ?></span>
-            Get Started
-        </a>
-    </div>
+    <!-- Removed mobile Get Started button -->
   </div>
 </div>
 
 <script>
-// Sticky header and top bar functionality
+// Sticky header and top bar functionality (class-based, direction-aware)
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('masthead');
     const navbar = header.querySelector('.navbar');
     const topBar = document.querySelector('.top-bar');
-    
-    function handleScroll() {
-        if (window.scrollY > 100) {
+
+    function setTopBarHeightVar() {
+        const height = topBar ? topBar.offsetHeight : 0;
+        document.documentElement.style.setProperty('--sm-topbar-height', height + 'px');
+    }
+    setTopBarHeightVar();
+    window.addEventListener('resize', setTopBarHeightVar, { passive: true });
+
+    let lastY = window.scrollY;
+    let lock = null; // null | 'up' | 'down'
+    function onScroll() {
+        const y = window.scrollY;
+
+        if (y > 100) {
             header.classList.add('scrolled');
             navbar.classList.add('navbar-scrolled');
             document.body.classList.add('header-scrolled');
-            // Hide top bar when scrolled
-            if (topBar) {
-                topBar.style.transform = 'translateY(-100%)';
-            }
         } else {
             header.classList.remove('scrolled');
             navbar.classList.remove('navbar-scrolled');
             document.body.classList.remove('header-scrolled');
-            // Show top bar when at top
-            if (topBar) {
-                topBar.style.transform = 'translateY(0)';
+        }
+
+        const delta = y - lastY;
+        if (Math.abs(delta) > 6) {
+            if (delta > 0 && lock !== 'down') {
+                document.body.classList.add('header-hide');
+                lock = 'down';
+            } else if (delta < 0 && lock !== 'up') {
+                document.body.classList.remove('header-hide');
+                lock = 'up';
             }
+            lastY = y;
         }
     }
-    
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial state
-    
-    // Removed forced body padding that caused a white gap under the header
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 });
-</script> 
+</script>
