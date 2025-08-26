@@ -115,11 +115,200 @@
   }
 }
 
+/* ========================================
+   Sprint 3.3 - Responsive Animation Scaling
+   ======================================== */
+
+/* Performance-based animation scaling */
+.low-performance .service-card,
+.low-performance .step-card,
+.low-performance .feature-item {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.low-performance .service-card:hover,
+.low-performance .step-card:hover,
+.low-performance .feature-item:hover {
+  transform: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Reduced animations for smaller screens */
+@media (max-width: 768px) {
+  /* Reduce complex animations on mobile */
+  .hero-landing::before {
+    animation-duration: 30s !important; /* Slower world map animation */
+  }
+  
+  .floating-cube {
+    animation-duration: 8s !important; /* Slower floating animations */
+  }
+  
+  /* Simplify card hover effects */
+  .service-card:hover,
+  .step-card:hover {
+    transform: translateY(-4px) !important; /* Reduce scale effect */
+  }
+  
+  /* Reduce parallax intensity */
+  .hero-landing {
+    --parallax-intensity: 15px; /* Half the original parallax effect */
+  }
+  
+  /* Simplify button micro-interactions */
+  .btn:hover {
+    transform: translateY(-1px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further reduce animations on small screens */
+  .hero-landing::before,
+  .floating-cube {
+    animation: none !important;
+  }
+  
+  .service-card:hover,
+  .step-card:hover,
+  .feature-item:hover {
+    transform: none !important;
+  }
+  
+  /* Disable parallax on very small screens */
+  .hero-landing {
+    --parallax-y: 0px !important;
+  }
+}
+
+/* Battery level optimizations */
+.low-battery .service-card,
+.low-battery .step-card,
+.low-battery .floating-cube,
+.low-battery .hero-landing::before {
+  animation: none !important;
+  transition: opacity 0.2s ease, background-color 0.2s ease !important;
+}
+
+.low-battery .btn:hover {
+  transform: none !important;
+}
+
+/* Reduced data mode */
+.reduced-data .hero-landing::before {
+  display: none !important; /* Hide decorative world map */
+}
+
+.reduced-data .floating-cube {
+  display: none !important; /* Hide decorative floating elements */
+}
+
+.reduced-data .service-card::before,
+.reduced-data .step-card::before {
+  display: none !important; /* Hide decorative gradients */
+}
+
+/* Connection-based optimizations */
+.slow-connection {
+  --animation-duration-multiplier: 2; /* Double animation durations */
+}
+
+.slow-connection .service-card {
+  transition-duration: calc(0.4s * var(--animation-duration-multiplier)) !important;
+}
+
+.slow-connection .btn {
+  transition-duration: calc(0.3s * var(--animation-duration-multiplier)) !important;
+}
+
+/* CPU performance optimizations */
+@media (max-width: 768px) and (max-resolution: 150dpi) {
+  /* Assume lower performance on low DPI mobile devices */
+  .service-card,
+  .step-card,
+  .feature-item {
+    will-change: auto !important; /* Remove will-change hints */
+  }
+  
+  /* Use opacity transitions instead of transforms */
+  .service-card:hover {
+    transform: none !important;
+    opacity: 0.9 !important;
+  }
+}
+
+/* Intersection Observer optimizations */
+.reduced-performance .animate-on-scroll {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* High contrast mode with reduced motion */
+@media (prefers-contrast: high) and (prefers-reduced-motion: reduce) {
+  .service-card:hover,
+  .step-card:hover,
+  .btn:hover {
+    background: #f0f0f0 !important;
+    color: #000 !important;
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
 /* High DPI Displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .trust-badge,
   .timeline-badge {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Optimize rendering for high DPI */
+  .service-card,
+  .step-card {
+    will-change: transform, opacity;
+  }
+}
+
+/* Ultra-wide screen optimizations */
+@media (min-width: 1920px) {
+  /* Increase animation scale for larger screens */
+  .service-card:hover {
+    transform: translateY(-12px) scale(1.03) !important;
+  }
+  
+  .hero-landing {
+    --parallax-intensity: 50px; /* Increase parallax on large screens */
+  }
+}
+
+/* Tablet landscape optimizations */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  /* Optimize for tablet landscape */
+  .service-card:hover {
+    transform: translateY(-6px) scale(1.015) !important;
+  }
+  
+  /* Reduce floating animation intensity */
+  .floating-cube {
+    --float-distance: 15px;
+  }
+}
+
+/* Print media optimizations */
+@media print {
+  /* Disable all animations and transforms for printing */
+  * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .hero-landing::before,
+  .floating-cube {
+    display: none !important;
   }
 } 

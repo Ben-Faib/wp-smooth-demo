@@ -73,7 +73,143 @@ function smoothmigration_enhanced_brand_mapping( string $text ): array {
 }
 
 /**
+ * Find the folder that contains the folder structure and determine if it's 3-layer or 4-layer
+ */
+function smoothmigration_find_brand_container_folder( string $base_path ): string {
+    $main_folders = array_filter( scandir( $base_path ), function( $item ) use ( $base_path ) {
+        $full_path = $base_path . '/' . $item;
+        return $item !== '.' && $item !== '..' && is_dir( $full_path ) && ! smoothmigration_is_system_folder( $item );
+    });
+    
+    // If there's only one non-system folder, it's likely the country container (e.g., "South Africa")
+    if ( count( $main_folders ) === 1 ) {
+        $country_folder = reset( $main_folders );
+        $country_path = $base_path . '/' . $country_folder;
+        
+        return $country_path;
+    }
+    
+    return $base_path;
+}
+
+/**
+ * Check if a folder is a system folder that should be ignored
+ */
+function smoothmigration_is_system_folder( string $folder_name ): bool {
+    $system_folders = array( '__MACOSX', '.DS_Store', 'Thumbs.db', '.git', '.svn' );
+    return in_array( $folder_name, $system_folders, true ) || strpos( $folder_name, '.' ) === 0;
+}
+
+/**
+ * Detect if the folder structure is 3-layer or 4-layer
+ * 3-layer: Country/Brand/Images
+ * 4-layer: Country/ServiceType/Brand/Images
+ */
+function smoothmigration_detect_folder_structure( string $country_path ): array {
+    $subfolders = array_filter( scandir( $country_path ), function( $item ) use ( $country_path ) {
+        $full_path = $country_path . '/' . $item;
+        return $item !== '.' && $item !== '..' && is_dir( $full_path ) && ! smoothmigration_is_system_folder( $item );
+    });
+    
+    if ( empty( $subfolders ) ) {
+        return array( 'type' => 'none', 'folders' => array() );
+    }
+    
+    // Check first folder to determine structure
+    $first_folder = reset( $subfolders );
+    $first_folder_path = $country_path . '/' . $first_folder;
+    
+    $first_folder_contents = array_filter( scandir( $first_folder_path ), function( $item ) use ( $first_folder_path ) {
+        $full_path = $first_folder_path . '/' . $item;
+        return $item !== '.' && $item !== '..' && is_dir( $full_path ) && ! smoothmigration_is_system_folder( $item );
+    });
+    
+    // If first folder contains subfolders, check if those contain images (4-layer)
+    // or if they contain more subfolders (which would be unusual)
+    if ( ! empty( $first_folder_contents ) ) {
+        $sample_subfolder = reset( $first_folder_contents );
+        $sample_subfolder_path = $first_folder_path . '/' . $sample_subfolder;
+        
+        // Check if this subfolder contains images
+        $image_files = smoothmigration_get_image_files( $sample_subfolder_path );
+        
+        if ( ! empty( $image_files ) ) {
+            // 4-layer structure: Country/ServiceType/Brand/Images
+            return array( 'type' => '4-layer', 'service_types' => $subfolders );
+        }
+    }
+    
+    // Check if the main folders themselves contain images (3-layer structure)
+    $image_files = smoothmigration_get_image_files( $first_folder_path );
+    if ( ! empty( $image_files ) ) {
+        // 3-layer structure: Country/Brand/Images
+        return array( 'type' => '3-layer', 'brands' => $subfolders );
+    }
+    
+    // If we can't determine, assume 4-layer for safety
+    return array( 'type' => '4-layer', 'service_types' => $subfolders );
+}
+
+/**
+ * Map service type folder names to taxonomy slugs
+ */
+function smoothmigration_map_service_type_folder( string $folder_name ): string {
+    $folder_lower = strtolower( trim( $folder_name ) );
+    
+    $mapping = array(
+        'banking services' => 'money-services',
+        'money' => 'money-services',
+        'banking' => 'money-services',
+        'financial' => 'money-services',
+        'finance' => 'money-services',
+        'remittance' => 'money-services',
+        
+        'telecommunication' => 'telecommunication',
+        'telecom' => 'telecommunication',
+        'mobile' => 'telecommunication',
+        'phone' => 'telecommunication',
+        'communication' => 'telecommunication',
+        
+        'vehicle services' => 'vehicles',
+        'vehicles' => 'vehicles',
+        'cars' => 'vehicles',
+        'automotive' => 'vehicles',
+        'rental' => 'vehicles',
+        'transport' => 'vehicles',
+        'transportation' => 'vehicles',
+        
+        'international moving' => 'international-moving',
+        'moving' => 'international-moving',
+        'relocation' => 'international-moving',
+        'shipping' => 'international-moving',
+        'freight' => 'international-moving',
+        
+        'insurance' => 'insurance',
+        'travel insurance' => 'insurance',
+        'health insurance' => 'insurance',
+        'pet insurance' => 'insurance',
+        'home insurance' => 'insurance',
+        'tenant insurance' => 'insurance',
+        
+        'realtor' => 'realtor',
+        'real estate' => 'realtor',
+        'property' => 'realtor',
+        'housing' => 'realtor',
+    );
+    
+    foreach ( $mapping as $keyword => $slug ) {
+        if ( str_contains( $folder_lower, $keyword ) ) {
+            return $slug;
+        }
+    }
+    
+    // Default fallback
+    return 'insurance';
+}
+
+/**
  * Process a folder structure and import services with logos
+ * Supports both 3-layer and 4-layer structures
  */
 function smoothmigration_process_folder_structure( string $base_path, string $region = '' ): array {
     $results = array(
@@ -81,7 +217,8 @@ function smoothmigration_process_folder_structure( string $base_path, string $re
         'message' => '',
         'processed' => 0,
         'errors' => array(),
-        'services_created' => array()
+        'services_created' => array(),
+        'structure_type' => '',
     );
     
     if ( ! is_dir( $base_path ) ) {
@@ -93,28 +230,79 @@ function smoothmigration_process_folder_structure( string $base_path, string $re
     // Ensure core service terms exist
     smoothmigration_ensure_core_service_terms();
     
-    // Get all subdirectories (brands)
-    $brand_folders = array_filter( scandir( $base_path ), function( $item ) use ( $base_path ) {
-        return $item !== '.' && $item !== '..' && is_dir( $base_path . '/' . $item );
-    });
+    // Detect folder structure
+    $structure = smoothmigration_detect_folder_structure( $base_path );
+    $results['structure_type'] = $structure['type'];
     
-    foreach ( $brand_folders as $folder_name ) {
-        $folder_path = $base_path . '/' . $folder_name;
-        $brand_result = smoothmigration_process_brand_folder( $folder_path, $folder_name, $region );
-        
-        if ( $brand_result['success'] ) {
-            $results['processed']++;
-            $results['services_created'][] = $brand_result['service_name'];
-        } else {
-            $results['errors'][] = "Failed to process {$folder_name}: " . $brand_result['message'];
-        }
+    if ( $structure['type'] === 'none' ) {
+        $results['success'] = false;
+        $results['message'] = 'No valid folders found in the structure';
+        return $results;
     }
     
-    $results['message'] = sprintf(
-        'Processed %d brand folders. Created/updated %d services. %d errors.',
-        count( $brand_folders ),
-        $results['processed'],
-        count( $results['errors'] )
+    if ( $structure['type'] === '3-layer' ) {
+        // Country/Brand/Images structure
+        foreach ( $structure['brands'] as $brand_folder ) {
+            $brand_path = $base_path . '/' . $brand_folder;
+            $brand_result = smoothmigration_process_brand_folder( $brand_path, $brand_folder, $region );
+            
+            if ( $brand_result['success'] ) {
+                $results['processed']++;
+                $results['services_created'][] = $brand_result['service_name'];
+            } else {
+                $results['errors'][] = "Failed to process {$brand_folder}: " . $brand_result['message'];
+            }
+        }
+        
+        $results['message'] = sprintf(
+            'Processed %d brand folders (3-layer structure) from "%s". Created/updated %d services. %d errors.',
+            count( $structure['brands'] ),
+            basename( $base_path ),
+            $results['processed'],
+            count( $results['errors'] )
+        );
+        
+    } elseif ( $structure['type'] === '4-layer' ) {
+        // Country/ServiceType/Brand/Images structure
+        foreach ( $structure['service_types'] as $service_type_folder ) {
+            $service_type_path = $base_path . '/' . $service_type_folder;
+            $service_type_slug = smoothmigration_map_service_type_folder( $service_type_folder );
+            
+            // Get brand folders within this service type
+            $brand_folders = array_filter( scandir( $service_type_path ), function( $item ) use ( $service_type_path ) {
+                $full_path = $service_type_path . '/' . $item;
+                return $item !== '.' && $item !== '..' && is_dir( $full_path ) && ! smoothmigration_is_system_folder( $item );
+            });
+            
+            foreach ( $brand_folders as $brand_folder ) {
+                $brand_path = $service_type_path . '/' . $brand_folder;
+                $brand_result = smoothmigration_process_brand_folder( $brand_path, $brand_folder, $region, $service_type_slug );
+                
+                if ( $brand_result['success'] ) {
+                    $results['processed']++;
+                    $results['services_created'][] = $brand_result['service_name'] . ' (' . $service_type_folder . ')';
+                } else {
+                    $results['errors'][] = "Failed to process {$service_type_folder}/{$brand_folder}: " . $brand_result['message'];
+                }
+            }
+        }
+        
+        $results['message'] = sprintf(
+            'Processed %d service type folders (4-layer structure) from "%s". Created/updated %d services. %d errors.',
+            count( $structure['service_types'] ),
+            basename( $base_path ),
+            $results['processed'],
+            count( $results['errors'] )
+        );
+    }
+    
+    // Add debugging info
+    $results['debug'] = sprintf(
+        "Structure: %s | Found: %s",
+        $structure['type'],
+        $structure['type'] === '3-layer' 
+            ? implode( ', ', $structure['brands'] ?? array() )
+            : implode( ', ', $structure['service_types'] ?? array() )
     );
     
     return $results;
@@ -123,7 +311,7 @@ function smoothmigration_process_folder_structure( string $base_path, string $re
 /**
  * Process a single brand folder and its images
  */
-function smoothmigration_process_brand_folder( string $folder_path, string $folder_name, string $region = '' ): array {
+function smoothmigration_process_brand_folder( string $folder_path, string $folder_name, string $region = '', string $service_type_override = '' ): array {
     $result = array(
         'success' => false,
         'message' => '',
@@ -136,7 +324,7 @@ function smoothmigration_process_brand_folder( string $folder_path, string $fold
     $result['service_name'] = $brand_name;
     
     // Find or create the service
-    $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $region );
+    $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $region, $service_type_override );
     
     if ( ! $service_id ) {
         $result['message'] = 'Failed to create/find service';
@@ -147,7 +335,17 @@ function smoothmigration_process_brand_folder( string $folder_path, string $fold
     $image_files = smoothmigration_get_image_files( $folder_path );
     
     if ( empty( $image_files ) ) {
-        $result['message'] = 'No image files found in folder';
+        // Get more details for debugging
+        $all_files = is_dir( $folder_path ) ? scandir( $folder_path ) : array();
+        $all_files = array_filter( $all_files, function( $file ) {
+            return $file !== '.' && $file !== '..';
+        });
+        
+        $result['message'] = sprintf( 
+            'No image files found in folder. Found %d total files: %s', 
+            count( $all_files ),
+            implode( ', ', array_slice( $all_files, 0, 5 ) ) . ( count( $all_files ) > 5 ? '...' : '' )
+        );
         return $result;
     }
     
@@ -170,7 +368,7 @@ function smoothmigration_process_brand_folder( string $folder_path, string $fold
 /**
  * Find or create a service post
  */
-function smoothmigration_find_or_create_service( string $brand_name, string $brand_slug, string $region = '' ): int {
+function smoothmigration_find_or_create_service( string $brand_name, string $brand_slug, string $region = '', string $service_type_override = '' ): int {
     // First try to find existing service by canonical slug
     $existing_posts = get_posts( array(
         'post_type' => 'service',
@@ -199,7 +397,7 @@ function smoothmigration_find_or_create_service( string $brand_name, string $bra
     }
     
     // Create new service
-    $type_slug = smoothmigration_guess_type_from_filename( $brand_name );
+    $type_slug = $service_type_override ?: smoothmigration_guess_type_from_filename( $brand_name );
     
     // Get known affiliate links
     $affiliate_map = smoothmigration_get_affiliate_links();
@@ -451,6 +649,159 @@ function smoothmigration_cleanup_temp_files( string $temp_path ): void {
 }
 
 /**
+ * Debug folder structure without importing
+ */
+function smoothmigration_debug_folder_structure( string $base_path ): array {
+    $debug_info = array();
+    
+    // Analyze the extracted content
+    $all_items = scandir( $base_path );
+    $folders = array_filter( $all_items, function( $item ) use ( $base_path ) {
+        return $item !== '.' && $item !== '..' && is_dir( $base_path . '/' . $item );
+    });
+    
+    $debug_info[] = "=== ROOT LEVEL ANALYSIS ===";
+    $debug_info[] = "Base path: " . $base_path;
+    $debug_info[] = "Total items found: " . count( $all_items );
+    $debug_info[] = "Folders found: " . implode( ', ', $folders );
+    
+    // Find the container folder
+    $container_path = smoothmigration_find_brand_container_folder( $base_path );
+    $debug_info[] = "Selected container path: " . $container_path;
+    
+    if ( $container_path !== $base_path ) {
+        $debug_info[] = "Container folder detected: " . basename( $container_path );
+    }
+    
+    // Detect structure type
+    $structure = smoothmigration_detect_folder_structure( $container_path );
+    $debug_info[] = "Structure detected: " . $structure['type'];
+    
+    if ( $structure['type'] === '3-layer' ) {
+        // Analyze brand folders directly
+        $debug_info[] = "";
+        $debug_info[] = "=== 3-LAYER STRUCTURE ANALYSIS ===";
+        $debug_info[] = "Brand folders found: " . count( $structure['brands'] );
+        $debug_info[] = "Brand folder names: " . implode( ', ', $structure['brands'] );
+        
+        foreach ( $structure['brands'] as $brand_folder ) {
+            $brand_path = $container_path . '/' . $brand_folder;
+            $debug_info = array_merge( $debug_info, smoothmigration_debug_brand_folder( $brand_path, $brand_folder ) );
+        }
+        
+    } elseif ( $structure['type'] === '4-layer' ) {
+        // Analyze service type folders, then brand folders within
+        $debug_info[] = "";
+        $debug_info[] = "=== 4-LAYER STRUCTURE ANALYSIS ===";
+        $debug_info[] = "Service type folders found: " . count( $structure['service_types'] );
+        $debug_info[] = "Service type folder names: " . implode( ', ', $structure['service_types'] );
+        
+        foreach ( $structure['service_types'] as $service_type_folder ) {
+            $service_type_path = $container_path . '/' . $service_type_folder;
+            $service_type_slug = smoothmigration_map_service_type_folder( $service_type_folder );
+            
+            $debug_info[] = "";
+            $debug_info[] = "=== SERVICE TYPE: " . $service_type_folder . " ===";
+            $debug_info[] = "Mapped to taxonomy: " . $service_type_slug;
+            
+            $brand_folders = array_filter( scandir( $service_type_path ), function( $item ) use ( $service_type_path ) {
+                $full_path = $service_type_path . '/' . $item;
+                return $item !== '.' && $item !== '..' && is_dir( $full_path ) && ! smoothmigration_is_system_folder( $item );
+            });
+            
+            $debug_info[] = "Brand folders in " . $service_type_folder . ": " . implode( ', ', $brand_folders );
+            
+            foreach ( $brand_folders as $brand_folder ) {
+                $brand_path = $service_type_path . '/' . $brand_folder;
+                $debug_info = array_merge( $debug_info, smoothmigration_debug_brand_folder( $brand_path, $brand_folder, $service_type_folder, $service_type_slug ) );
+            }
+        }
+    }
+    
+    // System folders found
+    $system_folders = array_filter( $folders, function( $folder ) {
+        return smoothmigration_is_system_folder( $folder );
+    });
+    
+    if ( ! empty( $system_folders ) ) {
+        $debug_info[] = "";
+        $debug_info[] = "=== SYSTEM FOLDERS (IGNORED) ===";
+        $debug_info[] = implode( ', ', $system_folders );
+    }
+    
+    $total_brands = 0;
+    if ( $structure['type'] === '3-layer' ) {
+        $total_brands = count( $structure['brands'] ?? array() );
+    } elseif ( $structure['type'] === '4-layer' ) {
+        foreach ( $structure['service_types'] ?? array() as $service_type_folder ) {
+            $service_type_path = $container_path . '/' . $service_type_folder;
+            $brand_folders = array_filter( scandir( $service_type_path ), function( $item ) use ( $service_type_path ) {
+                $full_path = $service_type_path . '/' . $item;
+                return $item !== '.' && $item !== '..' && is_dir( $full_path ) && ! smoothmigration_is_system_folder( $item );
+            });
+            $total_brands += count( $brand_folders );
+        }
+    }
+    
+    return array(
+        'success' => true,
+        'message' => sprintf( 'Debug analysis complete. Found %s structure with %d total brand folders.', $structure['type'], $total_brands ),
+        'debug' => implode( "\n", $debug_info ),
+        'processed' => 0,
+        'errors' => array()
+    );
+}
+
+/**
+ * Debug a single brand folder
+ */
+function smoothmigration_debug_brand_folder( string $brand_path, string $brand_folder, string $service_type_folder = '', string $service_type_slug = '' ): array {
+    $debug_info = array();
+    
+    $debug_info[] = "";
+    $debug_info[] = "--- Brand: " . $brand_folder . " ---";
+    
+    list( $canonical_brand, $brand_slug ) = smoothmigration_enhanced_brand_mapping( $brand_folder );
+    $debug_info[] = "Canonical name: " . $canonical_brand;
+    $debug_info[] = "Slug: " . $brand_slug;
+    
+    if ( $service_type_slug ) {
+        $debug_info[] = "Service type (from folder): " . $service_type_slug;
+    } else {
+        $service_type = smoothmigration_guess_type_from_filename( $canonical_brand );
+        $debug_info[] = "Service type (guessed): " . $service_type;
+    }
+    
+    // Analyze images
+    $all_brand_files = is_dir( $brand_path ) ? scandir( $brand_path ) : array();
+    $brand_files = array_filter( $all_brand_files, function( $file ) {
+        return $file !== '.' && $file !== '..';
+    });
+    
+    $image_files = smoothmigration_get_image_files( $brand_path );
+    
+    $debug_info[] = "Total files in folder: " . count( $brand_files );
+    $debug_info[] = "All files: " . implode( ', ', array_slice( $brand_files, 0, 5 ) ) . ( count( $brand_files ) > 5 ? '...' : '' );
+    $debug_info[] = "Image files found: " . count( $image_files );
+    
+    if ( ! empty( $image_files ) ) {
+        $debug_info[] = "Image files: " . implode( ', ', $image_files );
+        
+        // Analyze variants
+        $variants = array();
+        foreach ( $image_files as $image ) {
+            $variant = smoothmigration_classify_logo_variant( $image );
+            $variants[] = $image . " -> " . $variant;
+        }
+        $debug_info[] = "Logo variants: " . implode( ', ', array_slice( $variants, 0, 3 ) ) . ( count( $variants ) > 3 ? '...' : '' );
+    } else {
+        $debug_info[] = "❌ No image files found in this brand folder";
+    }
+    
+    return $debug_info;
+}
+
+/**
  * Recursively remove directory
  */
 function smoothmigration_recursive_rmdir( string $dir ): void {
@@ -486,12 +837,21 @@ function smoothmigration_render_bulk_import_page(): void {
         if ( ! empty( $results['services_created'] ) ) {
             echo '<p><strong>Services created/updated:</strong> ' . esc_html( implode( ', ', $results['services_created'] ) ) . '</p>';
         }
+        if ( ! empty( $results['structure_type'] ) ) {
+            echo '<p><strong>Structure detected:</strong> ' . esc_html( ucwords( str_replace( '-', ' ', $results['structure_type'] ) ) ) . '</p>';
+        }
         if ( ! empty( $results['errors'] ) ) {
             echo '<p><strong>Errors:</strong></p><ul>';
             foreach ( $results['errors'] as $error ) {
                 echo '<li>' . esc_html( $error ) . '</li>';
             }
             echo '</ul>';
+        }
+        if ( ! empty( $results['debug'] ) ) {
+            echo '<div style="background: #f6f7f7; padding: 15px; border-radius: 3px; margin: 10px 0;">';
+            echo '<p><strong>Debug Info:</strong></p>';
+            echo '<pre style="white-space: pre-wrap; font-family: monospace; font-size: 12px;">' . esc_html( $results['debug'] ) . '</pre>';
+            echo '</div>';
         }
         echo '</div>';
     }
@@ -502,26 +862,48 @@ function smoothmigration_render_bulk_import_page(): void {
         <p>Import services by uploading a folder structure or zip file. Each subfolder should represent a brand, with logo images inside.</p>
         
         <div class="card">
-            <h2>Folder Structure Example</h2>
-            <pre>
+            <h2>Supported Folder Structures</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h3>4-Layer Structure (Recommended)</h3>
+                    <pre style="font-size: 11px;">
+South Africa/
+├── Banking Services/
+│   ├── Wise/
+│   │   ├── logo-primary.png
+│   │   └── logo-white.png
+│   └── Remitly/
+│       └── remitly-dark.png
+├── Telecommunication/
+│   └── Airalo/
+│       └── airalo-logo.png
+└── Vehicle Services/
+    └── Rentcars/
+        └── rentcars-logo.png
+                    </pre>
+                </div>
+                <div>
+                    <h3>3-Layer Structure (Legacy)</h3>
+                    <pre style="font-size: 11px;">
 South Africa/
 ├── Airalo/
 │   ├── logo-primary.png
-│   ├── logo-white.png
-│   └── logo-square.png
+│   └── logo-white.png
 ├── Wise/
 │   └── wise-logo.png
 └── Remitly/
     └── remitly-dark.png
-            </pre>
-            <p><strong>How it works:</strong></p>
+                    </pre>
+                </div>
+            </div>
+            <p><strong>4-Layer Benefits:</strong></p>
             <ul>
-                <li>Each subfolder name becomes a service (e.g., "Airalo", "Wise")</li>
-                <li>All images in the subfolder are imported as logo variants</li>
-                <li>Filenames determine the logo variant (primary, on_dark, on_light, square)</li>
-                <li>Services are automatically categorized and affiliate links are added when known</li>
-                <li>Region information is stored for geographic targeting</li>
+                <li><strong>Automatic categorization</strong> - Service types determined from folder names</li>
+                <li><strong>Better organization</strong> - Group services by type (Money, Telecom, etc.)</li>
+                <li><strong>Accurate taxonomy assignment</strong> - No more guessing service categories</li>
+                <li><strong>Scalable structure</strong> - Easy to add new service types</li>
             </ul>
+            <p><strong>🐞 Troubleshooting:</strong> Use <strong>Debug Mode</strong> to analyze your folder structure and see which format is detected.</p>
         </div>
         
         <form method="post" enctype="multipart/form-data" class="bulk-import-form">
@@ -541,6 +923,10 @@ South Africa/
                             <label>
                                 <input type="radio" name="import_method" value="existing">
                                 Use existing server folder
+                            </label><br>
+                            <label>
+                                <input type="radio" name="import_method" value="debug">
+                                Debug Mode (analyze folder structure without importing)
                             </label>
                         </fieldset>
                     </td>
@@ -599,7 +985,7 @@ South Africa/
             
             radios.forEach(radio => {
                 radio.addEventListener('change', function() {
-                    if (this.value === 'zip') {
+                    if (this.value === 'zip' || this.value === 'debug') {
                         zipRow.style.display = '';
                         folderRow.style.display = 'none';
                     } else {
@@ -634,16 +1020,7 @@ function smoothmigration_handle_bulk_import_submission(): array {
         
         // Find the main folder in extracted content
         $extracted_path = $zip_result['extracted_path'];
-        $main_folders = array_filter( scandir( $extracted_path ), function( $item ) use ( $extracted_path ) {
-            return $item !== '.' && $item !== '..' && is_dir( $extracted_path . '/' . $item );
-        });
-        
-        // Use the first folder found, or the extracted path itself if it contains brand folders directly
-        if ( count( $main_folders ) === 1 ) {
-            $import_path = $extracted_path . '/' . reset( $main_folders );
-        } else {
-            $import_path = $extracted_path;
-        }
+        $import_path = smoothmigration_find_brand_container_folder( $extracted_path );
         
         // Process the folder structure
         $results = smoothmigration_process_folder_structure( $import_path, $region );
@@ -661,6 +1038,26 @@ function smoothmigration_handle_bulk_import_submission(): array {
         }
         
         return smoothmigration_process_folder_structure( $folder_path, $region );
+    
+    } elseif ( $method === 'debug' ) {
+        if ( ! isset( $_FILES['zip_file'] ) || $_FILES['zip_file']['error'] !== UPLOAD_ERR_OK ) {
+            return array( 'success' => false, 'message' => 'No zip file uploaded or upload error occurred for debug mode.' );
+        }
+        
+        // Handle zip upload for debugging
+        $zip_result = smoothmigration_handle_zip_upload( $_FILES['zip_file'], $region );
+        if ( ! $zip_result['success'] ) {
+            return $zip_result;
+        }
+        
+        // Analyze the folder structure without importing
+        $extracted_path = $zip_result['extracted_path'];
+        $debug_results = smoothmigration_debug_folder_structure( $extracted_path );
+        
+        // Clean up temporary files
+        smoothmigration_cleanup_temp_files( $extracted_path );
+        
+        return $debug_results;
     }
     
     return array( 'success' => false, 'message' => 'Invalid import method.' );

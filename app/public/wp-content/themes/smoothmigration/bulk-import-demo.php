@@ -27,15 +27,21 @@ function smoothmigration_bulk_import_demo_notice() {
         <p><strong>Simulating import of South Africa folder structure...</strong></p>
         <p>This demo shows how the system would process your folder structure:</p>
         <pre style="background: #f6f7f7; padding: 10px; border-radius: 3px;">
+4-Layer Structure Example:
 South Africa/
-├── Airalo/ (3 images)
-├── Wise/ (5 images) 
-├── Remitly/ (6 images)
-├── Rentcars.com/ (10 images)
-├── XE Money transfers/ (7 images)
-├── Sirelo(expertsinmoving)/ (8 images)
-├── Expat Ride/ (5 images)
-└── Covermore/ (4 images)
+├── Money Services/
+│   ├── Wise/ (5 images)
+│   ├── Remitly/ (6 images)
+│   └── XE Money transfers/ (7 images)
+├── Telecommunication/
+│   └── Airalo/ (3 images)
+├── Vehicle Services/
+│   ├── Rentcars.com/ (10 images)
+│   └── Expat Ride/ (5 images)
+├── International Moving/
+│   └── Sirelo(expertsinmoving)/ (8 images)
+└── Insurance/
+    └── Covermore/ (4 images)
         </pre>
         <p><strong>Debug Info:</strong> Each folder would be processed as a separate service with automatic logo variant assignment.</p>
     </div>

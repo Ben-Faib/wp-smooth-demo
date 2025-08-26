@@ -126,7 +126,7 @@ $term = get_queried_object();
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-between">
-                <small class="text-muted">We may earn a referral fee at no cost to you.</small>
+
                 <div class="d-flex gap-2">
                     <a id="qvAffiliate" href="#" target="_blank" rel="nofollow noopener" class="btn btn-primary">Use Partner Link</a>
                     <a id="qvLearn" href="#" class="btn btn-outline-primary">Learn More</a>

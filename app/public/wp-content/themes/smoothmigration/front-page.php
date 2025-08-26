@@ -12,6 +12,90 @@ get_header(); ?>
 <!-- 1. Enhanced Hero Section -->
 <section class="hero-landing">
     <div class="hero-overlay-dark" aria-hidden="true"></div>
+    
+    <!-- Floating Service Cubes -->
+    <div class="hero-floating-cubes" aria-hidden="true">
+        <div class="floating-cube-element cube-housing" title="Housing Services">
+            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="housingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="cubeShadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                        <feOffset dx="1" dy="2" result="offset"/>
+                        <feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer>
+                        <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+                <g filter="url(#cubeShadow)">
+                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#housingGrad)"/>
+                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#housingGrad)" opacity="0.7"/>
+                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#housingGrad)" opacity="0.5"/>
+                    <path d="M18 40 L25 30 L32 40 M22 40 L22 35 L28 35 L28 40" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                </g>
+            </svg>
+        </div>
+        
+        <div class="floating-cube-element cube-finance" title="Financial Services">
+            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="financeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g filter="url(#cubeShadow)">
+                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#financeGrad)"/>
+                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#financeGrad)" opacity="0.7"/>
+                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#financeGrad)" opacity="0.5"/>
+                    <path d="M25 18 L25 42 M20 22 L30 22 M20 38 L30 38" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <path d="M18 26 C18 24 20 22 25 22 C30 22 32 24 32 26 C32 28 30 30 25 30 C20 30 18 32 18 34 C18 36 20 38 25 38 C30 38 32 36 32 34" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                </g>
+            </svg>
+        </div>
+        
+        <div class="floating-cube-element cube-vehicle" title="Vehicle Services">
+            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="vehicleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g filter="url(#cubeShadow)">
+                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#vehicleGrad)"/>
+                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#vehicleGrad)" opacity="0.7"/>
+                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#vehicleGrad)" opacity="0.5"/>
+                    <path d="M13 32 L37 32 M13 36 L37 36" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <circle cx="17" cy="38" r="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <circle cx="33" cy="38" r="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <path d="M15 32 L15 28 L19 24 L31 24 L35 28 L35 32" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                </g>
+            </svg>
+        </div>
+        
+        <div class="floating-cube-element cube-communication" title="Communication Services">
+            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="commGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g filter="url(#cubeShadow)">
+                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#commGrad)"/>
+                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#commGrad)" opacity="0.7"/>
+                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#commGrad)" opacity="0.5"/>
+                    <rect x="19" y="23" width="12" height="20" rx="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <line x1="22" y1="26" x2="28" y2="26" stroke="white" stroke-width="1" opacity="0.9"/>
+                    <circle cx="25" cy="38" r="1" fill="white" opacity="0.9"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
     <div class="container">
         <div class="row align-items-center min-vh-100">
             <div class="col-lg-8">
@@ -20,13 +104,12 @@ get_header(); ?>
                     <div class="trust-signals mb-4">
                         <div class="trust-badges">
                             <span class="trust-badge"><span class="icon-glow me-2"><?php echo sm_icon('earth-americas', 'solid', ''); ?></span>Global coverage</span>
-                            <span class="trust-metric"><?php echo esc_html( get_option( 'sm_avg_relocation_time', '45 days' ) ); ?></span>
                             <span class="trust-metric"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?> successful relocations</span>
                         </div>
                     </div>
                     <div class="small text-light" style="opacity:.9">No additional or hidden costs.</div>
                     
-                    <h1 class="hero-headline">Your international relocation, made simple.</h1>
+                    <h1 class="hero-headline">Your international relocation,<br>made simple.</h1>
                     <p class="hero-subheadline">Get your clear, step-by-step plan and vetted providers—tailored to your destination, timing, and budget. Even if you're moving internationally for the first time, you'll have expert guidance every step of the way.</p>
                     
                     <!-- Enhanced CTA Group with Self-Segmentation -->
@@ -142,7 +225,7 @@ get_header(); ?>
                     <div class="service-card interactive-card" aria-describedby="money-services-desc">
                         <div class="service-illustration" aria-hidden="true"><i class="fa-solid fa-money-bill-transfer"></i></div>
                         <div class="service-content">
-                            <h3 class="service-title">Money Services</h3>
+                            <h3 class="service-title">Banking Services</h3>
                             <p id="money-services-desc" class="service-description">Banking, transfers, and multi-currency accounts set up for expats.</p>
                         </div>
                     </div>
@@ -426,7 +509,7 @@ get_header(); ?>
         <div class="toast-body d-flex align-items-center gap-3">
             <div class="flex-shrink-0" aria-hidden="true"><?php echo sm_icon('comment-dots', 'solid', 'text-primary icon'); ?></div>
             <div>
-                <strong>Consult available services</strong>
+                <strong>Consulting services available</strong>
                 <div class="small text-muted">Talk to a specialist today</div>
             </div>
             <a class="btn btn-primary btn-sm" href="/contact">Book now</a>
@@ -461,27 +544,71 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Auto-scroll carousel
+    // Enhanced Partners Carousel with Infinite Scroll
     const carousel = document.getElementById('partnersCarousel');
     if (carousel) {
-        let scrollAmount = 0;
-        const scrollSpeed = 1;
+        // Duplicate carousel content for seamless infinite scroll
+        const originalItems = Array.from(carousel.children);
+        const duplicatedItems = originalItems.map(item => item.cloneNode(true));
+        duplicatedItems.forEach(item => carousel.appendChild(item));
         
-        function autoScroll() {
-            scrollAmount += scrollSpeed;
-            if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
-                scrollAmount = 0;
+        // Keyboard navigation support
+        carousel.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                const focusableItems = carousel.querySelectorAll('.partner-link');
+                const currentIndex = Array.from(focusableItems).indexOf(document.activeElement);
+                
+                if (currentIndex !== -1) {
+                    let nextIndex;
+                    if (e.key === 'ArrowLeft') {
+                        nextIndex = (currentIndex - 1 + focusableItems.length) % focusableItems.length;
+                    } else {
+                        nextIndex = (currentIndex + 1) % focusableItems.length;
+                    }
+                    focusableItems[nextIndex].focus();
+                }
             }
-            carousel.scrollLeft = scrollAmount;
-        }
-        
-        const scrollInterval = setInterval(autoScroll, 50);
-        
-        // Pause on hover
-        carousel.addEventListener('mouseenter', () => clearInterval(scrollInterval));
-        carousel.addEventListener('mouseleave', () => {
-            setInterval(autoScroll, 50);
         });
+        
+        // Enhanced accessibility - announce carousel state
+        const announceCarousel = () => {
+            const totalItems = originalItems.length;
+            carousel.setAttribute('aria-live', 'polite');
+            carousel.setAttribute('aria-label', `Partner carousel with ${totalItems} partners. Use arrow keys to navigate.`);
+        };
+        
+        announceCarousel();
+        
+        // Enhanced hover pause functionality
+        carousel.addEventListener('mouseenter', () => {
+            carousel.style.animationPlayState = 'paused';
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            if (!carousel.matches(':focus-within')) {
+                carousel.style.animationPlayState = 'running';
+            }
+        });
+        
+        // Pause on focus for accessibility
+        carousel.addEventListener('focusin', () => {
+            carousel.style.animationPlayState = 'paused';
+        });
+        
+        carousel.addEventListener('focusout', (e) => {
+            // Resume animation if focus moves completely outside the carousel
+            setTimeout(() => {
+                if (!carousel.contains(document.activeElement) && !carousel.matches(':hover')) {
+                    carousel.style.animationPlayState = 'running';
+                }
+            }, 100);
+        });
+        
+        // Respect reduced motion preferences
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            carousel.style.animation = 'none';
+        }
     }
     
     // Scroll animations for sections

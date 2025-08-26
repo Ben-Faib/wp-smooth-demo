@@ -234,90 +234,261 @@ section {
     letter-spacing: 0.05em;
 }
 
-/* Enhanced Partners Carousel */
+/* Enhanced Partners Carousel with Infinite Scroll */
 .partners-carousel {
     position: relative;
     z-index: 1;
+    margin: 3rem 0;
 }
 
 .partners-carousel h3 {
     color: var(--text-dark);
     font-weight: 700;
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .carousel-container {
     position: relative;
     overflow: hidden;
-    border-radius: 12px;
-    background: var(--bg-white);
-    box-shadow: var(--shadow-sm);
-    padding: 2rem 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-section) 100%);
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.carousel-container::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    background: linear-gradient(to right, var(--bg-white), transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.carousel-container::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    background: linear-gradient(to left, var(--bg-white), transparent);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .carousel-track {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
     padding: 0 2rem;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    animation: infiniteScroll 30s linear infinite;
+    min-width: 200%;
+    will-change: transform;
 }
 
-.carousel-track::-webkit-scrollbar {
-    display: none;
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.carousel-track:focus-within {
+    animation-play-state: paused;
+}
+
+@keyframes infiniteScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .partner-item {
     flex: 0 0 auto;
     text-align: center;
-    padding: 1rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    min-width: 120px;
+    padding: 1.5rem;
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 140px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
 }
 
-.partner-item:hover {
-    transform: translateY(-3px);
-    background: var(--bg-section);
+.partner-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.partner-item:hover::before {
+    left: 100%;
+}
+
+.partner-item:hover,
+.partner-item:focus-within {
+    transform: translateY(-8px) scale(1.05);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-light);
+}
+
+.partner-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.partner-link:hover,
+.partner-link:focus {
+    text-decoration: none;
+    color: inherit;
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
 .partner-logo {
-    width: 80px;
-    height: 60px;
+    width: 90px;
+    height: 70px;
     object-fit: contain;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     border-radius: 8px;
-    filter: grayscale(100%) opacity(0.7);
-    transition: all 0.3s ease;
+    filter: grayscale(70%) opacity(0.8) brightness(1.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
 }
 
-.partner-item:hover .partner-logo {
-    filter: grayscale(0%) opacity(1);
-    transform: scale(1.05);
+.partner-item:hover .partner-logo,
+.partner-link:focus .partner-logo {
+    filter: grayscale(0%) opacity(1) brightness(1);
+    transform: scale(1.1) translateY(-2px);
 }
 
 .partner-name {
-    font-size: 0.85rem;
-    color: var(--text-light);
+    font-size: 0.9rem;
+    color: var(--text-medium);
     font-weight: 600;
     display: block;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.partner-item:hover .partner-name,
+.partner-link:focus .partner-name {
+    color: var(--primary-color);
 }
 
 .partner-placeholder {
-    width: 80px;
-    height: 60px;
+    width: 90px;
+    height: 70px;
     background: var(--bg-lighter);
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
     color: var(--text-lighter);
-    margin: 0 auto 0.5rem;
-    border: 2px dashed var(--border-medium);
+    margin: 0 auto 0.75rem;
+    border: 2px dashed var(--border-light);
+    transition: all 0.3s ease;
+}
+
+.partner-item:hover .partner-placeholder {
+    background: var(--primary-lighter);
+    border-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+/* Responsive carousel adjustments */
+@media (max-width: 1024px) {
+    .carousel-track {
+        animation-duration: 25s;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        padding: 2rem 0;
+    }
+    
+    .carousel-container::before,
+    .carousel-container::after {
+        width: 40px;
+    }
+    
+    .carousel-track {
+        gap: 1.5rem;
+        padding: 0 1.5rem;
+        animation-duration: 20s;
+    }
+    
+    .partner-item {
+        min-width: 110px;
+        padding: 1rem 0.75rem;
+    }
+    
+    .partner-logo {
+        width: 75px;
+        height: 55px;
+    }
+    
+    .partner-name {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-track {
+        animation-duration: 15s;
+        gap: 1rem;
+    }
+    
+    .partner-item {
+        min-width: 90px;
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .partner-logo {
+        width: 60px;
+        height: 45px;
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+        animation: none;
+    }
+    
+    .partner-item {
+        animation: none;
+    }
+    
+    .partner-item::before {
+        display: none;
+    }
 }
 
 /* Enhanced About Snippet Section */
@@ -1383,4 +1554,151 @@ html {
         display: inline-block;
         margin: 0.5rem;
     }
-} 
+}
+
+/* ========================================
+   Sprint 2.1 - Enhanced Counter Animations
+   ======================================== */
+
+/* Counter animation states */
+.counter-animating {
+    color: var(--primary-color);
+    font-weight: 700;
+    position: relative;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+.counter-animating::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: linear-gradient(45deg, 
+        transparent, 
+        var(--primary-light), 
+        transparent, 
+        var(--secondary-light), 
+        transparent);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.6;
+    animation: counter-glow 2.5s ease-out;
+    filter: blur(2px);
+}
+
+@keyframes counter-glow {
+    0% { 
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% { 
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+    100% { 
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.counter-animated {
+    color: var(--primary-color);
+    font-weight: 700;
+    position: relative;
+}
+
+.counter-animated::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+    opacity: 0.1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Enhanced stat numbers with better visual hierarchy */
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Additional counter selectors with consistent styling */
+[data-counter],
+.counter-value,
+.metric-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Enhanced stat item hover effects */
+.stat-item:hover .stat-number,
+.stat-item:hover [data-counter],
+.stat-item:hover .counter-value,
+.stat-item:hover .metric-number {
+    transform: scale(1.05);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Accessibility: Reduce motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .counter-animating::after,
+    .counter-glow {
+        animation: none;
+        opacity: 0;
+    }
+    
+    .counter-animating {
+        transform: none;
+    }
+    
+    .stat-item:hover .stat-number,
+    .stat-item:hover [data-counter],
+    .stat-item:hover .counter-value,
+    .stat-item:hover .metric-number {
+        transform: none;
+    }
+}
+
+/* Performance optimization for counter animations */
+.counter-animating,
+.counter-animated,
+.stat-number,
+[data-counter],
+.counter-value,
+.metric-number {
+    will-change: transform, opacity;
+}
+
+/* Remove will-change after animation completes */
+.counter-animated {
+    will-change: auto;
+}

@@ -40,6 +40,8 @@ require_once get_template_directory() . '/inc/service-import.php';
 require_once get_template_directory() . '/inc/bulk-import.php';
 // Demo script for bulk import (add ?bulk_import_demo=1 to test)
 require_once get_template_directory() . '/bulk-import-demo.php';
+// 4-layer structure conversion guide (add ?test_4layer=1 to test)
+require_once get_template_directory() . '/test-4layer-structure.php';
 // Helpers for logos and rendering choices
 require_once get_template_directory() . '/inc/service-helpers.php';
 // Options page for data-driven content

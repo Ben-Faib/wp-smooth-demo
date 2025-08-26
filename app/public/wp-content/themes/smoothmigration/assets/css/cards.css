@@ -451,4 +451,474 @@
   .feature-icon {
     margin: 0 auto;
   }
+}
+
+/* ========================================
+   Sprint 2.3 - Advanced Service Card Interactions
+   ======================================== */
+
+/* Service card flip container */
+.service-card-flip {
+  perspective: 1000px;
+  height: 100%;
+  position: relative;
+}
+
+.service-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.service-card-flip.flipped .service-card-inner {
+  transform: rotateY(180deg);
+}
+
+.service-card-front,
+.service-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.service-card-back {
+  transform: rotateY(180deg);
+  background: color-mix(in srgb, var(--bg-white), transparent 25%);
+  backdrop-filter: blur(var(--blur-lg, 25px));
+  -webkit-backdrop-filter: blur(var(--blur-lg, 25px));
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--primary-light), transparent 60%);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-details-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 280px;
+}
+
+.service-details-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-light), transparent 70%);
+  color: var(--text-medium);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.service-details-list li:last-child {
+  border-bottom: none;
+}
+
+.service-details-list li::before {
+  content: '✓';
+  color: var(--success-color);
+  font-weight: bold;
+  font-size: 1.1em;
+  flex-shrink: 0;
+}
+
+.service-details-list li:hover {
+  color: var(--primary-color);
+}
+
+/* Service flip button */
+.service-flip-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--primary-light), transparent 70%);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+}
+
+.service-flip-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-flip-button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.service-flip-button i {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.service-card-flip.flipped .service-flip-button i {
+  transform: rotate(180deg);
+}
+
+/* Enhanced Quick View Modal with Glassmorphism */
+.modal-content {
+  background: color-mix(in srgb, var(--bg-white), transparent 15%) !important;
+  backdrop-filter: blur(var(--blur-lg, 25px)) !important;
+  -webkit-backdrop-filter: blur(var(--blur-lg, 25px)) !important;
+  border: 1px solid color-mix(in srgb, var(--primary-light), transparent 60%) !important;
+  border-radius: var(--border-radius-xl) !important;
+  box-shadow: var(--shadow-2xl) !important;
+  overflow: hidden;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--primary-light), transparent 80%) 0%, 
+    color-mix(in srgb, var(--secondary-light), transparent 85%) 100%) !important;
+  backdrop-filter: blur(15px) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-light), transparent 70%) !important;
+  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0 !important;
+  padding: 1.5rem 2rem !important;
+}
+
+.modal-title {
+  font-weight: 700 !important;
+  color: var(--primary-color) !important;
+  margin: 0 !important;
+}
+
+.modal-body {
+  background: transparent !important;
+  padding: 2rem !important;
+}
+
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+}
+
+/* Card to Modal Transition Animation */
+.service-card.modal-opening {
+  animation: cardToModal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 9999;
+  position: relative;
+}
+
+@keyframes cardToModal {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-40px) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+.modal.fade.show .modal-dialog {
+  animation: modalSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideIn {
+  0% {
+    transform: scale(0.8) translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Enhanced modal close button */
+.btn-close {
+  background: transparent !important;
+  border: none !important;
+  font-size: 1.2rem !important;
+  opacity: 0.7 !important;
+  transition: all 0.3s ease !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--text-dark) !important;
+}
+
+.btn-close:hover {
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: scale(1.1) !important;
+  color: var(--primary-color) !important;
+}
+
+.btn-close:focus {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+}
+
+/* Enhanced service card reveal animation */
+.service-card[data-reveal="true"] {
+  animation: serviceCardReveal 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes serviceCardReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) rotateX(-15deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-5px) rotateX(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+/* Accessibility enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .service-card-inner,
+  .service-flip-button i,
+  .modal-dialog,
+  .service-card {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .service-card-flip.flipped .service-card-inner {
+    transform: none;
+  }
+  
+  .service-card-flip.flipped .service-card-front {
+    display: none;
+  }
+  
+  .service-card-flip.flipped .service-card-back {
+    display: flex;
+    transform: none;
+    position: relative;
+  }
+}
+
+/* ========================================
+   Sprint 3.2 - Touch-Optimized Card Interactions
+   ======================================== */
+
+/* Ensure all interactive card elements meet 44px minimum touch target */
+.service-card,
+.step-card,
+.feature-item,
+.testimonial-card,
+.stat-item {
+  touch-action: manipulation; /* Prevent double-tap zoom */
+  -webkit-tap-highlight-color: transparent; /* Remove default tap highlight */
+  cursor: pointer;
+}
+
+.service-flip-button {
+  min-width: 44px;
+  min-height: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Enhanced touch ripple effects for cards */
+.service-card .card-ripple,
+.step-card .card-ripple,
+.feature-item .card-ripple,
+.testimonial-card .card-ripple,
+.stat-item .card-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb), 0.3);
+  transform: scale(0);
+  animation: card-touch-ripple 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.service-card .card-ripple {
+  background: rgba(var(--primary-rgb), 0.2);
+}
+
+.step-card .card-ripple {
+  background: rgba(var(--secondary-rgb), 0.2);
+}
+
+.feature-item .card-ripple {
+  background: rgba(var(--secondary-rgb), 0.15);
+}
+
+@keyframes card-touch-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(6);
+    opacity: 0;
+  }
+}
+
+/* Touch device specific optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover effects on touch devices */
+  .service-card:hover,
+  .service-card:focus-within,
+  .step-card:hover,
+  .step-card:focus,
+  .feature-item:hover,
+  .testimonial-card:hover,
+  .stat-item:hover {
+    transform: none;
+  }
+  
+  /* Enhanced touch feedback */
+  .service-card:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+  }
+  
+  .step-card:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+  }
+  
+  .feature-item:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+  }
+  
+  .testimonial-card:active,
+  .stat-item:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+  }
+  
+  /* Enhanced visual feedback for touch */
+  .service-card:active::after,
+  .step-card:active::after,
+  .feature-item:active::after,
+  .testimonial-card:active::after,
+  .stat-item:active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(var(--primary-rgb), 0.1);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* Touch-optimized flip button */
+  .service-flip-button {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .service-flip-button:active {
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Touch-optimized modal interactions */
+  .modal-header {
+    padding: 1.5rem 2rem 1rem !important;
+  }
+  
+  .btn-close {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  
+  .btn-close:active {
+    transform: scale(0.9) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+}
+
+/* Enhanced mobile optimizations */
+@media (max-width: 768px) {
+  /* Ensure adequate spacing for touch targets */
+  .service-card {
+    margin-bottom: 2rem;
+  }
+  
+  .step-card {
+    margin-bottom: 2rem;
+  }
+  
+  .feature-item {
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-flip-button {
+    width: 48px;
+    height: 48px;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+  
+  .service-card-back {
+    padding: 1.5rem;
+  }
+  
+  .service-details-list li {
+    font-size: 0.85rem;
+    padding: 0.6rem 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .modal-content {
+    margin: 1rem !important;
+  }
+  
+  .modal-header {
+    padding: 1rem 1.5rem !important;
+  }
+  
+  .modal-body {
+    padding: 1.5rem !important;
+  }
+  
+  /* Ensure modal close button is touch-friendly */
+  .btn-close {
+    min-width: 48px !important;
+    min-height: 48px !important;
+    margin: -6px !important;
+  }
 } 

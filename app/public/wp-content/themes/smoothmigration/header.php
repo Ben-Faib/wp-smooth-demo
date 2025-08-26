@@ -26,20 +26,20 @@
 <header id="masthead" class="site-header sticky-header" role="banner">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
-                <?php
-                $custom_logo_id = get_theme_mod( 'custom_logo' );
-                $logo_img = wp_get_attachment_image( $custom_logo_id, 'full', false, array( 'class' => 'header-logo', 'alt' => get_bloginfo( 'name', 'display' ) ) );
-                ?>
-                <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo $logo_img; ?></a>
-            <?php else : ?>
-                <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/smooth-migration-logo.png" alt="Smooth Migration Logo" class="header-logo">
-                </a>
-            <?php endif; ?>
+            <a class="navbar-brand d-flex align-items-center" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) :
+                    $custom_logo_id = get_theme_mod( 'custom_logo' );
+                    echo wp_get_attachment_image( $custom_logo_id, 'full', false, array( 'class' => 'header-logo', 'alt' => '' ) );
+                else : ?>
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/smooth-migration-logo.png" alt="" class="header-logo" style="height: 40px; width: auto;">
+                <?php endif; ?>
+                <span class="site-title ms-2" style="font-weight: 600; font-size: 1.25rem;"><?php bloginfo( 'name' ); ?></span>
+            </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler mobile-menu-trigger" type="button" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-line"></span>
+                <span class="toggler-line"></span>
+                <span class="toggler-line"></span>
             </button>
             
             <div class="collapse navbar-collapse" id="primary-menu">
@@ -66,8 +66,8 @@
                             <li><a class="dropdown-item" href="/services">All Services</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/realtor-locator">Realtor Locator</a></li>
-                            <li><a class="dropdown-item" href="/service-type/money-services/">Money Services</a></li>
-                            <li><a class="dropdown-item" href="/service-type/telecommunication/">Phone Plans</a></li>
+                            <li><a class="dropdown-item" href="/service-type/money-services/">Banking Services</a></li>
+                            <li><a class="dropdown-item" href="/service-type/telecommunication/">Data and Phone Plans</a></li>
                             <li><a class="dropdown-item" href="/service-type/vehicles/">Vehicle Services</a></li>
                             <li><a class="dropdown-item" href="/service-type/international-moving/">International Moving</a></li>
                             <li><a class="dropdown-item" href="/service-type/insurance/">Insurance</a></li>
@@ -83,7 +83,7 @@
                         <a class="nav-link" href="/contact">Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/become-a-partner">Want to Affiliate?</a>
+                        <a class="nav-link" href="/become-a-partner">Become a Partner</a>
                     </li>
                 </ul>
                 
@@ -104,69 +104,118 @@
     </nav>
 </header>
 
-<!-- Mobile off-canvas menu -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="mobileNavLabel">Menu</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<!-- Enhanced Mobile Menu -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+<nav class="mobile-menu" id="mobileNav" aria-labelledby="mobileNavLabel">
+  <div class="mobile-menu-header">
+    <div class="mobile-menu-brand">
+      <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) :
+          $custom_logo_id = get_theme_mod( 'custom_logo' );
+          echo wp_get_attachment_image( $custom_logo_id, 'full', false, array( 'class' => 'mobile-logo', 'alt' => '' ) );
+      else : ?>
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/smooth-migration-logo.png" alt="" class="mobile-logo">
+      <?php endif; ?>
+      <span class="mobile-menu-title" id="mobileNavLabel"><?php bloginfo( 'name' ); ?></span>
+    </div>
+    <button type="button" class="mobile-menu-close" aria-label="Close menu">
+      <span class="close-line"></span>
+      <span class="close-line"></span>
+    </button>
   </div>
-  <div class="offcanvas-body">
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="/about-us">About</a>
-        </li>
-        <li class="nav-item">
-            <span class="nav-link disabled">Resources</span>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/faq">→ FAQ</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/guides">→ Guides</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/case-studies">→ Case Studies</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/how-it-works">→ How it works</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/services">Services</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/realtor-locator">→ Realtor Locator</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/service-type/money-services/">→ Money Services</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/service-type/telecommunication/">→ Phone Plans</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/service-type/vehicles/">→ Vehicle Services</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/service-type/international-moving/">→ International Moving</a>
-        </li>
-        <li class="nav-item ps-3">
-            <a class="nav-link small" href="/service-type/insurance/">→ Insurance</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/ai-relocator">
-                <i class="fas fa-robot me-1"></i>
-                AI Relocator
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact Us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/become-a-partner">Want to Affiliate?</a>
-        </li>
+  
+  <div class="mobile-menu-content">
+    <ul class="mobile-menu-items">
+      <li class="mobile-menu-item" style="--item-index: 0">
+        <a class="mobile-menu-link" href="/about-us">
+          <i class="fas fa-users"></i>
+          <span>About</span>
+        </a>
+      </li>
+      <li class="mobile-menu-item mobile-menu-group" style="--item-index: 1">
+        <button class="mobile-menu-toggle" type="button" aria-expanded="false">
+          <i class="fas fa-book-open"></i>
+          <span>Resources</span>
+          <i class="fas fa-chevron-down mobile-menu-chevron"></i>
+        </button>
+        <ul class="mobile-submenu">
+          <li class="mobile-submenu-item" style="--item-index: 0">
+            <a class="mobile-menu-link" href="/faq">FAQ</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 1">
+            <a class="mobile-menu-link" href="/guides">Guides</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 2">
+            <a class="mobile-menu-link" href="/case-studies">Case Studies</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 3">
+            <a class="mobile-menu-link" href="/how-it-works">How it works</a>
+          </li>
+        </ul>
+      </li>
+      <li class="mobile-menu-item mobile-menu-group" style="--item-index: 2">
+        <button class="mobile-menu-toggle" type="button" aria-expanded="false">
+          <i class="fas fa-concierge-bell"></i>
+          <span>Services</span>
+          <i class="fas fa-chevron-down mobile-menu-chevron"></i>
+        </button>
+        <ul class="mobile-submenu">
+          <li class="mobile-submenu-item" style="--item-index: 0">
+            <a class="mobile-menu-link" href="/services">All Services</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 1">
+            <a class="mobile-menu-link" href="/realtor-locator">Realtor Locator</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 2">
+            <a class="mobile-menu-link" href="/service-type/money-services/">Banking Services</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 3">
+            <a class="mobile-menu-link" href="/service-type/telecommunication/">Data and Phone Plans</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 4">
+            <a class="mobile-menu-link" href="/service-type/vehicles/">Vehicle Services</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 5">
+            <a class="mobile-menu-link" href="/service-type/international-moving/">International Moving</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 6">
+            <a class="mobile-menu-link" href="/service-type/insurance/">Insurance</a>
+          </li>
+        </ul>
+      </li>
+      <li class="mobile-menu-item" style="--item-index: 3">
+        <a class="mobile-menu-link" href="/ai-relocator">
+          <i class="fas fa-robot"></i>
+          <span>AI Relocator</span>
+        </a>
+      </li>
+      <li class="mobile-menu-item" style="--item-index: 4">
+        <a class="mobile-menu-link" href="/contact">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </a>
+      </li>
+      <li class="mobile-menu-item" style="--item-index: 5">
+        <a class="mobile-menu-link" href="/become-a-partner">
+          <i class="fas fa-handshake"></i>
+          <span>Become a Partner</span>
+        </a>
+      </li>
     </ul>
-    <!-- Removed mobile Get Started button -->
   </div>
-</div>
+  
+  <div class="mobile-menu-footer">
+    <button type="button" id="mobile-theme-toggle" class="mobile-theme-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="theme-icon sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+      <svg class="theme-icon moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <span>Theme</span>
+    </button>
+  </div>
+</nav>
 
 <script>
 // Sticky header and top bar functionality (class-based, direction-aware)
