@@ -1,19 +1,20 @@
-/* Enhanced Modern Service Cards */
+/* Enhanced Modern Service Cards - Glassmorphism */
 .service-card {
-  border: 1px solid var(--border-light);
+  border: none;
+  outline: 1px solid color-mix(in srgb, var(--primary-light), transparent 60%);
   border-radius: var(--border-radius-xl);
   padding: 0;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-sm);
-  background-color: var(--bg-white);
+  box-shadow: var(--shadow-lg);
+  background: color-mix(in srgb, var(--bg-white), transparent 35%);
+  backdrop-filter: blur(var(--blur-lg, 20px));
+  -webkit-backdrop-filter: blur(var(--blur-lg, 20px));
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
   position: relative;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .service-card::before {
@@ -32,11 +33,14 @@
   opacity: 1;
 }
 
-.service-card:hover {
-  transform: translateY(-8px);
+.service-card:hover,
+.service-card:focus-within {
+  transform: translateY(-8px) scale(1.02);
   box-shadow: var(--shadow-2xl);
-  border-color: var(--primary-light);
-  background: var(--bg-section);
+  outline-color: var(--primary-color);
+  background: color-mix(in srgb, var(--bg-white), transparent 20%);
+  backdrop-filter: blur(var(--blur-lg, 25px));
+  -webkit-backdrop-filter: blur(var(--blur-lg, 25px));
 }
 
 .service-card-link {
@@ -156,17 +160,20 @@
   color: var(--text-medium);
 }
 
-/* Enhanced Interactive Cards for How It Works */
+/* Enhanced Interactive Cards for How It Works - Glassmorphism */
 .step-card {
-  background: var(--bg-white);
-  border: 2px solid var(--border-light);
+  background: color-mix(in srgb, var(--bg-white), transparent 30%);
+  backdrop-filter: blur(var(--blur-lg, 15px));
+  -webkit-backdrop-filter: blur(var(--blur-lg, 15px));
+  border: none;
+  outline: 1px solid color-mix(in srgb, var(--secondary-light), transparent 70%);
   border-radius: var(--border-radius-xl);
   padding: 3rem 2rem;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
 }
 
 .step-card::before {
@@ -186,11 +193,14 @@
   opacity: 0.03;
 }
 
-.step-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--primary-light);
+.step-card:hover,
+.step-card:focus {
+  transform: translateY(-6px) scale(1.02);
+  outline-color: var(--secondary-color);
   box-shadow: var(--shadow-xl);
-  background: var(--bg-section);
+  background: color-mix(in srgb, var(--bg-white), transparent 15%);
+  backdrop-filter: blur(var(--blur-lg, 20px));
+  -webkit-backdrop-filter: blur(var(--blur-lg, 20px));
 }
 
 .step-number {

@@ -13,6 +13,7 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to main content</a>
 
 <!-- Top Bar -->
 <div class="top-bar">
@@ -86,8 +87,18 @@
                     </li>
                 </ul>
                 
-                <!-- Right side utilities (reserved) -->
-                <div class="navbar-nav ms-3 d-flex align-items-center gap-2"></div>
+                <!-- Right side utilities -->
+                <div class="navbar-nav ms-3 d-flex align-items-center gap-2">
+                    <button type="button" id="theme-toggle" class="btn btn-ghost btn-sm" aria-label="Toggle dark mode" title="Toggle dark mode">
+                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -164,12 +175,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const navbar = header.querySelector('.navbar');
     const topBar = document.querySelector('.top-bar');
 
-    function setTopBarHeightVar() {
-        const height = topBar ? topBar.offsetHeight : 0;
-        document.documentElement.style.setProperty('--sm-topbar-height', height + 'px');
+    function setHeaderOffsets() {
+        const topBarHeight = topBar ? topBar.offsetHeight : 0;
+        const headerHeight = header ? header.offsetHeight : 0;
+        
+        document.documentElement.style.setProperty('--sm-topbar-height', topBarHeight + 'px');
+        document.body.style.paddingTop = (topBarHeight + headerHeight) + 'px';
     }
-    setTopBarHeightVar();
-    window.addEventListener('resize', setTopBarHeightVar, { passive: true });
+
+    setHeaderOffsets();
+    window.addEventListener('resize', setHeaderOffsets, { passive: true });
 
     let lastY = window.scrollY;
     let lock = null; // null | 'up' | 'down'
@@ -223,5 +238,27 @@ document.addEventListener('DOMContentLoaded', function() {
         d.addEventListener('focusin', () => positionTriangle(d));
     });
     window.addEventListener('resize', positionAllTriangles, { passive: true });
+    
+    // Dark mode toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or default to 'light' mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Add a subtle animation feedback
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 150);
+    });
 });
 </script>

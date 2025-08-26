@@ -127,6 +127,14 @@ function smoothmigration_add_service_meta_boxes() {
         'side',
         'default'
     );
+    add_meta_box(
+        'service_regions',
+        __( 'Regions/Countries', 'smoothmigration' ),
+        'smoothmigration_service_regions_callback',
+        'service',
+        'side',
+        'default'
+    );
 }
 add_action( 'add_meta_boxes', 'smoothmigration_add_service_meta_boxes' );
 
@@ -295,6 +303,20 @@ function smoothmigration_service_logo_variants_callback( $post ) {
 }
 
 /**
+ * Callback function for the "Service Regions" meta box.
+ */
+function smoothmigration_service_regions_callback( $post ) {
+    $regions = get_post_meta( $post->ID, '_service_regions', true );
+    ?>
+    <p>
+        <label for="service_regions"><?php _e( 'Regions/Countries (comma-separated)', 'smoothmigration' ); ?></label>
+        <textarea id="service_regions" name="service_regions" class="widefat" rows="3" placeholder="e.g., USA, Canada, South Africa"><?php echo esc_textarea( $regions ); ?></textarea>
+        <small class="description">Enter regions or countries where this service is available, separated by commas.</small>
+    </p>
+    <?php
+}
+
+/**
  * Save meta box data.
  */
 function smoothmigration_save_service_meta( $post_id ) {
@@ -337,6 +359,7 @@ function smoothmigration_save_service_meta( $post_id ) {
         'service_logo_on_light' => 'absint',
         'service_logo_on_dark' => 'absint',
         'service_logo_square' => 'absint',
+        'service_regions' => 'sanitize_textarea_field',
     );
 
     foreach ( $fields as $field => $sanitize_callback ) {
@@ -372,6 +395,7 @@ function smoothmigration_service_columns( $columns ) {
     $columns['service_type'] = __( 'Service Type', 'smoothmigration' );
     $columns['featured'] = __( 'Featured', 'smoothmigration' );
     $columns['company'] = __( 'Company', 'smoothmigration' );
+    $columns['regions'] = __( 'Regions', 'smoothmigration' );
     $columns['logo'] = __( 'Logo', 'smoothmigration' );
     return $columns;
 }
@@ -398,6 +422,19 @@ function smoothmigration_service_column_content( $column, $post_id ) {
         case 'company':
             $company_name = get_post_meta( $post_id, '_service_company_name', true );
             echo $company_name ?: '—';
+            break;
+            
+        case 'regions':
+            $regions = get_post_meta( $post_id, '_service_regions', true );
+            if ( $regions ) {
+                $regions_array = array_map( 'trim', explode( ',', $regions ) );
+                echo esc_html( implode( ', ', array_slice( $regions_array, 0, 3 ) ) );
+                if ( count( $regions_array ) > 3 ) {
+                    echo '...';
+                }
+            } else {
+                echo '—';
+            }
             break;
             
         case 'logo':

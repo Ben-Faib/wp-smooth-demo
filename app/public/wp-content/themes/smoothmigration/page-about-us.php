@@ -8,44 +8,66 @@
  */
 
 /**
- * Get team member image by searching for filename
+ * Get team member image by searching Media Library for filename/title.
+ * - Accepts a string or an array of preferred search terms (first match wins)
+ * - Prefers newest uploads by ordering by date DESC
+ * - Debug: add ?sm_debug_team=1 to the URL to output HTML comments with match info
  */
-function get_team_member_image($search_term, $alt_text = '', $class = 'team-image') {
-    // Search for attachments that match the search term
-    $attachments = get_posts(array(
-        'post_type' => 'attachment',
-        'post_mime_type' => 'image',
-        'post_status' => 'inherit',
-        'posts_per_page' => -1,
-        'meta_query' => array(
-            'relation' => 'OR',
-            array(
-                'key' => '_wp_attached_file',
-                'value' => $search_term,
-                'compare' => 'LIKE'
-            )
-        )
-    ));
-    
-    // Also search by post title
-    if (empty($attachments)) {
+function get_team_member_image($search_terms, $alt_text = '', $class = 'team-image') {
+    $debug = isset($_GET['sm_debug_team']);
+    if (!is_array($search_terms)) {
+        $search_terms = array($search_terms);
+    }
+
+    foreach ($search_terms as $term) {
+        // Primary: search by file path (filename in _wp_attached_file)
         $attachments = get_posts(array(
             'post_type' => 'attachment',
             'post_mime_type' => 'image',
             'post_status' => 'inherit',
             'posts_per_page' => 1,
-            's' => $search_term
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'meta_query' => array(
+                array(
+                    'key' => '_wp_attached_file',
+                    'value' => $term,
+                    'compare' => 'LIKE',
+                ),
+            ),
+            'suppress_filters' => false,
         ));
-    }
-    
-    if (!empty($attachments)) {
-        $attachment = $attachments[0];
-        $image_url = wp_get_attachment_image_url($attachment->ID, 'full');
-        if ($image_url) {
-            return '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($alt_text) . '" class="' . esc_attr($class) . '" />';
+
+        // Secondary: search by attachment title if not found by file path
+        if (empty($attachments)) {
+            $attachments = get_posts(array(
+                'post_type' => 'attachment',
+                'post_mime_type' => 'image',
+                'post_status' => 'inherit',
+                'posts_per_page' => 1,
+                'orderby' => 'date',
+                'order' => 'DESC',
+                's' => $term,
+                'suppress_filters' => false,
+            ));
+        }
+
+        if (!empty($attachments)) {
+            $attachment = $attachments[0];
+            $image_url = wp_get_attachment_image_url($attachment->ID, 'full');
+            if ($debug) {
+                echo "\n<!-- sm_debug_team: term='" . esc_html($term) . "' matched attachment ID " . intval($attachment->ID) . " url=" . esc_url($image_url) . " -->\n";
+            }
+            if ($image_url) {
+                return '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($alt_text) . '" class="' . esc_attr($class) . '" />';
+            }
+        } else {
+            if ($debug) {
+                echo "\n<!-- sm_debug_team: term='" . esc_html($term) . "' not found -->\n";
+            }
         }
     }
-    
+
     // Fallback: return placeholder if image not found
     return '<div class="photo-placeholder"><i class="fas fa-user"></i></div>';
 }
@@ -53,7 +75,7 @@ function get_team_member_image($search_term, $alt_text = '', $class = 'team-imag
 get_header();
 ?>
 
-<main id="main" class="site-main about-page" role="main">
+<main id="main" class="site-main about-page" role="main" tabindex="-1">
 
     <!-- Hero Section -->
     <section class="about-hero py-6 bg-gradient-primary text-white position-relative overflow-hidden">
@@ -65,12 +87,12 @@ get_header();
                             <span class="badge-about"><?php echo sm_icon('earth-americas', 'solid', 'me-2 icon'); ?> Our Story</span>
                         </div>
                         <h1 class="display-2 fw-bold mb-4">About Smooth Migration</h1>
-                        <p class="lead fs-4 mb-4 opacity-90">Founded by global professionals who have navigated international relocations across multiple continents. We bring decades of real-world experience to make your move seamless.</p>
+                        <p class="lead fs-4 mb-4 opacity-90">Founded by global professionals who have navigated international relocations across multiple continents.<br />We bring decades of real-world experience to make your move seamless.</p>
                         
                         <div class="hero-stats d-flex flex-wrap gap-4 mb-4">
                             <div class="stat-item">
-                                <div class="stat-number">2019</div>
-                                <div class="stat-label">Founded</div>
+                                <div class="stat-number">2021</div>
+                                <div class="stat-label">Founded in</div>
                             </div>
                             <div class="stat-item">
                                 <div class="stat-number">15+</div>
@@ -83,10 +105,6 @@ get_header();
                         </div>
                         
                         <div class="hero-cta">
-                            <a href="#our-story" class="btn btn-accent btn-lg me-3">
-                                <i class="fas fa-book-open me-2"></i>
-                                Our Journey
-                            </a>
                             <a href="#team" class="btn btn-outline-light btn-lg">
                                 <i class="fas fa-users me-2"></i>
                                 Meet the Team
@@ -102,12 +120,13 @@ get_header();
                                     <i class="fas fa-home display-3 text-accent"></i>
                                 </div>
                                 <div class="connection-lines"></div>
-                                <div class="location-dots">
-                                    <div class="dot dot-1" data-location="London"><i class="fas fa-location-dot"></i></div>
-                                    <div class="dot dot-2" data-location="Singapore"><i class="fas fa-location-dot"></i></div>
-                                    <div class="dot dot-3" data-location="Dubai"><i class="fas fa-location-dot"></i></div>
-                                    <div class="dot dot-4" data-location="Toronto"><i class="fas fa-location-dot"></i></div>
-                                    <div class="dot dot-5" data-location="Sydney"><i class="fas fa-location-dot"></i></div>
+                                <div class="location-dots" aria-hidden="true">
+                                    <div class="dot dot-1" data-location="Checklist"><i class="fas fa-clipboard-check" aria-hidden="true"></i></div>
+                                    <div class="dot dot-2" data-location="Keys"><i class="fas fa-key" aria-hidden="true"></i></div>
+                                    <div class="dot dot-3" data-location="Moving Boxes"><i class="fas fa-box" aria-hidden="true"></i></div>
+                                    <div class="dot dot-4" data-location="Visa"><i class="fas fa-passport" aria-hidden="true"></i></div>
+                                    <div class="dot dot-5" data-location="SIM"><i class="fas fa-sim-card" aria-hidden="true"></i></div>
+                                    <div class="dot dot-6" data-location="Banking"><i class="fas fa-landmark" aria-hidden="true"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -118,6 +137,15 @@ get_header();
         
         <!-- Background Pattern -->
         <div class="hero-pattern position-absolute top-0 start-0 w-100 h-100 opacity-10"></div>
+        <!-- Scroll cue -->
+        <div class="scroll-cue" aria-hidden="true">
+            <span class="scroll-text">Scroll</span>
+            <div class="scroll-arrow">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 4v14m0 0l-5-5m5 5l5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
     </section>
 
     <!-- Our Story Section -->
@@ -150,7 +178,7 @@ get_header();
                                 </div>
                                 <div class="timeline-content">
                                     <h4>The Vision</h4>
-                                    <p>Drawing from 35+ years of work experience across multiple countries and industries, we realized the need for a comprehensive relocation service that truly understands the expat experience.</p>
+                                    <p>Drawing from 35+ years of work experience across multiple countries and industries, we realized the need for a comprehensive relocation service that truly understands the newcomer experience.</p>
                                 </div>
                             </div>
                             
@@ -192,7 +220,7 @@ get_header();
                                     <i class="fas fa-language"></i>
                                 </div>
                                 <div class="stat-details">
-                                    <h3>8+</h3>
+                                    <h3>5+</h3>
                                     <p>Languages Spoken</p>
                                 </div>
                             </div>
@@ -309,12 +337,14 @@ get_header();
                         <div class="team-info">
                             <h4 class="team-name">Grant Sakinofsky</h4>
                             <p class="team-role">Founder & Director</p>
-                            <p class="team-description">Grant's journey began early - working since age 8, he graduated at 17 and used his savings to move to England, where he became one of the youngest foreigners in British history to be licensed before the Supreme Court in London. A former national age group champion in springboard diving, provincial gymnast, and rock climber, Grant brings both athletic discipline and legal precision to international relocation.</p>
-                            <p class="team-description">After excelling across South Africa and England, Grant moved to the USA in 2019 where he got licensed in real estate and founded Smooth Migration. In 2022, he relocated to Canada, earning additional qualifications from UBC and becoming one of the only non-US, non-Canadian citizens to hold real estate licenses in both countries. Currently serving on a Canadian non-profit board, Grant's 35+ years span four countries and multiple industries.</p>
+                            <p class="team-description">Grant's journey began early — working since age 8, he graduated at 17 and used his savings to move to England, where he became one of the youngest foreigners in recent British history to be licensed before the Supreme Court in London.</p>
+                            <p class="team-description">A former national age group champion in springboard diving, provincial gymnast, and rock climber, Grant brings both athletic discipline and legal precision to international relocation.</p>
+                            <p class="team-description">After excelling across South Africa and England, Grant moved to the USA in 2019 where he got licensed in real estate and founded Smooth Migration. In 2022, he relocated to Canada, earning additional qualifications from UBC and becoming one of the only non-US, non-Canadian citizens to hold real estate licenses in both countries.</p>
+                            <p class="team-description">Currently serving on a Canadian non-profit board, Grant's 35+ years span four countries and multiple industries.</p>
                             <div class="team-expertise">
-                                <span class="expertise-tag">Supreme Court Licensed</span>
+                                <span class="expertise-tag">Internationally Qualified Across Multiple Industries</span>
                                 <span class="expertise-tag">Dual Real Estate Licenses</span>
-                                <span class="expertise-tag">Former Athlete</span>
+                                <span class="expertise-tag">Former National Athlete</span>
                                 <span class="expertise-tag">Non-Profit Director</span>
                             </div>
                         </div>
@@ -324,7 +354,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.2s;">
                         <div class="team-photo">
-                            <?php echo get_team_member_image('Erin', 'Erin Copeland'); ?>
+                            <?php echo get_team_member_image(array('Erin-about', 'Erin Copeland', 'Erin'), 'Erin Copeland'); ?>
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
@@ -333,11 +363,14 @@ get_header();
                         <div class="team-info">
                             <h4 class="team-name">Erin Copeland</h4>
                             <p class="team-role">Operations Manager - North America</p>
-                            <p class="team-description">Erin is a true veteran of international living, having navigated relocations across seven different countries. Her unique background as a former Science and Biology teacher gives her exceptional organizational skills and attention to detail that proves invaluable in managing complex relocations.</p>
-                            <p class="team-description">With teaching qualifications from the University of Waterloo in Canada and a Master's in Education from Griffith University in Australia, Erin combines academic rigor with practical experience. She currently runs an established online tutoring company serving clients across multiple countries, demonstrating her ability to manage international operations and cross-cultural communication. Her strong background in logistics, organization, and communication makes her the perfect bridge between our clients and their new destinations.</p>
+                            <p class="team-description">Erin is a true veteran of international living, having navigated relocations across seven different countries.</p>
+                            <p class="team-description">Her unique background as a former Science and Biology teacher gives her exceptional organizational skills and attention to detail that prove invaluable in managing complex relocations.</p>
+                            <p class="team-description">With teaching qualifications from the University of Waterloo in Canada and a Master’s in Education from Griffith University in Australia, Erin combines academic rigor with practical experience.</p>
+                            <p class="team-description">She ran an established online tutoring company serving clients across multiple countries, demonstrating her ability to manage international operations and cross-cultural communication.</p>
+                            <p class="team-description">Her strong background in logistics, organization, and communication makes her the perfect bridge between our clients and their new destinations.</p>
                             <div class="team-expertise">
                                 <span class="expertise-tag">7 Countries Experience</span>
-                                <span class="expertise-tag">Master's in Education</span>
+                                <span class="expertise-tag">Master’s in Education</span>
                                 <span class="expertise-tag">International Tutoring</span>
                                 <span class="expertise-tag">Logistics Expert</span>
                             </div>
@@ -357,8 +390,12 @@ get_header();
                         <div class="team-info">
                             <h4 class="team-name">Christian Harmbeck</h4>
                             <p class="team-role">Operations Manager - Southern Africa</p>
-                            <p class="team-description">Christian brings a wealth of international business expertise, having lived and worked across several countries while mastering three languages. As a driven business leader with a remarkable 25+ year track record, he has successfully scaled profitable companies and achieved successful exits across both hospitality and retail sectors.</p>
-                            <p class="team-description">As a globally certified business and executive coach, Christian excels at empowering teams and business owners to reach their full potential. He's a versatile business generalist who specializes in systemizing workflows and creating independent, self-sustaining operations. His passion lies in driving organizational success through empowered teams, streamlined processes, and deep industry-specific knowledge. Christian's strength in building robust customer relations and fostering positive company cultures makes him invaluable for clients navigating new business environments.</p>
+                            <p class="team-description">Christian brings a wealth of international business expertise, having lived and worked across several countries while mastering three languages.</p>
+                            <p class="team-description">As a driven business leader with a remarkable 25+ year track record, he has successfully scaled profitable companies and achieved successful exits across hospitality, retail and other sectors.</p>
+                            <p class="team-description">As a globally certified business and executive coach, Christian excels at empowering teams and business owners to reach their full potential.</p>
+                            <p class="team-description">He's a versatile business generalist who specializes in systemizing workflows and creating independent, self-sustaining operations.</p>
+                            <p class="team-description">His passion lies in driving organizational success through empowered teams, streamlined processes, and deep industry-specific knowledge.</p>
+                            <p class="team-description">Christian's strength in building robust customer relations and fostering positive company cultures makes him invaluable for clients navigating new business environments.</p>
                             <div class="team-expertise">
                                 <span class="expertise-tag">Trilingual</span>
                                 <span class="expertise-tag">Certified Executive Coach</span>
@@ -372,7 +409,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.1s;">
                         <div class="team-photo">
-                            <?php echo get_team_member_image('rob', 'Robert Wood'); ?>
+                            <?php echo get_team_member_image(array('Rob-about', 'Robert Wood', 'Rob'), 'Robert Wood'); ?>
                             <div class="team-social">
                                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
@@ -381,10 +418,13 @@ get_header();
                         <div class="team-info">
                             <h4 class="team-name">Robert Wood</h4>
                             <p class="team-role">Operations Manager - United Kingdom</p>
-                            <p class="team-description">Originally from Australia, Robert has made the United Kingdom his home for over 20 years, working extensively across both England and Scotland with a focus on customer-facing roles. His international perspective expanded further during his time in Italy, where he provided ongoing business support to locally-based companies, gaining invaluable insight into European business culture.</p>
-                            <p class="team-description">With over two decades of experience spanning Hospitality, New Business Development, and Customer Relations, Robert has developed an exceptional ability to connect with people from all backgrounds. As a highly skilled customer relations expert and experienced marketing professional, he brings his own unique flair to everything he does. His deep understanding of what it means to build a life in a new country, combined with his natural talent for making people feel at ease, makes him the perfect advocate for our UK-bound clients.</p>
+                            <p class="team-description">Originally from Australia, Robert has made the United Kingdom his home for over 20 years, working extensively across both England and Scotland with a focus on customer-facing roles.</p>
+                            <p class="team-description">His international perspective expanded further during his time in Italy, where he provided ongoing business support to locally based companies, gaining invaluable insight into European business culture.</p>
+                            <p class="team-description">With over two decades of experience spanning Hospitality, New Business Development, and Customer Relations, Robert has developed an exceptional ability to connect with people from all backgrounds.</p>
+                            <p class="team-description">As a highly skilled customer relations expert and experienced marketing professional, he brings his own unique flair to everything he does.</p>
+                            <p class="team-description">His deep understanding of what it means to build a life in a new country, combined with his natural talent for making people feel at ease, makes him the perfect advocate for our UK-bound clients.</p>
                             <div class="team-expertise">
-                                <span class="expertise-tag">20+ Years UK Experience</span>
+                                <span class="expertise-tag">20+ Years of UK Experience</span>
                                 <span class="expertise-tag">Cross-European Business</span>
                                 <span class="expertise-tag">Customer Relations Expert</span>
                                 <span class="expertise-tag">Marketing Professional</span>
@@ -457,16 +497,16 @@ get_header();
                         <p class="lead mb-4">Work with professionals who have lived the expat experience across four continents. Let our personal knowledge guide your successful relocation.</p>
                         <div class="cta-features d-flex flex-wrap gap-4">
                             <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-phone-alt text-primary me-2"></i>
-                                <span>Personal Consultation</span>
+                                <i class="fas fa-star text-primary me-2"></i>
+                                <span>Superior Service</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-globe text-primary me-2"></i>
-                                <span>Global Experience</span>
+                                <i class="fas fa-tags text-primary me-2"></i>
+                                <span>Superior Pricing</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-users text-primary me-2"></i>
-                                <span>Expat Team</span>
+                                <i class="fas fa-microchip text-primary me-2"></i>
+                                <span>Superior Technology</span>
                             </div>
                         </div>
                     </div>
@@ -493,6 +533,11 @@ get_header();
 /* About Page Specific Styles */
 .about-hero {
     min-height: 100vh;
+}
+
+/* Prevent hero H1 clipping at some viewports */
+.about-hero h1.display-2 {
+    line-height: 1.15;
 }
 
 .hero-pattern {
@@ -602,6 +647,9 @@ get_header();
 .dot-3 { bottom: 10px; right: 30%; animation-delay: 1.6s; }
 .dot-4 { bottom: 10px; left: 30%; animation-delay: 2.4s; }
 .dot-5 { top: 50%; left: 10px; transform: translateY(-50%); animation-delay: 3.2s; }
+
+/* Additional relocation icon */
+.dot-6 { top: 20%; left: 20%; animation-delay: 1.2s; }
 
 @keyframes float-dot {
     0%, 100% { transform: translateY(0); }

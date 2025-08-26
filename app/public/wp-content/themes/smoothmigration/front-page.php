@@ -7,35 +7,10 @@
 
 get_header(); ?>
 
-<a class="skip-link" href="#main-content">Skip to main content</a>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- 1. Enhanced Hero Section -->
 <section class="hero-landing">
-    <div class="hero-lottie-overlay" aria-hidden="true">
-        <?php
-        $hero_lottie = get_template_directory() . '/assets/lottie/hero-world.json';
-        if ( file_exists( $hero_lottie ) ) {
-            echo do_shortcode('[lottie src="' . get_template_directory_uri() . '/assets/lottie/hero-world.json" loop="true" autoplay="true" speed="1" class="hero-lottie" ]');
-        }
-        ?>
-        <div class="flight-overlay" aria-hidden="true">
-            <svg viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <defs>
-                    <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stop-color="#f59e0b"/>
-                        <stop offset="100%" stop-color="#1e40af"/>
-                    </linearGradient>
-                </defs>
-                <path id="flightPath" d="M100 450 C 300 350, 500 550, 700 420 S 1000 350, 1100 200" stroke="url(#routeGrad)" stroke-width="3" stroke-dasharray="6 8" stroke-linecap="round"/>
-                <g id="plane" transform="translate(100,450)">
-                    <path d="M0 -6 L18 0 L0 6 L3 0 Z" fill="#ffffff" stroke="#1e40af" stroke-width="1.5"/>
-                </g>
-                <animateMotion xlink:href="#plane" dur="8s" repeatCount="indefinite" rotate="auto">
-                    <mpath xlink:href="#flightPath"/>
-                </animateMotion>
-            </svg>
-        </div>
-    </div>
     <div class="hero-overlay-dark" aria-hidden="true"></div>
     <div class="container">
         <div class="row align-items-center min-vh-100">
@@ -51,8 +26,8 @@ get_header(); ?>
                     </div>
                     <div class="small text-light" style="opacity:.9">No additional or hidden costs.</div>
                     
-                    <h1 class="hero-headline">International relocation, made simple.</h1>
-                    <p class="hero-subheadline">Get a clear, step-by-step plan and vetted providers—tailored to your destination, timing, and budget.</p>
+                    <h1 class="hero-headline">Your international relocation, made simple.</h1>
+                    <p class="hero-subheadline">Get your clear, step-by-step plan and vetted providers—tailored to your destination, timing, and budget. Even if you're moving internationally for the first time, you'll have expert guidance every step of the way.</p>
                     
                     <!-- Enhanced CTA Group with Self-Segmentation -->
                     <div class="hero-cta-group">
@@ -99,12 +74,12 @@ get_header(); ?>
 </section>
 
 <!-- 2. Interactive How It Works Section -->
-<main id="main-content">
+<main id="main">
 <section class="how-it-works py-5" aria-labelledby="how-it-works-title">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 id="how-it-works-title" class="section-title">How It Works</h2>
-            <p class="section-subtitle">Answer a few questions, get a plan, and connect to vetted partners—see quick category links below.</p>
+            <h2 id="how-it-works-title" class="section-title">How It Works For You</h2>
+            <p class="section-subtitle">You answer a few questions, get your personalized plan, and connect to vetted partners who understand your needs—see quick category links below.</p>
         </div>
         
         <div class="row g-4">
@@ -112,7 +87,7 @@ get_header(); ?>
                 <div class="step-card interactive-card text-center" tabindex="0">
                     <div class="step-number">1</div>
                     <h3 class="step-title">Complete our questionnaire</h3>
-                    <p class="step-description">Tell us your relocation specifics—destination, timing, family, and priorities.</p>
+                    <p class="step-description">Tell us your relocation specifics—your destination, timing, family, and priorities.</p>
                 </div>
             </div>
             
@@ -120,15 +95,15 @@ get_header(); ?>
                 <div class="step-card interactive-card text-center" tabindex="0">
                     <div class="step-number">2</div>
                     <h3 class="step-title">Select services from your plan</h3>
-                    <p class="step-description">Use your custom plan to pick services and see tasks at each stage. Try the <a href="/ai-relocator" class="text-primary fw-bold">AI Relocator</a> for suggestions.</p>
+                    <p class="step-description">Use your custom plan to pick services and see your tasks at each stage. Try our <a href="/ai-relocator" class="text-primary fw-bold">AI Relocator</a> for personalized suggestions.</p>
                 </div>
             </div>
             
             <div class="col-lg-4">
                 <div class="step-card interactive-card text-center" tabindex="0">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Get preferred-rate quotes</h3>
-                    <p class="step-description">Receive tailored quotes from our trusted partners—often at competitive pricing.</p>
+                    <h3 class="step-title">Get your preferred-rate quotes</h3>
+                    <p class="step-description">You receive tailored quotes from our trusted partners—often at rates better than going direct.</p>
                 </div>
             </div>
         </div>
@@ -156,8 +131,8 @@ get_header(); ?>
 <section class="services-snapshot py-5 bg-light" aria-labelledby="services-title">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 id="services-title" class="section-title">Core Services</h2>
-            <p class="section-subtitle">Everything you need for a smooth international move — and it’s free to use.</p>
+            <h2 id="services-title" class="section-title">Your Core Services</h2>
+            <p class="section-subtitle">Everything you need for your smooth international move — and it's free to use. Even if you only need one service, you'll get expert guidance and vetted providers.</p>
         </div>
         
         <div class="row g-4 services-grid-limited">

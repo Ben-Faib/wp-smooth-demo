@@ -19,6 +19,7 @@ Tags: custom-theme, responsive, bootstrap
 @import url('assets/css/buttons.css');
 @import url('assets/css/cards.css');
 @import url('assets/css/sections.css');
+@import url('assets/css/guides.css');
 @import url('assets/css/footer.css');
 @import url('assets/css/responsive.css');
 
@@ -80,12 +81,60 @@ Tags: custom-theme, responsive, bootstrap
   --border-radius-xl: 1rem;
   --border-radius-2xl: 1.5rem;
   
+  /* Blur Effects for Glassmorphism */
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 12px;
+  --blur-xl: 16px;
+  --blur-2xl: 20px;
+  
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
   --gradient-secondary: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-light) 100%);
   --gradient-accent: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
   --gradient-hero: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--primary-dark) 100%);
   --gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 100%);
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  /* Dark Primary Colors */
+  --primary-color: #60a5fa;
+  --primary-dark: #3b82f6;
+  --primary-light: #93c5fd;
+  --primary-lighter: #1e3a8a;
+  
+  /* Dark Secondary Colors */
+  --secondary-color: #22d3ee;
+  --secondary-dark: #06b6d4;
+  --secondary-light: #67e8f9;
+  --secondary-lighter: #0e7490;
+  
+  /* Dark Accent Colors */
+  --accent-color: #fbbf24;
+  --accent-dark: #f59e0b;
+  --accent-light: #fcd34d;
+  --accent-lighter: #d97706;
+  
+  /* Dark Text Colors */
+  --text-dark: #f9fafb;
+  --text-medium: #d1d5db;
+  --text-light: #9ca3af;
+  --text-lighter: #6b7280;
+  
+  /* Dark Background Colors */
+  --bg-white: #111827;
+  --bg-light: #1f2937;
+  --bg-lighter: #374151;
+  --bg-section: #0f172a;
+  
+  /* Dark Border Colors */
+  --border-light: #374151;
+  --border-medium: #4b5563;
+  --border-dark: #6b7280;
+  
+  /* Dark Gradients */
+  --gradient-hero: linear-gradient(135deg, #1e3a8a 0%, #0e7490 50%, #1e40af 100%);
 }
 
 /* Enhanced Modern Typography */
@@ -109,6 +158,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
   letter-spacing: -0.01em;
 }
+
+/* Normalize heading/body scale across sections */
+.section-title { line-height: 1.2; }
+.section-subtitle { line-height: 1.6; }
 
 h1 {
   font-size: clamp(2.25rem, 5vw, 3.25rem);
@@ -194,6 +247,23 @@ section {
 .bg-gradient-primary {
   background: var(--gradient-primary) !important;
   color: white;
+}
+
+/* Improve default contrast on gradient backgrounds */
+.bg-gradient-primary, .bg-gradient-secondary {
+  --text-on-gradient: #ffffff;
+}
+.bg-gradient-primary h1, .bg-gradient-primary h2, .bg-gradient-primary h3,
+.bg-gradient-primary .lead, .bg-gradient-primary p,
+.bg-gradient-secondary h1, .bg-gradient-secondary h2, .bg-gradient-secondary h3,
+.bg-gradient-secondary .lead, .bg-gradient-secondary p {
+  color: var(--text-on-gradient);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* Links on gradients: ensure AA contrast */
+.bg-gradient-primary a.btn, .bg-gradient-secondary a.btn {
+  border-color: rgba(255,255,255,0.85);
 }
 
 .bg-gradient-secondary {
@@ -317,5 +387,164 @@ section {
 /* Reduce giant Forminator gaps */
 .forminator-ui .forminator-row {
   margin-bottom: 1rem;
+}
+
+/* Custom Cursor Highlights for Interactive Elements */
+.btn,
+.service-card-link,
+.step-card,
+.nav-link,
+.footer-link,
+.social-link,
+button,
+[role="button"],
+input[type="submit"],
+.interactive-card {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Subtle cursor highlight - only on hover for tasteful effect */
+.btn:hover,
+.service-card-link:hover,
+.step-card:hover,
+.nav-link:hover,
+.footer-link:hover,
+.social-link:hover,
+button:hover,
+[role="button"]:hover,
+input[type="submit"]:hover,
+.interactive-card:hover {
+  cursor: pointer;
+}
+
+/* Add subtle focus ring animations */
+.btn:focus-visible,
+.service-card:focus-within,
+.step-card:focus,
+.nav-link:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  outline-style: solid;
+  animation: focus-pulse 2s infinite;
+}
+
+@keyframes focus-pulse {
+  0%, 100% { outline-color: var(--primary-color); }
+  50% { outline-color: var(--primary-light); }
+}
+
+/* Enhanced ripple effect for buttons */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.btn-ripple:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.btn-ripple:active:after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
+
+/* Disable custom cursor effects when reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+  .btn:focus-visible,
+  .service-card:focus-within,
+  .step-card:focus,
+  .nav-link:focus-visible {
+    animation: none;
+  }
+  
+  .btn-ripple:after {
+    transition: none;
+    display: none;
+  }
+}
+
+/* Scroll-Triggered Animation Styles */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section-specific animations */
+.animate-section {
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-section.animate-in {
+  transform: translateY(0);
+}
+
+/* Floating animation for hero elements */
+.animate-float {
+  opacity: 0;
+  transform: translateY(20px) rotate(0deg);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.animate-float.animate-in {
+  opacity: 1;
+  transform: translateY(0) rotate(5deg);
+  animation: gentle-float 6s ease-in-out infinite;
+}
+
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0) rotate(5deg); }
+  50% { transform: translateY(-10px) rotate(-3deg); }
+}
+
+/* Staggered animations for card grids */
+.service-card.animate-on-scroll {
+  transition-delay: var(--delay, 0s);
+}
+
+.step-card.animate-on-scroll {
+  transition-delay: var(--delay, 0s);
+}
+
+.feature-item.animate-on-scroll {
+  transition-delay: var(--delay, 0s);
+}
+
+/* Disable all animations when reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .animate-section,
+  .animate-float {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  .animate-float.animate-in {
+    animation: none !important;
+  }
 }
 

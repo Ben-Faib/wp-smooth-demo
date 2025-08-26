@@ -29,7 +29,7 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 				'languages' => array( 'en' => 'English', 'fr' => 'Français', 'es' => 'Español', 'de' => 'Deutsch' ),
 			),
 			'uk' => array(
-				'domain'    => 'smoothmigration.co.uk',
+				'domain'    => 'smoothmigration.uk',
 				'label'     => 'United Kingdom',
 				'hreflang'  => array( 'en-GB' ),
 				'languages' => array( 'en-GB' => 'English (UK)', 'fr' => 'Français', 'es' => 'Español', 'de' => 'Deutsch' ),

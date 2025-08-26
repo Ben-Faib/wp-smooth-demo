@@ -333,11 +333,6 @@ body.header-scrolled .top-bar {
   }
 }
 
-/* Ensure content doesn't hide behind fixed header */
-body {
-    padding-top: 0;
-}
-
 .admin-bar body {
     padding-top: 32px; /* Only adjust for WordPress admin bar */
 }
@@ -464,4 +459,67 @@ body.header-hide .site-header { transform: translateY(-100%); }
 /* Hide desktop collapse on mobile since we use off-canvas */
 @media (max-width: 991.98px) {
   #primary-menu { display: none !important; }
+}
+
+/* Dark Mode Toggle Styles */
+#theme-toggle {
+  position: relative;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-white);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  padding: 0;
+}
+
+#theme-toggle:hover,
+#theme-toggle:focus {
+  background: var(--primary-lighter);
+  border-color: var(--primary-light);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-icon {
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+.sun-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.moon-icon {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+[data-theme="dark"] .sun-icon {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+[data-theme="dark"] .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+#theme-toggle:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support for theme toggle */
+@media (prefers-reduced-motion: reduce) {
+  .theme-icon {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
 }

@@ -1,123 +1,33 @@
 <?php
 /**
- * Template Name: Moving Guides
+ * Template Name: Moving Guides (Legacy - Redirects to Enhanced)
  * 
  * @package smoothmigration
  */
 
+// Redirect to enhanced guides page
+$enhanced_guides_page = get_pages(array(
+    'meta_key' => '_wp_page_template',
+    'meta_value' => 'page-guides-enhanced.php',
+    'posts_per_page' => 1
+));
+
+if (!empty($enhanced_guides_page)) {
+    wp_redirect(get_permalink($enhanced_guides_page[0]->ID), 301);
+    exit;
+}
+
 get_header();
 ?>
 
-<style>
-.guides-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 100px 0 60px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.guides-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='0.1'%3E%3Cpolygon fill='white' points='50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: 100px 100px;
-}
-
-.guides-content {
-    background: #f8f9fa;
-    padding: 60px 0;
-}
-
-.guide-card {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.guide-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    text-decoration: none;
-    color: inherit;
-}
-
-.guide-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.guide-title {
-    color: #2c3e50;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.guide-description {
-    color: #6c757d;
-    line-height: 1.8;
-    margin-bottom: 15px;
-}
-
-.guide-meta {
-    display: flex;
-    gap: 20px;
-    font-size: 0.9rem;
-    color: #95a5a6;
-}
-
-.guide-meta-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.coming-soon-badge {
-    display: inline-block;
-    background: #ffc107;
-    color: #856404;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-top: 10px;
-}
-
-.cta-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 60px 0;
-    color: white;
-    text-align: center;
-}
-</style>
-
-<div class="guides-hero">
+<div class="guides-hero bg-gradient-primary py-6 text-white position-relative overflow-hidden">
     <div class="container position-relative">
         <h1 class="display-4 fw-bold mb-3">Moving Guides</h1>
-        <p class="lead">Comprehensive guides to help you navigate every aspect of your international relocation.</p>
+        <p class="lead opacity-90">Comprehensive guides to help you navigate every aspect of your international relocation.</p>
     </div>
 </div>
 
-<div class="guides-content">
+<div class="guides-content bg-section py-6">
     <div class="container">
         <div class="row mb-5">
             <div class="col-lg-8 mx-auto text-center">
@@ -130,7 +40,7 @@ get_header();
             <!-- Pre-Move Planning -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-clipboard-list"></i>
                     </div>
                     <h3 class="guide-title">Pre-Move Planning</h3>
@@ -152,7 +62,7 @@ get_header();
             <!-- Country Guides -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-globe-americas"></i>
                     </div>
                     <h3 class="guide-title">Country-Specific Guides</h3>
@@ -163,7 +73,7 @@ get_header();
                             <span><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?> Countries</span>
                         </div>
                         <div class="guide-meta-item">
-                            <i class="fas fa-update"></i>
+                            <i class="fas fa-rotate-right"></i>
                             <span>Updated Monthly</span>
                         </div>
                     </div>
@@ -174,7 +84,7 @@ get_header();
             <!-- Immigration & Visas -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-passport"></i>
                     </div>
                     <h3 class="guide-title">Immigration & Visas</h3>
@@ -196,7 +106,7 @@ get_header();
             <!-- Housing & Real Estate -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-home"></i>
                     </div>
                     <h3 class="guide-title">Finding Housing Abroad</h3>
@@ -218,7 +128,7 @@ get_header();
             <!-- Banking & Finance -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-piggy-bank"></i>
                     </div>
                     <h3 class="guide-title">Banking & Finance</h3>
@@ -240,7 +150,7 @@ get_header();
             <!-- Healthcare -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-heartbeat"></i>
                     </div>
                     <h3 class="guide-title">Healthcare & Insurance</h3>
@@ -262,7 +172,7 @@ get_header();
             <!-- Education -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3 class="guide-title">Education & Schools</h3>
@@ -284,7 +194,7 @@ get_header();
             <!-- Cultural Integration -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="guide-title">Cultural Integration</h3>
@@ -306,7 +216,7 @@ get_header();
             <!-- Emergency Prep -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <a href="#" class="guide-card">
-                    <div class="guide-icon">
+                    <div class="guide-icon bg-gradient-primary">
                         <i class="fas fa-first-aid"></i>
                     </div>
                     <h3 class="guide-title">Emergency Preparation</h3>
@@ -328,7 +238,7 @@ get_header();
     </div>
 </div>
 
-<section class="cta-section">
+<section class="cta-section bg-gradient-primary">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">

@@ -22,6 +22,11 @@ require_once get_template_directory() . '/inc/locale-switcher.php';
 
 // Custom post types and taxonomies.
 require_once get_template_directory() . '/inc/cpt-service.php';
+require_once get_template_directory() . '/inc/cpt-guide.php';
+
+// Guide helper functions.
+require_once get_template_directory() . '/inc/guide-helpers.php';
+require_once get_template_directory() . '/inc/guide-demo-content.php';
 
 // Integrations.
 require_once get_template_directory() . '/inc/elementor.php';
@@ -31,6 +36,10 @@ require_once get_template_directory() . '/inc/demo-content.php';
 
 // Importer utilities for creating services from uploaded logos.
 require_once get_template_directory() . '/inc/service-import.php';
+// Bulk import system for folder/zip uploads
+require_once get_template_directory() . '/inc/bulk-import.php';
+// Demo script for bulk import (add ?bulk_import_demo=1 to test)
+require_once get_template_directory() . '/bulk-import-demo.php';
 // Helpers for logos and rendering choices
 require_once get_template_directory() . '/inc/service-helpers.php';
 // Options page for data-driven content

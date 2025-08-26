@@ -210,3 +210,144 @@ function smoothmigration_submit_realtor_form() {
 }
 add_action( 'wp_ajax_submit_realtor_form', 'smoothmigration_submit_realtor_form' );
 add_action( 'wp_ajax_nopriv_submit_realtor_form', 'smoothmigration_submit_realtor_form' );
+
+/**
+ * AJAX handler for loading guides with filtering and pagination
+ */
+function smoothmigration_load_guides() {
+    // Security check
+    check_ajax_referer( 'load_guides_nonce', 'nonce' );
+    
+    // Get parameters
+    $page = absint( $_POST['page'] ?? 1 );
+    $search = sanitize_text_field( $_POST['search'] ?? '' );
+    $category = sanitize_text_field( $_POST['category'] ?? '' );
+    $difficulty = sanitize_text_field( $_POST['difficulty'] ?? '' );
+    $timeline = sanitize_text_field( $_POST['timeline'] ?? '' );
+    $country = sanitize_text_field( $_POST['country'] ?? '' );
+    $sort = sanitize_text_field( $_POST['sort'] ?? 'date' );
+    $per_page = 9;
+    
+    // Build query arguments
+    $args = array(
+        'post_type' => 'guide',
+        'post_status' => 'publish',
+        'posts_per_page' => $per_page,
+        'paged' => $page
+    );
+    
+    // Search
+    if ( ! empty( $search ) ) {
+        $args['s'] = $search;
+    }
+    
+    // Tax queries
+    $tax_query = array();
+    
+    if ( ! empty( $category ) ) {
+        $tax_query[] = array(
+            'taxonomy' => 'guide_category',
+            'field' => 'slug',
+            'terms' => $category
+        );
+    }
+    
+    if ( ! empty( $timeline ) ) {
+        $tax_query[] = array(
+            'taxonomy' => 'guide_timeline',
+            'field' => 'slug',
+            'terms' => $timeline
+        );
+    }
+    
+    if ( ! empty( $country ) ) {
+        $tax_query[] = array(
+            'taxonomy' => 'guide_country',
+            'field' => 'slug',
+            'terms' => $country
+        );
+    }
+    
+    if ( ! empty( $tax_query ) ) {
+        $args['tax_query'] = $tax_query;
+    }
+    
+    // Meta queries
+    $meta_query = array();
+    
+    if ( ! empty( $difficulty ) ) {
+        $meta_query[] = array(
+            'key' => '_guide_difficulty',
+            'value' => $difficulty,
+            'compare' => '='
+        );
+    }
+    
+    if ( ! empty( $meta_query ) ) {
+        $args['meta_query'] = $meta_query;
+    }
+    
+    // Sorting
+    switch ( $sort ) {
+        case 'title':
+            $args['orderby'] = 'title';
+            $args['order'] = 'ASC';
+            break;
+        case 'difficulty':
+            $args['meta_key'] = '_guide_difficulty';
+            $args['orderby'] = 'meta_value';
+            $args['order'] = 'ASC';
+            break;
+        case 'duration':
+            $args['meta_key'] = '_guide_duration';
+            $args['orderby'] = 'meta_value';
+            $args['order'] = 'ASC';
+            break;
+        default:
+            $args['orderby'] = 'date';
+            $args['order'] = 'DESC';
+            break;
+    }
+    
+    // Execute query
+    $guides_query = new WP_Query( $args );
+    
+    if ( $guides_query->have_posts() ) {
+        $guides_html = '';
+        $guides_data = array();
+        
+        while ( $guides_query->have_posts() ) {
+            $guides_query->the_post();
+            $guide_id = get_the_ID();
+            
+            $guides_data[] = array(
+                'id' => $guide_id,
+                'title' => get_the_title(),
+                'link' => get_permalink()
+            );
+            
+            // Render guide card
+            ob_start();
+            echo '<div class="col-lg-4 col-md-6 mb-4">';
+            echo smoothmigration_render_guide_card( $guide_id );
+            echo '</div>';
+            $guides_html .= ob_get_clean();
+        }
+        
+        wp_reset_postdata();
+        
+        wp_send_json_success( array(
+            'html' => $guides_html,
+            'guides' => $guides_data,
+            'total' => $guides_query->found_posts,
+            'pages' => $guides_query->max_num_pages,
+            'current_page' => $page
+        ) );
+    } else {
+        wp_send_json_error( array(
+            'message' => 'No guides found matching your criteria.'
+        ) );
+    }
+}
+add_action( 'wp_ajax_load_guides', 'smoothmigration_load_guides' );
+add_action( 'wp_ajax_nopriv_load_guides', 'smoothmigration_load_guides' );

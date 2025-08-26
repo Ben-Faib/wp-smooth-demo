@@ -49,6 +49,17 @@ function smoothmigration_enqueue_assets() {
     // Custom theme JavaScript
     wp_enqueue_script( 'smoothmigration-js', get_template_directory_uri() . '/assets/js/theme.js', array( 'bootstrap' ), $ver, true );
 
+    // Enqueue guides system JavaScript on guides pages
+    if ( is_page_template( 'page-guides-enhanced.php' ) || is_page_template( 'page-guides.php' ) || is_singular( 'guide' ) ) {
+        wp_enqueue_script( 'smoothmigration-guides', get_template_directory_uri() . '/assets/js/guides.js', array( 'smoothmigration-js' ), $ver, true );
+        
+        // Localize guides script
+        wp_localize_script( 'smoothmigration-guides', 'guideAjax', array(
+            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+            'nonce' => wp_create_nonce( 'load_guides_nonce' )
+        ) );
+    }
+
     // If front page, ensure Lordicon web component is available for animated icons
     if ( is_front_page() ) {
         wp_enqueue_script( 'lordicon' );

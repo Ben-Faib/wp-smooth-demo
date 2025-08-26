@@ -1,9 +1,22 @@
-/* Enhanced Footer Styles - Fixed Logo & Simplified */
+/* Enhanced Mega Footer Styles */
 .site-footer {
     background: var(--text-dark);
     color: white;
-    padding: 3rem 0 1.5rem;
+    padding: 4rem 0 2rem;
     margin-top: 4rem;
+}
+
+/* Footer Tier Structure */
+.footer-tier-1 {
+    margin-bottom: 3rem;
+}
+
+.footer-nav-grid {
+    width: 100%;
+}
+
+.footer-tier-3 {
+    margin-top: 2rem;
 }
 
 /* Fixed Footer Brand Section */
@@ -32,7 +45,8 @@
     font-size: 1.25rem;
     font-weight: 700;
     color: white;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.2px;
+    text-transform: none;
 }
 
 .footer-description {
@@ -175,6 +189,7 @@
     
     .footer-brand-text {
         font-size: 1.1rem;
+        text-transform: none;
     }
     
     .footer-heading {
@@ -294,5 +309,75 @@
     
     .footer-links:hover {
         transform: none;
+    }
+}
+
+/* Trust Metrics Section */
+.trust-metrics {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.trust-metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.trust-metric-item strong {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/* Footer Contact Section */
+.footer-tagline {
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.footer-contact p {
+    margin-bottom: 0.75rem;
+}
+
+.footer-contact .btn {
+    margin-top: 0.5rem;
+}
+
+/* Footer Mission Text */
+.footer-mission {
+    margin-top: 1rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Responsive Adjustments for Mega Footer */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 2rem 0 1.5rem;
+        text-align: center;
+    }
+    
+    .footer-tier-1,
+    .footer-tier-3 {
+        margin-bottom: 2rem;
+    }
+    
+    .trust-metrics {
+        justify-content: center;
+        gap: 1.5rem;
+    }
+    
+    .footer-nav-grid .row {
+        text-align: center;
+    }
+    
+    .footer-contact,
+    .footer-social-copyright {
+        text-align: center;
+        margin-bottom: 2rem;
     }
 }
