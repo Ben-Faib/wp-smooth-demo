@@ -87,7 +87,7 @@ get_header();
             $service_enhancements = array(
                 'money-services' => array(
                     'icon' => 'fa-solid fa-credit-card',
-                    'name' => 'Money Services',
+                    'name' => 'Banking Services',
                     'description' => 'Banking and international transfers set up for expats.',
                     'features' => ['Account Opening', 'Cards & Payments', 'International Transfers'],
                     'timeline' => '1-2 weeks',

@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function smoothmigration_ensure_core_service_terms(): void {
 	$terms = array(
 		'realtor' => 'Realtor Locator',
-		'money-services' => 'Money Services',
+		'money-services' => 'Banking Services',
 		'telecommunication' => 'Telecommunication',
 		'vehicles' => 'Vehicle Services',
 		'international-moving' => 'International Moving',
@@ -42,7 +42,7 @@ function smoothmigration_guess_type_from_filename( string $filename ): string {
     $lower = strtolower( $filename );
     // Priority keyword mapping for known brands
     $map = array(
-        // Money Services
+        // Banking Services
         'wise' => 'money-services',
         'remit' => 'money-services',
         'chime' => 'money-services',

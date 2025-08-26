@@ -29,7 +29,7 @@ function smoothmigration_bulk_import_demo_notice() {
         <pre style="background: #f6f7f7; padding: 10px; border-radius: 3px;">
 4-Layer Structure Example:
 South Africa/
-├── Money Services/
+├── Banking Services/
 │   ├── Wise/ (5 images)
 │   ├── Remitly/ (6 images)
 │   └── XE Money transfers/ (7 images)

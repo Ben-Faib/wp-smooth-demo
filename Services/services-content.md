@@ -2,7 +2,7 @@
 
 This document provides human-readable summaries and talking points for each partner service page. Use this as source for editorial refinement.
 
-## Money Services
+## Banking Services
 
 ### Wise
 - Overview: Global money account and international transfers with transparent fees and mid-market exchange rates.

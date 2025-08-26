@@ -219,7 +219,7 @@ get_header(); ?>
         </div>
         
         <div class="row g-4 services-grid-limited">
-            <!-- Left: Money Services (taxonomy link) -->
+            <!-- Left: Banking Services (taxonomy link) -->
             <div class="col-lg-4 col-md-6">
                 <a href="/service-type/money-services/" class="service-card-link">
                     <div class="service-card interactive-card" aria-describedby="money-services-desc">

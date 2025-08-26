@@ -41,7 +41,7 @@ get_header();
                         'link' => '/realtor-form'
                     ),
                     'money-services' => array(
-                        'name' => 'Money Services',
+                        'name' => 'Banking Services',
                         'icon' => 'fa-solid fa-credit-card',
                         'description' => 'Banking and international transfers set up for expats.',
                         'existing' => 'money-services',

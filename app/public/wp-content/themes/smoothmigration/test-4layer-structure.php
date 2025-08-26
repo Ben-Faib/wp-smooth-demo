@@ -43,7 +43,7 @@ South Africa/
                 <h4>Recommended Structure (4-layer)</h4>
                 <pre style="background: #eeffee; padding: 10px; border-radius: 3px; font-size: 11px;">
 South Africa/
-├── Money Services/
+├── Banking Services/
 │   ├── Wise/
 │   ├── Remitly/
 │   └── XE Money transfers/
@@ -64,7 +64,7 @@ South Africa/
             <h4>🎯 Service Type Mappings</h4>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
                 <div>
-                    <strong>Money Services:</strong><br>
+                    <strong>Banking Services:</strong><br>
                     • Wise<br>
                     • Remitly<br>
                     • XE Money transfers<br>
