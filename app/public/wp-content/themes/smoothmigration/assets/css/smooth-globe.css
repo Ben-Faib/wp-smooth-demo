@@ -20,6 +20,353 @@
   transition: filter 0.3s ease;
 }
 
+/* Enhanced point styling for country nodes and animated dots */
+.smooth-globe {
+  position: relative;
+}
+
+.smooth-globe::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: gentle-pulse 8s ease-in-out infinite;
+}
+
+/* Prominent country nodes styling - 5 distinct glowing effects */
+.smooth-globe-wrap .supported-country-node.australia-node {
+  animation: australia-glow 6s ease-in-out infinite;
+}
+
+.smooth-globe-wrap .supported-country-node.uk-node {
+  animation: uk-glow 6s ease-in-out infinite;
+}
+
+.smooth-globe-wrap .supported-country-node.usa-node {
+  animation: usa-glow 6s ease-in-out infinite;
+}
+
+.smooth-globe-wrap .supported-country-node.canada-node {
+  animation: canada-glow 6s ease-in-out infinite;
+}
+
+.smooth-globe-wrap .supported-country-node.south-africa-node {
+  animation: south-africa-glow 6s ease-in-out infinite;
+}
+
+/* Australia - Oceanic blue-green glow with wave-like pulsing */
+@keyframes australia-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px #00b894) drop-shadow(0 0 20px rgba(0, 184, 148, 0.4));
+  }
+  25% {
+    filter: drop-shadow(0 0 15px #00b894) drop-shadow(0 0 25px rgba(0, 184, 148, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 18px #00b894) drop-shadow(0 0 30px rgba(0, 184, 148, 0.6));
+  }
+  75% {
+    filter: drop-shadow(0 0 15px #00b894) drop-shadow(0 0 25px rgba(0, 184, 148, 0.5));
+  }
+}
+
+/* UK - Royal purple glow with sophisticated pulsing */
+@keyframes uk-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px #9c27b0) drop-shadow(0 0 20px rgba(156, 39, 176, 0.4));
+  }
+  20% {
+    filter: drop-shadow(0 0 14px #9c27b0) drop-shadow(0 0 22px rgba(156, 39, 176, 0.45));
+  }
+  40% {
+    filter: drop-shadow(0 0 16px #9c27b0) drop-shadow(0 0 26px rgba(156, 39, 176, 0.55));
+  }
+  60% {
+    filter: drop-shadow(0 0 18px #9c27b0) drop-shadow(0 0 30px rgba(156, 39, 176, 0.65));
+  }
+  80% {
+    filter: drop-shadow(0 0 14px #9c27b0) drop-shadow(0 0 22px rgba(156, 39, 176, 0.45));
+  }
+}
+
+/* USA - Patriotic blue glow with strong, steady pulsing */
+@keyframes usa-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px #3f51b5) drop-shadow(0 0 20px rgba(63, 81, 181, 0.4));
+  }
+  33% {
+    filter: drop-shadow(0 0 16px #3f51b5) drop-shadow(0 0 28px rgba(63, 81, 181, 0.6));
+  }
+  66% {
+    filter: drop-shadow(0 0 20px #3f51b5) drop-shadow(0 0 35px rgba(63, 81, 181, 0.7));
+  }
+}
+
+/* Canada - Maple leaf inspired warm glow with gentle waves */
+@keyframes canada-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px #ffc107) drop-shadow(0 0 20px rgba(255, 193, 7, 0.4));
+  }
+  15% {
+    filter: drop-shadow(0 0 14px #ffc107) drop-shadow(0 0 22px rgba(255, 193, 7, 0.45));
+  }
+  30% {
+    filter: drop-shadow(0 0 16px #ffc107) drop-shadow(0 0 26px rgba(255, 193, 7, 0.55));
+  }
+  45% {
+    filter: drop-shadow(0 0 18px #ffc107) drop-shadow(0 0 30px rgba(255, 193, 7, 0.65));
+  }
+  60% {
+    filter: drop-shadow(0 0 16px #ffc107) drop-shadow(0 0 26px rgba(255, 193, 7, 0.55));
+  }
+  75% {
+    filter: drop-shadow(0 0 14px #ffc107) drop-shadow(0 0 22px rgba(255, 193, 7, 0.45));
+  }
+  85% {
+    filter: drop-shadow(0 0 13px #ffc107) drop-shadow(0 0 21px rgba(255, 193, 7, 0.42));
+  }
+}
+
+/* South Africa - Vibrant green-gold glow with African rhythm */
+@keyframes south-africa-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px #4caf50) drop-shadow(0 0 20px rgba(76, 175, 80, 0.4));
+  }
+  12% {
+    filter: drop-shadow(0 0 14px #4caf50) drop-shadow(0 0 23px rgba(76, 175, 80, 0.45));
+  }
+  25% {
+    filter: drop-shadow(0 0 16px #4caf50) drop-shadow(0 0 27px rgba(76, 175, 80, 0.55));
+  }
+  37% {
+    filter: drop-shadow(0 0 18px #4caf50) drop-shadow(0 0 32px rgba(76, 175, 80, 0.65));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #4caf50) drop-shadow(0 0 36px rgba(76, 175, 80, 0.7));
+  }
+  62% {
+    filter: drop-shadow(0 0 18px #4caf50) drop-shadow(0 0 32px rgba(76, 175, 80, 0.65));
+  }
+  75% {
+    filter: drop-shadow(0 0 16px #4caf50) drop-shadow(0 0 27px rgba(76, 175, 80, 0.55));
+  }
+  87% {
+    filter: drop-shadow(0 0 14px #4caf50) drop-shadow(0 0 23px rgba(76, 175, 80, 0.45));
+  }
+}
+
+/* Country node glow effects */
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+/* Enhanced interaction feedback */
+.smooth-globe-wrap.interactive-active {
+  position: relative;
+}
+
+.smooth-globe-wrap.interactive-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  border-radius: 8px;
+  pointer-events: none;
+  animation: interaction-pulse 2s ease-out;
+}
+
+@keyframes interaction-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+/* Migration route highlights */
+.smooth-globe-wrap.route-highlight {
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+  transition: box-shadow 0.5s ease;
+}
+
+/* Australia path enhancements */
+.australia-path {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8)) !important;
+  animation: australia-path-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes australia-path-glow {
+  0% {
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+  }
+  100% {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 1));
+  }
+}
+
+/* Source country nodes styling */
+.source-country-node {
+  filter: drop-shadow(0 0 3px rgba(120, 120, 120, 0.5));
+  opacity: 0.8;
+}
+
+/* Enhanced immigration flow indicators */
+.immigration-flow {
+  position: relative;
+}
+
+.immigration-flow::before {
+  content: '→';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  animation: flow-indicator 1.5s ease-in-out infinite;
+}
+
+@keyframes flow-indicator {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Hide globe container styling during drag interactions */
+.smooth-globe-wrap.globe-dragging {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: all 0.2s ease-out;
+}
+
+.smooth-globe-wrap.globe-dragging::before,
+.smooth-globe-wrap.globe-dragging::after {
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+/* Services page specific drag styling */
+.services-parallax-globe.globe-dragging {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Restore container styling when drag ends */
+.smooth-globe-wrap:not(.globe-dragging) {
+  transition: all 0.3s ease-in;
+}
+
+.smooth-globe-wrap:not(.globe-dragging)::before,
+.smooth-globe-wrap:not(.globe-dragging)::after {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Animated dots styling */
+@keyframes dot-travel {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+}
+
+/* Country information panel */
+#country-info-panel {
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#country-info-panel .country-flag {
+  font-size: 1.2em;
+  margin-right: 8px;
+}
+
+#country-info-panel .country-name {
+  font-weight: 600;
+  color: var(--primary-color, #3b82f6);
+}
+
+#country-info-panel .services-list {
+  margin-top: 8px;
+  font-size: 0.85em;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* Enhanced tooltip styling */
+.smooth-globe-wrap .globe-tooltip {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  font-family: inherit !important;
+}
+
+.smooth-globe-wrap .globe-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgba(0, 0, 0, 0.9);
+}
+
 /* Scroll conflict prevention styles */
 .smooth-globe-wrap.scroll-disabled {
   pointer-events: none;

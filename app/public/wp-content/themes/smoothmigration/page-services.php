@@ -474,6 +474,78 @@ get_header();
     box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
 }
 
+/* Colorful, layered background for the services section */
+.services-grid {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(1200px 600px at 0% -10%, color-mix(in srgb, var(--primary-light) 18%, transparent), transparent 60%),
+        radial-gradient(800px 400px at 110% 5%, color-mix(in srgb, var(--secondary-light) 18%, transparent), transparent 60%),
+        linear-gradient(180deg, rgba(17,24,39,.02), rgba(17,24,39,.04));
+}
+
+.services-grid::before,
+.services-grid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.services-grid::before {
+    background:
+        radial-gradient(220px 220px at 12% 18%, color-mix(in srgb, var(--primary-light) 28%, transparent), transparent 60%),
+        conic-gradient(from 200deg at 120% -20%, color-mix(in srgb, var(--secondary-light) 24%, transparent) 10%, transparent 20% 100%),
+        linear-gradient(180deg, transparent, rgba(0,0,0,.02));
+    opacity: .65;
+    transform: translateY(var(--bg-before-y,0)) rotate(var(--bg-before-rot,0deg));
+    transition: transform .2s ease-out;
+}
+
+.services-grid::after {
+    background:
+        radial-gradient(260px 260px at 85% 80%, color-mix(in srgb, var(--accent-light) 26%, transparent), transparent 60%),
+        radial-gradient(900px 400px at 50% 110%, color-mix(in srgb, var(--secondary-lighter) 12%, transparent), transparent 60%),
+        radial-gradient(circle at 1px 1px, rgba(17,24,39,.06) 1px, transparent 1px);
+    background-size:
+        auto,
+        auto,
+        24px 24px;
+    opacity: .55;
+    transform: translateY(var(--bg-after-y,0)) scale(var(--bg-after-scale,1));
+    transition: transform .2s ease-out, opacity .3s ease-out;
+}
+
+/* Optional: a faint halo behind the globe */
+.services-parallax-globe {
+    position: relative;
+    z-index: 1;
+}
+.services-parallax-globe::before {
+    content: '';
+    position: absolute;
+    inset: -60px;
+    border-radius: 50%;
+    background:
+        conic-gradient(from 0deg at 50% 50%, color-mix(in srgb, var(--secondary-light) 18%, transparent) 0 12%, transparent 12% 100%);
+    filter: blur(20px);
+    opacity: .45;
+    z-index: -1;
+}
+
+/* Debug toggle to preview stronger background via ?bg=1 */
+.debug-bg .services-grid::before,
+.debug-bg .services-grid::after { opacity: .9; }
+
+/* Dark mode balance */
+[data-theme="dark"] .services-grid {
+    background:
+        radial-gradient(1200px 600px at 0% -10%, color-mix(in srgb, var(--primary-lighter) 25%, transparent), transparent 60%),
+        radial-gradient(800px 400px at 110% 5%, color-mix(in srgb, var(--secondary-lighter) 25%, transparent), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.04));
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .service-card-header {
@@ -541,53 +613,24 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
 
-    // Add scroll-based parallax effects
-    let lastScrollY = window.scrollY;
-    let ticking = false;
+    // Lightweight CSS-variable parallax for background layers
+    const servicesGrid = document.querySelector('.services-grid');
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function updateParallax() {
-        const scrollY = window.scrollY;
-        const servicesGrid = document.querySelector('.services-grid');
-
-        if (servicesGrid) {
-            // Add scroll-animated class when scrolling
-            servicesGrid.classList.add('scroll-animated');
-
-            // Subtle parallax transform for background layers
-            const transformValue = `translateY(${scrollY * 0.1}px)`;
-            const beforeElement = servicesGrid.querySelector('::before');
-            const afterElement = servicesGrid.querySelector('::after');
-
-            if (beforeElement) {
-                beforeElement.style.transform = `translateY(${scrollY * 0.05}px) rotate(${scrollY * 0.01}deg)`;
-            }
-
-            if (afterElement) {
-                afterElement.style.transform = `translateY(${scrollY * -0.03}px) scale(${1 + scrollY * 0.0001})`;
-                afterElement.style.opacity = Math.max(0.3, 1 - scrollY * 0.001);
-            }
-        }
-
-        ticking = false;
+    function onScroll() {
+        if (!servicesGrid || prefersReduced) return;
+        const y = window.scrollY || 0;
+        servicesGrid.style.setProperty('--bg-before-y', (y * 0.06) + 'px');
+        servicesGrid.style.setProperty('--bg-before-rot', (y * 0.02) + 'deg');
+        servicesGrid.style.setProperty('--bg-after-y', (-y * 0.04) + 'px');
+        servicesGrid.style.setProperty('--bg-after-scale', (1 + y * 0.0002).toFixed(3));
     }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
 
-    function requestParallaxUpdate() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    }
-
-    // Throttle scroll events for better performance
-    let scrollThrottleTimer = null;
-    window.addEventListener('scroll', function() {
-        if (!scrollThrottleTimer) {
-            scrollThrottleTimer = setTimeout(function() {
-                requestParallaxUpdate();
-                scrollThrottleTimer = null;
-            }, 16); // ~60fps
-        }
-    }, { passive: true });
+    // Debug toggle to preview stronger background while reviewing: ?bg=1
+    const p = new URLSearchParams(location.search);
+    if (p.get('bg') === '1') document.documentElement.classList.add('debug-bg');
 
     // Add scroll-enhanced class to globe for better parallax
     const globeContainer = document.querySelector('.services-parallax-globe');
