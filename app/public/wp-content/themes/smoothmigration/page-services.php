@@ -29,6 +29,11 @@ get_header();
             </div>
         </div>
         
+        <!-- Globe: international routes preview -->
+        <div class="container mt-4 position-relative z-2">
+            <?php echo do_shortcode('[smooth_globe height="420px" id="services-globe"]'); ?>
+        </div>
+        
         <!-- Background Pattern -->
         <div class="hero-pattern position-absolute top-0 start-0 w-100 h-100 opacity-10"></div>
     </section>
@@ -47,8 +52,8 @@ get_header();
                     <div class="search-filter">
                         <div class="input-group">
                             <input type="text" class="form-control" id="serviceSearch" placeholder="Search services...">
-                            <button class="btn btn-outline-primary" type="button">
-                                <i class="fas fa-search"></i>
+                            <button class="btn btn-outline-primary" type="button" aria-label="Search services">
+                                <i class="fas fa-search" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -62,7 +67,7 @@ get_header();
         <div class="container">
             <?php
             // Curated list of service categories (reduced set)
-            $curated_slugs = array('realtor','money-services','telecommunication','vehicles','international-moving','insurance');
+            $curated_slugs = array('realtor','banking-services','data-and-phone-plans','vehicles','international-moving','insurance');
 
             // Build curated service types array, including a virtual "realtor" card
             $service_types = array();
@@ -85,7 +90,7 @@ get_header();
 
             // Enhanced service mapping with better icons and descriptions
             $service_enhancements = array(
-                'money-services' => array(
+                'banking-services' => array(
                     'icon' => 'fa-solid fa-credit-card',
                     'name' => 'Banking Services',
                     'description' => 'Banking and international transfers set up for expats.',
@@ -117,9 +122,9 @@ get_header();
                     'timeline' => '3-6 weeks',
                     'color' => 'warning'
                 ),
-                'telecommunication' => array(
+                'data-and-phone-plans' => array(
                     'icon' => 'fa-solid fa-mobile-screen',
-                    'name' => 'Mobile & Cellular Plans',
+                    'name' => 'Data and Phone Plans',
                     'description' => 'Mobile plans and connectivity solutions for seamless communication.',
                     'features' => ['Plan Selection', 'Device Setup', 'Network Optimization'],
                     'timeline' => '1 week',

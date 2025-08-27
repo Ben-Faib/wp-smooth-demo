@@ -47,7 +47,7 @@ South Africa/
 │   ├── Wise/
 │   ├── Remitly/
 │   └── XE Money transfers/
-├── Telecommunication/
+├── Data and Phone Plans/
 │   └── Airalo/
 ├── Vehicle Services/
 │   ├── Expat Ride/
@@ -70,7 +70,7 @@ South Africa/
                     • XE Money transfers<br>
                 </div>
                 <div>
-                    <strong>Telecommunication:</strong><br>
+                    <strong>Data and Phone Plans:</strong><br>
                     • Airalo<br>
                 </div>
                 <div>

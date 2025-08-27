@@ -69,10 +69,10 @@
                       ) );
                     ?>
                   <?php else : ?>
-                    <li><a href="/service-type/money-services/" class="footer-link">Banking Services</a></li>
+                    <li><a href="/service-type/banking-services/" class="footer-link">Banking Services</a></li>
                     <li><a href="/service-type/insurance/" class="footer-link">Insurance</a></li>
                     <li><a href="/service-type/vehicles/" class="footer-link">Vehicle Services</a></li>
-                    <li><a href="/service-type/telecommunication/" class="footer-link">Data and Phone Plans</a></li>
+                    <li><a href="/service-type/data-and-phone-plans/" class="footer-link">Data and Phone Plans</a></li>
                   <?php endif; ?>
                 </ul>
               </div>

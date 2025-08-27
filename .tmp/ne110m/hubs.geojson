@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {"type":"Feature","properties":{"name":"Canada"},"geometry":{"type":"Point","coordinates":[-79.3832,43.6532]}},
+    {"type":"Feature","properties":{"name":"US"},"geometry":{"type":"Point","coordinates":[-96.7970,32.7767]}},
+    {"type":"Feature","properties":{"name":"UK"},"geometry":{"type":"Point","coordinates":[-0.1276,51.5072]}},
+    {"type":"Feature","properties":{"name":"South Africa"},"geometry":{"type":"Point","coordinates":[28.0473,-26.2041]}},
+    {"type":"Feature","properties":{"name":"Australia"},"geometry":{"type":"Point","coordinates":[151.2093,-33.8688]}}
+  ]
+}

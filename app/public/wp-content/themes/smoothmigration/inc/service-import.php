@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 function smoothmigration_ensure_core_service_terms(): void {
 	$terms = array(
 		'realtor' => 'Realtor Locator',
-		'money-services' => 'Banking Services',
-		'telecommunication' => 'Telecommunication',
+		'banking-services' => 'Banking Services',
+		'data-and-phone-plans' => 'Data and Phone Plans',
 		'vehicles' => 'Vehicle Services',
 		'international-moving' => 'International Moving',
 		'insurance' => 'Insurance',
@@ -43,18 +43,18 @@ function smoothmigration_guess_type_from_filename( string $filename ): string {
     // Priority keyword mapping for known brands
     $map = array(
         // Banking Services
-        'wise' => 'money-services',
-        'remit' => 'money-services',
-        'chime' => 'money-services',
-        'bank' => 'money-services',
-        'homeloan' => 'money-services',
-        'home loan' => 'money-services',
+        'wise' => 'banking-services',
+        'remit' => 'banking-services',
+        'chime' => 'banking-services',
+        'bank' => 'banking-services',
+        'homeloan' => 'banking-services',
+        'home loan' => 'banking-services',
 
-        // Telecommunication
-        'verizon' => 'telecommunication',
-        'visible' => 'telecommunication',
-        'boost' => 'telecommunication',
-        'mobile' => 'telecommunication',
+        // Data and Phone Plans
+        'verizon' => 'data-and-phone-plans',
+        'visible' => 'data-and-phone-plans',
+        'boost' => 'data-and-phone-plans',
+        'mobile' => 'data-and-phone-plans',
 
         // Vehicles
         'carvana' => 'vehicles',

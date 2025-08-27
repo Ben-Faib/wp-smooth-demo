@@ -655,10 +655,14 @@
 
 /* Enhanced modal close button */
 .btn-close {
-  background: transparent !important;
+  background-color: transparent !important;
+  background-image: var(--bs-btn-close-bg) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 1rem !important;
   border: none !important;
   font-size: 1.2rem !important;
-  opacity: 0.7 !important;
+  opacity: 0.9 !important;
   transition: all 0.3s ease !important;
   border-radius: 50% !important;
   width: 36px !important;
@@ -666,14 +670,13 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  color: var(--text-dark) !important;
+  color: inherit !important;
 }
 
 .btn-close:hover {
   opacity: 1 !important;
-  background: rgba(255, 255, 255, 0.3) !important;
-  transform: scale(1.1) !important;
-  color: var(--primary-color) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  transform: scale(1.05) !important;
 }
 
 .btn-close:focus {

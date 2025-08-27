@@ -106,7 +106,7 @@ get_header();
                         
                         <div class="hero-cta">
                             <a href="#team" class="btn btn-outline-light btn-lg">
-                                <i class="fas fa-users me-2"></i>
+                                <i class="fas fa-users me-2" aria-hidden="true"></i>
                                 Meet the Team
                             </a>
                         </div>
@@ -330,8 +330,8 @@ get_header();
                         <div class="team-photo">
                             <?php echo get_team_member_image('Grant', 'Grant Sakinofsky'); ?>
                             <div class="team-social">
-                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                                <a href="#" class="social-link" aria-label="Grant Sakinofsky on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="#" class="social-link" aria-label="Email Grant Sakinofsky"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="team-info">
@@ -356,8 +356,8 @@ get_header();
                         <div class="team-photo">
                             <?php echo get_team_member_image(array('Erin-about', 'Erin Copeland', 'Erin'), 'Erin Copeland'); ?>
                             <div class="team-social">
-                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                                <a href="#" class="social-link" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="#" class="social-link" aria-label="Send email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="team-info">
@@ -383,8 +383,8 @@ get_header();
                         <div class="team-photo">
                             <?php echo get_team_member_image('Christian', 'Christian Harmbeck'); ?>
                             <div class="team-social">
-                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                                <a href="#" class="social-link" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="#" class="social-link" aria-label="Send email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="team-info">
@@ -411,8 +411,8 @@ get_header();
                         <div class="team-photo">
                             <?php echo get_team_member_image(array('Rob-about', 'Robert Wood', 'Rob'), 'Robert Wood'); ?>
                             <div class="team-social">
-                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                                <a href="#" class="social-link" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="#" class="social-link" aria-label="Send email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="team-info">

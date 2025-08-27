@@ -157,18 +157,19 @@ function smoothmigration_map_service_type_folder( string $folder_name ): string 
     $folder_lower = strtolower( trim( $folder_name ) );
     
     $mapping = array(
-        'banking services' => 'money-services',
-        'money' => 'money-services',
-        'banking' => 'money-services',
-        'financial' => 'money-services',
-        'finance' => 'money-services',
-        'remittance' => 'money-services',
+        'banking services' => 'banking-services',
+        'money' => 'banking-services',
+        'banking' => 'banking-services',
+        'financial' => 'banking-services',
+        'finance' => 'banking-services',
+        'remittance' => 'banking-services',
         
-        'telecommunication' => 'telecommunication',
-        'telecom' => 'telecommunication',
-        'mobile' => 'telecommunication',
-        'phone' => 'telecommunication',
-        'communication' => 'telecommunication',
+        'data and phone plans' => 'data-and-phone-plans',
+        'telecommunication' => 'data-and-phone-plans',
+        'telecom' => 'data-and-phone-plans',
+        'mobile' => 'data-and-phone-plans',
+        'phone' => 'data-and-phone-plans',
+        'communication' => 'data-and-phone-plans',
         
         'vehicle services' => 'vehicles',
         'vehicles' => 'vehicles',

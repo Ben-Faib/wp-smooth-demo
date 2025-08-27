@@ -18,6 +18,13 @@ get_header();
         </div>
     </header>
 
+    <!-- Globe Section for Services -->
+    <section class="services-globe-section py-4 bg-light">
+        <div class="container">
+            <?php echo do_shortcode('[smooth_globe height="420px" id="services-globe"]'); ?>
+        </div>
+    </section>
+
     <div class="page-content py-5">
         <div class="container">
             
@@ -40,12 +47,12 @@ get_header();
                         'existing' => 'realtor', 
                         'link' => '/realtor-form'
                     ),
-                    'money-services' => array(
+                    'banking-services' => array(
                         'name' => 'Banking Services',
                         'icon' => 'fa-solid fa-credit-card',
                         'description' => 'Banking and international transfers set up for expats.',
-                        'existing' => 'money-services',
-                        'link' => '/service-type/money-services/'
+                        'existing' => 'banking-services',
+                        'link' => '/service-type/banking-services/'
                     ),
                     'visas' => array(
                         'name' => 'Visas & Immigration',
@@ -86,8 +93,8 @@ get_header();
                         'name' => 'Mobile & Connectivity',
                         'icon' => 'fa-solid fa-mobile-screen',
                         'description' => 'Mobile plans and connectivity solutions for seamless communication.',
-                        'existing' => 'telecommunication',
-                        'link' => '/service-type/telecommunication/'
+                        'existing' => 'data-and-phone-plans',
+                        'link' => '/service-type/data-and-phone-plans/'
                     ),
                     'insurance' => array(
                         'name' => 'Insurance & Protection',

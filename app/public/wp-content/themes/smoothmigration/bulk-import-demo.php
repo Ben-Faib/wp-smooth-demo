@@ -33,7 +33,7 @@ South Africa/
 │   ├── Wise/ (5 images)
 │   ├── Remitly/ (6 images)
 │   └── XE Money transfers/ (7 images)
-├── Telecommunication/
+├── Data and Phone Plans/
 │   └── Airalo/ (3 images)
 ├── Vehicle Services/
 │   ├── Rentcars.com/ (10 images)

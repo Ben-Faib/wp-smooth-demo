@@ -49,7 +49,22 @@ require_once get_template_directory() . '/inc/options.php';
 // Stats helpers and shortcodes
 require_once get_template_directory() . '/inc/stats.php';
 
+// Globe (interactive services globe shortcode)
+require_once get_template_directory() . '/inc/globe.php';
+
 // Media taxonomies (Asset Type: Brand Logo)
 require_once get_template_directory() . '/inc/media-taxonomies.php';
 // Media bulk assignment tool
 require_once get_template_directory() . '/inc/media-bulk-assign.php';
+
+// Redirect old telecommunication slug to new data-and-phone-plans
+add_action( 'template_redirect', function() {
+    if ( is_tax( 'service_type', 'telecommunication' ) ) {
+        wp_redirect( home_url( '/service-type/data-and-phone-plans/' ), 301 );
+        exit;
+    }
+    if ( is_tax( 'service_type', 'money-services' ) ) {
+        wp_redirect( home_url( '/service-type/banking-services/' ), 301 );
+        exit;
+    }
+});

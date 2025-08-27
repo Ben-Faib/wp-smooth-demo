@@ -13,88 +13,7 @@ get_header(); ?>
 <section class="hero-landing">
     <div class="hero-overlay-dark" aria-hidden="true"></div>
     
-    <!-- Floating Service Cubes -->
-    <div class="hero-floating-cubes" aria-hidden="true">
-        <div class="floating-cube-element cube-housing" title="Housing Services">
-            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="housingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9" />
-                        <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
-                    </linearGradient>
-                    <filter id="cubeShadow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-                        <feOffset dx="1" dy="2" result="offset"/>
-                        <feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer>
-                        <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                </defs>
-                <g filter="url(#cubeShadow)">
-                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#housingGrad)"/>
-                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#housingGrad)" opacity="0.7"/>
-                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#housingGrad)" opacity="0.5"/>
-                    <path d="M18 40 L25 30 L32 40 M22 40 L22 35 L28 35 L28 40" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
-                </g>
-            </svg>
-        </div>
-        
-        <div class="floating-cube-element cube-finance" title="Financial Services">
-            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="financeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.9" />
-                        <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <g filter="url(#cubeShadow)">
-                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#financeGrad)"/>
-                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#financeGrad)" opacity="0.7"/>
-                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#financeGrad)" opacity="0.5"/>
-                    <path d="M25 18 L25 42 M20 22 L30 22 M20 38 L30 38" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
-                    <path d="M18 26 C18 24 20 22 25 22 C30 22 32 24 32 26 C32 28 30 30 25 30 C20 30 18 32 18 34 C18 36 20 38 25 38 C30 38 32 36 32 34" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
-                </g>
-            </svg>
-        </div>
-        
-        <div class="floating-cube-element cube-vehicle" title="Vehicle Services">
-            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="vehicleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.9" />
-                        <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <g filter="url(#cubeShadow)">
-                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#vehicleGrad)"/>
-                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#vehicleGrad)" opacity="0.7"/>
-                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#vehicleGrad)" opacity="0.5"/>
-                    <path d="M13 32 L37 32 M13 36 L37 36" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
-                    <circle cx="17" cy="38" r="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
-                    <circle cx="33" cy="38" r="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
-                    <path d="M15 32 L15 28 L19 24 L31 24 L35 28 L35 32" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
-                </g>
-            </svg>
-        </div>
-        
-        <div class="floating-cube-element cube-communication" title="Communication Services">
-            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="commGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.9" />
-                        <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <g filter="url(#cubeShadow)">
-                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#commGrad)"/>
-                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#commGrad)" opacity="0.7"/>
-                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#commGrad)" opacity="0.5"/>
-                    <rect x="19" y="23" width="12" height="20" rx="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
-                    <line x1="22" y1="26" x2="28" y2="26" stroke="white" stroke-width="1" opacity="0.9"/>
-                    <circle cx="25" cy="38" r="1" fill="white" opacity="0.9"/>
-                </g>
-            </svg>
-        </div>
-    </div>
+    <!-- World map moved to right column; service cubes relocated below hero -->
     
     <div class="container">
         <div class="row align-items-center min-vh-100">
@@ -143,12 +62,24 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            <?php $expats = trim( (string) get_option( 'sm_expats_count', '' ) ); if ( $expats !== '' ) : ?>
-            <div class="stat-item">
-                <div class="stat-number"><?php echo esc_html( $expats ); ?></div>
-                <div class="stat-label">Expats In Our Community</div>
+            <div class="col-lg-4 d-none d-lg-block">
+                <div class="hero-map-container" aria-hidden="true">
+                    <?php
+                    $map_path = get_template_directory() . '/assets/svg/world-map.svg';
+                    if ( file_exists( $map_path ) ) {
+                        echo file_get_contents( $map_path );
+                    } else {
+                        echo '<img src="' . esc_url( get_template_directory_uri() . '/assets/svg/world-map.svg' ) . '" alt="" />';
+                    }
+                    ?>
+                </div>
+                <?php $expats = trim( (string) get_option( 'sm_expats_count', '' ) ); if ( $expats !== '' ) : ?>
+                <div class="stat-item mt-4">
+                    <div class="stat-number"><?php echo esc_html( $expats ); ?></div>
+                    <div class="stat-label">Expats In Our Community</div>
+                </div>
+                <?php endif; ?>
             </div>
-            <?php endif; ?>
         </div>
         <?php $updated = trim( (string) get_option( 'sm_stats_last_updated', '' ) ); if ( $updated !== '' ) : ?>
         <p class="text-muted small mt-2"><?php echo esc_html( $updated ); ?> <a class="text-muted" href="/methodology" aria-label="See methodology details">Methodology</a></p>
@@ -158,6 +89,86 @@ get_header(); ?>
 
 <!-- 2. Interactive How It Works Section -->
 <main id="main">
+<section class="cube-band py-4" aria-hidden="true">
+    <div class="container d-none d-md-flex justify-content-center align-items-center gap-4 flex-wrap">
+        <div class="floating-cube-element cube-housing" title="Housing Services">
+            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="housingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="cubeShadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                        <feOffset dx="1" dy="2" result="offset"/>
+                        <feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer>
+                        <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+                <g filter="url(#cubeShadow)">
+                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#housingGrad)"/>
+                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#housingGrad)" opacity="0.7"/>
+                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#housingGrad)" opacity="0.5"/>
+                    <path d="M18 40 L25 30 L32 40 M22 40 L22 35 L28 35 L28 40" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                </g>
+            </svg>
+        </div>
+        <div class="floating-cube-element cube-finance" title="Financial Services">
+            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="financeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g filter="url(#cubeShadow)">
+                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#financeGrad)"/>
+                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#financeGrad)" opacity="0.7"/>
+                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#financeGrad)" opacity="0.5"/>
+                    <path d="M25 18 L25 42 M20 22 L30 22 M20 38 L30 38" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <path d="M18 26 C18 24 20 22 25 22 C30 22 32 24 32 26 C32 28 30 30 25 30 C20 30 18 32 18 34 C18 36 20 38 25 38 C30 38 32 36 32 34" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                </g>
+            </svg>
+        </div>
+        <div class="floating-cube-element cube-vehicle" title="Vehicle Services">
+            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="vehicleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g filter="url(#cubeShadow)">
+                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#vehicleGrad)"/>
+                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#vehicleGrad)" opacity="0.7"/>
+                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#vehicleGrad)" opacity="0.5"/>
+                    <path d="M13 32 L37 32 M13 36 L37 36" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <circle cx="17" cy="38" r="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <circle cx="33" cy="38" r="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <path d="M15 32 L15 28 L19 24 L31 24 L35 28 L35 32" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                </g>
+            </svg>
+        </div>
+        <div class="floating-cube-element cube-communication" title="Communication Services">
+            <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="commGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g filter="url(#cubeShadow)">
+                    <polygon points="10,15 40,15 40,45 10,45" fill="url(#commGrad)"/>
+                    <polygon points="10,15 18,8 48,8 40,15" fill="url(#commGrad)" opacity="0.7"/>
+                    <polygon points="40,15 48,8 48,38 40,45" fill="url(#commGrad)" opacity="0.5"/>
+                    <rect x="19" y="23" width="12" height="20" rx="2" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+                    <line x1="22" y1="26" x2="28" y2="26" stroke="white" stroke-width="1" opacity="0.9"/>
+                    <circle cx="25" cy="38" r="1" fill="white" opacity="0.9"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+    </section>
 <section class="how-it-works py-5" aria-labelledby="how-it-works-title">
     <div class="container">
         <div class="text-center mb-5">
@@ -221,12 +232,12 @@ get_header(); ?>
         <div class="row g-4 services-grid-limited">
             <!-- Left: Banking Services (taxonomy link) -->
             <div class="col-lg-4 col-md-6">
-                <a href="/service-type/money-services/" class="service-card-link">
-                    <div class="service-card interactive-card" aria-describedby="money-services-desc">
+                <a href="/service-type/banking-services/" class="service-card-link">
+                    <div class="service-card interactive-card" aria-describedby="banking-services-desc">
                         <div class="service-illustration" aria-hidden="true"><i class="fa-solid fa-money-bill-transfer"></i></div>
                         <div class="service-content">
                             <h3 class="service-title">Banking Services</h3>
-                            <p id="money-services-desc" class="service-description">Banking, transfers, and multi-currency accounts set up for expats.</p>
+                            <p id="banking-services-desc" class="service-description">Banking, transfers, and multi-currency accounts set up for expats.</p>
                         </div>
                     </div>
                 </a>

@@ -66,8 +66,8 @@
                             <li><a class="dropdown-item" href="/services">All Services</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/realtor-locator">Realtor Locator</a></li>
-                            <li><a class="dropdown-item" href="/service-type/money-services/">Banking Services</a></li>
-                            <li><a class="dropdown-item" href="/service-type/telecommunication/">Data and Phone Plans</a></li>
+                            <li><a class="dropdown-item" href="/service-type/banking-services/">Banking Services</a></li>
+                            <li><a class="dropdown-item" href="/service-type/data-and-phone-plans/">Data and Phone Plans</a></li>
                             <li><a class="dropdown-item" href="/service-type/vehicles/">Vehicle Services</a></li>
                             <li><a class="dropdown-item" href="/service-type/international-moving/">International Moving</a></li>
                             <li><a class="dropdown-item" href="/service-type/insurance/">Insurance</a></li>
@@ -166,10 +166,10 @@
             <a class="mobile-menu-link" href="/realtor-locator">Realtor Locator</a>
           </li>
           <li class="mobile-submenu-item" style="--item-index: 2">
-            <a class="mobile-menu-link" href="/service-type/money-services/">Banking Services</a>
+            <a class="mobile-menu-link" href="/service-type/banking-services/">Banking Services</a>
           </li>
           <li class="mobile-submenu-item" style="--item-index: 3">
-            <a class="mobile-menu-link" href="/service-type/telecommunication/">Data and Phone Plans</a>
+            <a class="mobile-menu-link" href="/service-type/data-and-phone-plans/">Data and Phone Plans</a>
           </li>
           <li class="mobile-submenu-item" style="--item-index: 4">
             <a class="mobile-menu-link" href="/service-type/vehicles/">Vehicle Services</a>

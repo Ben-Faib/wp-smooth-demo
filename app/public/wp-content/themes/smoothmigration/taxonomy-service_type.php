@@ -34,7 +34,7 @@ $term = get_queried_object();
 
 <main id="main" class="site-main py-5" role="main">
     <div class="container">
-        <?php if ( isset($term) && isset($term->slug) && $term->slug === 'money-services' ) : ?>
+        <?php if ( isset($term) && isset($term->slug) && $term->slug === 'banking-services' ) : ?>
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <h2 class="h5 mb-3">Quick Comparison</h2>
@@ -49,7 +49,7 @@ $term = get_queried_object();
                                 'xe' => array('Best For' => 'Larger transfers & FX tools', 'Speed' => '1–3 days'),
                                 'chime' => array('Best For' => 'US banking setup', 'Speed' => 'Same day'),
                             );
-                            $posts = get_posts(array('post_type'=>'service','numberposts'=>-1,'tax_query'=>array(array('taxonomy'=>'service_type','field'=>'slug','terms'=>array('money-services')))));
+                            $posts = get_posts(array('post_type'=>'service','numberposts'=>-1,'tax_query'=>array(array('taxonomy'=>'service_type','field'=>'slug','terms'=>array('banking-services')))));
                             foreach($posts as $p){
                                 $slug = sanitize_title($p->post_title);
                                 $row = null;
