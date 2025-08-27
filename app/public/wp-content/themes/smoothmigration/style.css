@@ -96,46 +96,7 @@ Tags: custom-theme, responsive, bootstrap
   --gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 100%);
 }
 
-/* Dark Mode Variables */
-[data-theme="dark"] {
-  /* Dark Primary Colors */
-  --primary-color: #60a5fa;
-  --primary-dark: #3b82f6;
-  --primary-light: #93c5fd;
-  --primary-lighter: #1e3a8a;
-  
-  /* Dark Secondary Colors */
-  --secondary-color: #22d3ee;
-  --secondary-dark: #06b6d4;
-  --secondary-light: #67e8f9;
-  --secondary-lighter: #0e7490;
-  
-  /* Dark Accent Colors */
-  --accent-color: #fbbf24;
-  --accent-dark: #f59e0b;
-  --accent-light: #fcd34d;
-  --accent-lighter: #d97706;
-  
-  /* Dark Text Colors */
-  --text-dark: #f9fafb;
-  --text-medium: #d1d5db;
-  --text-light: #9ca3af;
-  --text-lighter: #6b7280;
-  
-  /* Dark Background Colors */
-  --bg-white: #111827;
-  --bg-light: #1f2937;
-  --bg-lighter: #374151;
-  --bg-section: #0f172a;
-  
-  /* Dark Border Colors */
-  --border-light: #374151;
-  --border-medium: #4b5563;
-  --border-dark: #6b7280;
-  
-  /* Dark Gradients */
-  --gradient-hero: linear-gradient(135deg, #1e3a8a 0%, #0e7490 50%, #1e40af 100%);
-}
+
 
 /* Enhanced Modern Typography */
 body {

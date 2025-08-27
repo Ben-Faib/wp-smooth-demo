@@ -137,29 +137,15 @@
 /* South Africa - Vibrant green-gold glow with African rhythm */
 @keyframes south-africa-glow {
   0%, 100% {
-    filter: drop-shadow(0 0 12px #4caf50) drop-shadow(0 0 20px rgba(76, 175, 80, 0.4));
+    filter: none;
   }
-  12% {
-    filter: drop-shadow(0 0 14px #4caf50) drop-shadow(0 0 23px rgba(76, 175, 80, 0.45));
-  }
-  25% {
-    filter: drop-shadow(0 0 16px #4caf50) drop-shadow(0 0 27px rgba(76, 175, 80, 0.55));
-  }
-  37% {
-    filter: drop-shadow(0 0 18px #4caf50) drop-shadow(0 0 32px rgba(76, 175, 80, 0.65));
-  }
-  50% {
-    filter: drop-shadow(0 0 20px #4caf50) drop-shadow(0 0 36px rgba(76, 175, 80, 0.7));
-  }
-  62% {
-    filter: drop-shadow(0 0 18px #4caf50) drop-shadow(0 0 32px rgba(76, 175, 80, 0.65));
-  }
-  75% {
-    filter: drop-shadow(0 0 16px #4caf50) drop-shadow(0 0 27px rgba(76, 175, 80, 0.55));
-  }
-  87% {
-    filter: drop-shadow(0 0 14px #4caf50) drop-shadow(0 0 23px rgba(76, 175, 80, 0.45));
-  }
+  12% { filter: none; }
+  25% { filter: none; }
+  37% { filter: none; }
+  50% { filter: none; }
+  62% { filter: none; }
+  75% { filter: none; }
+  87% { filter: none; }
 }
 
 /* Country node glow effects */
@@ -459,7 +445,7 @@
   }
 }
 
-/* Services Page Globe Wrapper */
+/* Services Page Globe Wrapper - Optimized for transform-based positioning */
 .services-globe-wrapper {
     position: sticky;
     top: 2rem;
@@ -467,9 +453,13 @@
     overflow: visible;
     border-radius: 12px;
     z-index: 10;
+    /* Optimize for child transforms */
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    will-change: transform;
 }
 
-/* Services Page Parallax Globe */
+/* Services Page Parallax Globe - Visual container that moves with globe and fades out */
 .services-parallax-globe {
     position: absolute;
     top: 0;
@@ -486,24 +476,33 @@
         /* Enhanced gradient background */
         linear-gradient(135deg,
             rgba(59, 130, 246, 0.15) 0%,
-            rgba(6, 182, 212, 0.12) 25%,
+            rgba(59, 130, 246, 0.10) 25%,
             rgba(255, 255, 255, 0.25) 50%,
             rgba(245, 158, 11, 0.08) 75%,
             rgba(59, 130, 246, 0.12) 100%
         ),
         /* Dynamic radial overlays */
         radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
         /* Subtle pattern overlay */
         url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239ca3af' fill-opacity='0.04'%3E%3Ccircle cx='10' cy='10' r='1.5'/%3E%3Ccircle cx='70' cy='15' r='1'/%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3Ccircle cx='55' cy='45' r='1.2'/%3E%3Ccircle cx='20' cy='60' r='0.8'/%3E%3Ccircle cx='65' cy='70' r='1.3'/%3E%3C/g%3E%3Cpath d='M20 20 L60 20 M20 40 L60 40 M20 60 L60 60' stroke='%236b7280' stroke-width='0.5' stroke-opacity='0.03'/%3E%3C/g%3E%3C/svg%3E");
     backdrop-filter: blur(20px) saturate(1.3);
     border: 1px solid rgba(255, 255, 255, 0.4);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: top, transform;
+    /* Critical for container movement and fade effects */
+    will-change: transform, opacity;
     z-index: 10;
     transform-origin: center center;
-    position: relative;
+    /* Hardware acceleration for smooth movement and fading */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    /* Smooth opacity transitions */
+    transition: opacity 0.1s ease-out;
+    /* Prevent layout thrashing */
+    contain: layout style paint;
+    /* Ensure smooth transforms */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 /* Add floating particles around the globe */
@@ -516,9 +515,7 @@
     bottom: -20px;
     background:
         radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 3px),
-        radial-gradient(circle at 75% 25%, rgba(6, 182, 212, 0.08) 0%, transparent 3px),
-        radial-gradient(circle at 25% 75%, rgba(245, 158, 11, 0.06) 0%, transparent 3px),
-        radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.07) 0%, transparent 3px);
+        radial-gradient(circle at 25% 75%, rgba(245, 158, 11, 0.06) 0%, transparent 3px);
     background-size: 100px 100px;
     animation: gentle-float-bg 15s ease-in-out infinite reverse;
     pointer-events: none;
@@ -536,8 +533,17 @@
     width: 100% !important;
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.08s ease-out;
     will-change: transform;
+    /* Hardware acceleration for smooth transforms */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    /* Optimize rendering */
+    image-rendering: optimizeQuality;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Globe zoom zones */
@@ -553,7 +559,7 @@
 }
 
 .globe-zoom-zone.active {
-    background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    background: none !important;
 }
 
 /* Enhanced service card interactions */
@@ -602,7 +608,16 @@
 .services-parallax-globe .smooth-globe canvas {
     will-change: transform;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    /* Optimize canvas rendering */
+    image-rendering: optimizeSpeed;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    /* Prevent flickering */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 /* Services Page Layout Improvements */
@@ -613,12 +628,10 @@
     background:
         /* Layer 1: Subtle travel-themed pattern */
         radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 25%),
-        radial-gradient(circle at 90% 10%, rgba(6, 182, 212, 0.06) 0%, transparent 25%),
         radial-gradient(circle at 20% 90%, rgba(245, 158, 11, 0.04) 0%, transparent 30%),
-        radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.05) 0%, transparent 20%),
         /* Layer 2: Connecting lines pattern */
         linear-gradient(45deg, transparent 46%, rgba(59, 130, 246, 0.02) 47%, rgba(59, 130, 246, 0.02) 53%, transparent 54%),
-        linear-gradient(-45deg, transparent 46%, rgba(6, 182, 212, 0.02) 47%, rgba(6, 182, 212, 0.02) 53%, transparent 54%),
+        linear-gradient(-45deg, transparent 46%, rgba(59, 130, 246, 0.02) 47%, rgba(59, 130, 246, 0.02) 53%, transparent 54%),
         /* Layer 3: Base gradient */
         linear-gradient(135deg, #fefefe 0%, #f8fafc 25%, #f1f5f9 100%);
     background-attachment: fixed;
@@ -780,12 +793,10 @@
     background-image:
         /* Migration routes pattern */
         radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.08) 0%, transparent 3px),
-        radial-gradient(circle at 85% 15%, rgba(6, 182, 212, 0.06) 0%, transparent 3px),
         radial-gradient(circle at 15% 85%, rgba(245, 158, 11, 0.05) 0%, transparent 3px),
-        radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.07) 0%, transparent 3px),
         /* Connecting paths */
-        linear-gradient(45deg, rgba(59, 130, 246, 0.03) 0%, transparent 1px, transparent 99%, rgba(6, 182, 212, 0.03) 100%),
-        linear-gradient(-45deg, rgba(245, 158, 11, 0.02) 0%, transparent 1px, transparent 99%, rgba(16, 185, 129, 0.02) 100%);
+        linear-gradient(45deg, rgba(59, 130, 246, 0.03) 0%, transparent 1px, transparent 99%, rgba(59, 130, 246, 0.03) 100%),
+        linear-gradient(-45deg, rgba(245, 158, 11, 0.02) 0%, transparent 1px, transparent 99%, rgba(245, 158, 11, 0.02) 100%);
     background-size: 120px 120px, 120px 120px, 120px 120px, 120px 120px, 200px 200px, 200px 200px;
     opacity: 0.7;
     pointer-events: none;
@@ -804,9 +815,8 @@
     background-image:
         /* Subtle geometric shapes */
         radial-gradient(ellipse 60% 40% at 30% 30%, rgba(59, 130, 246, 0.04) 0%, transparent 100%),
-        radial-gradient(ellipse 40% 60% at 70% 70%, rgba(6, 182, 212, 0.03) 0%, transparent 100%),
         /* Travel path lines */
-        linear-gradient(135deg, rgba(245, 158, 11, 0.02) 0%, transparent 50%, rgba(16, 185, 129, 0.02) 100%);
+        linear-gradient(135deg, rgba(245, 158, 11, 0.02) 0%, transparent 50%, rgba(59, 130, 246, 0.02) 100%);
     background-size: 300px 300px, 250px 250px, 100% 100%;
     opacity: 0.5;
     pointer-events: none;
@@ -1098,22 +1108,32 @@
     transition: none !important;
 }
 
-/* Scroll-based background animations */
+/* Optimized scroll-based background animations */
 .services-grid.scroll-animated {
     position: relative;
     overflow: hidden;
+    /* Enable hardware acceleration for background layers */
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .services-grid.scroll-animated::before {
     transform-origin: center center;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.08s ease-out;
     will-change: transform;
+    /* Hardware acceleration */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .services-grid.scroll-animated::after {
     transform-origin: center center;
-    transition: transform 0.15s ease-out, opacity 0.1s ease-out;
+    transition: transform 0.12s ease-out, opacity 0.08s ease-out;
     will-change: transform, opacity;
+    /* Hardware acceleration */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* Parallax effect for background layers */

@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             observer.observe(section);
         });
         
-        // Hero floating elements (if they exist)
-        const heroFloatingElements = document.querySelectorAll('.floating-cube');
+        // Hero floating elements (if they exist) - scope to hero only to avoid SVG cubes on contact page
+        const heroFloatingElements = document.querySelectorAll('.floating-cube-element, .hero-floating-cubes .floating-cube');
         heroFloatingElements.forEach((element, index) => {
             element.classList.add('animate-on-scroll', 'animate-float');
             element.style.animationDelay = `${index * 0.3}s`;

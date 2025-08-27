@@ -221,12 +221,8 @@ get_header();
 
                                 <div class="service-card-footer">
                                     <div class="service-actions">
-                                        <button class="btn btn-outline-<?php echo $color; ?> btn-sm"
-                                                disabled>
-                                           <i class="fas fa-eye"></i> Quick View
-                                        </button>
-                                        <a href="<?php echo esc_url( $term_link ); ?>" class="btn btn-<?php echo $color; ?> btn-sm">
-                                            <i class="fas fa-arrow-right"></i> View Services
+                                        <a href="<?php echo esc_url( $term_link ); ?>" class="btn btn-<?php echo $color; ?> btn-sm w-100">
+                                            <i class="fas fa-arrow-right"></i> See details
                                         </a>
                                     </div>
                                 </div>
@@ -264,11 +260,11 @@ get_header();
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA Section with Mini Wizard -->
     <section class="services-cta py-6 bg-gradient-secondary text-white">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <div class="cta-content">
                         <h2 class="display-5 fw-bold mb-3">Need Something Else?</h2>
                         <p class="lead mb-4">Looking for specialized services like international tax advice, business setup, or other unique requirements? Our expert team is here to help with personalized solutions.</p>
@@ -279,7 +275,7 @@ get_header();
                             </div>
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-clock me-2"></i>
-                                <span>24/7 Support</span>
+                                <span>Typical response under 24 hours</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-globe me-2"></i>
@@ -288,17 +284,40 @@ get_header();
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 text-center">
-                    <div class="cta-actions">
-                        <a href="/contact" class="btn btn-accent btn-lg mb-3 w-100">
-                            <i class="fas fa-comments me-2"></i>
-                            Get Expert Guidance
-                        </a>
-                        <a href="/about" class="btn btn-outline-light w-100">
-                            <i class="fas fa-users me-2"></i>
-                            Meet Our Team
-                        </a>
-                    </div>
+                <div class="col-lg-5">
+                    <form id="servicesMiniWizard" class="wizard-form bg-white text-dark p-4 rounded-4 shadow-lg" aria-labelledby="wizardTitle" novalidate>
+                        <h3 id="wizardTitle" class="h5 fw-bold mb-3"><i class="fas fa-wand-magic-sparkles me-2 text-accent"></i>Get your personalized relocation plan</h3>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="fromCountry" class="form-label">Moving from</label>
+                                <input type="text" class="form-control" id="fromCountry" name="from" placeholder="e.g., South Africa" autocomplete="country-name" required />
+                            </div>
+                            <div class="col-12">
+                                <label for="toCountry" class="form-label">Moving to</label>
+                                <input type="text" class="form-control" id="toCountry" name="to" placeholder="e.g., Canada" autocomplete="country-name" required />
+                            </div>
+                            <div class="col-12">
+                                <label for="moveDate" class="form-label">Target move date</label>
+                                <input type="date" class="form-control" id="moveDate" name="date" />
+                            </div>
+                            <div class="col-12">
+                                <label for="interest" class="form-label">Primary interest</label>
+                                <select id="interest" name="interest" class="form-select">
+                                    <option value="">Select a category (optional)</option>
+                                    <option value="banking-services">Banking</option>
+                                    <option value="realtor">Housing</option>
+                                    <option value="data-and-phone-plans">Phones & Data</option>
+                                    <option value="vehicles">Vehicles</option>
+                                    <option value="international-moving">International Moving</option>
+                                    <option value="insurance">Insurance</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-accent btn-lg" type="submit" aria-describedby="wizardTitle"><i class="fas fa-paper-plane me-2"></i>Get Expert Guidance</button>
+                        </div>
+                        <p class="small text-muted mt-2 mb-0">Free and personalized. We’ll follow up within 24 hours.</p>
+                    </form>
                 </div>
             </div>
         </div>
@@ -458,9 +477,45 @@ get_header();
 }
 
 .cta-features .feature-item {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
+    color: #ffffff;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
+
+.cta-features .feature-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cta-features .feature-item i {
+    color: #ffffff;
+    opacity: 1;
+    font-size: 1.1rem;
+}
+
+.cta-features .feature-item span {
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+.wizard-form .form-label { font-weight: 700; }
+.wizard-form .form-control, .wizard-form .form-select {
+    border-radius: var(--border-radius-lg);
+    border: 2px solid var(--border-light);
+    padding: 0.75rem 1rem;
+}
+.wizard-form .btn.btn-accent { background: var(--gradient-accent, var(--accent-color)); color: #fff; border: 0; }
+.wizard-form .btn.btn-accent:hover { filter: brightness(1.05); transform: translateY(-1px); }
 
 .services-filter .form-control {
     border-radius: var(--border-radius-lg);
@@ -538,13 +593,7 @@ get_header();
 .debug-bg .services-grid::before,
 .debug-bg .services-grid::after { opacity: .9; }
 
-/* Dark mode balance */
-[data-theme="dark"] .services-grid {
-    background:
-        radial-gradient(1200px 600px at 0% -10%, color-mix(in srgb, var(--primary-lighter) 25%, transparent), transparent 60%),
-        radial-gradient(800px 400px at 110% 5%, color-mix(in srgb, var(--secondary-lighter) 25%, transparent), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.04));
-}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -676,6 +725,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // Respect prefers-reduced-motion
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('reduced-animations');
+    }
+
+    // Mini wizard submission -> redirect to contact with prefilled params
+    const wizard = document.getElementById('servicesMiniWizard');
+    if (wizard) {
+        wizard.addEventListener('submit', function(e){
+            e.preventDefault();
+            const from = wizard.querySelector('#fromCountry').value.trim();
+            const to = wizard.querySelector('#toCountry').value.trim();
+            const date = wizard.querySelector('#moveDate').value.trim();
+            const interest = wizard.querySelector('#interest').value.trim();
+
+            // basic validation
+            wizard.querySelectorAll('[required]').forEach(el => {
+                if (!el.value.trim()) { el.setAttribute('aria-invalid', 'true'); }
+                else { el.removeAttribute('aria-invalid'); }
+            });
+            if (!from || !to) { return; }
+
+            const qp = new URLSearchParams();
+            qp.set('from', from);
+            qp.set('to', to);
+            if (date) qp.set('date', date);
+            if (interest) qp.set('interest', interest);
+            qp.set('source', 'services_wizard');
+
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'wizard_submit', {event_category: 'services', event_label: interest || 'general'});
+            }
+
+            window.location.href = '/contact?' + qp.toString();
+        });
     }
 });
 </script>

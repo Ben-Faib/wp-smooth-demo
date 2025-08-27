@@ -211,56 +211,60 @@
       }
     } catch (e) {}
 
-    // Enhanced scroll conflict prevention
-    var scrollTimeout;
+    // Ultra-optimized scroll handling - minimal work during scroll
     var isScrolling = false;
-    var lastScrollTime = 0;
-    var scrollVelocity = 0;
-    var lastScrollY = window.scrollY;
+    var scrollTimeout;
+    var ticking = false;
 
-
-    // Function to temporarily disable globe interactions during scroll
-    function disableGlobeInteractions() {
-      if (controls) {
-        controls.enableRotate = false;
-        controls.enableZoom = false;
-        controls.enablePan = false;
-        controls.autoRotate = false; // Disable auto-rotation during scroll
+    // Ultra-light scroll handler - just queue updates
+    function handleScrollPassive() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          processScrollQueue();
+          ticking = false;
+        });
+        ticking = true;
       }
-      isScrolling = true;
-
-      // Add visual feedback
-      globeContainer.classList.add('scroll-disabled');
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(function() {
-        if (controls) {
-          controls.enableRotate = true;
-          controls.enableZoom = true;
-          controls.enablePan = true;
-          // Re-enable auto-rotation only if not disabled by reduced motion preferences
-          if (!disableMotion && perfMode !== 'low') {
-            controls.autoRotate = true;
-          }
-        }
-        isScrolling = false;
-        globeContainer.classList.remove('scroll-disabled');
-      }, 500); // Re-enable after 500ms of no scroll activity
     }
 
-    // Function to detect scroll intent
-    function handleScrollIntent() {
-      var currentTime = Date.now();
-      var currentScrollY = window.scrollY;
-      scrollVelocity = Math.abs(currentScrollY - lastScrollY);
+    // Process all queued scroll updates in one go
+    function processScrollQueue() {
+      const currentScrollY = window.scrollY;
+      const velocity = Math.abs(currentScrollY - lastScrollY);
 
-      // If scrolling velocity is high, user is likely trying to scroll the page
-      if (scrollVelocity > 5 || (currentTime - lastScrollTime) < 100) {
+      // Only disable interactions during fast scrolling
+      if (velocity > 10 && !isScrolling) {
         disableGlobeInteractions();
       }
 
-      lastScrollTime = currentTime;
       lastScrollY = currentScrollY;
+    }
+
+    // Simplified globe interaction disable
+    function disableGlobeInteractions() {
+      if (controls && !isScrolling) {
+        controls.enableRotate = false;
+        controls.enableZoom = false;
+        controls.enablePan = false;
+        controls.autoRotate = false;
+        isScrolling = true;
+
+        globeContainer.classList.add('scroll-disabled');
+
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+          if (controls) {
+            controls.enableRotate = true;
+            controls.enableZoom = true;
+            controls.enablePan = true;
+            if (!disableMotion && perfMode !== 'low') {
+              controls.autoRotate = true;
+            }
+          }
+          isScrolling = false;
+          globeContainer.classList.remove('scroll-disabled');
+        }, 250);
+      }
     }
 
 
@@ -333,8 +337,8 @@
     // Add event listeners with proper event capturing
     var globeContainer = el.parentElement;
 
-    // Use passive listeners where possible for better performance
-    window.addEventListener('scroll', handleScrollIntent, { passive: true });
+    // Use ultra-light passive scroll listener
+    window.addEventListener('scroll', handleScrollPassive, { passive: true });
     globeContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
     globeContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
     globeContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
@@ -647,7 +651,7 @@
     // Store cleanup function for potential future use
     el.__smoothGlobeCleanup = function() {
       window.removeEventListener('resize', debouncedResize);
-      window.removeEventListener('scroll', handleScrollIntent);
+      window.removeEventListener('scroll', handleScrollPassive);
       globeContainer.removeEventListener('touchstart', handleTouchStart);
       globeContainer.removeEventListener('touchmove', handleTouchMove);
       globeContainer.removeEventListener('touchend', handleTouchEnd);
@@ -655,6 +659,12 @@
       globeContainer.removeEventListener('touchstart', handleBufferZoneTouch);
       globeContainer.removeEventListener('keydown', handleKeyDown);
       clearTimeout(scrollTimeout);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      if (hoverAnimationId) {
+        cancelAnimationFrame(hoverAnimationId);
+      }
       if (globe && typeof globe.destroy === 'function') {
         globe.destroy();
       }
@@ -693,23 +703,9 @@
     const serviceCards = document.querySelectorAll('.enhanced-service-card');
     let currentActiveService = 0;
 
-    // Calculate the maximum position for the globe within the services grid
-    function getMaxGlobePosition() {
-      const servicesGrid = document.querySelector('.services-grid');
-      if (!servicesGrid) return window.innerHeight;
 
-      const gridHeight = servicesGrid.getBoundingClientRect().height;
-      const globeWrapper = document.getElementById('services-globe-wrapper');
-      const wrapperHeight = globeWrapper ? globeWrapper.offsetHeight : globeContainer.offsetHeight;
 
-      // Return the maximum top position (grid height minus globe height)
-      return Math.max(0, gridHeight - wrapperHeight);
-    }
-
-    // Variables for floating behavior
-    let currentGlobeTop = 0; // Start at top of wrapper
-    let targetGlobeTop = currentGlobeTop;
-    let lastScrollY = window.scrollY;
+    // Variables for simplified floating behavior
     let isFloating = false;
 
     // Mouse interaction variables
@@ -750,145 +746,256 @@
       return activeIndex;
     }
 
-    // Function to handle globe floating behavior
-    function updateGlobePosition() {
-      const currentScrollY = window.scrollY;
+    // Fixed start position globe positioning with fade-out
+    let currentTranslateY = 0;
+    let targetTranslateY = 0;
+    let lastScrollPosition = window.scrollY;
+    let servicesGridRect = null;
+    let globeStartPosition = 0; // The maximum height/start position
+    // CTA section intersection will be calculated dynamically
+    let currentOpacity = 1; // Globe opacity for fade-out effect
 
-      // Get the services grid boundaries
+    // Cache the grid position and set start position
+    function cacheGridPosition() {
       const servicesGrid = document.querySelector('.services-grid');
-      if (!servicesGrid) return;
+      const ctaSection = document.querySelector('.services-cta');
 
-      const gridRect = servicesGrid.getBoundingClientRect();
-      const gridTop = gridRect.top + window.scrollY;
-      const gridBottom = gridRect.bottom + window.scrollY;
-      const gridHeight = gridRect.height;
+      if (servicesGrid) {
+        servicesGridRect = servicesGrid.getBoundingClientRect();
+        // Set the start position to the top of the services grid (maximum height)
+        globeStartPosition = servicesGridRect.top + window.scrollY;
+        // Initialize globe at start position
+        currentTranslateY = 0;
+        targetTranslateY = 0;
+      }
 
-      // Globe dimensions
-      const globeWrapper = document.getElementById('services-globe-wrapper');
-      const wrapperHeight = globeWrapper ? globeWrapper.offsetHeight : globeContainer.offsetHeight;
-
-      // Enhanced scroll-based positioning: move globe with increased speed and range
-      // Calculate extended scroll range to allow globe to keep up with fast scrolling
-      const scrollStart = gridTop - window.innerHeight * 0.5; // Start when grid is 50% into view
-      const scrollEnd = gridBottom + window.innerHeight * 0.8; // End much later to allow extended movement
-
-      const scrollProgress = Math.max(0, Math.min(1,
-        (currentScrollY - scrollStart) / (scrollEnd - scrollStart)
-      ));
-
-      // Calculate target position with increased movement multiplier
-      // Globe moves 1.5x the available space for better tracking
-      const availableSpace = Math.max(0, gridHeight - wrapperHeight);
-      const movementMultiplier = 1.5; // Globe moves 1.5x faster than proportional
-      let targetPosition = scrollProgress * (availableSpace * movementMultiplier + window.innerHeight * 0.6);
-
-      // Allow globe to move much lower and higher
-      const minPosition = -window.innerHeight * 0.3; // Allow moving above the wrapper
-      const maxPosition = availableSpace * movementMultiplier + window.innerHeight * 0.8; // Allow moving well below
-      targetPosition = Math.max(minPosition, Math.min(maxPosition, targetPosition));
-
-      // Much more aggressive easing to keep up with fast scrolling
-      const positionDiff = targetPosition - currentGlobeTop;
-      const easingFactor = Math.abs(positionDiff) > 100 ? 0.25 : 0.18; // Faster easing for large movements
-      currentGlobeTop += positionDiff * easingFactor;
-
-      // Apply the position
-      globeContainer.style.top = currentGlobeTop + 'px';
-
-      lastScrollY = currentScrollY;
+      // CTA section position will be calculated dynamically in updateGlobePosition
+      // No need to cache it statically since intersection changes with scroll
     }
 
-    // Parallax and zoom effect on scroll
-    function updateGlobeTransform() {
-      if (isAnimating) {
-        requestAnimationFrame(updateGlobeTransform);
-        return;
+    // Smooth easing function for transitions
+    function easeInOutQuad(t) {
+      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
+    // Globe positioning with proper intersection-based fade behavior
+    function updateGlobePosition() {
+      if (!servicesGridRect) return;
+
+      // Get globe container element
+      const globeContainer = globeElement.closest('.services-parallax-globe');
+      if (!globeContainer) return;
+
+      const currentScrollY = window.scrollY;
+
+      // Get current positions of both elements
+      const globeRect = globeContainer.getBoundingClientRect();
+      const ctaSection = document.querySelector('.services-cta');
+
+      if (!ctaSection) return;
+
+      const ctaRect = ctaSection.getBoundingClientRect();
+
+      // Calculate intersection between globe container and CTA section
+      const globeBottom = globeRect.bottom;
+      const globeTop = globeRect.top;
+      const globeHeight = globeRect.height;
+
+      const ctaTop = ctaRect.top;
+      const ctaBottom = ctaRect.bottom;
+      const ctaHeight = ctaRect.height;
+
+      // Calculate how much the globe overlaps with the CTA section
+      const overlapStart = Math.max(globeTop, ctaTop);
+      const overlapEnd = Math.min(globeBottom, ctaBottom);
+      const overlapHeight = Math.max(0, overlapEnd - overlapStart);
+
+      // Calculate intersection percentage (0 to 1)
+      const intersectionPercentage = overlapHeight / globeHeight;
+
+      // Globe scrolls naturally with the page until it starts intersecting with CTA
+      let naturalScrollY = Math.max(0, currentScrollY - globeStartPosition);
+
+      // If globe hasn't reached CTA yet, move naturally
+      if (intersectionPercentage === 0 && globeBottom < ctaTop) {
+        targetTranslateY = naturalScrollY;
+        currentOpacity = 1;
+      }
+      // If globe is intersecting with CTA, apply smooth fade and movement
+      else if (intersectionPercentage > 0) {
+        // Fade based on intersection percentage (start at 5%, complete at 95%)
+        const fadeStartThreshold = 0.05; // 5% intersection - fade begins
+        const fadeEndThreshold = 0.95;   // 95% intersection - fade completes
+
+        // Movement transition zone (start earlier than fade for smoother effect)
+        const movementStartThreshold = 0.02; // 2% intersection - start slowing movement
+        const movementEndThreshold = 0.98;   // 98% intersection - fully slowed (30% speed)
+
+        // Calculate fade progress with smooth easing
+        let fadeProgress = 0;
+        if (intersectionPercentage >= fadeStartThreshold) {
+          const fadeRange = fadeEndThreshold - fadeStartThreshold;
+          const fadePosition = intersectionPercentage - fadeStartThreshold;
+          // Use smooth easing function for fade
+          fadeProgress = Math.min(1, easeInOutQuad(fadePosition / fadeRange));
+          currentOpacity = 1 - fadeProgress;
+        } else {
+          currentOpacity = 1;
+        }
+
+        // Calculate movement damping with smooth transition
+        let movementDamping = 1.0; // Start with normal speed
+        if (intersectionPercentage >= movementStartThreshold) {
+          const movementRange = movementEndThreshold - movementStartThreshold;
+          const movementPosition = intersectionPercentage - movementStartThreshold;
+          // Smooth easing for movement damping
+          const dampingProgress = Math.min(1, easeInOutQuad(movementPosition / movementRange));
+          movementDamping = 1.0 - (dampingProgress * 0.7); // Gradually reduce to 30% speed
+        }
+
+        // Apply smoothed movement
+        targetTranslateY = naturalScrollY * movementDamping;
+      }
+      // If globe has completely passed CTA section, keep it faded and still
+      else if (globeTop >= ctaBottom) {
+        currentOpacity = 0;
+        // Keep the final position when it was 95% covered
+        targetTranslateY = targetTranslateY; // Don't change position
       }
 
-      isAnimating = true;
+      // Handle pointer events based on visibility
+      globeElement.style.pointerEvents = currentOpacity > 0.1 ? 'auto' : 'none';
 
-      // Update globe position first
+      const visualContainer = globeElement.closest('.services-parallax-globe');
+      if (visualContainer) {
+        visualContainer.style.pointerEvents = currentOpacity > 0.1 ? 'auto' : 'none';
+      }
+
+      lastScrollPosition = currentScrollY;
+    }
+
+    // Ultra-simple animation loop - minimal work per frame
+    let rafId = null;
+    let lastFrameTime = 0;
+
+    function updateGlobeSmooth(currentTime = 0) {
+      // Limit to 60fps for smooth performance
+      if (currentTime - lastFrameTime < 16.67) {
+        rafId = requestAnimationFrame(updateGlobeSmooth);
+        return;
+      }
+      lastFrameTime = currentTime;
+
+      // Update position on each frame
       updateGlobePosition();
 
-      const containerRect = globeContainer.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const containerCenter = containerRect.top + containerRect.height / 2;
-      const windowCenter = windowHeight / 2;
+      // Smooth interpolation for position
+      const positionDiff = targetTranslateY - currentTranslateY;
+      currentTranslateY += positionDiff * 0.1; // Smooth easing
 
-      // Only update if globe is visible
-      if (containerRect.bottom < 0 || containerRect.top > windowHeight) {
-        isAnimating = false;
-        requestAnimationFrame(updateGlobeTransform);
-        return;
-      }
+      // Simple scale based on mouse hover only
+      const targetScale = baseScale + mouseHoverBoost;
+      currentScale += (targetScale - currentScale) * 0.15;
 
-      // Calculate scroll progress within the globe's visible area
-      const scrollProgress = Math.max(0, Math.min(1,
-        (windowCenter - containerRect.top) / (containerRect.height + windowHeight)
-      ));
+      // Clamp scale
+      currentScale = Math.max(minScale, Math.min(maxScale + mouseHoverMaxBoost, currentScale));
 
-      // Calculate scroll velocity for smoother effects
-      const currentScrollY = window.scrollY;
-      scrollVelocity = (scrollVelocity * dampening) + ((currentScrollY - lastScrollY) * 0.05);
+      // Subtle floating motion
+      const time = currentTime * 0.001;
+      const floatOffset = Math.sin(time * 0.5) * 0.5;
 
-      // Get the currently active service (for scaling effects only)
-      const activeServiceIndex = getActiveServiceIndex();
-      if (activeServiceIndex !== currentActiveService) {
-        currentActiveService = activeServiceIndex;
-        // Rotation disabled during scrolling - globe stays static
-        // targetRotation = (activeServiceIndex * 60) - 180; // Disabled for static globe
-      }
+      // Apply transforms to both globe and visual container so they move together
+      const globeTransform = `scale(${currentScale.toFixed(3)}) translateY(${floatOffset.toFixed(1)}px) translateZ(0)`;
+      const containerTransform = `translateY(${currentTranslateY.toFixed(1)}px)`;
 
-      // Rotation disabled - globe stays static
-      // const rotationDiff = targetRotation - currentRotation;
-      // currentRotation += rotationDiff * 0.02; // Disabled for static globe
+      // Only apply styles if globe is visible (opacity > 0)
+      if (currentOpacity > 0.01) {
+        globeElement.style.transform = globeTransform;
+        globeElement.style.opacity = currentOpacity.toFixed(3);
 
-      // Enhanced scale based on scroll progress and active service
-      const velocityInfluence = Math.abs(scrollVelocity) * 0.001;
-      const serviceInfluence = (activeServiceIndex / serviceCards.length) * 0.2; // Scale based on service position
-      const scrollBasedScale = baseScale + (scrollProgress - 0.5) * 0.4 + velocityInfluence + serviceInfluence;
+        // Move the visual container (.services-parallax-globe) alongside the globe
+        const visualContainer = globeElement.closest('.services-parallax-globe');
+        if (visualContainer) {
+          visualContainer.style.transform = containerTransform;
+          visualContainer.style.opacity = currentOpacity.toFixed(3);
+        }
+      } else {
+        // Globe is completely faded out, hide it entirely
+        globeElement.style.opacity = '0';
+        globeElement.style.pointerEvents = 'none';
 
-      // Combine scroll-based scale with mouse hover boost smoothly
-      const targetScale = scrollBasedScale + mouseHoverBoost;
-      currentScale += (targetScale - currentScale) * 0.06; // Adjusted smoothing
-
-      // Clamp scale between min and max, accounting for hover boost
-      const effectiveMaxScale = maxScale + mouseHoverMaxBoost;
-      currentScale = Math.max(minScale, Math.min(effectiveMaxScale, currentScale));
-
-      // Add subtle floating motion
-      const time = Date.now() * 0.001;
-      const floatOffset = Math.sin(time * 0.5) * 2; // Gentle floating effect
-
-      // Apply transform with hardware acceleration (rotation disabled)
-      globeElement.style.transform = `scale(${currentScale}) translateY(${floatOffset}px) translateZ(0)`;
-
-      // Update debug data attributes
-      if (globeDebug) {
-        globeContainer.setAttribute('data-scale', currentScale.toFixed(2));
-        globeContainer.setAttribute('data-service', currentActiveService);
-        globeContainer.setAttribute('data-position', currentGlobeTop.toFixed(1));
-        globeContainer.setAttribute('data-max-pos', getMaxGlobePosition().toFixed(1));
-      }
-
-      // Update globe controls if available (more responsive updates)
-      const globeInstance = globeElement.__globeInstance;
-      if (globeInstance && globeInstance.controls && Math.random() < 0.15) { // Increased update frequency
-        const zoomLevel = 1 + (scrollProgress - 0.5) * 0.4 + serviceInfluence;
-        globeInstance.controls.zoom = Math.max(0.6, Math.min(1.6, zoomLevel));
-
-        // Also update rotation in the globe itself for more dynamic effect
-        if (globeInstance.controls.rotateSpeed !== undefined) {
-          globeInstance.controls.rotateSpeed = 0.3 + (Math.abs(scrollVelocity) * 0.001);
+        const visualContainer = globeElement.closest('.services-parallax-globe');
+        if (visualContainer) {
+          visualContainer.style.opacity = '0';
+          visualContainer.style.pointerEvents = 'none';
         }
       }
 
-      isAnimating = false;
-      requestAnimationFrame(updateGlobeTransform);
+      // Debug information (only in debug mode)
+      if (globeDebug && Math.random() < 0.02) { // Show debug info occasionally
+        const ctaSection = document.querySelector('.services-cta');
+        const globeRect = globeContainer.getBoundingClientRect();
+        const ctaRect = ctaSection ? ctaSection.getBoundingClientRect() : null;
+
+        // Calculate intersection for debug
+        let intersectionPercentage = 0;
+        if (ctaRect) {
+          const globeBottom = globeRect.bottom;
+          const globeTop = globeRect.top;
+          const globeHeight = globeRect.height;
+          const ctaTop = ctaRect.top;
+          const ctaBottom = ctaRect.bottom;
+
+          const overlapStart = Math.max(globeTop, ctaTop);
+          const overlapEnd = Math.min(globeBottom, ctaBottom);
+          const overlapHeight = Math.max(0, overlapEnd - overlapStart);
+          intersectionPercentage = overlapHeight / globeHeight;
+        }
+
+        const debugInfo = {
+          scrollY: window.scrollY.toFixed(0),
+          globeTop: globeRect.top.toFixed(0),
+          globeBottom: globeRect.bottom.toFixed(0),
+          ctaTop: ctaRect ? ctaRect.top.toFixed(0) : 'N/A',
+          ctaBottom: ctaRect ? ctaRect.bottom.toFixed(0) : 'N/A',
+          intersectionPercent: (intersectionPercentage * 100).toFixed(1) + '%',
+          scrollDirection: 'intersection-based',
+          currentY: currentTranslateY.toFixed(1),
+          targetY: targetTranslateY.toFixed(1),
+          scale: currentScale.toFixed(3),
+          opacity: currentOpacity.toFixed(3),
+          fadeState: intersectionPercentage > 0.95 ? 'COMPLETE' : intersectionPercentage > 0.05 ? 'FADING' : 'VISIBLE'
+        };
+        console.log('[GlobePosition]', debugInfo);
+
+        // Update debug attributes on container
+        if (globeContainer) {
+          globeContainer.setAttribute('data-globe-top', globeRect.top.toFixed(0));
+          globeContainer.setAttribute('data-globe-bottom', globeRect.bottom.toFixed(0));
+          globeContainer.setAttribute('data-cta-top', ctaRect ? ctaRect.top.toFixed(0) : '0');
+          globeContainer.setAttribute('data-intersection', (intersectionPercentage * 100).toFixed(1) + '%');
+          globeContainer.setAttribute('data-opacity', currentOpacity.toFixed(3));
+          globeContainer.setAttribute('data-scroll-behavior', 'intersection-based');
+          globeContainer.setAttribute('data-fade-state', intersectionPercentage > 0.95 ? 'complete' : intersectionPercentage > 0.05 ? 'fading' : 'visible');
+        }
+      }
+
+      rafId = requestAnimationFrame(updateGlobeSmooth);
     }
 
-    // Start the animation loop
-    updateGlobeTransform();
+    // Cache initial position and start animation
+    cacheGridPosition();
+
+    // Set initial transforms - globe and container both start at the maximum height
+    globeElement.style.transform = `scale(${baseScale}) translateY(0px) translateZ(0)`;
+
+    // Also set the visual container initial transform
+    const initialVisualContainer = globeElement.closest('.services-parallax-globe');
+    if (initialVisualContainer) {
+      initialVisualContainer.style.transform = `translateY(0px)`;
+    }
+
+    updateGlobeSmooth();
 
     // Function to highlight active service card
     function highlightActiveService(activeIndex) {
@@ -936,7 +1043,8 @@
     // Initial highlight
     highlightActiveService(0);
 
-    // Add mouse interaction for enhanced zoom
+    // Optimized mouse interaction for enhanced zoom
+    let hoverAnimationId = null;
 
     globeContainer.addEventListener('mouseenter', () => {
       // Clear any pending leave animation
@@ -945,42 +1053,58 @@
         leaveTimeout = null;
       }
 
-      if (isHoverAnimating || !isVisible) return; // Prevent multiple animations or interactions when not visible
+      if (isHoverAnimating || !isVisible) return;
 
       isHoverAnimating = true;
 
-              // Smooth transition instead of instant jump (slowed down)
-        const animateHoverIn = () => {
-          mouseHoverBoost += mouseHoverSpeed * 0.5; // Slowed down by half
-          if (mouseHoverBoost < mouseHoverMaxBoost) {
-            requestAnimationFrame(animateHoverIn);
-          } else {
-            mouseHoverBoost = mouseHoverMaxBoost;
-            isHoverAnimating = false;
-          }
-        };
-        animateHoverIn();
+      // Cancel any existing animation
+      if (hoverAnimationId) {
+        cancelAnimationFrame(hoverAnimationId);
+      }
+
+      // Smooth transition with optimized easing
+      const animateHoverIn = () => {
+        const prevBoost = mouseHoverBoost;
+        mouseHoverBoost += (mouseHoverMaxBoost - mouseHoverBoost) * 0.15; // Faster easing
+
+        if (Math.abs(mouseHoverBoost - prevBoost) > 0.001) {
+          hoverAnimationId = requestAnimationFrame(animateHoverIn);
+        } else {
+          mouseHoverBoost = mouseHoverMaxBoost;
+          isHoverAnimating = false;
+          hoverAnimationId = null;
+        }
+      };
+      animateHoverIn();
     });
 
     globeContainer.addEventListener('mouseleave', () => {
-      // Add a small delay to prevent flickering when mouse moves quickly over edges
+      // Add a small delay to prevent flickering
       leaveTimeout = setTimeout(() => {
-        if (isHoverAnimating || !isVisible) return; // Prevent multiple animations or interactions when not visible
+        if (isHoverAnimating || !isVisible) return;
 
         isHoverAnimating = true;
 
-        // Smooth transition back instead of instant jump (slowed down)
+        // Cancel any existing animation
+        if (hoverAnimationId) {
+          cancelAnimationFrame(hoverAnimationId);
+        }
+
+        // Smooth transition back with optimized easing
         const animateHoverOut = () => {
-          mouseHoverBoost -= mouseHoverSpeed * 0.3; // Slowed down significantly
-          if (mouseHoverBoost > 0) {
-            requestAnimationFrame(animateHoverOut);
+          const prevBoost = mouseHoverBoost;
+          mouseHoverBoost += (0 - mouseHoverBoost) * 0.12; // Faster easing
+
+          if (Math.abs(mouseHoverBoost - prevBoost) > 0.001) {
+            hoverAnimationId = requestAnimationFrame(animateHoverOut);
           } else {
             mouseHoverBoost = 0;
             isHoverAnimating = false;
+            hoverAnimationId = null;
           }
         };
         animateHoverOut();
-      }, 50); // 50ms delay
+      }, 30); // Reduced delay for better responsiveness
     });
 
     // Performance optimization: pause when not visible
@@ -1036,9 +1160,8 @@
     const debugStyles = document.createElement('style');
     debugStyles.textContent = `
       .globe-zoom-zone { background: rgba(255, 0, 0, 0.2) !important; border: 2px dashed red; }
-      .globe-zoom-zone.active { background: rgba(0, 255, 0, 0.3) !important; border: 2px solid green; }
       .services-parallax-globe::before {
-        content: 'DEBUG: ' attr(data-scale) 'x Pos: ' attr(data-position) 'px Max: ' attr(data-max-pos) 'px Service: ' attr(data-service);
+        content: 'DEBUG: ' attr(data-scale) 'x Pos: ' attr(data-position) 'px Service: ' attr(data-service) ' | Start: ' attr(data-start-pos) 'px | Effective: ' attr(data-effective-start) 'px | CTA: ' attr(data-cta-fade-start) 'px | Opacity: ' attr(data-opacity);
         position: absolute;
         top: 10px;
         left: 10px;
@@ -1049,15 +1172,102 @@
         font-size: 12px;
         z-index: 1000;
         pointer-events: none;
-        max-width: 400px;
+        max-width: 600px;
         word-wrap: break-word;
       }
       .enhanced-service-card.active-service {
         outline: 3px solid #ff6b6b !important;
         outline-offset: 2px;
       }
+      /* Debug indicator for start position */
+      .globe-start-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: red;
+        z-index: 9999;
+        pointer-events: none;
+      }
+      .globe-start-indicator::before {
+        content: 'GLOBE START POSITION';
+        position: absolute;
+        top: -20px;
+        left: 10px;
+        background: red;
+        color: white;
+        padding: 2px 5px;
+        font-size: 10px;
+        border-radius: 3px;
+      }
+      /* Debug indicator for effective start position (where globe actually begins moving) */
+      .globe-effective-start-indicator {
+        position: absolute;
+        top: 200px; /* 200px above start position */
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: orange;
+        z-index: 9998;
+        pointer-events: none;
+      }
+      .globe-effective-start-indicator::before {
+        content: 'GLOBE EFFECTIVE START (MOVEMENT BEGINS HERE)';
+        position: absolute;
+        top: -20px;
+        left: 10px;
+        background: orange;
+        color: white;
+        padding: 2px 5px;
+        font-size: 10px;
+        border-radius: 3px;
+      }
+      /* Debug indicator for CTA fade-out start position */
+      .globe-cta-fade-indicator {
+        position: absolute;
+        top: 0; /* Will be positioned dynamically */
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: purple;
+        z-index: 9997;
+        pointer-events: none;
+      }
+      .globe-cta-fade-indicator::before {
+        content: 'GLOBE FADE-OUT STARTS HERE (CTA SECTION)';
+        position: absolute;
+        top: -20px;
+        left: 10px;
+        background: purple;
+        color: white;
+        padding: 2px 5px;
+        font-size: 10px;
+        border-radius: 3px;
+      }
     `;
     document.head.appendChild(debugStyles);
+
+    // Add visual indicators for start, effective start, and CTA fade positions
+    const servicesGrid = document.querySelector('.services-grid');
+    let ctaFadeIndicator = null;
+
+    if (servicesGrid) {
+      // Start position indicator (red line)
+      const startIndicator = document.createElement('div');
+      startIndicator.className = 'globe-start-indicator';
+      servicesGrid.appendChild(startIndicator);
+
+      // Effective start position indicator (orange line, 200px above start)
+      const effectiveStartIndicator = document.createElement('div');
+      effectiveStartIndicator.className = 'globe-effective-start-indicator';
+      servicesGrid.appendChild(effectiveStartIndicator);
+
+      // CTA fade start indicator (purple line, positioned dynamically)
+      ctaFadeIndicator = document.createElement('div');
+      ctaFadeIndicator.className = 'globe-cta-fade-indicator';
+      servicesGrid.appendChild(ctaFadeIndicator);
+    }
   }
 
   // Initialize services globe effects if on services page

@@ -10,7 +10,7 @@ get_header();
 $term = get_queried_object();
 ?>
 
-<header class="page-header bg-light py-5">
+        <header class="page-header bg-light py-5">
     <div class="container text-center">
         <h1 class="page-title display-5 fw-bold">
             <?php echo esc_html( $term->name ); ?>
@@ -18,8 +18,19 @@ $term = get_queried_object();
         <?php if ( ! empty( $term->description ) ) : ?>
             <p class="lead text-muted"><?php echo esc_html( $term->description ); ?></p>
         <?php endif; ?>
+
+        <!-- Request Help CTA -->
+        <div class="mt-4">
+            <a href="/contact" class="btn btn-primary btn-lg me-3" id="headerRequestHelp">
+                <i class="fas fa-question-circle me-2"></i>Request Help
+            </a>
+            <a href="/services" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-arrow-left me-2"></i>Back to All Services
+            </a>
+        </div>
+
         <?php if ( has_nav_menu( 'section_category_links' ) ) : ?>
-            <nav aria-label="Category quick links" class="mt-3">
+            <nav aria-label="Category quick links" class="mt-4">
                 <?php wp_nav_menu( array(
                     'theme_location' => 'section_category_links',
                     'container'      => false,
@@ -34,6 +45,145 @@ $term = get_queried_object();
 
 <main id="main" class="site-main py-5" role="main">
     <div class="container">
+        <?php
+        // Add quick comparison for all service types except banking-services and realtor
+        $excluded_slugs = array('banking-services', 'realtor');
+        if ( isset($term) && isset($term->slug) && !in_array($term->slug, $excluded_slugs) ) :
+        ?>
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Quick Comparison</h2>
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                        <?php
+                        // Define comparison data for each service type
+                        $service_comparisons = array(
+                            'data-and-phone-plans' => array(
+                                'headers' => array('Brand', 'Best For', 'Data Plans', 'Details'),
+                                'data' => array(
+                                    'airalo' => array('Best For' => 'Global eSIM coverage', 'Data Plans' => 'From $5/day'),
+                                    'visible' => array('Best For' => 'US coverage', 'Data Plans' => 'Unlimited plans available'),
+                                    'tesco' => array('Best For' => 'UK coverage', 'Data Plans' => 'Flexible monthly plans'),
+                                )
+                            ),
+                            'vehicles' => array(
+                                'headers' => array('Brand', 'Best For', 'Vehicle Types', 'Details'),
+                                'data' => array(
+                                    'expat' => array('Best For' => 'International car leasing', 'Vehicle Types' => 'Cars, SUVs, vans'),
+                                    'itlauto' => array('Best For' => 'US vehicle imports', 'Vehicle Types' => 'Various makes/models'),
+                                    'bond' => array('Best For' => 'UK vehicle leasing', 'Vehicle Types' => 'Business & personal'),
+                                )
+                            ),
+                            'international-moving' => array(
+                                'headers' => array('Brand', 'Best For', 'Service Type', 'Details'),
+                                'data' => array(
+                                    'sirelo' => array('Best For' => 'Full-service moving', 'Service Type' => 'Door-to-door'),
+                                    'experts' => array('Best For' => 'Specialized moving', 'Service Type' => 'Custom solutions'),
+                                )
+                            ),
+                            'insurance' => array(
+                                'headers' => array('Brand', 'Best For', 'Coverage Type', 'Details'),
+                                'data' => array(
+                                    'covermore' => array('Best For' => 'Travel & health insurance', 'Coverage Type' => 'Comprehensive'),
+                                    'figo' => array('Best For' => 'Pet insurance', 'Coverage Type' => 'Pet-specific'),
+                                    'lemonade' => array('Best For' => 'Tenant insurance', 'Coverage Type' => 'Rental protection'),
+                                    'square' => array('Best For' => 'Canadian tenant insurance', 'Coverage Type' => 'Rental protection'),
+                                    'pets' => array('Best For' => 'Canadian pet insurance', 'Coverage Type' => 'Pet health'),
+                                )
+                            ),
+                            'visas-immigration' => array(
+                                'headers' => array('Brand', 'Best For', 'Processing Time', 'Details'),
+                                'data' => array(
+                                    '1st' => array('Best For' => 'UK company setup', 'Processing Time' => '5-10 days'),
+                                    'ownr' => array('Best For' => 'Canadian company setup', 'Processing Time' => '3-7 days'),
+                                )
+                            ),
+                            'pet-relocation' => array(
+                                'headers' => array('Brand', 'Best For', 'Service Type', 'Details'),
+                                'data' => array(
+                                    'pets' => array('Best For' => 'Canadian pet relocation', 'Service Type' => 'Health certificates & transport'),
+                                    'figo' => array('Best For' => 'Pet health insurance', 'Service Type' => 'Insurance coverage'),
+                                )
+                            ),
+                            'school-search' => array(
+                                'headers' => array('Brand', 'Best For', 'Service Type', 'Details'),
+                                'data' => array(
+                                    'school' => array('Best For' => 'International school search', 'Service Type' => 'Research & enrollment'),
+                                )
+                            ),
+                            'tax-legal' => array(
+                                'headers' => array('Brand', 'Best For', 'Service Type', 'Details'),
+                                'data' => array(
+                                    'tax' => array('Best For' => 'International tax advice', 'Service Type' => 'Compliance & planning'),
+                                    'legal' => array('Best For' => 'Legal services for expats', 'Service Type' => 'Documentation & advice'),
+                                )
+                            ),
+                            'business-setup' => array(
+                                'headers' => array('Brand', 'Best For', 'Processing Time', 'Details'),
+                                'data' => array(
+                                    '1st' => array('Best For' => 'UK company formation', 'Processing Time' => '5-10 working days'),
+                                    'ownr' => array('Best For' => 'Canadian company setup', 'Processing Time' => '3-7 business days'),
+                                )
+                            ),
+                            'utilities-services' => array(
+                                'headers' => array('Brand', 'Best For', 'Service Type', 'Details'),
+                                'data' => array(
+                                    'utility' => array('Best For' => 'Internet & phone setup', 'Service Type' => 'Connection services'),
+                                    'energy' => array('Best For' => 'Electricity & gas', 'Service Type' => 'Utility connections'),
+                                )
+                            )
+                        );
+
+                        $current_comparison = $service_comparisons[$term->slug] ?? null;
+
+                        if ($current_comparison) :
+                            // Output table headers
+                            echo '<thead><tr>';
+                            foreach ($current_comparison['headers'] as $header) {
+                                echo '<th>' . esc_html($header) . '</th>';
+                            }
+                            echo '<th></th></tr></thead>';
+
+                            // Output table body
+                            echo '<tbody>';
+                            $posts = get_posts(array(
+                                'post_type'=>'service',
+                                'numberposts'=>-1,
+                                'tax_query'=>array(array(
+                                    'taxonomy'=>'service_type',
+                                    'field'=>'slug',
+                                    'terms'=>array($term->slug)
+                                ))
+                            ));
+
+                            foreach($posts as $p){
+                                $slug = sanitize_title($p->post_title);
+                                $row = null;
+                                foreach($current_comparison['data'] as $key=>$val){
+                                    if (strpos($slug,$key)!==false){
+                                        $row=$val; break;
+                                    }
+                                }
+
+                                if ($row) {
+                                    echo '<tr>';
+                                    echo '<td>'.esc_html($p->post_title).'</td>';
+                                    foreach ($row as $value) {
+                                        echo '<td>'.esc_html($value).'</td>';
+                                    }
+                                    echo '<td><a class="btn btn-outline-primary btn-sm" href="'.get_permalink($p->ID).'">Details</a></td>';
+                                    echo '</tr>';
+                                }
+                            }
+                            echo '</tbody>';
+                        endif;
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <?php if ( isset($term) && isset($term->slug) && $term->slug === 'banking-services' ) : ?>
         <div class="card shadow-sm mb-4">
             <div class="card-body">
@@ -136,6 +286,8 @@ $term = get_queried_object();
     </div>
     </div>
 
+
+
 <!-- My Plan Tray -->
 <div id="planTray" class="plan-tray shadow">
     <div class="plan-header">My Plan <span class="badge bg-primary" id="planCount">0</span></div>
@@ -152,6 +304,8 @@ $term = get_queried_object();
 .plan-items{overflow:auto;flex:1;border:1px solid #eee;border-radius:8px;padding:8px;margin-bottom:8px}
 .plan-item{display:flex;justify-content:space-between;align-items:center;padding:6px 4px;border-bottom:1px dashed #eee}
 .plan-item:last-child{border-bottom:none}
+
+
 </style>
 
 <script>
@@ -193,13 +347,12 @@ document.addEventListener('DOMContentLoaded', function(){
         list.forEach((it,idx)=>{
             const row=document.createElement('div'); row.className='plan-item';
             row.innerHTML='<span>'+it.title+'</span><button class="btn btn-sm btn-link text-danger">Remove</button>';
-            row.querySelector('button').addEventListener('click',()=>{ list.splice(idx,1); write(list); });
+            row.querySelector('button').addEventListener('click',()=>{ list.splice(idx,1); write(list); updateRequestHelpLinks(); });
             itemsEl.appendChild(row);
         });
-        const titles = list.map(i=>i.title).join(', ');
-        const url = new URL(submitEl.getAttribute('href'), window.location.origin);
-        if (titles) { url.searchParams.set('services', titles); } else { url.searchParams.delete('services'); }
-        submitEl.setAttribute('href', url.pathname + url.search);
+
+        // Update request help links whenever plan changes
+        updateRequestHelpLinks();
     }
     document.querySelectorAll('.js-add-plan').forEach(btn=>{
         btn.addEventListener('click', function(){
@@ -211,6 +364,46 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     });
     update();
+
+    // Request Help functionality - Direct link to contact page
+    function updateRequestHelpLinks() {
+        const selectedServices = read();
+        const serviceType = '<?php echo esc_js($term->slug); ?>';
+        const serviceName = '<?php echo esc_js($term->name); ?>';
+
+        // Build URL parameters
+        const qp = new URLSearchParams();
+        qp.set('interest', serviceType);
+        qp.set('source', 'service_type_direct');
+
+        // Build a human-readable message with clear formatting
+        let message = `Service Type: ${serviceName}`;
+
+        // Include selected services from plan tray
+        if (selectedServices.length > 0) {
+            const titles = selectedServices.map(i => i.title).join(', ');
+            message += `\n\nSelected Services:\n${selectedServices.map(s => `• ${s.title}`).join('\n')}`;
+            qp.set('services', titles);
+        }
+
+        // Properly encode the message to preserve line breaks
+        qp.set('message', encodeURIComponent(message));
+
+        // Update both request help links
+        const headerLink = document.getElementById('headerRequestHelp');
+        const planLink = document.getElementById('planSubmit');
+
+        if (headerLink) {
+            headerLink.href = '/contact?' + qp.toString();
+        }
+
+        if (planLink) {
+            planLink.href = '/contact?' + qp.toString();
+        }
+    }
+
+    // Update links when plan changes
+    updateRequestHelpLinks();
 });
 </script>
 

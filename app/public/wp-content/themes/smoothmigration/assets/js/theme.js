@@ -61,6 +61,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // UX debug outline toggle via ?ux=1
+    try {
+        const params = new URLSearchParams(location.search);
+        if (params.get('ux') === '1') {
+            document.documentElement.classList.add('ux-debug');
+            const style = document.createElement('style');
+            style.textContent = `
+                .ux-debug * { outline: 1px dashed rgba(0,0,0,.12); }
+            `;
+            document.head.appendChild(style);
+        }
+    } catch(e) {}
+
     // Intersection Observer for fade-in animations
     const observerOptions = {
         threshold: 0.1,
@@ -305,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.mobileMenu = document.querySelector('.mobile-menu');
             this.menuBackdrop = document.querySelector('.mobile-menu-backdrop');
             this.menuClose = document.querySelector('.mobile-menu-close');
-            this.mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
             this.isOpen = false;
             
             this.init();
@@ -449,17 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        setupMobileThemeToggle() {
-            if (!this.mobileThemeToggle) return;
-            
-            this.mobileThemeToggle.addEventListener('click', () => {
-                // Sync with main theme toggle
-                const mainToggle = document.getElementById('theme-toggle');
-                if (mainToggle) {
-                    mainToggle.click();
-                }
-            });
-        }
+
 
         setupKeyboardNavigation() {
             this.mobileMenu.addEventListener('keydown', (e) => {
@@ -1194,19 +1197,7 @@ document.addEventListener('DOMContentLoaded', function() {
         imageObserver.observe(img);
     });
 
-    // Dark mode toggle (if implemented)
-    const darkModeToggle = document.querySelector('.dark-mode-toggle');
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-        });
 
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-        }
-    }
 
     // Inject "Meet Our Team" CTA button into the hero section (if present)
     const heroCtaGroup = document.querySelector('.hero .d-flex');

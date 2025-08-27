@@ -118,38 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, index * 200);
     });
     
-    // Testimonial rotation (if multiple testimonials exist)
-    const testimonials = document.querySelectorAll('.testimonial-card');
-    if (testimonials.length > 3) {
-        let currentIndex = 0;
-        const showTestimonials = 3;
-        let rotateTimer;
-
-        function rotateTestimonials() {
-            const max = testimonials.length;
-            for (let i = 0; i < max; i++) {
-                const visible = i >= currentIndex && i < currentIndex + showTestimonials;
-                testimonials[i].style.display = visible ? 'block' : 'none';
-            }
-            currentIndex = (currentIndex + showTestimonials) % testimonials.length;
-            rotateTimer = setTimeout(rotateTestimonials, 5000);
-        }
-
-        const visObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    clearTimeout(rotateTimer);
-                } else {
-                    clearTimeout(rotateTimer);
-                    rotateTestimonials();
-                }
-            });
-        }, { threshold: 0.1 });
-
-        const section = document.querySelector('.social-proof');
-        if (section) visObserver.observe(section);
-        else rotateTestimonials();
-    }
+    // Testimonials are static by default; rotation removed per design decision
     
     // Hero section parallax effect
     const heroSection = document.querySelector('.hero-landing');
