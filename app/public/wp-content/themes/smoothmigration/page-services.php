@@ -233,9 +233,15 @@ get_header();
                 <div class="col-lg-5 d-none d-lg-block">
                     <?php
                     $no_globe = isset($_GET['noglobe']) && $_GET['noglobe'] === '1';
+                    $debug_mode = isset($_GET['globe_debug']) && $_GET['globe_debug'] === '1';
                     if ( ! $no_globe ) : ?>
-                        <div class="services-parallax-globe" id="services-globe-container">
+                        <div class="services-parallax-globe" id="services-globe-container" <?php if ($debug_mode) echo 'data-debug="true"'; ?>>
                             <?php echo do_shortcode('[smooth_globe height="80vh" id="smooth-globe-services"]'); ?>
+                            <?php if ($debug_mode) : ?>
+                                <div class="globe-debug-info">
+                                    <small>Scroll to test parallax effect</small>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     <?php else : ?>
                         <!-- World map SVG temporarily removed -->
