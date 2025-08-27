@@ -29,11 +29,6 @@ get_header();
             </div>
         </div>
         
-        <!-- Globe: international routes preview -->
-        <div class="container mt-4 position-relative z-2">
-            <?php echo do_shortcode('[smooth_globe height="420px" id="services-globe"]'); ?>
-        </div>
-        
         <!-- Background Pattern -->
         <div class="hero-pattern position-absolute top-0 start-0 w-100 h-100 opacity-10"></div>
     </section>

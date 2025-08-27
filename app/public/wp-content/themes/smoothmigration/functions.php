@@ -49,9 +49,6 @@ require_once get_template_directory() . '/inc/options.php';
 // Stats helpers and shortcodes
 require_once get_template_directory() . '/inc/stats.php';
 
-// Globe (interactive services globe shortcode)
-require_once get_template_directory() . '/inc/globe.php';
-
 // Media taxonomies (Asset Type: Brand Logo)
 require_once get_template_directory() . '/inc/media-taxonomies.php';
 // Media bulk assignment tool

@@ -18,13 +18,6 @@ get_header();
         </div>
     </header>
 
-    <!-- Globe Section for Services -->
-    <section class="services-globe-section py-4 bg-light">
-        <div class="container">
-            <?php echo do_shortcode('[smooth_globe height="420px" id="services-globe"]'); ?>
-        </div>
-    </section>
-
     <div class="page-content py-5">
         <div class="container">
             

@@ -140,6 +140,33 @@ section {
     overflow: hidden;
 }
 
+/* Decorative services cubes background overlay */
+.services-cubes-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+}
+
+.services-cubes-bg svg {
+    width: 120%;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: -10%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.06));
+}
+
+@media (max-width: 991.98px) {
+    .services-cubes-bg { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .services-cubes-bg svg { animation: none !important; }
+}
+
 .services-snapshot::before {
     content: '';
     position: absolute;
