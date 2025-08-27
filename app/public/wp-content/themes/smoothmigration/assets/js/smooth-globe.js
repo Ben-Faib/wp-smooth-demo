@@ -7,6 +7,8 @@
   var d = window.SmoothGlobeData || { arcs: [], points: [], reduced: false };
   var url = new URL(window.location.href);
   var debug = url.searchParams.get('globe_debug') === '1';
+  var perfMode = url.searchParams.get('globe_perf'); // 'low' | 'off'
+  if (url.searchParams.get('noglobe') === '1' || perfMode === 'off') return;
 
   // Honor prefers-reduced-motion
   var prefersReduced = false;
@@ -47,7 +49,7 @@
       .arcStroke(0.7)
       .arcDashLength(0.6)
       .arcDashGap(0.2)
-      .arcDashAnimateTime(disableMotion ? 0 : 4000)
+      .arcDashAnimateTime((disableMotion || perfMode === 'low') ? 0 : 3000)
       .pointsData(d.points)
       .pointAltitude(0.01)
       .pointRadius(0.15)
@@ -67,6 +69,15 @@
     controls.autoRotate = !disableMotion;
     controls.autoRotateSpeed = 0.35;
 
+    // Reduce GPU load on low mode or high-DPI screens
+    try {
+      var pxRatio = (perfMode === 'low') ? 1 : Math.min(1.5, window.devicePixelRatio || 1);
+      if (globe.renderer && typeof globe.renderer === 'function') {
+        var r = globe.renderer();
+        if (r && typeof r.setPixelRatio === 'function') r.setPixelRatio(pxRatio);
+      }
+    } catch (e) {}
+
     // Enhanced scroll conflict prevention
     var scrollTimeout;
     var isScrolling = false;
@@ -81,6 +92,7 @@
         controls.enableRotate = false;
         controls.enableZoom = false;
         controls.enablePan = false;
+        controls.autoRotate = false; // Disable auto-rotation during scroll
       }
       isScrolling = true;
 
@@ -93,6 +105,10 @@
           controls.enableRotate = true;
           controls.enableZoom = true;
           controls.enablePan = true;
+          // Re-enable auto-rotation only if not disabled by reduced motion preferences
+          if (!disableMotion && perfMode !== 'low') {
+            controls.autoRotate = true;
+          }
         }
         isScrolling = false;
         globeContainer.classList.remove('scroll-disabled');
@@ -242,6 +258,24 @@
     globe.onPointClick(function (p) {
       if (debug) { alert('Clicked: ' + (p.name || (p.lat + ',' + p.lng))); }
     });
+
+    // Pause/Resume animations when offscreen (hero & any globe)
+    try {
+      var visObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (!entry.isIntersecting) {
+            if (controls) controls.autoRotate = false;
+            globe.arcDashAnimateTime(0);
+          } else {
+            if (!disableMotion && perfMode !== 'low') {
+              if (controls) controls.autoRotate = true;
+              globe.arcDashAnimateTime(3000);
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      visObserver.observe(globeContainer);
+    } catch (e) {}
 
     // Store cleanup function for potential future use
     el.__smoothGlobeCleanup = function() {
@@ -437,17 +471,17 @@
       const currentScrollY = window.scrollY;
       scrollVelocity = (scrollVelocity * dampening) + ((currentScrollY - lastScrollY) * 0.05);
 
-      // Get the currently active service
+      // Get the currently active service (for scaling effects only)
       const activeServiceIndex = getActiveServiceIndex();
       if (activeServiceIndex !== currentActiveService) {
         currentActiveService = activeServiceIndex;
-        // Rotate globe based on service index for more dynamic movement
-        targetRotation = (activeServiceIndex * 60) - 180; // 60 degrees per service, start from -180
+        // Rotation disabled during scrolling - globe stays static
+        // targetRotation = (activeServiceIndex * 60) - 180; // Disabled for static globe
       }
 
-      // Smooth rotation towards target
-      const rotationDiff = targetRotation - currentRotation;
-      currentRotation += rotationDiff * 0.02; // Smooth rotation transition
+      // Rotation disabled - globe stays static
+      // const rotationDiff = targetRotation - currentRotation;
+      // currentRotation += rotationDiff * 0.02; // Disabled for static globe
 
       // Enhanced scale based on scroll progress and active service
       const velocityInfluence = Math.abs(scrollVelocity) * 0.001;
@@ -466,13 +500,12 @@
       const time = Date.now() * 0.001;
       const floatOffset = Math.sin(time * 0.5) * 2; // Gentle floating effect
 
-      // Apply transform with hardware acceleration
-      globeElement.style.transform = `scale(${currentScale}) rotate(${currentRotation}deg) translateY(${floatOffset}px) translateZ(0)`;
+      // Apply transform with hardware acceleration (rotation disabled)
+      globeElement.style.transform = `scale(${currentScale}) translateY(${floatOffset}px) translateZ(0)`;
 
       // Update debug data attributes
       if (globeDebug) {
         globeContainer.setAttribute('data-scale', currentScale.toFixed(2));
-        globeContainer.setAttribute('data-rotation', currentRotation.toFixed(1));
         globeContainer.setAttribute('data-service', currentActiveService);
         globeContainer.setAttribute('data-position', currentGlobeTop.toFixed(1));
         globeContainer.setAttribute('data-max-pos', getMaxGlobePosition().toFixed(1));
@@ -645,7 +678,7 @@
       .globe-zoom-zone { background: rgba(255, 0, 0, 0.2) !important; border: 2px dashed red; }
       .globe-zoom-zone.active { background: rgba(0, 255, 0, 0.3) !important; border: 2px solid green; }
       .services-parallax-globe::before {
-        content: 'DEBUG: ' attr(data-scale) 'x ' attr(data-rotation) '° Pos: ' attr(data-position) 'px Max: ' attr(data-max-pos) 'px Service: ' attr(data-service);
+        content: 'DEBUG: ' attr(data-scale) 'x Pos: ' attr(data-position) 'px Max: ' attr(data-max-pos) 'px Service: ' attr(data-service);
         position: absolute;
         top: 10px;
         left: 10px;

@@ -67,27 +67,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Stats Counter Animation (enhanced)
+    // Stats Counter Animation (enhanced, requestAnimationFrame-based)
     function animateCounters() {
         const counters = document.querySelectorAll('.stat-number');
         
         counters.forEach(counter => {
             const target = parseInt(counter.textContent.replace(/\D/g, ''));
             const suffix = counter.textContent.replace(/\d/g, '');
-            let current = 0;
-            const increment = target / 100;
-            const duration = 2000;
-            const stepTime = duration / 100;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    counter.textContent = target + suffix;
-                    clearInterval(timer);
-                } else {
-                    counter.textContent = Math.floor(current) + suffix;
-                }
-            }, stepTime);
+            let startTime = null;
+            const duration = 1200;
+
+            function step(ts) {
+                if (startTime === null) startTime = ts;
+                const progress = Math.min(1, (ts - startTime) / duration);
+                const value = Math.floor(progress * target);
+                counter.textContent = value + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
         });
     }
     
@@ -126,34 +123,51 @@ document.addEventListener('DOMContentLoaded', function() {
     if (testimonials.length > 3) {
         let currentIndex = 0;
         const showTestimonials = 3;
-        
+        let rotateTimer;
+
         function rotateTestimonials() {
-            testimonials.forEach((testimonial, index) => {
-                if (index >= currentIndex && index < currentIndex + showTestimonials) {
-                    testimonial.style.display = 'block';
+            const max = testimonials.length;
+            for (let i = 0; i < max; i++) {
+                const visible = i >= currentIndex && i < currentIndex + showTestimonials;
+                testimonials[i].style.display = visible ? 'block' : 'none';
+            }
+            currentIndex = (currentIndex + showTestimonials) % testimonials.length;
+            rotateTimer = setTimeout(rotateTestimonials, 5000);
+        }
+
+        const visObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    clearTimeout(rotateTimer);
                 } else {
-                    testimonial.style.display = 'none';
+                    clearTimeout(rotateTimer);
+                    rotateTestimonials();
                 }
             });
-            
-            currentIndex = (currentIndex + showTestimonials) % testimonials.length;
-        }
-        
-        // Initial display
-        rotateTestimonials();
-        
-        // Rotate every 5 seconds
-        setInterval(rotateTestimonials, 5000);
+        }, { threshold: 0.1 });
+
+        const section = document.querySelector('.social-proof');
+        if (section) visObserver.observe(section);
+        else rotateTestimonials();
     }
     
     // Hero section parallax effect
     const heroSection = document.querySelector('.hero-landing');
     if (heroSection) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.3;
-            heroSection.style.backgroundPosition = `center ${rate}px`;
-        });
+        try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; } } catch (e) {}
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.2;
+                    heroSection.style.backgroundPosition = `center ${rate}px`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
     }
     
     // Note: Removed form validation since contact form is now on dedicated contact page

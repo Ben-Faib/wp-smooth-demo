@@ -218,96 +218,211 @@
 </nav>
 
 <script>
-// Sticky header and top bar functionality (class-based, direction-aware)
-document.addEventListener('DOMContentLoaded', function() {
-    const header = document.getElementById('masthead');
-    const navbar = header.querySelector('.navbar');
-    const topBar = document.querySelector('.top-bar');
+// Enhanced header management with proper timing and error handling
+(function() {
+    'use strict';
 
-    function setHeaderOffsets() {
-        const topBarHeight = topBar ? topBar.offsetHeight : 0;
-        const headerHeight = header ? header.offsetHeight : 0;
-        
-        document.documentElement.style.setProperty('--sm-topbar-height', topBarHeight + 'px');
-        document.body.style.paddingTop = (topBarHeight + headerHeight) + 'px';
-    }
+    let headerManager = {
+        header: null,
+        navbar: null,
+        topBar: null,
+        resizeTimeout: null,
+        isInitialized: false,
+        lastTopBarHeight: 0,
+        lastHeaderHeight: 0,
+        lastScrollY: 0,
 
-    setHeaderOffsets();
-    window.addEventListener('resize', setHeaderOffsets, { passive: true });
+        init: function() {
+            this.header = document.getElementById('masthead');
+            this.navbar = this.header ? this.header.querySelector('.navbar') : null;
+            this.topBar = document.querySelector('.top-bar');
 
-    let lastY = window.scrollY;
-    let lock = null; // null | 'up' | 'down'
-    function onScroll() {
-        const y = window.scrollY;
-
-        if (y > 100) {
-            header.classList.add('scrolled');
-            navbar.classList.add('navbar-scrolled');
-            document.body.classList.add('header-scrolled');
-        } else {
-            header.classList.remove('scrolled');
-            navbar.classList.remove('navbar-scrolled');
-            document.body.classList.remove('header-scrolled');
-        }
-
-        const delta = y - lastY;
-        if (Math.abs(delta) > 6) {
-            if (delta > 0 && lock !== 'down') {
-                document.body.classList.add('header-hide');
-                lock = 'down';
-            } else if (delta < 0 && lock !== 'up') {
-                document.body.classList.remove('header-hide');
-                lock = 'up';
+            if (!this.header) {
+                console.warn('Header element not found');
+                return;
             }
-            lastY = y;
+
+            // Wait for CSS to load before calculating heights
+            this.waitForCSS().then(() => {
+                this.setHeaderOffsets();
+                this.bindEvents();
+                this.isInitialized = true;
+            });
+        },
+
+        waitForCSS: function() {
+            return new Promise((resolve) => {
+                // Check if CSS is loaded by testing if our custom property exists
+                const testEl = document.createElement('div');
+                testEl.style.position = 'absolute';
+                testEl.style.visibility = 'hidden';
+                testEl.style.top = 'var(--sm-topbar-height, -9999px)';
+                document.body.appendChild(testEl);
+
+                function checkCSS() {
+                    const computed = window.getComputedStyle(testEl);
+                    const topValue = computed.getPropertyValue('top');
+
+                    if (topValue !== '-9999px') {
+                        // CSS is loaded
+                        document.body.removeChild(testEl);
+                        resolve();
+                    } else {
+                        // Wait a bit more
+                        setTimeout(checkCSS, 10);
+                    }
+                }
+
+                // Also set a fallback timeout in case CSS detection fails
+                setTimeout(() => {
+                    if (document.body.contains(testEl)) {
+                        document.body.removeChild(testEl);
+                        resolve();
+                    }
+                }, 100);
+
+                checkCSS();
+            });
+        },
+
+        setHeaderOffsets: function() {
+            if (!this.header) return;
+
+            const topBarHeight = this.topBar ? this.topBar.offsetHeight : 0;
+            const headerHeight = this.header.offsetHeight;
+
+            // Only update if values have changed to prevent unnecessary reflows
+            if (topBarHeight !== this.lastTopBarHeight || headerHeight !== this.lastHeaderHeight) {
+                document.documentElement.style.setProperty('--sm-topbar-height', topBarHeight + 'px');
+                document.body.style.paddingTop = (topBarHeight + headerHeight) + 'px';
+
+                this.lastTopBarHeight = topBarHeight;
+                this.lastHeaderHeight = headerHeight;
+            }
+        },
+
+        debounceResize: function() {
+            clearTimeout(this.resizeTimeout);
+            this.resizeTimeout = setTimeout(() => {
+                this.setHeaderOffsets();
+            }, 100);
+        },
+
+        bindEvents: function() {
+            // Debounced resize handler
+            window.addEventListener('resize', () => this.debounceResize(), { passive: true });
+
+            // Scroll handler with throttling
+            let ticking = false;
+            const scrollHandler = () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        this.handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            };
+
+            window.addEventListener('scroll', scrollHandler, { passive: true });
+            this.handleScroll(); // Initial call
+
+            // Dropdown positioning
+            this.initDropdowns();
+
+            // Theme toggle
+            this.initThemeToggle();
+        },
+
+        handleScroll: function() {
+            if (!this.header || !this.navbar) return;
+
+            const y = window.scrollY;
+
+            if (y > 100) {
+                this.header.classList.add('scrolled');
+                this.navbar.classList.add('navbar-scrolled');
+                document.body.classList.add('header-scrolled');
+            } else {
+                this.header.classList.remove('scrolled');
+                this.navbar.classList.remove('navbar-scrolled');
+                document.body.classList.remove('header-scrolled');
+            }
+
+            // Direction-aware hide/show (simplified)
+            const delta = y - this.lastScrollY;
+            if (Math.abs(delta) > 6) {
+                if (delta > 0 && !document.body.classList.contains('header-hide')) {
+                    document.body.classList.add('header-hide');
+                } else if (delta < 0 && document.body.classList.contains('header-hide')) {
+                    document.body.classList.remove('header-hide');
+                }
+            }
+            this.lastScrollY = y;
+        },
+
+        initDropdowns: function() {
+            const dropdowns = document.querySelectorAll('.navbar-nav .dropdown');
+
+            const positionTriangle = (dropdown) => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                if (!toggle || !menu) return;
+
+                const toggleRect = toggle.getBoundingClientRect();
+                const menuRect = menu.getBoundingClientRect();
+                let left = (toggleRect.left + toggleRect.width / 2) - menuRect.left;
+                left = Math.max(12, Math.min(left, menuRect.width - 12));
+                menu.style.setProperty('--triangle-left', left + 'px');
+            };
+
+            dropdowns.forEach(dropdown => {
+                positionTriangle(dropdown);
+                dropdown.addEventListener('mouseenter', () => positionTriangle(dropdown), { passive: true });
+                dropdown.addEventListener('focusin', () => positionTriangle(dropdown));
+            });
+
+            window.addEventListener('resize', () => {
+                dropdowns.forEach(positionTriangle);
+            }, { passive: true });
+        },
+
+        initThemeToggle: function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            if (!themeToggle) return;
+
+            const html = document.documentElement;
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', currentTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+
+                // Animation feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
         }
+    };
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => headerManager.init());
+    } else {
+        headerManager.init();
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    
-    // Align dropdown pointer triangle directly under each toggle label
-    const dropdowns = document.querySelectorAll('.navbar-nav .dropdown');
-    function positionTriangle(dropdown) {
-        const toggle = dropdown.querySelector('.dropdown-toggle');
-        const menu = dropdown.querySelector('.dropdown-menu');
-        if (!toggle || !menu) return;
-        const toggleRect = toggle.getBoundingClientRect();
-        const menuRect = menu.getBoundingClientRect();
-        let left = (toggleRect.left + toggleRect.width / 2) - menuRect.left;
-        // Clamp within menu bounds with 12px padding
-        left = Math.max(12, Math.min(left, Math.max(12, menuRect.width - 12)));
-        menu.style.setProperty('--triangle-left', left + 'px');
-    }
-    function positionAllTriangles() {
-        dropdowns.forEach(positionTriangle);
-    }
-    dropdowns.forEach(d => {
-        positionTriangle(d);
-        d.addEventListener('mouseenter', () => positionTriangle(d), { passive: true });
-        d.addEventListener('focusin', () => positionTriangle(d));
-    });
-    window.addEventListener('resize', positionAllTriangles, { passive: true });
-    
-    // Dark mode toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    
-    // Check for saved theme preference or default to 'light' mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', currentTheme);
-    
-    themeToggle.addEventListener('click', function() {
-        const currentTheme = html.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        
-        // Add a subtle animation feedback
-        this.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            this.style.transform = '';
-        }, 150);
-    });
-});
+
+    // Fallback: try to initialize after a short delay if DOMContentLoaded hasn't fired
+    setTimeout(() => {
+        if (!headerManager.isInitialized) {
+            headerManager.init();
+        }
+    }, 100);
+})();
 </script>
