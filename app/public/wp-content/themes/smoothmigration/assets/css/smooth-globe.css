@@ -1,0 +1,145 @@
+.smooth-globe-wrap { position: relative; }
+.smooth-globe { width: 100%; height: 100%; min-height: 360px; }
+.smooth-globe canvas { filter: drop-shadow(0 0 12px rgba(99,102,241,0.35)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .smooth-globe canvas { animation: none !important; }
+}
+
+/* Services Page Parallax Globe */
+.services-parallax-globe {
+    position: sticky;
+    top: 2rem;
+    height: 80vh;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.services-parallax-globe .smooth-globe-wrap {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.services-parallax-globe .smooth-globe {
+    height: 100% !important;
+    width: 100% !important;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Globe zoom zones */
+.globe-zoom-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.globe-zoom-zone.active {
+    background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+}
+
+/* Services Page Layout Improvements */
+.services-grid {
+    padding: 4rem 0;
+    min-height: 100vh;
+}
+
+.services-grid .container {
+    max-width: 1400px;
+}
+
+.services-grid .row {
+    min-height: calc(100vh - 8rem);
+}
+
+/* Service cards spacing */
+.services-grid .service-card {
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.services-grid .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced visual hierarchy */
+.services-grid .service-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.services-grid .service-description {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Fallback for when globe is disabled or fails to load */
+.services-parallax-globe:empty,
+.services-parallax-globe[data-disabled="true"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.services-parallax-globe:empty::before,
+.services-parallax-globe[data-disabled="true"]::before {
+    content: "🌍";
+    font-size: 4rem;
+    opacity: 0.8;
+    animation: float 6s ease-in-out infinite;
+}
+
+.services-parallax-globe:empty::after,
+.services-parallax-globe[data-disabled="true"]::after {
+    content: "Interactive World Map";
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .services-parallax-globe {
+        display: none;
+    }
+
+    .services-grid .col-lg-7 {
+        margin-bottom: 3rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .services-grid .col-lg-7 {
+        padding-right: 3rem;
+    }
+
+    .services-grid .col-lg-5 {
+        padding-left: 1rem;
+    }
+}
+
+

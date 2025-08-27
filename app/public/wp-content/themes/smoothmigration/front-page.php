@@ -63,7 +63,16 @@ get_header(); ?>
                 </div>
             </div>
             <div class="col-lg-4 d-none d-lg-block">
+                <?php 
+                // Allow disabling globe via ?noglobe=1 for quick A/B or fallback
+                $no_globe = isset($_GET['noglobe']) && $_GET['noglobe'] === '1';
+                if ( ! $no_globe ) : ?>
                 <div class="hero-map-container" aria-hidden="true">
+                    <?php echo do_shortcode('[smooth_globe height="420px" id="smooth-globe-hero"]'); ?>
+                </div>
+                <?php else : ?>
+                <!-- World map SVG temporarily removed -->
+                <!-- <div class="hero-map-container" aria-hidden="true">
                     <?php
                     $map_path = get_template_directory() . '/assets/svg/world-map.svg';
                     if ( file_exists( $map_path ) ) {
@@ -72,7 +81,8 @@ get_header(); ?>
                         echo '<img src="' . esc_url( get_template_directory_uri() . '/assets/svg/world-map.svg' ) . '" alt="" />';
                     }
                     ?>
-                </div>
+                </div> -->
+                <?php endif; ?>
                 <?php $expats = trim( (string) get_option( 'sm_expats_count', '' ) ); if ( $expats !== '' ) : ?>
                 <div class="stat-item mt-4">
                     <div class="stat-number"><?php echo esc_html( $expats ); ?></div>

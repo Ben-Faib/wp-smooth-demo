@@ -223,25 +223,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Header scroll effect
+    // Header scroll effect (integrated into combined scroll handler)
     let lastScrollY = window.scrollY;
     const header = document.querySelector('.site-header');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Hide/show header on scroll
-        if (window.scrollY > lastScrollY && window.scrollY > 200) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-        lastScrollY = window.scrollY;
-    });
+
+    // Add header handling to the combined scroll function
+    const originalHandleCombinedScroll = handleCombinedScroll;
+    handleCombinedScroll = function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            const scrolled = window.pageYOffset;
+
+            // Handle scroll animations
+            handleScrollAnimation();
+
+            // Handle parallax elements
+            const parallaxElements = document.querySelectorAll('.parallax');
+            parallaxElements.forEach(el => {
+                const rate = scrolled * -0.5;
+                el.style.transform = `translateY(${rate}px)`;
+            });
+
+            // Handle header scroll effect
+            if (header) {
+                if (scrolled > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                // Hide/show header on scroll
+                if (scrolled > lastScrollY && scrolled > 200) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+                lastScrollY = scrolled;
+            }
+        }, 16); // ~60fps
+    };
 
     // Simplified button loading states - Fixed version
     document.querySelectorAll('.btn').forEach(btn => {
@@ -1094,17 +1114,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    window.addEventListener('scroll', handleScrollAnimation);
+    // Combined scroll handler for better performance
+    let scrollTimeout;
+    function handleCombinedScroll() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            const scrolled = window.pageYOffset;
 
-    // Parallax effect for hero section
-    const parallaxElements = document.querySelectorAll('.parallax');
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        parallaxElements.forEach(el => {
-            const rate = scrolled * -0.5;
-            el.style.transform = `translateY(${rate}px)`;
-        });
-    });
+            // Handle scroll animations
+            handleScrollAnimation();
+
+            // Handle parallax elements
+            const parallaxElements = document.querySelectorAll('.parallax');
+            parallaxElements.forEach(el => {
+                const rate = scrolled * -0.5;
+                el.style.transform = `translateY(${rate}px)`;
+            });
+        }, 16); // ~60fps
+    }
+
+    window.addEventListener('scroll', handleCombinedScroll, { passive: true });
 
     // Service option tracking
     document.querySelectorAll('[data-bs-toggle="modal"]').forEach(btn => {
@@ -1250,22 +1279,56 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.why-us .icon-glow, .resource-link .icon-glow, .resource-icon .icon-glow').forEach(el => faIconObserver.observe(el));
 });
 
+// Performance monitoring utility
+window.smoothMigration = window.smoothMigration || {};
+window.smoothMigration.performance = {
+    // Track script execution time
+    scriptStartTime: performance.now(),
+
+    // Monitor globe instances
+    globeInstances: 0,
+
+    // Track event listeners
+    eventListeners: {
+        scroll: 0,
+        resize: 0
+    },
+
+    // Log performance metrics
+    logMetrics: function() {
+        const loadTime = performance.now() - this.scriptStartTime;
+        console.log('[Performance] Page load time:', loadTime + 'ms');
+        console.log('[Performance] Globe instances:', this.globeInstances);
+
+        // Check for multiple globes (performance issue indicator)
+        if (this.globeInstances > 1) {
+            console.warn('[Performance] Multiple globe instances detected! This may cause performance issues.');
+        }
+    },
+
+    // Track globe creation
+    trackGlobe: function() {
+        this.globeInstances++;
+    }
+};
+
 // Utility functions
-window.smoothMigration = {
+window.smoothMigration = window.smoothMigration || {};
+window.smoothMigration.utils = {
     // Show notification
     showNotification: function(message, type = 'info') {
         const notification = document.createElement('div');
         notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
         notification.style.zIndex = '9999';
         notification.textContent = message;
-        
+
         document.body.appendChild(notification);
-        
+
         setTimeout(() => {
             notification.remove();
         }, 5000);
     },
-    
+
     // Smooth scroll to element
     scrollTo: function(selector) {
         const element = document.querySelector(selector);
@@ -1273,4 +1336,11 @@ window.smoothMigration = {
             element.scrollIntoView({ behavior: 'smooth' });
         }
     }
-}; 
+};
+
+// Log performance metrics on page load
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        window.smoothMigration.performance.logMetrics();
+    }, 100);
+}); 

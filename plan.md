@@ -1,435 +1,204 @@
-# Smooth Migration Theme - Action Plan & Follow-ups
+# World Map SVG — Implementation Plan and QA Guide
 
-## 📋 **Executive Summary**
+File: `app/public/wp-content/themes/smoothmigration/assets/svg/world-map.svg`  
+Scope: hub placement, origin placement, routes, country outlines, accessibility, debug, and QA.
 
-Following the successful implementation of Phase 1 (glassmorphism cards, dark mode, micro-interactions, mega footer, animations, and accessibility improvements), this document outlines Phase 2 priorities to further enhance the user experience, performance, and visual appeal of the Smooth Migration website.
+## Goals
+- Place blue hub dots accurately on: New York City (US), Vancouver (CA), London (UK), Cape Town (SA), Melbourne (AU).
+- Place yellow origin dots on visible land across many unique countries and connect them to one or more hubs.
+- Add distinct colored outline halos around Canada, United States, United Kingdom, South Africa, and Australia.
+- Keep subtle animation; fully respect `prefers-reduced-motion`.
+- Provide a zero-JS debug toggle for verification.
+
+## Projection model and conventions (corrected)
+- Coordinate space: 800×400 SVG viewBox.
+- Base map: Natural Earth 110m land pre‑projected to Winkel Tripel (WinTri). Therefore, use WinTri forward projection for all coordinates (NOT equirectangular).
+- Central meridian: `λ₀ = 0°`. Standard parallel: `φ₁ = arccos(2/π) ≈ 50.467°`.
+- Animations must not run when `prefers-reduced-motion: reduce`.
+- No external paid assets; keep to SVG/CSS only.
+
+WinTri forward projection used here (pseudo‑code / JS):
+
+```js
+// inputs in degrees, output in SVG pixels for an 800×400 canvas
+function lonLatToPixel(lonDeg, latDeg, bbox = computedWintriBBox) {
+  const W = 800, H = 400; // viewBox
+  const toRad = d => (Math.PI / 180) * d;
+  const lon = toRad(lonDeg);
+  const lat = toRad(latDeg);
+  const λ0 = 0; // central meridian
+  const φ1 = Math.acos(2 / Math.PI); // ≈ 0.880 rad (50.467°)
+  // Aitoff helper
+  const λ = lon - λ0;
+  const α = Math.acos(Math.cos(lat) * Math.cos(λ / 2));
+  const sinc = α === 0 ? 1 : Math.sin(α) / α;
+  const xA = 2 * Math.cos(lat) * Math.sin(λ / 2) / sinc;
+  const yA = Math.sin(lat) / sinc;
+  // Winkel Tripel: average of Aitoff and equirectangular at φ1
+  const xW = (xA + λ * Math.cos(φ1)) / 2;
+  const yW = (yA + lat) / 2;
+  // Normalize to pixels using a bbox precomputed by gridding lon/lat
+  // bbox = { xmin, xmax, ymin, ymax } in WinTri coords
+  const x = (xW - bbox.xmin) / (bbox.xmax - bbox.xmin) * W;
+  const y = (1 - (yW - bbox.ymin) / (bbox.ymax - bbox.ymin)) * H;
+  return { x, y };
+}
+```
+
+How to get `computedWintriBBox`:
+- Grid lon `[-180,180]` and lat `[-90,90]` every 1–2 degrees, project with the function above, take min/max of `xW`, `yW` to form `{xmin,xmax,ymin,ymax}`.
+- Use the same bbox for all points to match the land layer’s extents. Optionally shrink by ~1% to add a small breathing margin.
 
 ---
 
-## 🎯 **Phase 2 Objectives**
+## Stage 1 — Baseline, projection, and helpers
+- Confirm map renders at 800×400.
+- Embed the WinTri conversion snippet (above) as a comment in the plan and keep a local script to recompute pixel coordinates on demand.
+- Compute the WinTri bbox by gridding and lock it in the repo (JSON in `assets/svg/wintri-bbox.json`).
+- Add a hidden debug grid and labels, revealed by:
+  - Setting `data-debug="1"` on the root `<svg>`, or
+  - Loading with `#debug` fragment.
 
-### **Primary Goals:**
-- **Enhanced Visual Storytelling**: Integrate 3D elements and world map animations
-- **Advanced Micro-interactions**: Polish partner carousels and metric counters
-- **Mobile Experience**: Optimize touch interactions and responsive animations
-- **Performance**: Achieve consistent 95+ Lighthouse scores
-- **Accessibility**: Advanced a11y features beyond WCAG AA compliance
+Deliverables
+- Inline `<style>` with `.debug` rules.
+- `<g id="debug" class="debug">` grid at 80px intervals.
 
-### **Success Metrics:**
-- Lighthouse Performance: 95+ (currently targeting 90+)
-- User engagement: 20% increase in time on page
-- Mobile usability: Perfect mobile-friendly test scores
-- Accessibility: AAA compliance where feasible
-- Conversion: 15% improvement in contact form submissions
-
----
-
-## 🚀 **Phase 2 Feature Roadmap**
-
-### **Sprint 1: Visual Enhancements (Week 1-2)**
-
-#### 1.1 **Hero Background Integration**
-**Priority**: High | **Effort**: Medium | **Impact**: High
-
-**Task**: Integrate world map SVG as animated hero background
-```
-Files to modify:
-- assets/css/hero.css
-- front-page.php
-- assets/svg/world-map.svg (enhance)
-
-Implementation:
-- Add world map as ::before pseudo-element on hero
-- Implement subtle parallax effect (respect reduced motion)
-- Add gentle glow animations on connection points
-- Ensure contrast with hero text remains accessible
-```
-
-**Acceptance Criteria:**
-- [ ] World map appears as background without interfering with text readability
-- [ ] Connection points pulse gently with 3s intervals
-- [ ] Parallax effect disabled when `prefers-reduced-motion: reduce`
-- [ ] Hero text contrast passes WCAG AA in both light/dark modes
-
-#### 1.2 **Floating Service Cubes in Hero**
-**Priority**: High | **Effort**: Medium | **Impact**: High
-
-**Task**: Position 3D service cubes as floating elements in hero section
-```
-Files to modify:
-- assets/css/hero.css
-- front-page.php
-- assets/svg/service-cubes.svg
-
-Implementation:
-- Add service cubes as absolute positioned elements
-- Implement gentle floating animations (6-8s cycles)
-- Add hover interactions for cube rotation
-- Ensure mobile-responsive positioning
-```
-
-**Acceptance Criteria:**
-- [ ] 3-5 service cubes float at different levels in hero
-- [ ] Each cube represents a core service with appropriate icon
-- [ ] Hover effects rotate cubes slightly
-- [ ] Mobile version shows fewer/smaller cubes for performance
-
-#### 1.3 **Enhanced Partner Logo Carousel**
-**Priority**: Medium | **Effort**: Low | **Impact**: Medium
-
-**Task**: Improve partner carousel with smooth infinite scroll and interactions
-```
-Files to modify:
-- front-page.php (partners carousel section)
-- assets/css/sections.css
-- assets/js/landing-page.js
-
-Implementation:
-- Replace current auto-scroll with smooth infinite loop
-- Add hover pause functionality
-- Implement logo fade-in on scroll
-- Add subtle grayscale→color transition on hover
-```
-
-**Acceptance Criteria:**
-- [ ] Carousel loops smoothly without jarring resets
-- [ ] Pause on hover/focus for accessibility
-- [ ] Logos have subtle hover effects
-- [ ] Works with keyboard navigation (arrow keys)
-
-### **Sprint 2: Interactive Animations (Week 3-4)**
-
-#### 2.1 **Animated Metrics Counters**
-**Priority**: High | **Effort**: Low | **Impact**: High
-
-**Task**: Add count-up animations for trust metrics
-```
-Files to modify:
-- assets/js/inview.js (extend)
-- front-page.php (metrics section)
-- footer.php (trust metrics)
-
-Implementation:
-- Create counter animation function with easing
-- Trigger on intersection observer
-- Add optional "+" suffix animation
-- Respect reduced motion preferences
-```
-
-**Acceptance Criteria:**
-- [ ] Numbers count up from 0 with smooth easing
-- [ ] Animation triggers when metrics enter viewport
-- [ ] Suffix characters ("+", "%") animate in after count
-- [ ] No animation with reduced motion preference
-
-#### 2.2 **Advanced Button Micro-interactions**
-**Priority**: Medium | **Effort**: Low | **Impact**: Medium
-
-**Task**: Enhance button states with advanced micro-interactions
-```
-Files to modify:
-- assets/css/buttons.css
-- assets/js/theme.js (new micro-interactions)
-
-Implementation:
-- Add magnetic hover effects for primary CTAs
-- Implement ripple click animations
-- Create loading state with progress indicators
-- Add success/error state animations
-```
-
-**Acceptance Criteria:**
-- [ ] Primary buttons have subtle magnetic effect on hover
-- [ ] Click creates ripple animation from touch point
-- [ ] Form submissions show loading states
-- [ ] Success/error states provide clear visual feedback
-
-#### 2.3 **Service Card Advanced Interactions**
-**Priority**: Medium | **Effort**: Medium | **Impact**: Medium
-
-**Task**: Add service card flip/reveal animations
-```
-Files to modify:
-- assets/css/cards.css
-- page-services.php / taxonomy templates
-
-Implementation:
-- Create card flip animation revealing service details
-- Add "Quick View" modal with glassmorphism
-- Implement card-to-modal transition animation
-- Ensure accessibility with focus management
-```
-
-**Acceptance Criteria:**
-- [ ] Cards can flip to show additional service information
-- [ ] Modal opens with smooth scale/fade animation
-- [ ] Focus management preserves keyboard navigation
-- [ ] ESC key and overlay click close modal
-
-### **Sprint 3: Mobile Experience (Week 5-6)**
-
-#### 3.1 **Mobile Menu Enhancement**
-**Priority**: High | **Effort**: Medium | **Impact**: High
-
-**Task**: Redesign mobile navigation with slide animations
-```
-Files to modify:
-- header.php
-- assets/css/header.css
-- assets/js/theme.js
-
-Implementation:
-- Replace Bootstrap offcanvas with custom slide menu
-- Add slide-in animation from right
-- Implement backdrop blur effect
-- Add menu item stagger animations
-```
-
-**Acceptance Criteria:**
-- [ ] Menu slides in smoothly from right edge
-- [ ] Backdrop has glassmorphism blur effect
-- [ ] Menu items animate in with staggered timing
-- [ ] Touch gestures work for opening/closing
-
-#### 3.2 **Touch-Optimized Interactions**
-**Priority**: Medium | **Effort**: Medium | **Impact**: High
-
-**Task**: Optimize all interactions for touch devices
-```
-Files to modify:
-- assets/css/buttons.css
-- assets/css/cards.css
-- assets/js/theme.js
-
-Implementation:
-- Increase touch targets to minimum 44px
-- Add touch ripple effects
-- Implement swipe gestures for carousels
-- Optimize hover states for touch devices
-```
-
-**Acceptance Criteria:**
-- [ ] All interactive elements meet 44px minimum touch target
-- [ ] Touch events provide immediate visual feedback
-- [ ] Swipe gestures work intuitively
-- [ ] No hover states interfere with touch interaction
-
-#### 3.3 **Responsive Animation Scaling**
-**Priority**: Medium | **Effort**: Low | **Impact**: Medium
-
-**Task**: Scale animations appropriately for different screen sizes
-```
-Files to modify:
-- assets/css/responsive.css
-- assets/js/inview.js
-
-Implementation:
-- Reduce animation intensity on smaller screens
-- Disable complex animations on low-end devices
-- Implement performance-based animation scaling
-- Add prefers-reduced-data support
-```
-
-**Acceptance Criteria:**
-- [ ] Mobile devices show simpler animations
-- [ ] Performance detection disables heavy animations
-- [ ] Battery level affects animation complexity (if available)
-- [ ] Data-saver mode respected
-
-### **Sprint 4: Performance & Advanced A11y (Week 7-8)**
-
-#### 4.1 **Critical CSS Implementation**
-**Priority**: High | **Effort**: Medium | **Impact**: High
-
-**Task**: Implement critical CSS inlining for above-the-fold content
-```
-Files to modify:
-- functions.php (new critical CSS function)
-- header.php (inline critical styles)
-- inc/enqueue.php
-
-Implementation:
-- Extract critical CSS for hero and header
-- Inline critical styles in <head>
-- Defer non-critical stylesheets
-- Implement CSS preloading
-```
-
-**Acceptance Criteria:**
-- [ ] Above-the-fold content renders without external CSS
-- [ ] First Contentful Paint improves by 200ms+
-- [ ] No FOUC (Flash of Unstyled Content)
-- [ ] Non-critical CSS loads asynchronously
-
-#### 4.2 **Image Optimization Pipeline**
-**Priority**: High | **Effort**: Medium | **Impact**: High
-
-**Task**: Implement next-gen image formats with fallbacks
-```
-Files to modify:
-- functions.php (image optimization)
-- All template files using images
-- .htaccess (WebP serving rules)
-
-Implementation:
-- Generate WebP/AVIF versions of all images
-- Implement progressive JPEG fallbacks
-- Add lazy loading with intersection observer
-- Implement responsive image sizing
-```
-
-**Acceptance Criteria:**
-- [ ] WebP images served to compatible browsers
-- [ ] AVIF images for newest browsers
-- [ ] Lazy loading works without JavaScript fallback
-- [ ] Images scale appropriately for device resolution
-
-#### 4.3 **Advanced Accessibility Features**
-**Priority**: Medium | **Effort**: Medium | **Impact**: High
-
-**Task**: Implement advanced accessibility beyond WCAG AA
-```
-Files to modify:
-- header.php (skip navigation)
-- assets/js/theme.js (keyboard navigation)
-- style.css (high contrast mode)
-
-Implementation:
-- Add comprehensive skip navigation
-- Implement roving tabindex for complex widgets
-- Create high contrast mode toggle
-- Add live regions for dynamic updates
-```
-
-**Acceptance Criteria:**
-- [ ] Skip links work for all major sections
-- [ ] Complex widgets navigable with arrow keys
-- [ ] High contrast mode available beyond system setting
-- [ ] Screen readers announce dynamic content changes
+Acceptance criteria
+- Toggling `data-debug="1"` shows the grid and labels without JS.
 
 ---
 
-## ⏰ **Implementation Timeline**
+## Stage 2 — Hubs (blue)
+- Place the five blue hubs using WinTri‑derived pixels (rounded) and allow ±4px visual nudge per region to sit cleanly on land.
+- Keep soft glow + pulse animation; hide via reduced-motion media query.
 
-### **8-Week Development Schedule**
+| Hub        | Lat, Lon            | Pixel (x,y) | Notes |
+|------------|----------------------|-------------|-------|
+| Vancouver  | 49.2827, −123.1207  | (~126, ~90) | Canada west coast |
+| New York   | 40.7128, −74.0060   | (~236, ~112)| US east coast |
+| London     | 51.5074, −0.1278    | (~400, ~86) | UK |
+| Cape Town  | −33.9249, 18.4241   | (~441, ~285)| South Africa |
+| Melbourne  | −37.8136, 144.9631  | (~722, ~288)| Australia |
 
-```
-Week 1-2: Sprint 1 - Visual Enhancements
-├── Hero background integration (Week 1)
-├── Floating service cubes (Week 1-2)
-└── Partner carousel polish (Week 2)
+Deliverables
+- Updated `<g class="hubs">` with the coordinates above and existing animations.
 
-Week 3-4: Sprint 2 - Interactive Animations  
-├── Animated metrics counters (Week 3)
-├── Advanced button interactions (Week 3-4)
-└── Service card flip animations (Week 4)
-
-Week 5-6: Sprint 3 - Mobile Experience
-├── Mobile menu enhancement (Week 5)
-├── Touch-optimized interactions (Week 5-6)
-└── Responsive animation scaling (Week 6)
-
-Week 7-8: Sprint 4 - Performance & A11y
-├── Critical CSS implementation (Week 7)
-├── Image optimization pipeline (Week 7-8)
-└── Advanced accessibility features (Week 8)
-```
-
-### **Milestone Checkpoints**
-
-**Week 2 Checkpoint**: Visual storytelling complete
-- [ ] Hero has animated world map background
-- [ ] Service cubes float in hero section
-- [ ] Partner carousel loops smoothly
-
-**Week 4 Checkpoint**: Interactive animations complete
-- [ ] Trust metrics count up on scroll
-- [ ] Buttons have advanced micro-interactions
-- [ ] Service cards have reveal animations
-
-**Week 6 Checkpoint**: Mobile experience optimized
-- [ ] Mobile menu slides in smoothly
-- [ ] Touch interactions feel responsive
-- [ ] Animations scale appropriately
-
-**Week 8 Checkpoint**: Performance & A11y enhanced
-- [ ] Lighthouse scores consistently 95+
-- [ ] Images load in next-gen formats
-- [ ] Advanced accessibility features active
+Acceptance criteria
+- Each hub sits clearly on the intended land mass; no overlap with oceans at 1× and 2× DPR.
 
 ---
 
-## 🧪 **Testing Strategy**
+## Stage 3 — Origins (yellow)
+- Curate origin dots across unique countries on continent land masses only (no islands or micro‑states that are absent at 110m resolution).
+- Keep comments per city for maintainability.
+- Ensure geographic spread across Americas, Europe/MENA, Africa, and Asia (mainland) + Australia (as the only Oceania continent).
 
-### **Automated Testing**
+Deliverables
+- Updated `<g class="origins">` with a diverse mainland set (examples; all WinTri‑projected):
+  - Americas: Mexico City (MX), Bogotá (CO), Lima (PE), São Paulo (BR), Buenos Aires (AR)
+  - Europe/MENA (mainland): Madrid (ES), Berlin (DE), Paris (FR), Rome (IT), Istanbul (TR), Casablanca (MA)
+  - Africa (mainland): Lagos (NG), Luanda (AO), Nairobi (KE), Addis Ababa (ET)
+  - Asia (mainland): Mumbai (IN), Delhi (IN), Dubai (AE), Riyadh (SA), Tehran (IR), Bangkok (TH), Ho Chi Minh City (VN), Kuala Lumpur (MY), Guangzhou (CN), Seoul (KR)
+- Keep `filter="url(#glow)"` for visual consistency.
 
-#### **Performance Testing**
-```bash
-# Lighthouse CI integration
-npm install -g @lhci/cli
-lhci autorun --upload.target=temporary-public-storage
-
-# Target scores:
-Performance: 95+
-Accessibility: 95+
-Best Practices: 100
-SEO: 100
-```
-
-#### **Accessibility Testing**
-```bash
-# axe-core integration
-npm install --save-dev @axe-core/cli
-axe https://smoothmigration.local --tags wcag2a,wcag2aa,wcag21aa
-```
-
-### **Success Metrics & KPIs**
-
-| Metric | Current | Target | Measurement |
-|--------|---------|---------|-------------|
-| Lighthouse Performance | 90+ | 95+ | Weekly automated tests |
-| First Contentful Paint | ~1.2s | <1.0s | Lab & field data |
-| Contact Form Conversion | ~3.2% | >3.7% | Form analytics |
-| Mobile Usability Score | 95 | 100 | Google Search Console |
+Acceptance criteria
+- All yellow dots are over continent land (no islands); 15–20 unique countries minimum; no cluster overlaps hubs.
 
 ---
 
-## ✅ **Next Steps**
+## Stage 4 — Routes
+- Use quadratic curves (`Q`) from each origin to one or more hubs to indicate migration.
+- Style: `stroke="#fbbf24"`, `stroke-width="1.2"`, `stroke-dasharray="4,4"`, `fill="none"`.
+- Create several multi-hub links to show diversity (e.g., Tokyo → Vancouver and → Melbourne; Cairo → London and → Cape Town).
 
-### **Immediate Actions (This Week)**
-1. **Stakeholder Review**: Present action plan to team for approval
-2. **Resource Planning**: Confirm developer availability and timeline
-3. **Environment Setup**: Prepare development tools and testing framework
-4. **Sprint Planning**: Break down Sprint 1 into detailed tasks
+Deliverables
+- `<g class="routes">` organized in blocks by destination hub with clear comments.
 
-### **Sprint 1 Kickoff Preparation**
-- [ ] Create feature branch: `feature/phase-2-visual-enhancements`
-- [ ] Set up performance monitoring baseline
-- [ ] Prepare world map SVG enhancements
-- [ ] Research browser support for advanced CSS features
+Acceptance criteria
+- Routes terminate on hubs; avoid lines that end in ocean; density balanced so the map remains readable.
 
 ---
 
-**This action plan transforms the Smooth Migration website into a best-in-class example of modern web design that prioritizes both visual appeal and inclusive accessibility. Each sprint builds upon the solid foundation established in Phase 1, ensuring a cohesive and professional user experience that truly makes international relocation feel smooth and approachable.**
+## Stage 5 — Country border outlines (distinct colors) — corrected
+- Replace ellipses with actual country border paths (stroke only) for:
+  - Canada: `#06b6d4`
+  - United States: `#ef4444`
+  - United Kingdom: `#a78bfa`
+  - South Africa: `#10b981`
+  - Australia: `#f59e0b`
+- Source: Natural Earth Admin‑0 (110m) for each country; project to WinTri with the same parameters and scale used for the land layer.
+- Simplify to ~1–2px fidelity at 800×400 to keep file size reasonable.
+- Style: `fill="none"`, `stroke` per color, `stroke-width="1.2"`, `stroke-dasharray="6,6"`, `filter="url(#glow)"`.
 
-## 📊 **Quick Reference Summary**
+Deliverables
+- `<g class="country-borders">` containing five `<path>` elements that follow the real borders.
 
-**🎯 Phase 2 Focus Areas:**
-1. **Visual Storytelling** (Weeks 1-2): Hero animations & floating cubes
-2. **Interactive Polish** (Weeks 3-4): Counters & advanced micro-interactions  
-3. **Mobile Excellence** (Weeks 5-6): Touch optimization & responsive scaling
-4. **Performance & A11y** (Weeks 7-8): Critical CSS & advanced accessibility
+Acceptance criteria
+- Strokes follow visible coastlines/borders at 110m resolution; colors are distinct and readable; no ellipses remain.
 
-**💡 Key Success Factors:**
-- Maintain 95+ Lighthouse scores throughout development
-- Ensure all animations respect `prefers-reduced-motion`
-- Test extensively on mobile devices and assistive technologies
-- Implement comprehensive fallbacks for older browsers
+---
 
-**🚀 Expected Outcomes:**
-- Industry-leading performance and accessibility scores
-- 20% increase in user engagement metrics
-- 15% improvement in conversion rates
-- Seamless experience across all devices and abilities
+## Stage 6 — Accessibility, motion, and performance
+- Keep pulse animations wrapped with `[data-anim]` and disabled via:
+  ```css
+  @media (prefers-reduced-motion: reduce) {
+    [data-anim] { display: none; }
+  }
+  ```
+- Ensure adequate contrast for hubs and origins on the gradient.
+- SVG remains <100KB uncompressed where practical.
 
-This comprehensive action plan provides the roadmap to elevate the Smooth Migration website from its already excellent foundation to a truly exceptional digital experience that sets new standards in the relocation services industry.
+Deliverables
+- Verified reduced-motion behavior.
+- Final size check.
+
+Acceptance criteria
+- No animation when reduced-motion is on.
+- Visuals remain legible on standard laptop and mobile widths.
+
+---
+
+## Stage 7 — QA and sign‑off
+- Cross-check hub locations against a reference map using the debug grid.
+- Verify every origin dot is on land at 110m granularity.
+- Scan routes for kinks/overlaps; adjust control points as needed.
+- Validate halo colors and positions.
+- Smoke test in Safari, Chrome, Firefox on macOS; Chrome/Edge on Windows.
+- Run through responsive containers (CSS scaling) to ensure no clipping.
+
+Definition of Done
+- All acceptance criteria above pass.
+- No yellow dot in ocean; no route endpoints off the hub coordinates.
+- Distinct colored halos present for CA, US, UK, SA, AU.
+- Reduced-motion respected; debug toggle works.
+
+---
+
+## Maintenance guide
+
+Add a new origin
+1. Convert city lat/lon to pixel:
+   ```
+   x = (lon + 180) * 800 / 360
+   y = (90 - lat) * 400 / 180
+   ```
+2. Place a `<circle>` with `r="3"` and `filter="url(#glow)"`.
+3. Add one or more routes to the nearest hub(s) using `Q` curves.
+4. Verify on land with the debug grid.
+
+Adjusting hubs or halos
+- Update coordinates in the hubs table and move related route endpoints.
+- Recenter/re‑size the corresponding halo ellipse; keep stroke width and dash pattern consistent.
+
+Debug usage (no JS)
+- Temporarily set `data-debug="1"` on the root `<svg>` or load with `#debug` to reveal the grid and labels.
+
+Appendix — Projection references
+- Winkel Tripel forward formula as implemented above (WinTri = mean of Aitoff and equirectangular at `φ₁ = arccos(2/π)`).
+- Bbox must be computed once for the repo and reused; do not mix formulas (no equirectangular short‑cuts).
+- Example (sanity check, approximate pixels for this repo’s bbox):
+  - NYC (40.7128, −74.0060) → ≈ (236, 112)
+  - London (51.5074, −0.1278) → ≈ (400, 86)
+  - Vancouver (49.2827, −123.1207) → ≈ (126, 90)
+  - Cape Town (−33.9249, 18.4241) → ≈ (441, 285)
+  - Melbourne (−37.8136, 144.9631) → ≈ (722, 288)

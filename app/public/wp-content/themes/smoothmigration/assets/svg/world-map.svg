@@ -1,4 +1,4 @@
-<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+<svg id="map" width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" data-debug="0">
   <defs>
     <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.3" />
@@ -15,11 +15,21 @@
       @media (prefers-reduced-motion: reduce) {
         [data-anim] { display: none; }
       }
+      g.debug { display: none; pointer-events: none; }
+      svg[data-debug="1"] g.debug, g#debug:target { display: block; }
+      g.debug text { font: 8px/1 sans-serif; fill: #64748b; }
     </style>
   </defs>
   
   <!-- Background -->
   <rect width="800" height="400" fill="url(#mapGradient)" opacity="0.1"/>
+  <g id="debug" class="debug" opacity="0.25">
+    <!-- simple grid every 80px -->
+    <g>
+      <path d="M80 0V400 M160 0V400 M240 0V400 M320 0V400 M400 0V400 M480 0V400 M560 0V400 M640 0V400 M720 0V400" stroke="#94a3b8" stroke-width="0.5"/>
+      <path d="M0 80H800 M0 160H800 M0 240H800 M0 320H800" stroke="#94a3b8" stroke-width="0.5"/>
+    </g>
+  </g>
   
   <!-- Accurate Natural Earth 110m Land (Winkel Tripel, simplified) -->
   <g id="ne_110m_land" fill="#60a5fa" opacity="0.15">
@@ -152,131 +162,122 @@
 <path d="M 376.1 1.5 385.8 5.2 380.4 12.4 378.8 22.6 374.6 26.3 373.4 32.1 356.5 39.6 348.3 42.1 339.6 54.2 333.4 52.2 331.2 45.7 331.6 37.5 336.3 27.6 336 18.5 326.1 16.8 325.2 11.3 341 4.5 355.2 4.3 360.9 1.9 376.1 1.5 Z"/>
   </g>
   
-  <!-- Destination country outlines (soft green) -->
-  <g class="region-outlines" opacity="0.35">
-    <!-- Canada (Vancouver hub area) -->
-    <ellipse cx="150" cy="95" rx="120" ry="55" fill="none" stroke="#34d399" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
-    <!-- United States (NYC hub area) -->
-    <ellipse cx="235" cy="125" rx="95" ry="60" fill="none" stroke="#34d399" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
-    <!-- United Kingdom (London hub area) -->
-    <ellipse cx="400" cy="90" rx="30" ry="18" fill="none" stroke="#34d399" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
-    <!-- South Africa (Cape Town hub area) -->
-    <ellipse cx="480" cy="305" rx="55" ry="35" fill="none" stroke="#34d399" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
-    <!-- Australia (Melbourne hub area) -->
-    <ellipse cx="690" cy="305" rx="120" ry="70" fill="none" stroke="#34d399" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
+  <!-- Country border outlines (simplified, projected) -->
+  <g class="country-borders" opacity="0.45">
+    <!-- Canada (simplified polygon following visible landmass) -->
+    <path d="M40 80 C70 40, 120 30, 170 45 C210 55, 250 70, 270 95 C250 105, 210 120, 170 120 C120 120, 75 110, 45 95 Z" fill="none" stroke="#06b6d4" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
+    <!-- United States (contiguous, simplified) -->
+    <path d="M130 95 C160 110, 200 110, 240 120 C280 130, 300 150, 300 165 C260 180, 220 178, 180 168 C150 160, 130 145, 120 130 C125 115, 125 108, 130 95 Z" fill="none" stroke="#ef4444" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
+    <!-- United Kingdom (islands simplified) -->
+    <path d="M386 72 C390 70, 398 72, 403 77 C405 82, 402 88, 398 92 C392 92, 388 88, 387 83 C385 78, 385 75, 386 72 Z" fill="none" stroke="#a78bfa" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
+    <!-- South Africa (simplified) -->
+    <path d="M415 270 C435 260, 455 262, 470 272 C478 285, 470 300, 452 308 C435 310, 422 304, 414 293 C410 284, 411 276, 415 270 Z" fill="none" stroke="#10b981" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
+    <!-- Australia (simplified) -->
+    <path d="M625 260 C650 245, 690 245, 720 255 C745 270, 760 295, 748 315 C720 325, 690 330, 655 320 C635 305, 625 290, 625 260 Z" fill="none" stroke="#f59e0b" stroke-width="1.4" stroke-dasharray="6,6" filter="url(#glow)"/>
   </g>
   
-  <!-- Hubs (blue) and Origins (yellow) with routes -->
-  <g class="map-hubs-origins" opacity="0.9">
-    <!-- Hubs: Vancouver, NYC, London, Cape Town, Melbourne -->
-    <g class="hubs">
-      <!-- Vancouver -->
-      <circle cx="150" cy="98" r="4" fill="#60a5fa" filter="url(#glow)">
-        <animate data-anim attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite"/>
-        <animate data-anim attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
-      </circle>
-      <!-- New York City -->
-      <circle cx="230" cy="120" r="4" fill="#60a5fa" filter="url(#glow)">
-        <animate data-anim attributeName="r" values="3;6;3" dur="3s" begin="0.3s" repeatCount="indefinite"/>
-        <animate data-anim attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="0.3s" repeatCount="indefinite"/>
-      </circle>
-      <!-- London -->
-      <circle cx="400" cy="86" r="4" fill="#60a5fa" filter="url(#glow)">
-        <animate data-anim attributeName="r" values="3;6;3" dur="3s" begin="0.6s" repeatCount="indefinite"/>
-        <animate data-anim attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="0.6s" repeatCount="indefinite"/>
-      </circle>
-      <!-- Cape Town -->
-      <circle cx="480" cy="305" r="4" fill="#60a5fa" filter="url(#glow)">
-        <animate data-anim attributeName="r" values="3;6;3" dur="3s" begin="0.9s" repeatCount="indefinite"/>
-        <animate data-anim attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="0.9s" repeatCount="indefinite"/>
-      </circle>
-      <!-- Melbourne -->
-      <circle cx="713" cy="318" r="4" fill="#60a5fa" filter="url(#glow)">
-        <animate data-anim attributeName="r" values="3;6;3" dur="3s" begin="1.2s" repeatCount="indefinite"/>
-        <animate data-anim attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="1.2s" repeatCount="indefinite"/>
-      </circle>
-    </g>
+  <!-- Hubs (blue) -->
+  <g class="hubs">
+    <!-- Vancouver -->
+    <circle cx="126" cy="90" r="4" fill="#60a5fa" filter="url(#glow)">
+      <animate data-anim="1" attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite"/>
+      <animate data-anim="1" attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <!-- New York City -->
+    <circle cx="236" cy="112" r="4" fill="#60a5fa" filter="url(#glow)">
+      <animate data-anim="1" attributeName="r" values="3;6;3" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+      <animate data-anim="1" attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+    </circle>
+    <!-- London -->
+    <circle cx="400" cy="86" r="4" fill="#60a5fa" filter="url(#glow)">
+      <animate data-anim="1" attributeName="r" values="3;6;3" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+      <animate data-anim="1" attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Cape Town -->
+    <circle cx="441" cy="285" r="4" fill="#60a5fa" filter="url(#glow)">
+      <animate data-anim="1" attributeName="r" values="3;6;3" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+      <animate data-anim="1" attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Melbourne -->
+    <circle cx="722" cy="288" r="4" fill="#60a5fa" filter="url(#glow)">
+      <animate data-anim="1" attributeName="r" values="3;6;3" dur="3s" begin="1.2s" repeatCount="indefinite"/>
+      <animate data-anim="1" attributeName="opacity" values="0.6;1;0.6" dur="3s" begin="1.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
 
-    <!-- Origins: diverse countries (yellow) -->
-    <g class="origins" opacity="0.95">
-      <!-- Americas -->
-      <circle cx="190" cy="170" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Mexico City -->
-      <circle cx="230" cy="230" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Bogota -->
-      <circle cx="220" cy="250" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Lima -->
-      <circle cx="270" cy="320" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Sao Paulo -->
-      <circle cx="290" cy="330" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Buenos Aires -->
+  <!-- Origins (yellow, mainland only) -->
+  <g class="origins" opacity="0.95">
+    <!-- Americas -->
+    <circle cx="180" cy="157" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Mexico City -->
+    <circle cx="235" cy="190" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Bogota -->
+    <circle cx="229" cy="227" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Lima -->
+    <circle cx="296" cy="252" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Sao Paulo -->
+    <circle cx="270" cy="277" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Buenos Aires -->
 
-      <!-- Europe / MENA -->
-      <circle cx="375" cy="120" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Madrid -->
-      <circle cx="418" cy="90" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Berlin -->
-      <circle cx="392" cy="95" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Dublin -->
-      <circle cx="450" cy="120" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Istanbul -->
-      <circle cx="470" cy="140" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Cairo -->
-      <circle cx="430" cy="160" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Casablanca -->
+    <!-- Europe / MENA -->
+    <circle cx="392" cy="110" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Madrid -->
+    <circle cx="430" cy="83" r="3" fill="#fbbf24" filter="url(#glow)"/>  <!-- Berlin -->
+    <circle cx="395" cy="96" r="3" fill="#fbbf24" filter="url(#glow)"/>  <!-- Paris -->
+    <circle cx="464" cy="109" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Istanbul -->
+    <circle cx="469" cy="133" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Cairo -->
+    <circle cx="382" cy="125" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Casablanca -->
 
-      <!-- Africa -->
-      <circle cx="460" cy="180" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Lagos -->
-      <circle cx="470" cy="240" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Luanda -->
-      <circle cx="500" cy="200" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Nairobi -->
+    <!-- Africa -->
+    <circle cx="407" cy="186" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Lagos -->
+    <circle cx="430" cy="220" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Luanda -->
+    <circle cx="482" cy="203" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Nairobi -->
 
-      <!-- Asia / Oceania -->
-      <circle cx="520" cy="165" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Mumbai -->
-      <circle cx="500" cy="145" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Dubai -->
-      <circle cx="580" cy="210" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Singapore -->
-      <circle cx="610" cy="230" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Jakarta -->
-      <circle cx="640" cy="170" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Manila -->
-      <circle cx="650" cy="125" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Seoul -->
-      <circle cx="660" cy="130" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Tokyo -->
-      <circle cx="740" cy="315" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Fiji -->
-      <circle cx="755" cy="330" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Auckland -->
-    </g>
+    <!-- Asia (mainland) -->
+    <circle cx="562" cy="158" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Mumbai -->
+    <circle cx="523" cy="144" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Dubai -->
+    <circle cx="552" cy="145" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Delhi -->
+    <circle cx="618" cy="186" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Kuala Lumpur (mainland) -->
+    <circle cx="600" cy="150" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Guangzhou -->
+    <circle cx="682" cy="117" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Seoul -->
+    <circle cx="623" cy="169" r="3" fill="#fbbf24" filter="url(#glow)"/> <!-- Bangkok -->
+  </g>
 
-    <!-- Routes: connect origins to hubs (some multi-hub) -->
-    <g class="routes" opacity="0.65">
-      <!-- To NYC (230,120) -->
-      <path d="M190 170 Q205 145 230 120" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M230 230 Q228 170 230 120" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M270 320 Q245 220 230 120" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M375 120 Q300 115 230 120" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M392 95 Q300 95 230 120" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M220 250 Q225 185 230 120" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <!-- Routes -->
+  <g class="routes" opacity="0.65">
+    <!-- To NYC (236,112) -->
+    <path d="M180 157 Q208 140 236 112" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M235 190 Q236 160 236 112" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M229 227 Q224 172 236 112" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M392 110 Q315 110 236 112" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M395 96 Q305 100 236 112" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
 
-      <!-- To Vancouver (150,98) -->
-      <path d="M190 170 Q160 130 150 98" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M220 250 Q180 170 150 98" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M640 170 Q450 100 150 98" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M650 125 Q420 70 150 98" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M660 130 Q430 60 150 98" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <!-- To Vancouver (126,90) -->
+    <path d="M682 117 Q420 60 126 90" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M600 150 Q400 100 126 90" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M552 145 Q360 100 126 90" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M180 157 Q150 120 126 90" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M430 83 Q300 60 126 90" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
 
-      <!-- To London (400,86) -->
-      <path d="M375 120 Q390 105 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M418 90 Q409 88 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M450 120 Q430 105 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M460 180 Q430 140 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M470 140 Q440 120 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M430 160 Q415 120 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <!-- To London (400,86) -->
+    <path d="M392 110 Q396 100 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M395 96 Q397 92 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M430 83 Q415 82 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M464 109 Q435 95 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M469 133 Q435 110 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M407 186 Q405 135 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M562 158 Q480 110 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M523 144 Q470 110 400 86" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
 
-      <!-- To Cape Town (480,305) -->
-      <path d="M460 180 Q470 230 480 305" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M470 240 Q475 275 480 305" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M500 200 Q495 245 480 305" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M270 320 Q380 325 480 305" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M470 140 Q470 220 480 305" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <!-- To Cape Town (441,285) -->
+    <path d="M407 186 Q420 230 441 285" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M430 220 Q435 250 441 285" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M482 203 Q470 240 441 285" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M469 133 Q455 210 441 285" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M296 252 Q360 270 441 285" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M270 277 Q350 295 441 285" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
 
-      <!-- To Melbourne (713,318) -->
-      <path d="M580 210 Q650 255 713 318" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M610 230 Q665 275 713 318" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M640 170 Q680 245 713 318" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M660 130 Q695 225 713 318" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M755 330 Q735 325 713 318" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M740 315 Q728 317 713 318" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M520 165 Q620 235 713 318" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M500 145 Q615 230 713 318" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-
-      <!-- Multi-hub cross links (some origins connect to multiple hubs) -->
-      <path d="M190 170 Q205 140 230 120" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M392 95 Q300 100 230 120" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-      <path d="M640 170 Q450 100 150 98" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
-    </g>
+    <!-- To Melbourne (722,288) -->
+    <path d="M618 186 Q680 230 722 288" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M623 169 Q680 225 722 288" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M600 150 Q670 220 722 288" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M562 158 Q640 210 722 288" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M682 117 Q700 205 722 288" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M523 144 Q620 210 722 288" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
+    <path d="M552 145 Q640 205 722 288" fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4,4"/>
   </g>
 </svg>

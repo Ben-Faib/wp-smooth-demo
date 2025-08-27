@@ -11,47 +11,13 @@ get_header();
 
 <main id="main" class="site-main" role="main">
 
-    <!-- Enhanced Hero Section for Services -->
-    <section class="services-hero py-6 bg-gradient-primary text-white position-relative overflow-hidden">
-        <div class="container position-relative z-2">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
-                    <div class="services-hero-content animate-on-scroll">
-                        <h1 class="display-2 fw-bold mb-4">Our Services</h1>
-                        <p class="lead fs-4 mb-4 opacity-90">Comprehensive relocation services designed to make your international move seamless and stress-free.</p>
-                        <div class="hero-badges d-flex flex-wrap justify-content-center gap-3 mb-4">
-                            <span class="badge-modern"><?php echo sm_icon('earth-americas', 'solid', 'me-2 icon'); ?> <?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?> Countries Served</span>
-                            <span class="badge-modern"><?php echo sm_icon('trophy', 'solid', 'me-2 icon'); ?> <?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?> Successful Moves</span>
-                            <span class="badge-modern"><?php echo sm_icon('bolt', 'solid', 'me-2 icon'); ?> <?php echo esc_html( get_option( 'sm_customer_satisfaction', '98%' ) ); ?> Customer Satisfaction</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Background Pattern -->
-        <div class="hero-pattern position-absolute top-0 start-0 w-100 h-100 opacity-10"></div>
-    </section>
-
-    <!-- Services Filter Section -->
-    <section class="services-filter py-4 bg-light border-bottom">
+    <!-- Minimal Header for Services -->
+    <section class="py-5">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="filter-intro">
-                        <h3 class="h5 mb-2">Find Your Perfect Service</h3>
-                        <p class="text-muted mb-0">Browse by category or search for specific needs</p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="search-filter">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="serviceSearch" placeholder="Search services...">
-                            <button class="btn btn-outline-primary" type="button" aria-label="Search services">
-                                <i class="fas fa-search" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1 class="display-5 fw-bold mb-3">Our Services</h1>
+                    <p class="text-muted mb-0">Everything you need for a smooth international move.</p>
                 </div>
             </div>
         </div>
@@ -60,6 +26,8 @@ get_header();
     <!-- Main Services Grid -->
     <section class="services-grid py-6">
         <div class="container">
+            <div class="row align-items-start">
+                <div class="col-lg-7">
             <?php
             // Curated list of service categories (reduced set)
             $curated_slugs = array('realtor','banking-services','data-and-phone-plans','vehicles','international-moving','insurance');
@@ -200,7 +168,7 @@ get_header();
                         $timeline = $enhancement ? $enhancement['timeline'] : '2-4 weeks';
                         $color = $enhancement ? $enhancement['color'] : 'primary';
                     ?>
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-md-6">
                             <div class="enhanced-service-card animate-on-scroll" style="animation-delay: <?php echo $index * 0.1; ?>s;">
                                 <div class="service-card-header">
                                     <div class="service-icon-modern bg-<?php echo $color; ?>">
@@ -261,6 +229,29 @@ get_header();
                     </div>
                 </div>
             <?php endif; ?>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block">
+                    <?php
+                    $no_globe = isset($_GET['noglobe']) && $_GET['noglobe'] === '1';
+                    if ( ! $no_globe ) : ?>
+                        <div class="services-parallax-globe" id="services-globe-container">
+                            <?php echo do_shortcode('[smooth_globe height="80vh" id="smooth-globe-services"]'); ?>
+                        </div>
+                    <?php else : ?>
+                        <!-- World map SVG temporarily removed -->
+                        <!-- <div class="services-sticky-globe sticky-top">
+                            <?php
+                            $map_path = get_template_directory() . '/assets/svg/world-map.svg';
+                            if ( file_exists( $map_path ) ) {
+                                echo file_get_contents( $map_path );
+                            } else {
+                                echo '<img src="' . esc_url( get_template_directory_uri() . '/assets/svg/world-map.svg' ) . '" alt="" />';
+                            }
+                            ?>
+                        </div> -->
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -308,19 +299,7 @@ get_header();
 
 <style>
 /* Enhanced Services Page Styles */
-.services-hero {
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-}
-
-.hero-pattern {
-    background: 
-        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    animation: float 20s ease-in-out infinite;
-}
+/* Removed blue hero in favor of minimal header */
 
 .badge-modern {
     background: rgba(255, 255, 255, 0.15);
@@ -506,36 +485,21 @@ get_header();
         justify-content: center;
     }
 }
+
+/* Sticky globe spacing within services page */
+.services-sticky-globe {
+    top: calc(var(--sm-topbar-height, 0px) + 80px);
+}
+
+/* Tighten grid container to the left on xl screens */
+@media (min-width: 1200px) {
+    #servicesGrid { padding-right: 1rem; }
+}
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Search functionality
-    const searchInput = document.getElementById('serviceSearch');
-    const servicesGrid = document.getElementById('servicesGrid');
-    
-    if (searchInput && servicesGrid) {
-        searchInput.addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const serviceCards = servicesGrid.querySelectorAll('.col-lg-4');
-            
-            serviceCards.forEach(card => {
-                const title = card.querySelector('.service-title')?.textContent.toLowerCase() || '';
-                const description = card.querySelector('.service-description')?.textContent.toLowerCase() || '';
-                const features = Array.from(card.querySelectorAll('.features-list li')).map(li => li.textContent.toLowerCase()).join(' ');
-                
-                const isMatch = title.includes(searchTerm) || description.includes(searchTerm) || features.includes(searchTerm);
-                
-                if (isMatch) {
-                    card.style.display = 'block';
-                    card.classList.add('animate-in');
-                } else {
-                    card.style.display = 'none';
-                    card.classList.remove('animate-in');
-                }
-            });
-        });
-    }
+    // No search; grid is lean and focused
     
     // Quick view functionality
     const quickViewButtons = document.querySelectorAll('.btn-quick-view');
