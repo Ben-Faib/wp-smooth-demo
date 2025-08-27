@@ -331,8 +331,7 @@
       const servicesGrid = document.querySelector('.services-grid');
       if (!servicesGrid) return window.innerHeight;
 
-      const gridRect = servicesGrid.getBoundingClientRect();
-      const gridHeight = gridRect.height;
+      const gridHeight = servicesGrid.getBoundingClientRect().height;
       const globeWrapper = document.getElementById('services-globe-wrapper');
       const wrapperHeight = globeWrapper ? globeWrapper.offsetHeight : globeContainer.offsetHeight;
 
@@ -341,7 +340,7 @@
     }
 
     // Variables for floating behavior
-    let currentGlobeTop = parseFloat(getComputedStyle(globeContainer).top) || 32; // 2rem = 32px
+    let currentGlobeTop = 0; // Start at top of wrapper
     let targetGlobeTop = currentGlobeTop;
     let lastScrollY = window.scrollY;
     let isFloating = false;
@@ -398,42 +397,36 @@
       const gridHeight = gridRect.height;
 
       // Globe dimensions
-      const globeHeight = globeContainer.offsetHeight;
       const globeWrapper = document.getElementById('services-globe-wrapper');
-      const wrapperHeight = globeWrapper ? globeWrapper.offsetHeight : globeHeight;
+      const wrapperHeight = globeWrapper ? globeWrapper.offsetHeight : globeContainer.offsetHeight;
 
-      // Calculate the visible area of the services grid
-      const windowHeight = window.innerHeight;
-      const viewportTop = currentScrollY;
-      const viewportBottom = currentScrollY + windowHeight;
+      // Enhanced scroll-based positioning: move globe with increased speed and range
+      // Calculate extended scroll range to allow globe to keep up with fast scrolling
+      const scrollStart = gridTop - window.innerHeight * 0.5; // Start when grid is 50% into view
+      const scrollEnd = gridBottom + window.innerHeight * 0.8; // End much later to allow extended movement
 
-      // Calculate where the globe should be positioned within the grid
-      const gridVisibleTop = Math.max(gridTop, viewportTop);
-      const gridVisibleBottom = Math.min(gridBottom, viewportBottom);
-      const gridVisibleHeight = Math.max(0, gridVisibleBottom - gridVisibleTop);
+      const scrollProgress = Math.max(0, Math.min(1,
+        (currentScrollY - scrollStart) / (scrollEnd - scrollStart)
+      ));
 
-      // Only move globe if the grid is visible
-      if (gridVisibleHeight > 100) { // Minimum visibility threshold
-        // Position the globe to track the center of the visible grid area
-        const gridCenter = gridVisibleTop + (gridVisibleHeight / 2);
-        const globeCenterOffset = wrapperHeight / 2;
+      // Calculate target position with increased movement multiplier
+      // Globe moves 1.5x the available space for better tracking
+      const availableSpace = Math.max(0, gridHeight - wrapperHeight);
+      const movementMultiplier = 1.5; // Globe moves 1.5x faster than proportional
+      let targetPosition = scrollProgress * (availableSpace * movementMultiplier + window.innerHeight * 0.6);
 
-        // Calculate target position relative to the grid
-        let targetPosition = gridCenter - globeCenterOffset - gridTop;
+      // Allow globe to move much lower and higher
+      const minPosition = -window.innerHeight * 0.3; // Allow moving above the wrapper
+      const maxPosition = availableSpace * movementMultiplier + window.innerHeight * 0.8; // Allow moving well below
+      targetPosition = Math.max(minPosition, Math.min(maxPosition, targetPosition));
 
-        // Ensure globe stays within grid boundaries
-        const minPosition = 0;
-        const maxPosition = gridHeight - wrapperHeight;
+      // Much more aggressive easing to keep up with fast scrolling
+      const positionDiff = targetPosition - currentGlobeTop;
+      const easingFactor = Math.abs(positionDiff) > 100 ? 0.25 : 0.18; // Faster easing for large movements
+      currentGlobeTop += positionDiff * easingFactor;
 
-        targetPosition = Math.max(minPosition, Math.min(maxPosition, targetPosition));
-
-        // Smooth transition to target position
-        const positionDiff = targetPosition - currentGlobeTop;
-        currentGlobeTop += positionDiff * 0.12; // Slightly more responsive easing
-
-        // Apply the position
-        globeContainer.style.top = currentGlobeTop + 'px';
-      }
+      // Apply the position
+      globeContainer.style.top = currentGlobeTop + 'px';
 
       lastScrollY = currentScrollY;
     }

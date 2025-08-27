@@ -25,6 +25,11 @@ get_header();
 
     <!-- Main Services Grid -->
     <section class="services-grid py-6">
+        <!-- Floating travel elements -->
+        <div class="floating-elements">
+            <div class="travel-marker-1"></div>
+            <div class="travel-marker-2"></div>
+        </div>
         <div class="container">
             <div class="row align-items-start position-relative">
                 <div class="col-lg-7">
@@ -51,7 +56,7 @@ get_header();
                 }
             }
 
-            // Enhanced service mapping with better icons and descriptions
+            // Enhanced service mapping with better icons, descriptions, and country themes
             $service_enhancements = array(
                 'banking-services' => array(
                     'icon' => 'fa-solid fa-credit-card',
@@ -59,7 +64,8 @@ get_header();
                     'description' => 'Banking and international transfers set up for expats.',
                     'features' => ['Account Opening', 'Cards & Payments', 'International Transfers'],
                     'timeline' => '1-2 weeks',
-                    'color' => 'primary'
+                    'color' => 'primary',
+
                 ),
                 'realtor' => array(
                     'icon' => 'fa-solid fa-house',
@@ -67,7 +73,8 @@ get_header();
                     'description' => 'Find your perfect home with our vetted real estate partners.',
                     'features' => ['Property Search', 'Virtual Tours', 'Legal Support'],
                     'timeline' => '2-4 weeks',
-                    'color' => 'success'
+                    'color' => 'success',
+
                 ),
                 'insurance' => array(
                     'icon' => 'fa-solid fa-shield-heart',
@@ -75,7 +82,8 @@ get_header();
                     'description' => 'Comprehensive insurance solutions for your peace of mind.',
                     'features' => ['Health Insurance', 'Property Coverage', 'Life Insurance'],
                     'timeline' => '1-3 weeks',
-                    'color' => 'info'
+                    'color' => 'info',
+
                 ),
                 'vehicles' => array(
                     'icon' => 'fa-solid fa-car',
@@ -83,7 +91,8 @@ get_header();
                     'description' => 'Complete vehicle solutions including import, purchase, and registration.',
                     'features' => ['Import Services', 'Purchase Assistance', 'Registration'],
                     'timeline' => '3-6 weeks',
-                    'color' => 'warning'
+                    'color' => 'warning',
+
                 ),
                 'data-and-phone-plans' => array(
                     'icon' => 'fa-solid fa-mobile-screen',
@@ -91,16 +100,17 @@ get_header();
                     'description' => 'Mobile plans and connectivity solutions for seamless communication.',
                     'features' => ['Plan Selection', 'Device Setup', 'Network Optimization'],
                     'timeline' => '1 week',
-                    'color' => 'secondary'
-                ),
+                    'color' => 'secondary',
 
+                ),
                 'international-moving' => array(
                     'icon' => 'fa-solid fa-box',
                     'name' => 'International Moving',
                     'description' => 'Professional international moving services with trusted global partners.',
                     'features' => ['Packing Services', 'Customs Clearance', 'Door-to-Door'],
                     'timeline' => '6-8 weeks',
-                    'color' => 'primary'
+                    'color' => 'primary',
+
                 ),
                 'visas-immigration' => array(
                     'icon' => 'fa-solid fa-clipboard-list',
@@ -108,7 +118,8 @@ get_header();
                     'description' => 'Navigate complex visa requirements with expert immigration guidance.',
                     'features' => ['Visa Applications', 'Document Preparation', 'Legal Support'],
                     'timeline' => '4-12 weeks',
-                    'color' => 'info'
+                    'color' => 'info',
+
                 ),
                 'pet-relocation' => array(
                     'icon' => 'fa-solid fa-dog',
@@ -116,7 +127,8 @@ get_header();
                     'description' => 'Safe and stress-free relocation services for your beloved pets.',
                     'features' => ['Health Certificates', 'Travel Arrangements', 'Quarantine Support'],
                     'timeline' => '3-6 weeks',
-                    'color' => 'warning'
+                    'color' => 'warning',
+
                 ),
                 'school-search' => array(
                     'icon' => 'fa-solid fa-graduation-cap',
@@ -124,7 +136,8 @@ get_header();
                     'description' => 'Find the right schools and educational opportunities for your children.',
                     'features' => ['School Research', 'Application Support', 'Enrollment Assistance'],
                     'timeline' => '2-6 weeks',
-                    'color' => 'success'
+                    'color' => 'success',
+
                 ),
                 'tax-legal' => array(
                     'icon' => 'fa-solid fa-scale-balanced',
@@ -132,7 +145,8 @@ get_header();
                     'description' => 'International tax advice and legal services for expats.',
                     'features' => ['Tax Planning', 'Legal Consultation', 'Compliance Support'],
                     'timeline' => '2-4 weeks',
-                    'color' => 'secondary'
+                    'color' => 'secondary',
+
                 ),
                 'business-setup' => array(
                     'icon' => 'fa-solid fa-briefcase',
@@ -140,7 +154,8 @@ get_header();
                     'description' => 'Company formation and business setup in your new country.',
                     'features' => ['Company Registration', 'Banking Setup', 'Compliance'],
                     'timeline' => '4-8 weeks',
-                    'color' => 'primary'
+                    'color' => 'primary',
+
                 ),
                 'utilities-services' => array(
                     'icon' => 'fa-solid fa-bolt',
@@ -148,7 +163,8 @@ get_header();
                     'description' => 'Internet, electricity, water, and essential service connections.',
                     'features' => ['Utility Connections', 'Service Activation', 'Account Setup'],
                     'timeline' => '1-2 weeks',
-                    'color' => 'info'
+                    'color' => 'info',
+
                 )
             );
 
@@ -167,6 +183,7 @@ get_header();
                         $features = $enhancement ? $enhancement['features'] : ['Professional Service', 'Expert Support', 'Quality Guarantee'];
                         $timeline = $enhancement ? $enhancement['timeline'] : '2-4 weeks';
                         $color = $enhancement ? $enhancement['color'] : 'primary';
+
                     ?>
                         <div class="col-md-6">
                             <div class="enhanced-service-card animate-on-scroll" style="animation-delay: <?php echo $index * 0.1; ?>s;">
@@ -198,15 +215,16 @@ get_header();
                                             <?php endforeach; ?>
                                         </ul>
                                     </div>
+
+
                                 </div>
 
                                 <div class="service-card-footer">
                                     <div class="service-actions">
-                                        <a href="#" class="btn btn-outline-<?php echo $color; ?> btn-sm btn-quick-view"
-                                           data-service-type="<?php echo esc_attr( $type->slug ); ?>"
-                                           data-service-type-name="<?php echo esc_attr( $display_name ); ?>">
+                                        <button class="btn btn-outline-<?php echo $color; ?> btn-sm"
+                                                disabled>
                                            <i class="fas fa-eye"></i> Quick View
-                                        </a>
+                                        </button>
                                         <a href="<?php echo esc_url( $term_link ); ?>" class="btn btn-<?php echo $color; ?> btn-sm">
                                             <i class="fas fa-arrow-right"></i> View Services
                                         </a>
@@ -491,40 +509,131 @@ get_header();
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // No search; grid is lean and focused
+
     
-    // Quick view functionality
-    const quickViewButtons = document.querySelectorAll('.btn-quick-view');
-    quickViewButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const serviceType = this.dataset.serviceType;
-            const serviceName = this.dataset.serviceTypeName;
-            
-            // Here you could implement a modal or redirect to a detailed view
-            alert(`Quick view for ${serviceName} coming soon!`);
-        });
+
+    // Simple fade-in animation - no duplicates or conflicts
+    const serviceCards = document.querySelectorAll('.enhanced-service-card');
+
+    // Clean up any existing animation classes that might cause conflicts
+    serviceCards.forEach(card => {
+        card.classList.remove('animate-on-scroll', 'animate-in', 'revealed');
     });
-    
-    // Scroll animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
+
+    // Use a single, simple intersection observer
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting && !entry.target.classList.contains('revealed')) {
+                // Small delay to create staggered effect
+                setTimeout(() => {
+                    entry.target.classList.add('revealed');
+                }, index * 100); // 100ms delay between each card
             }
         });
-    }, observerOptions);
-    
-    // Observe service cards
-    const serviceCards = document.querySelectorAll('.enhanced-service-card');
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe each card once and add initial class
     serviceCards.forEach(card => {
-        card.classList.add('animate-on-scroll');
+        card.classList.add('scroll-reveal');
         observer.observe(card);
     });
+
+    // Add scroll-based parallax effects
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function updateParallax() {
+        const scrollY = window.scrollY;
+        const servicesGrid = document.querySelector('.services-grid');
+
+        if (servicesGrid) {
+            // Add scroll-animated class when scrolling
+            servicesGrid.classList.add('scroll-animated');
+
+            // Subtle parallax transform for background layers
+            const transformValue = `translateY(${scrollY * 0.1}px)`;
+            const beforeElement = servicesGrid.querySelector('::before');
+            const afterElement = servicesGrid.querySelector('::after');
+
+            if (beforeElement) {
+                beforeElement.style.transform = `translateY(${scrollY * 0.05}px) rotate(${scrollY * 0.01}deg)`;
+            }
+
+            if (afterElement) {
+                afterElement.style.transform = `translateY(${scrollY * -0.03}px) scale(${1 + scrollY * 0.0001})`;
+                afterElement.style.opacity = Math.max(0.3, 1 - scrollY * 0.001);
+            }
+        }
+
+        ticking = false;
+    }
+
+    function requestParallaxUpdate() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+
+    // Throttle scroll events for better performance
+    let scrollThrottleTimer = null;
+    window.addEventListener('scroll', function() {
+        if (!scrollThrottleTimer) {
+            scrollThrottleTimer = setTimeout(function() {
+                requestParallaxUpdate();
+                scrollThrottleTimer = null;
+            }, 16); // ~60fps
+        }
+    }, { passive: true });
+
+    // Add scroll-enhanced class to globe for better parallax
+    const globeContainer = document.querySelector('.services-parallax-globe');
+    if (globeContainer) {
+        globeContainer.classList.add('scroll-enhanced');
+    }
+
+    // Add floating elements animation control
+    const floatingElements = document.querySelector('.floating-elements');
+    if (floatingElements) {
+        // Pause animations when page is not visible for performance
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                floatingElements.style.animationPlayState = 'paused';
+            } else {
+                floatingElements.style.animationPlayState = 'running';
+            }
+        });
+    }
+
+    // Hover-only effects for service cards (no blue outline on focus)
+    serviceCards.forEach(card => {
+        // Handle hover effects (blue outline only on hover)
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-6px)';
+            this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.15), 0 0 30px rgba(59, 130, 246, 0.2)';
+            this.style.zIndex = '5';
+        });
+
+        card.addEventListener('mouseleave', function() {
+            // Reset all styles on mouse leave
+            this.style.transform = '';
+            this.style.boxShadow = '';
+            this.style.zIndex = '';
+        });
+    });
+
+    // Performance optimization: reduce animations on low-end devices
+    if ('deviceMemory' in navigator && navigator.deviceMemory < 4) {
+        document.documentElement.classList.add('reduced-animations');
+    }
+
+    // Respect prefers-reduced-motion
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('reduced-animations');
+    }
 });
 </script>
 
