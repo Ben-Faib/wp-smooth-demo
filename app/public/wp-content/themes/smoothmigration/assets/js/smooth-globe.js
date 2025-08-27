@@ -73,7 +73,7 @@
     var lastScrollTime = 0;
     var scrollVelocity = 0;
     var lastScrollY = window.scrollY;
-    var hasShownScrollHint = false;
+
 
     // Function to temporarily disable globe interactions during scroll
     function disableGlobeInteractions() {
@@ -108,25 +108,13 @@
       // If scrolling velocity is high, user is likely trying to scroll the page
       if (scrollVelocity > 5 || (currentTime - lastScrollTime) < 100) {
         disableGlobeInteractions();
-
-        // Show scroll hint on first scroll attempt
-        if (!hasShownScrollHint) {
-          showScrollHint();
-          hasShownScrollHint = true;
-        }
       }
 
       lastScrollTime = currentTime;
       lastScrollY = currentScrollY;
     }
 
-    // Function to show scroll hint
-    function showScrollHint() {
-      globeContainer.classList.add('scroll-hint');
-      setTimeout(function() {
-        globeContainer.classList.remove('scroll-hint');
-      }, 2000);
-    }
+
 
     // Enhanced touch event handling
     var touchStartY = 0;
@@ -182,7 +170,6 @@
     function handleKeyDown(e) {
       if (e.key === 'Escape' && globeContainer.contains(document.activeElement)) {
         disableGlobeInteractions();
-        showScrollHint();
       }
     }
 
@@ -305,22 +292,18 @@
     const serviceCards = document.querySelectorAll('.enhanced-service-card');
     let currentActiveService = 0;
 
-    // Calculate the maximum position for the globe (bottom of last service card)
+    // Calculate the maximum position for the globe within the services grid
     function getMaxGlobePosition() {
-      if (serviceCards.length === 0) return window.innerHeight;
-
-      const lastServiceCard = serviceCards[serviceCards.length - 1];
-      const lastCardRect = lastServiceCard.getBoundingClientRect();
       const servicesGrid = document.querySelector('.services-grid');
+      if (!servicesGrid) return window.innerHeight;
 
-      if (servicesGrid) {
-        const gridRect = servicesGrid.getBoundingClientRect();
-        const globeHeight = globeContainer.offsetHeight;
-        // Position globe so its bottom aligns with the bottom of the last service card
-        return gridRect.top + gridRect.height - globeHeight;
-      }
+      const gridRect = servicesGrid.getBoundingClientRect();
+      const gridHeight = gridRect.height;
+      const globeWrapper = document.getElementById('services-globe-wrapper');
+      const wrapperHeight = globeWrapper ? globeWrapper.offsetHeight : globeContainer.offsetHeight;
 
-      return window.innerHeight;
+      // Return the maximum top position (grid height minus globe height)
+      return Math.max(0, gridHeight - wrapperHeight);
     }
 
     // Variables for floating behavior
@@ -328,6 +311,14 @@
     let targetGlobeTop = currentGlobeTop;
     let lastScrollY = window.scrollY;
     let isFloating = false;
+
+    // Mouse interaction variables
+    let mouseHoverBoost = 0;
+    let isHoverAnimating = false;
+    let leaveTimeout;
+    let isVisible = true; // Track visibility for mouse interactions
+    const mouseHoverMaxBoost = 0.15;
+    const mouseHoverSpeed = 0.02;
 
     // Function to determine which service card is currently most visible
     function getActiveServiceIndex() {
@@ -362,25 +353,53 @@
     // Function to handle globe floating behavior
     function updateGlobePosition() {
       const currentScrollY = window.scrollY;
-      const scrollDelta = currentScrollY - lastScrollY;
 
-      // Calculate target position based on scroll
-      const initialTop = 32; // 2rem in pixels
-      const scrollBasedTop = initialTop + (currentScrollY * 0.3); // Move at 30% of scroll speed
+      // Get the services grid boundaries
+      const servicesGrid = document.querySelector('.services-grid');
+      if (!servicesGrid) return;
 
-      // Get maximum allowed position
-      const maxPosition = getMaxGlobePosition();
+      const gridRect = servicesGrid.getBoundingClientRect();
+      const gridTop = gridRect.top + window.scrollY;
+      const gridBottom = gridRect.bottom + window.scrollY;
+      const gridHeight = gridRect.height;
+
+      // Globe dimensions
       const globeHeight = globeContainer.offsetHeight;
+      const globeWrapper = document.getElementById('services-globe-wrapper');
+      const wrapperHeight = globeWrapper ? globeWrapper.offsetHeight : globeHeight;
 
-      // Constrain the target position
-      targetGlobeTop = Math.min(scrollBasedTop, maxPosition);
+      // Calculate the visible area of the services grid
+      const windowHeight = window.innerHeight;
+      const viewportTop = currentScrollY;
+      const viewportBottom = currentScrollY + windowHeight;
 
-      // Smooth transition to target position
-      const positionDiff = targetGlobeTop - currentGlobeTop;
-      currentGlobeTop += positionDiff * 0.08; // Smooth easing
+      // Calculate where the globe should be positioned within the grid
+      const gridVisibleTop = Math.max(gridTop, viewportTop);
+      const gridVisibleBottom = Math.min(gridBottom, viewportBottom);
+      const gridVisibleHeight = Math.max(0, gridVisibleBottom - gridVisibleTop);
 
-      // Apply the position
-      globeContainer.style.top = currentGlobeTop + 'px';
+      // Only move globe if the grid is visible
+      if (gridVisibleHeight > 100) { // Minimum visibility threshold
+        // Position the globe to track the center of the visible grid area
+        const gridCenter = gridVisibleTop + (gridVisibleHeight / 2);
+        const globeCenterOffset = wrapperHeight / 2;
+
+        // Calculate target position relative to the grid
+        let targetPosition = gridCenter - globeCenterOffset - gridTop;
+
+        // Ensure globe stays within grid boundaries
+        const minPosition = 0;
+        const maxPosition = gridHeight - wrapperHeight;
+
+        targetPosition = Math.max(minPosition, Math.min(maxPosition, targetPosition));
+
+        // Smooth transition to target position
+        const positionDiff = targetPosition - currentGlobeTop;
+        currentGlobeTop += positionDiff * 0.12; // Slightly more responsive easing
+
+        // Apply the position
+        globeContainer.style.top = currentGlobeTop + 'px';
+      }
 
       lastScrollY = currentScrollY;
     }
@@ -525,12 +544,6 @@
     highlightActiveService(0);
 
     // Add mouse interaction for enhanced zoom
-    let mouseHoverBoost = 0;
-    let isHoverAnimating = false;
-    let leaveTimeout;
-    let isVisible = true; // Track visibility for mouse interactions
-    const mouseHoverMaxBoost = 0.15;
-    const mouseHoverSpeed = 0.02;
 
     globeContainer.addEventListener('mouseenter', () => {
       // Clear any pending leave animation

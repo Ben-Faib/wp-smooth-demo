@@ -26,7 +26,7 @@ get_header();
     <!-- Main Services Grid -->
     <section class="services-grid py-6">
         <div class="container">
-            <div class="row align-items-start">
+            <div class="row align-items-start position-relative">
                 <div class="col-lg-7">
             <?php
             // Curated list of service categories (reduced set)
@@ -93,7 +93,7 @@ get_header();
                     'timeline' => '1 week',
                     'color' => 'secondary'
                 ),
-                
+
                 'international-moving' => array(
                     'icon' => 'fa-solid fa-box',
                     'name' => 'International Moving',
@@ -159,7 +159,7 @@ get_header();
                     foreach ( $service_types as $index => $type ) :
                         $term_link = isset( $type->__virtual ) ? '/realtor-form' : get_term_link( $type );
                         $enhancement = $service_enhancements[$type->slug] ?? null;
-                        
+
                         // Use enhanced data if available, otherwise fallback to original
                         $display_name = $enhancement ? $enhancement['name'] : $type->name;
                         $icon = $enhancement ? $enhancement['icon'] : 'fa-solid fa-wrench';
@@ -183,11 +183,11 @@ get_header();
                                         <strong class="text-<?php echo $color; ?>"><?php echo $timeline; ?></strong>
                                     </div>
                                 </div>
-                                
+
                                 <div class="service-card-body">
                                     <h3 class="service-title"><?php echo esc_html( $display_name ); ?></h3>
                                     <p class="service-description"><?php echo esc_html( $description ); ?></p>
-                                    
+
                                     <div class="service-features">
                                         <ul class="features-list">
                                             <?php foreach ($features as $feature) : ?>
@@ -199,11 +199,11 @@ get_header();
                                         </ul>
                                     </div>
                                 </div>
-                                
+
                                 <div class="service-card-footer">
                                     <div class="service-actions">
-                                        <a href="#" class="btn btn-outline-<?php echo $color; ?> btn-sm btn-quick-view" 
-                                           data-service-type="<?php echo esc_attr( $type->slug ); ?>" 
+                                        <a href="#" class="btn btn-outline-<?php echo $color; ?> btn-sm btn-quick-view"
+                                           data-service-type="<?php echo esc_attr( $type->slug ); ?>"
                                            data-service-type-name="<?php echo esc_attr( $display_name ); ?>">
                                            <i class="fas fa-eye"></i> Quick View
                                         </a>
@@ -216,7 +216,7 @@ get_header();
                         </div>
                     <?php endforeach; ?>
                 </div>
-                
+
             <?php else : ?>
                 <div class="text-center py-5">
                     <div class="empty-state">
@@ -231,30 +231,15 @@ get_header();
             <?php endif; ?>
                 </div>
                 <div class="col-lg-5 d-none d-lg-block">
+                    <!-- Globe positioned within service cards boundaries -->
                     <?php
                     $no_globe = isset($_GET['noglobe']) && $_GET['noglobe'] === '1';
-                    $debug_mode = isset($_GET['globe_debug']) && $_GET['globe_debug'] === '1';
                     if ( ! $no_globe ) : ?>
-                        <div class="services-parallax-globe" id="services-globe-container" <?php if ($debug_mode) echo 'data-debug="true"'; ?>>
-                            <?php echo do_shortcode('[smooth_globe height="80vh" id="smooth-globe-services"]'); ?>
-                            <?php if ($debug_mode) : ?>
-                                <div class="globe-debug-info">
-                                    <small>Scroll to test parallax effect</small>
-                                </div>
-                            <?php endif; ?>
+                        <div class="services-globe-wrapper" id="services-globe-wrapper">
+                            <div class="services-parallax-globe" id="services-globe-container">
+                                <?php echo do_shortcode('[smooth_globe height="400px" id="smooth-globe-services"]'); ?>
+                            </div>
                         </div>
-                    <?php else : ?>
-                        <!-- World map SVG temporarily removed -->
-                        <!-- <div class="services-sticky-globe sticky-top">
-                            <?php
-                            $map_path = get_template_directory() . '/assets/svg/world-map.svg';
-                            if ( file_exists( $map_path ) ) {
-                                echo file_get_contents( $map_path );
-                            } else {
-                                echo '<img src="' . esc_url( get_template_directory_uri() . '/assets/svg/world-map.svg' ) . '" alt="" />';
-                            }
-                            ?>
-                        </div> -->
                     <?php endif; ?>
                 </div>
             </div>

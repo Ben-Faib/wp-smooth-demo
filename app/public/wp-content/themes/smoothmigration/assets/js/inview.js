@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Hero floating elements (if they exist)
-        const heroFloatingElements = document.querySelectorAll('.floating-cube, .world-map-overlay');
+        const heroFloatingElements = document.querySelectorAll('.floating-cube');
         heroFloatingElements.forEach((element, index) => {
             element.classList.add('animate-on-scroll', 'animate-float');
             element.style.animationDelay = `${index * 0.3}s`;

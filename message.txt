@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>International Relocation Services &#8211; Smooth Migration Global</title>
+<meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	<link rel="alternate" hreflang="en-US" href="https://smoothmigration.net/" />
+<link rel="alternate" hreflang="en-CA" href="https://smoothmigration.ca/" />
+<link rel="alternate" hreflang="fr-CA" href="https://smoothmigration.ca/?lang=fr" />
+<link rel="alternate" hreflang="en-GB" href="https://smoothmigration.uk/" />
+<link rel="alternate" hreflang="en-AU" href="https://smoothmigration.com.au/" />
+<link rel="alternate" hreflang="en-ZA" href="https://smoothmigration.co.za/" />
+<link rel="alternate" hreflang="x-default" href="https://smoothmigration.net/" />
+<!-- SEO Meta Tags -->
+<meta name="description" content="Tailored, cost-effective relocation plans for individuals &amp; companies. Housing, visas, banking, pet moves &amp; more—expert support at every step.">
+<meta name="keywords" content="international relocation, expat services, visa assistance, housing abroad, international moving, pet relocation, banking abroad, school search">
+<meta name="author" content="Smooth Migration Global">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://smoothmigration.co.za">
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="International Relocation Services | Smooth Migration Global">
+<meta property="og:description" content="Tailored, cost-effective relocation plans for individuals &amp; companies. Housing, visas, banking, pet moves &amp; more—expert support at every step.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://smoothmigration.co.za">
+<meta property="og:image" content="https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/images/smooth-migration-logo.png">
+<meta property="og:site_name" content="Smooth Migration Global">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="International Relocation Services | Smooth Migration Global">
+<meta property="og:description" content="Tailored, cost-effective relocation plans for individuals &amp; companies. Housing, visas, banking, pet moves &amp; more—expert support at every step.">
+<meta property="og:image" content="https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/images/smooth-migration-logo.png">
+<!-- Additional SEO Tags -->
+<meta name="geo.region" content="Global">
+<meta name="geo.placename" content="International">
+<meta name="language" content="en">
+<meta name="coverage" content="Worldwide">
+<meta name="distribution" content="Global">
+<meta name="rating" content="General">
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Smooth Migration Global",
+    "url": "https://smoothmigration.co.za",
+    "logo": "https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/images/smooth-migration-logo.png",
+    "description": "Tailored, cost-effective relocation plans for individuals & companies. Housing, visas, banking, pet moves & more\u2014expert support at every step.",
+    "foundingDate": "2019",
+    "serviceArea": {
+        "@type": "Place",
+        "name": "Worldwide"
+    },
+    "services": [
+        "International Relocation Services",
+        "Visa Assistance",
+        "Housing Services",
+        "Banking Support",
+        "Pet Relocation",
+        "School Search",
+        "Vehicle Import",
+        "International Moving"
+    ],
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "availableLanguage": "English"
+    }
+}</script>
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//cdn.lordicon.com' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//fonts.cdnfonts.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="wp-smooth-demo &raquo; Feed" href="https://smoothmigration.co.za/feed/" />
+<link rel="alternate" type="application/rss+xml" title="wp-smooth-demo &raquo; Comments Feed" href="https://smoothmigration.co.za/comments/feed/" />
+<meta property="og:locale" content="en-ZA" />
+<meta property="og:locale:alternate" content="en-US" />
+<meta property="og:locale:alternate" content="en-CA" />
+<meta property="og:locale:alternate" content="fr-CA" />
+<meta property="og:locale:alternate" content="en-GB" />
+<meta property="og:locale:alternate" content="en-AU" />
+<script>
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/smoothmigration.co.za\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.8.2"}};
+/*! This file is auto-generated */
+!function(s,n){var o,i,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),a=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===a[t]})}function u(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);for(var n=e.getImageData(16,16,1,1),a=0;a<n.data.length;a++)if(0!==n.data[a])return!1;return!0}function f(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\udedf")}return!1}function g(e,t,n,a){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):s.createElement("canvas"),o=r.getContext("2d",{willReadFrequently:!0}),i=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(function(e){i[e]=t(o,e,n,a)}),i}function t(e){var t=s.createElement("script");t.src=e,t.defer=!0,s.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",i=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){s.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+g.toString()+"("+[JSON.stringify(i),f.toString(),p.toString(),u.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"}),r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=function(e){c(n=e.data),r.terminate(),t(n)})}catch(e){}c(n=g(i,f,p,u))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+</script>
+<link rel='stylesheet' id='litespeed-cache-dummy-css' href='https://smoothmigration.co.za/wp-content/plugins/litespeed-cache/assets/css/litespeed-dummy.css?ver=6.8.2' media='all' />
+<style id='wp-emoji-styles-inline-css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://smoothmigration.co.za/wp-includes/css/dist/block-library/style.min.css?ver=6.8.2' media='all' />
+<style id='classic-theme-styles-inline-css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='bootstrap-css' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css?ver=5.3.3' media='all' />
+<link rel='stylesheet' id='smooth-fa-css' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css?ver=6.5.1' media='all' />
+<link rel='stylesheet' id='aileron-font-css' href='https://fonts.cdnfonts.com/css/aileron' media='all' />
+<link rel='stylesheet' id='playfair-font-css' href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&#038;display=swap' media='all' />
+<link rel='stylesheet' id='smoothmigration-style-css' href='https://smoothmigration.co.za/wp-content/themes/smoothmigration/style.css?ver=1.0.0-5' media='all' />
+<link rel='stylesheet' id='sm-icons-css' href='https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/css/icons.css?ver=1.0.0-5' media='all' />
+<link rel='stylesheet' id='widget-fixes-css' href='https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/css/widget-fixes.css?ver=1.0.0-5' media='all' />
+<link rel='stylesheet' id='landing-page-css' href='https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/css/landing-page.css?ver=1.0.0-5' media='all' />
+<link rel='stylesheet' id='sm-locale-css' href='https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/css/locale.css?ver=1756260837' media='all' />
+<link rel="https://api.w.org/" href="https://smoothmigration.co.za/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://smoothmigration.co.za/wp-json/wp/v2/pages/296" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://smoothmigration.co.za/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.8.2" />
+<link rel="canonical" href="https://smoothmigration.co.za/" />
+<link rel='shortlink' href='https://smoothmigration.co.za/' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://smoothmigration.co.za/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsmoothmigration.co.za%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://smoothmigration.co.za/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsmoothmigration.co.za%2F&#038;format=xml" />
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://smoothmigration.co.za"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "International Relocation Services",
+            "item": "https://smoothmigration.co.za#services"
+        }
+    ]
+}</script>
+</head>
+<body class="home wp-singular page-template-default page page-id-296 page-parent wp-custom-logo wp-embed-responsive wp-theme-smoothmigration">
+			<div id="sm-locale-root" class="sm-locale-root" aria-live="polite">
+				<button id="sm-locale-pill" class="sm-pill material" type="button" aria-haspopup="dialog" aria-controls="sm-locale-sheet">
+					<span class="sm-pill-ico" aria-hidden="true">🌐</span>
+					<span id="sm-pill-text">Region · Language</span>
+				</button>
+
+				<div id="sm-locale-chip" class="sm-chip material" hidden>
+					<span id="sm-chip-text">Looks like Canada. Switch?</span>
+					<div class="sm-chip-actions">
+						<button id="sm-chip-switch" class="sm-btn sm-primary" type="button">Switch</button>
+						<button id="sm-chip-stay" class="sm-btn" type="button">Stay</button>
+					</div>
+				</div>
+
+				<div id="sm-locale-sheet" class="sm-sheet" role="dialog" aria-modal="true" aria-hidden="true">
+					<div class="sm-sheet-backdrop" data-close="1"></div>
+					<div class="sm-sheet-panel material" role="document" tabindex="-1" aria-labelledby="sm-sheet-title">
+						<header class="sm-sheet-header">
+							<h2 id="sm-sheet-title" class="sm-sheet-title">Region &amp; Language</h2>
+							<button class="sm-close" data-close="1" aria-label="Close">✕</button>
+						</header>
+						<div class="sm-sheet-body">
+							<section>
+								<h3 class="sm-section-title">Region</h3>
+								<div id="sm-region-grid" class="sm-region-grid"></div>
+							</section>
+							<section>
+								<h3 class="sm-section-title">Language</h3>
+								<div id="sm-lang-list" class="sm-lang-list"></div>
+							</section>
+						</div>
+						<footer class="sm-sheet-footer">
+							<button id="sm-go" class="sm-btn sm-primary" type="button">Go</button>
+							<button id="sm-stay-here" class="sm-btn" type="button" data-close="1">Stay here</button>
+						</footer>
+					</div>
+				</div>
+
+				<noscript>
+					<div class="sm-noscript-links">
+						<ul>
+							<li><a href="https://smoothmigration.net/">United States</a></li><li><a href="https://smoothmigration.ca/?lang=en">Canada</a></li><li><a href="https://smoothmigration.uk/">United Kingdom</a></li><li><a href="https://smoothmigration.com.au/">Australia</a></li><li><a href="https://smoothmigration.co.za/">South Africa</a></li>						</ul>
+					</div>
+				</noscript>
+			</div>
+			<a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to main content</a>
+
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="container d-flex justify-content-end align-items-center py-1 small">
+            </div>
+    </div>
+
+<!-- Main Header -->
+<header id="masthead" class="site-header sticky-header" role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="https://smoothmigration.co.za/">
+                <img width="1023" height="1023" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo.png" class="header-logo" alt="" decoding="async" fetchpriority="high" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo.png 1023w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-300x300.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-150x150.png 150w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-768x768.png 768w" sizes="(max-width: 1023px) 100vw, 1023px" />                <span class="site-title ms-2" style="font-weight: 600; font-size: 1.25rem;">wp-smooth-demo</span>
+            </a>
+            
+            <button class="navbar-toggler mobile-menu-trigger" type="button" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-line"></span>
+                <span class="toggler-line"></span>
+                <span class="toggler-line"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="primary-menu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about-us">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                            <li><a class="dropdown-item" href="/faq">FAQ</a></li>
+                            <li><a class="dropdown-item" href="/guides">Guides</a></li>
+                            <li><a class="dropdown-item" href="/case-studies">Case Studies</a></li>
+                            <li><a class="dropdown-item" href="/how-it-works">How it works</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="/services">All Services</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/realtor-locator">Realtor Locator</a></li>
+                            <li><a class="dropdown-item" href="/service-type/banking-services/">Banking Services</a></li>
+                            <li><a class="dropdown-item" href="/service-type/data-and-phone-plans/">Data and Phone Plans</a></li>
+                            <li><a class="dropdown-item" href="/service-type/vehicles/">Vehicle Services</a></li>
+                            <li><a class="dropdown-item" href="/service-type/international-moving/">International Moving</a></li>
+                            <li><a class="dropdown-item" href="/service-type/insurance/">Insurance</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ai-relocator">
+                            <i class="fas fa-robot me-1"></i>
+                            AI Relocator
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/become-a-partner">Become a Partner</a>
+                    </li>
+                </ul>
+                
+                <!-- Right side utilities -->
+                <div class="navbar-nav ms-3 d-flex align-items-center gap-2">
+                    <button type="button" id="theme-toggle" class="btn btn-ghost btn-sm" aria-label="Toggle dark mode" title="Toggle dark mode">
+                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Enhanced Mobile Menu -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+<nav class="mobile-menu" id="mobileNav" aria-labelledby="mobileNavLabel">
+  <div class="mobile-menu-header">
+    <div class="mobile-menu-brand">
+      <img width="1023" height="1023" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo.png" class="mobile-logo" alt="" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo.png 1023w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-300x300.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-150x150.png 150w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-768x768.png 768w" sizes="(max-width: 1023px) 100vw, 1023px" />      <span class="mobile-menu-title" id="mobileNavLabel">wp-smooth-demo</span>
+    </div>
+    <button type="button" class="mobile-menu-close" aria-label="Close menu">
+      <span class="close-line"></span>
+      <span class="close-line"></span>
+    </button>
+  </div>
+  
+  <div class="mobile-menu-content">
+    <ul class="mobile-menu-items">
+      <li class="mobile-menu-item" style="--item-index: 0">
+        <a class="mobile-menu-link" href="/about-us">
+          <i class="fas fa-users"></i>
+          <span>About</span>
+        </a>
+      </li>
+      <li class="mobile-menu-item mobile-menu-group" style="--item-index: 1">
+        <button class="mobile-menu-toggle" type="button" aria-expanded="false">
+          <i class="fas fa-book-open"></i>
+          <span>Resources</span>
+          <i class="fas fa-chevron-down mobile-menu-chevron"></i>
+        </button>
+        <ul class="mobile-submenu">
+          <li class="mobile-submenu-item" style="--item-index: 0">
+            <a class="mobile-menu-link" href="/faq">FAQ</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 1">
+            <a class="mobile-menu-link" href="/guides">Guides</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 2">
+            <a class="mobile-menu-link" href="/case-studies">Case Studies</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 3">
+            <a class="mobile-menu-link" href="/how-it-works">How it works</a>
+          </li>
+        </ul>
+      </li>
+      <li class="mobile-menu-item mobile-menu-group" style="--item-index: 2">
+        <button class="mobile-menu-toggle" type="button" aria-expanded="false">
+          <i class="fas fa-concierge-bell"></i>
+          <span>Services</span>
+          <i class="fas fa-chevron-down mobile-menu-chevron"></i>
+        </button>
+        <ul class="mobile-submenu">
+          <li class="mobile-submenu-item" style="--item-index: 0">
+            <a class="mobile-menu-link" href="/services">All Services</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 1">
+            <a class="mobile-menu-link" href="/realtor-locator">Realtor Locator</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 2">
+            <a class="mobile-menu-link" href="/service-type/banking-services/">Banking Services</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 3">
+            <a class="mobile-menu-link" href="/service-type/data-and-phone-plans/">Data and Phone Plans</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 4">
+            <a class="mobile-menu-link" href="/service-type/vehicles/">Vehicle Services</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 5">
+            <a class="mobile-menu-link" href="/service-type/international-moving/">International Moving</a>
+          </li>
+          <li class="mobile-submenu-item" style="--item-index: 6">
+            <a class="mobile-menu-link" href="/service-type/insurance/">Insurance</a>
+          </li>
+        </ul>
+      </li>
+      <li class="mobile-menu-item" style="--item-index: 3">
+        <a class="mobile-menu-link" href="/ai-relocator">
+          <i class="fas fa-robot"></i>
+          <span>AI Relocator</span>
+        </a>
+      </li>
+      <li class="mobile-menu-item" style="--item-index: 4">
+        <a class="mobile-menu-link" href="/contact">
+          <i class="fas fa-envelope"></i>
+          <span>Contact Us</span>
+        </a>
+      </li>
+      <li class="mobile-menu-item" style="--item-index: 5">
+        <a class="mobile-menu-link" href="/become-a-partner">
+          <i class="fas fa-handshake"></i>
+          <span>Become a Partner</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="mobile-menu-footer">
+    <button type="button" id="mobile-theme-toggle" class="mobile-theme-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="theme-icon sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+      <svg class="theme-icon moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <span>Theme</span>
+    </button>
+  </div>
+</nav>
+
+<script>
+// Sticky header and top bar functionality (class-based, direction-aware)
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('masthead');
+    const navbar = header.querySelector('.navbar');
+    const topBar = document.querySelector('.top-bar');
+
+    function setHeaderOffsets() {
+        const topBarHeight = topBar ? topBar.offsetHeight : 0;
+        const headerHeight = header ? header.offsetHeight : 0;
+        
+        document.documentElement.style.setProperty('--sm-topbar-height', topBarHeight + 'px');
+        document.body.style.paddingTop = (topBarHeight + headerHeight) + 'px';
+    }
+
+    setHeaderOffsets();
+    window.addEventListener('resize', setHeaderOffsets, { passive: true });
+
+    let lastY = window.scrollY;
+    let lock = null; // null | 'up' | 'down'
+    function onScroll() {
+        const y = window.scrollY;
+
+        if (y > 100) {
+            header.classList.add('scrolled');
+            navbar.classList.add('navbar-scrolled');
+            document.body.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('scrolled');
+            navbar.classList.remove('navbar-scrolled');
+            document.body.classList.remove('header-scrolled');
+        }
+
+        const delta = y - lastY;
+        if (Math.abs(delta) > 6) {
+            if (delta > 0 && lock !== 'down') {
+                document.body.classList.add('header-hide');
+                lock = 'down';
+            } else if (delta < 0 && lock !== 'up') {
+                document.body.classList.remove('header-hide');
+                lock = 'up';
+            }
+            lastY = y;
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    
+    // Align dropdown pointer triangle directly under each toggle label
+    const dropdowns = document.querySelectorAll('.navbar-nav .dropdown');
+    function positionTriangle(dropdown) {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (!toggle || !menu) return;
+        const toggleRect = toggle.getBoundingClientRect();
+        const menuRect = menu.getBoundingClientRect();
+        let left = (toggleRect.left + toggleRect.width / 2) - menuRect.left;
+        // Clamp within menu bounds with 12px padding
+        left = Math.max(12, Math.min(left, Math.max(12, menuRect.width - 12)));
+        menu.style.setProperty('--triangle-left', left + 'px');
+    }
+    function positionAllTriangles() {
+        dropdowns.forEach(positionTriangle);
+    }
+    dropdowns.forEach(d => {
+        positionTriangle(d);
+        d.addEventListener('mouseenter', () => positionTriangle(d), { passive: true });
+        d.addEventListener('focusin', () => positionTriangle(d));
+    });
+    window.addEventListener('resize', positionAllTriangles, { passive: true });
+    
+    // Dark mode toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or default to 'light' mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', currentTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Add a subtle animation feedback
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 150);
+    });
+});
+</script>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- 1. Enhanced Hero Section -->
+<section class="hero-landing">
+    <div class="hero-overlay-dark" aria-hidden="true"></div>
+    
+    <!-- World map moved to right column; service cubes relocated below hero -->
+    
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <!-- Trust Signals -->
+                    <div class="trust-signals mb-4">
+                        <div class="trust-badges">
+                            <span class="trust-badge"><span class="icon-glow me-2"><i class="fa-solid fa-earth-americas " aria-hidden="true"></i></span>Global coverage</span>
+                            <span class="trust-metric">2500+ successful relocations</span>
+                        </div>
+                    </div>
+                    <div class="small text-light" style="opacity:.9">No additional or hidden costs.</div>
+                    
+                    <h1 class="hero-headline">Your international relocation,<br>made simple.</h1>
+                    <p class="hero-subheadline">Get your clear, step-by-step plan and vetted providers—tailored to your destination, timing, and budget. Even if you're moving internationally for the first time, you'll have expert guidance every step of the way.</p>
+                    
+                    <!-- Enhanced CTA Group with Self-Segmentation -->
+                    <div class="hero-cta-group">
+                        <a href="/services" class="btn btn-primary btn-lg cta-relocating">
+                            <span class="icon-glow me-2"><i class="fa-solid fa-house " aria-hidden="true"></i></span>
+                            Get My Personal Moving Plan
+                        </a>
+                        <a href="/become-a-partner" class="btn btn-accent btn-lg cta-partner">
+                            <span class="icon-glow me-2"><i class="fa-solid fa-handshake " aria-hidden="true"></i></span>
+                            Become a Partner
+                        </a>
+                    </div>
+                    <div class="small text-light" style="opacity:.95">100% free to use. We’re paid by partners for referrals—and we rigorously vet every partner. No hidden costs.</div>
+                    <!-- Urgency without pressure -->
+                    <div class="urgency-signals mt-3">
+                        <p class="urgency-text">
+                            <strong>Join 200+ families who started their move this month</strong><br>
+                            <small class="text-light">Next available consultation: Today at 3 PM</small>
+                        </p>
+                    </div>
+                    
+                    <!-- Scroll Cue -->
+                    <div class="scroll-cue">
+                        <span class="scroll-text">Scroll to discover</span>
+                        <div class="scroll-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5v14M19 12l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block">
+                                <div class="hero-map-container" aria-hidden="true">
+                    <div class="smooth-globe-wrap"><div id="smooth-globe-hero" class="smooth-globe" style="height:420px;"></div></div>                </div>
+                                            </div>
+        </div>
+            </div>
+</section>
+
+<!-- 2. Interactive How It Works Section -->
+<main id="main">
+<section class="how-it-works py-5" aria-labelledby="how-it-works-title">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 id="how-it-works-title" class="section-title">How It Works For You</h2>
+            <p class="section-subtitle">You answer a few questions, get your personalized plan, and connect to vetted partners who understand your needs—see quick category links below.</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="step-card interactive-card text-center" tabindex="0">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Complete our questionnaire</h3>
+                    <p class="step-description">Tell us your relocation specifics—your destination, timing, family, and priorities.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="step-card interactive-card text-center" tabindex="0">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Select services from your plan</h3>
+                    <p class="step-description">Use your custom plan to pick services and see your tasks at each stage. Try our <a href="/ai-relocator" class="text-primary fw-bold">AI Relocator</a> for personalized suggestions.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="step-card interactive-card text-center" tabindex="0">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Get your preferred-rate quotes</h3>
+                    <p class="step-description">You receive tailored quotes from our trusted partners—often at rates better than going direct.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+                        <a href="/services" class="btn btn-outline-primary">Browse all categories (free) →</a>
+        </div>
+    </div>
+</section>
+
+<!-- 3. Limited Services Snapshot (3x2 Grid) -->
+<section class="services-snapshot py-5 bg-light position-relative" aria-labelledby="services-title">
+    <!-- Decorative services cubes background -->
+    <div class="services-cubes-bg d-none d-md-block" aria-hidden="true">
+        <svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients for 3D effect -->
+    <linearGradient id="housingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="financeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="vehicleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="commGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="insuranceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <!-- Drop shadow filter -->
+    <filter id="drop-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offset"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Housing Cube -->
+  <g class="floating-cube housing-cube" filter="url(#drop-shadow)">
+    <g transform="translate(80, 120)">
+      <!-- Front face -->
+      <polygon points="0,0 40,0 40,40 0,40" fill="url(#housingGradient)"/>
+      <!-- Top face -->
+      <polygon points="0,0 10,-10 50,-10 40,0" fill="url(#housingGradient)" opacity="0.7"/>
+      <!-- Right face -->
+      <polygon points="40,0 50,-10 50,30 40,40" fill="url(#housingGradient)" opacity="0.5"/>
+      
+      <!-- Icon: House -->
+      <path d="M12 32 L20 24 L28 32 M16 32 L16 28 L24 28 L24 32" 
+            stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+    </g>
+    <animateTransform attributeName="transform" 
+                      attributeType="XML" 
+                      type="translate" 
+                      values="0,0; 0,-8; 0,0" 
+                      dur="4s" 
+                      repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Finance Cube -->
+  <g class="floating-cube finance-cube" filter="url(#drop-shadow)">
+    <g transform="translate(200, 80)">
+      <!-- Front face -->
+      <polygon points="0,0 40,0 40,40 0,40" fill="url(#financeGradient)"/>
+      <!-- Top face -->
+      <polygon points="0,0 10,-10 50,-10 40,0" fill="url(#financeGradient)" opacity="0.7"/>
+      <!-- Right face -->
+      <polygon points="40,0 50,-10 50,30 40,40" fill="url(#financeGradient)" opacity="0.5"/>
+      
+      <!-- Icon: Dollar Sign -->
+      <path d="M20 8 L20 32 M16 12 L24 12 M16 28 L24 28" 
+            stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+      <path d="M14 16 C14 14 16 12 20 12 C24 12 26 14 26 16 C26 18 24 20 20 20 C16 20 14 22 14 24 C14 26 16 28 20 28 C24 28 26 26 26 24" 
+            stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+    </g>
+    <animateTransform attributeName="transform" 
+                      attributeType="XML" 
+                      type="translate" 
+                      values="0,0; 0,-12; 0,0" 
+                      dur="3.5s" 
+                      repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Vehicle Cube -->
+  <g class="floating-cube vehicle-cube" filter="url(#drop-shadow)">
+    <g transform="translate(380, 140)">
+      <!-- Front face -->
+      <polygon points="0,0 40,0 40,40 0,40" fill="url(#vehicleGradient)"/>
+      <!-- Top face -->
+      <polygon points="0,0 10,-10 50,-10 40,0" fill="url(#vehicleGradient)" opacity="0.7"/>
+      <!-- Right face -->
+      <polygon points="40,0 50,-10 50,30 40,40" fill="url(#vehicleGradient)" opacity="0.5"/>
+      
+      <!-- Icon: Car -->
+      <path d="M8 24 L32 24 M8 28 L32 28" 
+            stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+      <circle cx="12" cy="30" r="2" stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+      <circle cx="28" cy="30" r="2" stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+      <path d="M10 24 L10 20 L14 16 L26 16 L30 20 L30 24" 
+            stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+    </g>
+    <animateTransform attributeName="transform" 
+                      attributeType="XML" 
+                      type="translate" 
+                      values="0,0; 0,-6; 0,0" 
+                      dur="4.8s" 
+                      repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Communication Cube -->
+  <g class="floating-cube comm-cube" filter="url(#drop-shadow)">
+    <g transform="translate(120, 260)">
+      <!-- Front face -->
+      <polygon points="0,0 40,0 40,40 0,40" fill="url(#commGradient)"/>
+      <!-- Top face -->
+      <polygon points="0,0 10,-10 50,-10 40,0" fill="url(#commGradient)" opacity="0.7"/>
+      <!-- Right face -->
+      <polygon points="40,0 50,-10 50,30 40,40" fill="url(#commGradient)" opacity="0.5"/>
+      
+      <!-- Icon: Phone -->
+      <rect x="14" y="10" width="12" height="20" rx="2" 
+            stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+      <line x1="17" y1="13" x2="23" y2="13" 
+            stroke="white" stroke-width="1" opacity="0.9"/>
+      <circle cx="20" cy="26" r="1" fill="white" opacity="0.9"/>
+    </g>
+    <animateTransform attributeName="transform" 
+                      attributeType="XML" 
+                      type="translate" 
+                      values="0,0; 0,-10; 0,0" 
+                      dur="3.2s" 
+                      repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Insurance Cube -->
+  <g class="floating-cube insurance-cube" filter="url(#drop-shadow)">
+    <g transform="translate(320, 220)">
+      <!-- Front face -->
+      <polygon points="0,0 40,0 40,40 0,40" fill="url(#insuranceGradient)"/>
+      <!-- Top face -->
+      <polygon points="0,0 10,-10 50,-10 40,0" fill="url(#insuranceGradient)" opacity="0.7"/>
+      <!-- Right face -->
+      <polygon points="40,0 50,-10 50,30 40,40" fill="url(#insuranceGradient)" opacity="0.5"/>
+      
+      <!-- Icon: Shield -->
+      <path d="M20 10 L14 14 L14 22 C14 26 20 30 20 30 C20 30 26 26 26 22 L26 14 Z" 
+            stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+      <path d="M18 18 L19 20 L22 16" 
+            stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
+    </g>
+    <animateTransform attributeName="transform" 
+                      attributeType="XML" 
+                      type="translate" 
+                      values="0,0; 0,-7; 0,0" 
+                      dur="4.2s" 
+                      repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Connecting Lines (subtle) -->
+  <g class="cube-connections" opacity="0.2">
+    <line x1="120" y1="140" x2="220" y2="100" stroke="#60a5fa" stroke-width="1"/>
+    <line x1="220" y1="100" x2="400" y2="160" stroke="#60a5fa" stroke-width="1"/>
+    <line x1="140" y1="280" x2="340" y2="240" stroke="#60a5fa" stroke-width="1"/>
+    <line x1="340" y1="240" x2="400" y2="160" stroke="#60a5fa" stroke-width="1"/>
+  </g>
+</svg>
+    </div>
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 id="services-title" class="section-title">Your Core Services</h2>
+            <p class="section-subtitle">Everything you need for your smooth international move — and it's free to use. Even if you only need one service, you'll get expert guidance and vetted providers.</p>
+        </div>
+        
+        <div class="row g-4 services-grid-limited">
+            <!-- Left: Banking Services (taxonomy link) -->
+            <div class="col-lg-4 col-md-6">
+                <a href="/service-type/banking-services/" class="service-card-link">
+                    <div class="service-card interactive-card" aria-describedby="banking-services-desc">
+                        <div class="service-illustration" aria-hidden="true"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                        <div class="service-content">
+                            <h3 class="service-title">Banking Services</h3>
+                            <p id="banking-services-desc" class="service-description">Banking, transfers, and multi-currency accounts set up for expats.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Center: Realtor Locator (core) -->
+            <div class="col-lg-4 col-md-6">
+                <a href="/realtor-form" class="service-card-link">
+                    <div class="service-card service-card--core interactive-card" aria-describedby="realtor-core-desc">
+                        <span class="core-badge">Core</span>
+                        <div class="service-illustration" aria-hidden="true"><span class="icon-glow"><i class="fa-solid fa-house " aria-hidden="true"></i></span></div>
+                        <div class="service-content">
+                            <h3 class="service-title">Realtor Locator</h3>
+                            <p id="realtor-core-desc" class="service-description">Match with a vetted local realtor fast—get pre-arrival walk-throughs and insights.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right: Insurance Coverage (taxonomy link) -->
+            <div class="col-lg-4 col-md-6">
+                <a href="/service-type/insurance/" class="service-card-link">
+                    <div class="service-card interactive-card" aria-describedby="insurance-desc">
+                        <div class="service-illustration" aria-hidden="true"><i class="fa-solid fa-shield-heart"></i></div>
+                        <div class="service-content">
+                            <h3 class="service-title">Insurance Coverage</h3>
+                            <p id="insurance-desc" class="service-description">Health and travel insurance options tailored for international moves.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <p class="text-muted">Need something else—like international tax advice or business setup? <a href="/contact" class="text-primary">Contact us</a> for free, expert guidance.</p>
+            <a href="/services" class="btn btn-primary mt-2">View All Services →</a>
+        </div>
+    </div>
+</section>
+
+<!-- 4. Why Smooth Migration Global -->
+<section class="why-us py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Why Smooth Migration Global?</h2>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="feature-item interactive-card">
+                    <div class="feature-icon"><span class="icon-glow"><i class="fa-solid fa-house " aria-hidden="true"></i></span></div>
+                    <div class="feature-content">
+                        <h3>Founder and team with extensive first hand experience</h3>
+                        <p>We understand the challenges because we've lived them firsthand.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="feature-item interactive-card">
+                    <div class="feature-icon"><span class="icon-glow"><i class="fa-solid fa-building " aria-hidden="true"></i></span></div>
+                    <div class="feature-content">
+                        <h3>4 years of data-driven research</h3>
+                        <p>Insights from thousands of successful relocations inform every recommendation.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="feature-item interactive-card">
+                    <div class="feature-icon"><span class="icon-glow"><i class="fa-solid fa-rocket " aria-hidden="true"></i></span></div>
+                    <div class="feature-content">
+                        <h3>Up to 30% cheaper than going direct</h3>
+                        <p>Preferred pricing from top international brands saves you money.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="feature-item interactive-card">
+                    <div class="feature-icon"><span class="icon-glow"><i class="fa-solid fa-handshake " aria-hidden="true"></i></span></div>
+                    <div class="feature-content">
+                        <h3>One login, one support team</h3>
+                        <p>Every stage covered with consistent, personalized support throughout your journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. Enhanced Social Proof with Service Logos Carousel -->
+<section class="social-proof py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">2500+<sup class="ms-1"><a class="text-muted" href="/methodology" aria-label="See methodology">*</a></sup></div>
+                    <div class="stat-label">Successful Moves</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+<sup class="ms-1"><a class="text-muted" href="/methodology" aria-label="See methodology">*</a></sup></div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Service Partners Carousel -->
+        <div class="partners-carousel mb-5">
+            <h3 class="text-center mb-4">Trusted Service Partners</h3>
+            <div class="carousel-container">
+                <div class="carousel-track" id="partnersCarousel">
+                    <div class="partner-item" data-service-id="5209"><a href="https://smoothmigration.co.za/service/verizon/" class="partner-link"><img width="281" height="180" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Verizon-2.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" /><span class="partner-name">Verizon</span></a></div><div class="partner-item" data-service-id="5210"><a href="https://smoothmigration.co.za/service/experts-in-moving/" class="partner-link"><img width="300" height="87" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/sirelo-300x87.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/sirelo-300x87.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/sirelo.png 302w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Experts in Moving</span></a></div><div class="partner-item" data-service-id="5211"><a href="https://smoothmigration.co.za/service/remitely/" class="partner-link"><img width="249" height="203" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/remitely-1.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" /><span class="partner-name">Remitely</span></a></div><div class="partner-item" data-service-id="5212"><a href="https://smoothmigration.co.za/service/lemonade/" class="partner-link"><img width="300" height="150" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Lemonade-pet-300x150.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/Lemonade-pet-300x150.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Lemonade-pet.png 318w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Lemonade</span></a></div><div class="partner-item" data-service-id="5213"><a href="https://smoothmigration.co.za/service/embrace-homeloan/" class="partner-link"><img width="300" height="96" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Embrace-homeloan-300x96.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/Embrace-homeloan-300x96.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Embrace-homeloan.png 398w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Embrace Homeloan</span></a></div><div class="partner-item" data-service-id="5214"><a href="https://smoothmigration.co.za/service/figo-pet-insurance/" class="partner-link"><img width="300" height="150" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Figo-pet-USA-300x150.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/Figo-pet-USA-300x150.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Figo-pet-USA.png 318w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Figo Pet Insurance</span></a></div><div class="partner-item" data-service-id="5215"><a href="https://smoothmigration.co.za/service/rentcars/" class="partner-link"><img width="300" height="68" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Discovercars-300x68.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/Discovercars-300x68.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Discovercars.png 443w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Rentcars</span></a></div><div class="partner-item" data-service-id="5216"><a href="https://smoothmigration.co.za/service/chime/" class="partner-link"><img width="300" height="86" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Chime-Bank-USA-300x86.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/Chime-Bank-USA-300x86.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Chime-Bank-USA.png 420w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Chime</span></a></div><div class="partner-item" data-service-id="5217"><a href="https://smoothmigration.co.za/service/carvana/" class="partner-link"><img width="300" height="166" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Carvana.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" /><span class="partner-name">Carvana</span></a></div><div class="partner-item" data-service-id="5218"><a href="https://smoothmigration.co.za/service/boost-mobile/" class="partner-link"><img width="300" height="38" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/boost-mobile-usa-300x38.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/boost-mobile-usa-300x38.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/boost-mobile-usa.png 600w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Boost Mobile</span></a></div><div class="partner-item" data-service-id="5219"><a href="https://smoothmigration.co.za/service/avis-logo-logotype-scaled/" class="partner-link"><img width="300" height="105" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Avis_logo_logotype-300x105.png" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/Avis_logo_logotype-300x105.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Avis_logo_logotype-1024x358.png 1024w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Avis_logo_logotype-768x269.png 768w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Avis_logo_logotype-1536x537.png 1536w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Avis_logo_logotype-2048x716.png 2048w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Avis Logo Logotype Scaled</span></a></div><div class="partner-item" data-service-id="5205"><a href="https://smoothmigration.co.za/service/vistor-insurance/" class="partner-link"><img width="300" height="45" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/Vistor-insurance-usa-300x45.jpg" class="partner-logo wp-post-image" alt="" loading="lazy" decoding="async" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/Vistor-insurance-usa-300x45.jpg 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/Vistor-insurance-usa.jpg 580w" sizes="auto, (max-width: 300px) 100vw, 300px" /><span class="partner-name">Vistor Insurance</span></a></div>                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Smooth Migration made our move effortless — and the service was free."</div>
+                    <div class="testimonial-author">— Sarah M., UK → Canada</div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Free guidance and preferred-rate partners saved us time and money."</div>
+                    <div class="testimonial-author">— James R., SA → USA</div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Clear plan, trusted providers, no extra fees to us — just what we needed."</div>
+                    <div class="testimonial-author">— Emily W., USA → UK</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Great experience from start to finish. The guidance was free and practical."</div>
+                    <div class="testimonial-author">— Oliver P., UK → Australia</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"They connected us to vetted partners quickly — and at expat-friendly rates."</div>
+                    <div class="testimonial-author">— Naledi K., SA → Australia</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. About Us Story Snippet -->
+<section class="about-snippet py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="section-title">Our Story</h2>
+                <div class="story-content">
+                    <p>In 2019, a group of internationally qualified newcomers set out to fix the broken relocation experience. Having navigated multiple international moves ourselves, we knew there had to be a better way.</p>
+                    <p>We combined our firsthand experience with extensive research and data from thousands of relocations to create a platform that actually works for real people making real moves.</p>
+                    <a href="/about" class="btn btn-outline-primary">Read our full story →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. Resources & Next Steps Section -->
+<section class="resources-section py-5 bg-light">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title">Ready to Get Started?</h2>
+                <p class="section-subtitle mb-4">Choose your path to a successful international relocation.</p>
+                
+                <div class="resource-options">
+                    <div class="resource-item">
+                        <div class="resource-icon"><span class="icon-glow"><i class="fa-solid fa-rocket " aria-hidden="true"></i></span></div>
+                        <div class="resource-content">
+                            <h4>Start Building Your Plan</h4>
+                            <p>Browse our services and create a customized relocation package.</p>
+                            <a href="/services" class="btn btn-primary">Explore Services →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon"><span class="icon-glow"><i class="fa-solid fa-comment-dots " aria-hidden="true"></i></span></div>
+                        <div class="resource-content">
+                            <h4>Talk to an Expert</h4>
+                            <p>Get personalized guidance from our relocation specialists.</p>
+                            <a href="/contact" class="btn btn-outline-primary">Get in Touch →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="resources-card">
+                    <h3 class="resources-title">Free Resources</h3>
+                    <p class="resources-description">Get started with our helpful tools and guides.</p>
+                    
+                    <div class="resources-list">
+                        <a href="/ai-relocator" class="resource-link">
+                            <span class="resource-link-icon"><span class="icon-glow"><i class="fa-solid fa-robot " aria-hidden="true"></i></span></span>
+                            <div class="resource-link-content">
+                                <strong>AI Relocator Assistant</strong>
+                                <small>Intelligent relocation planning</small>
+                            </div>
+                        </a>
+                        
+                        <a href="/guides" class="resource-link">
+                            <span class="resource-link-icon"><span class="icon-glow"><i class="fa-solid fa-book-open " aria-hidden="true"></i></span></span>
+                            <div class="resource-link-content">
+                                <strong>Moving Guides</strong>
+                                <small>Country-specific advice</small>
+                            </div>
+                        </a>
+                        
+                        <a href="/faq" class="resource-link">
+                            <span class="resource-link-icon"><span class="icon-glow"><i class="fa-solid fa-circle-question " aria-hidden="true"></i></span></span>
+                            <div class="resource-link-content">
+                                <strong>FAQ</strong>
+                                <small>Common questions answered</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- Sticky consult box -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+    <div class="toast show shadow" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-body d-flex align-items-center gap-3">
+            <div class="flex-shrink-0" aria-hidden="true"><i class="fa-solid fa-comment-dots text-primary icon" aria-hidden="true"></i></div>
+            <div>
+                <strong>Consulting services available</strong>
+                <div class="small text-muted">Talk to a specialist today</div>
+            </div>
+            <a class="btn btn-primary btn-sm" href="/contact">Book now</a>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Dismiss"></button>
+        </div>
+    </div>
+    <script>document.addEventListener('DOMContentLoaded',function(){var t=document.querySelector('.toast'); if(t&&bootstrap?.Toast){ new bootstrap.Toast(t,{autohide:false}).show(); }});</script>
+</div>
+
+<script>
+function downloadChecklist() {
+    // Redirect to AI Relocator page
+    window.location.href = '/ai-relocator';
+}
+
+// Enhanced button state management and scroll animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle all button clicks to prevent loading state issues
+    const buttons = document.querySelectorAll('.btn[href]');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Don't prevent default - let the link work normally
+            // Just add a subtle visual feedback
+            this.style.opacity = '0.8';
+            this.style.pointerEvents = 'none';
+            
+            // Reset after a short delay in case navigation fails
+            setTimeout(() => {
+                this.style.opacity = '';
+                this.style.pointerEvents = '';
+            }, 1000);
+        });
+    });
+    
+    // Enhanced Partners Carousel with Infinite Scroll
+    const carousel = document.getElementById('partnersCarousel');
+    if (carousel) {
+        // Duplicate carousel content for seamless infinite scroll
+        const originalItems = Array.from(carousel.children);
+        const duplicatedItems = originalItems.map(item => item.cloneNode(true));
+        duplicatedItems.forEach(item => carousel.appendChild(item));
+        
+        // Keyboard navigation support
+        carousel.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                const focusableItems = carousel.querySelectorAll('.partner-link');
+                const currentIndex = Array.from(focusableItems).indexOf(document.activeElement);
+                
+                if (currentIndex !== -1) {
+                    let nextIndex;
+                    if (e.key === 'ArrowLeft') {
+                        nextIndex = (currentIndex - 1 + focusableItems.length) % focusableItems.length;
+                    } else {
+                        nextIndex = (currentIndex + 1) % focusableItems.length;
+                    }
+                    focusableItems[nextIndex].focus();
+                }
+            }
+        });
+        
+        // Enhanced accessibility - announce carousel state
+        const announceCarousel = () => {
+            const totalItems = originalItems.length;
+            carousel.setAttribute('aria-live', 'polite');
+            carousel.setAttribute('aria-label', `Partner carousel with ${totalItems} partners. Use arrow keys to navigate.`);
+        };
+        
+        announceCarousel();
+        
+        // Enhanced hover pause functionality
+        carousel.addEventListener('mouseenter', () => {
+            carousel.style.animationPlayState = 'paused';
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            if (!carousel.matches(':focus-within')) {
+                carousel.style.animationPlayState = 'running';
+            }
+        });
+        
+        // Pause on focus for accessibility
+        carousel.addEventListener('focusin', () => {
+            carousel.style.animationPlayState = 'paused';
+        });
+        
+        carousel.addEventListener('focusout', (e) => {
+            // Resume animation if focus moves completely outside the carousel
+            setTimeout(() => {
+                if (!carousel.contains(document.activeElement) && !carousel.matches(':hover')) {
+                    carousel.style.animationPlayState = 'running';
+                }
+            }, 100);
+        });
+        
+        // Respect reduced motion preferences
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            carousel.style.animation = 'none';
+        }
+    }
+    
+    // Scroll animations for sections
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Add animation classes to sections and observe them
+    const sectionsToAnimate = document.querySelectorAll('.how-it-works, .services-snapshot, .why-us, .social-proof, .about-snippet, .resources-section');
+    sectionsToAnimate.forEach((section, index) => {
+        section.classList.add('animate-on-scroll');
+        section.style.animationDelay = `${index * 0.2}s`;
+        observer.observe(section);
+    });
+    
+    // Add staggered animation to cards
+    const cards = document.querySelectorAll('.service-card, .step-card, .feature-item, .testimonial-card');
+    cards.forEach((card, index) => {
+        card.classList.add('animate-on-scroll');
+        card.style.animationDelay = `${index * 0.1}s`;
+        observer.observe(card);
+    });
+    
+    // Enhanced parallax effect for hero section
+    const heroSection = document.querySelector('.hero-landing');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = scrolled * 0.5;
+            heroSection.style.transform = `translateY(${parallax}px)`;
+        });
+    }
+    
+    // Add smooth scrolling to anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Add loading states to CTAs
+    const ctaButtons = document.querySelectorAll('.btn-cta, .btn-primary');
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            this.classList.add('loading');
+            setTimeout(() => {
+                this.classList.remove('loading');
+            }, 2000);
+        });
+    });
+
+    // Debug toggles for services cubes overlay
+    const urlParams = new URLSearchParams(window.location.search);
+    const cubesBg = document.querySelector('.services-cubes-bg');
+    if (cubesBg) {
+        if (urlParams.has('nocubes')) {
+            cubesBg.style.display = 'none';
+        }
+        if (urlParams.has('showcubes')) {
+            cubesBg.style.display = '';
+        }
+    }
+});
+</script>
+
+
+<!-- Enhanced Mega Footer with Schema.org Organization -->
+<footer class="site-footer mt-auto" itemscope itemtype="https://schema.org/Organization">
+  <div class="container">
+    <!-- Tier 1: Brand Summary -->
+    <div class="footer-tier-1">
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <div class="footer-logo-container">
+              <img width="1023" height="1023" src="https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo.png" class="footer-logo" alt="wp-smooth-demo" itemprop="logo" decoding="async" loading="lazy" srcset="https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo.png 1023w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-300x300.png 300w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-150x150.png 150w, https://smoothmigration.co.za/wp-content/uploads/2025/08/cropped-smoothmigration-logo-768x768.png 768w" sizes="auto, (max-width: 1023px) 100vw, 1023px" />              <span class="footer-brand-text" itemprop="name">SMOOTH MIGRATION</span>
+            </div>
+            <p class="footer-description" itemprop="description">Making international relocation smooth and seamless for families and professionals relocating worldwide.</p>
+            <p class="footer-mission text-muted small">Even if you're moving for the first time, you'll get expert guidance and vetted providers to ensure your relocation goes smoothly.</p>
+          </div>
+        </div>
+        
+        <!-- Tier 2: Navigation Grid -->
+        <div class="col-lg-8">
+          <div class="footer-nav-grid">
+            <div class="row g-4">
+              <!-- Products -->
+              <div class="col-md-3">
+                <h5 class="footer-heading">Products</h5>
+                <ul class="footer-links">
+                  <li><a href="/ai-relocator" class="footer-link">AI Relocator</a></li>
+                  <li><a href="/realtor-locator" class="footer-link">Realtor Locator</a></li>
+                  <li><a href="/services" class="footer-link">All Services</a></li>
+                  <li><a href="/guides" class="footer-link">Moving Guides</a></li>
+                </ul>
+              </div>
+              
+              <!-- Company -->
+              <div class="col-md-3">
+                <h5 class="footer-heading">Company</h5>
+                <ul class="footer-links">
+                  <li><a href="/about-us" class="footer-link">About Us</a></li>
+                  <li><a href="/contact" class="footer-link">Contact</a></li>
+                  <li><a href="/become-a-partner" class="footer-link">Become a Partner</a></li>
+                  <li><a href="/faq" class="footer-link">FAQ</a></li>
+                </ul>
+              </div>
+              
+              <!-- Resources -->
+              <div class="col-md-3">
+                <h5 class="footer-heading">Resources</h5>
+                <ul class="footer-links">
+                                      <li><a href="/service-type/banking-services/" class="footer-link">Banking Services</a></li>
+                    <li><a href="/service-type/insurance/" class="footer-link">Insurance</a></li>
+                    <li><a href="/service-type/vehicles/" class="footer-link">Vehicle Services</a></li>
+                    <li><a href="/service-type/data-and-phone-plans/" class="footer-link">Data and Phone Plans</a></li>
+                                  </ul>
+              </div>
+              
+              <!-- Legal -->
+              <div class="col-md-3">
+                <h5 class="footer-heading">Legal</h5>
+                <ul class="footer-links">
+                  <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+                  <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+                  <li><a href="/cookies" class="footer-link">Cookie Policy</a></li>
+                  <li><a href="/legal-disclaimer" class="footer-link">Legal Disclaimer</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <hr class="footer-divider">
+    
+    <!-- Tier 3: Trust Signals & Contact -->
+    <div class="footer-tier-3">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-4">
+          <div class="footer-trust">
+            <div class="trust-metrics">
+              <div class="trust-metric-item">
+                <strong class="text-success">2500+</strong>
+                <span class="text-muted small">Successful Moves</span>
+              </div>
+              <div class="trust-metric-item">
+                <strong class="text-success">98%</strong>
+                <span class="text-muted small">Satisfaction Rate</span>
+              </div>
+              <div class="trust-metric-item">
+                <strong class="text-success">5+</strong>
+                <span class="text-muted small">Countries</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="footer-contact" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
+            <p class="footer-tagline"><strong>Ready to relocate smoothly?</strong></p>
+            <p class="text-muted small mb-2">Get personalized guidance from our experts</p>
+            <a href="/contact" class="btn btn-outline-primary btn-sm">Get Started Free →</a>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="footer-social-copyright">
+            <div class="footer-social">
+              <a href="https://www.linkedin.com/company/smoothmigrationglobal" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener" itemprop="sameAs">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/smoothmigrationglobal" class="social-link" aria-label="Facebook" target="_blank" rel="noopener" itemprop="sameAs">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/smoothmigrationglobal/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener" itemprop="sameAs">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2.1a2.9 2.9 0 110 5.8 2.9 2.9 0 010-5.8zM17.5 6a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2z"/>
+                </svg>
+              </a>
+            </div>
+            <p class="footer-copyright">&copy; 2025 <span itemprop="name">Smooth Migration</span>. All Rights Reserved.</p>
+            <p class="text-muted small">Free to use. We're paid by partners; we only work with vetted providers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Schema.org Organization Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Smooth Migration",
+    "url": "https://smoothmigration.co.za/",
+    "logo": "https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/images/smooth-migration-logo.png",
+    "description": "Making international relocation smooth and seamless for families and professionals relocating worldwide.",
+    "foundingDate": "2019",
+    "sameAs": [
+      "https://www.linkedin.com/company/smoothmigrationglobal",
+      "https://www.facebook.com/smoothmigrationglobal",
+      "https://www.instagram.com/smoothmigrationglobal/"
+    ]
+  }
+  </script>
+</footer>
+
+<!-- A11y Checklist:
+✓ Focus order ok - Logical footer link ordering
+✓ Visible focus - Buttons and links have focus styles
+✓ Landmarks present - Footer semantic element with proper heading structure  
+✓ Alt text present - Logo images have appropriate alt attributes
+✓ Reduced-motion supported - No problematic animations
+✓ Contrast passes - Color contrast meets WCAG AA standards
+-->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/smoothmigration\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<link rel='stylesheet' id='sm-globe-css' href='https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/css/smooth-globe.css?ver=1.0.0' media='all' />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js?ver=5.3.3" id="bootstrap-js"></script>
+<script id="smoothmigration-js-js-extra">
+var smAjax = {"ajax_url":"https:\/\/smoothmigration.co.za\/wp-admin\/admin-ajax.php","nonce":"86dc122408"};
+</script>
+<script src="https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/js/theme.js?ver=1.0.0-5" id="smoothmigration-js-js"></script>
+<script src="https://cdn.lordicon.com/lordicon.js" id="lordicon-js"></script>
+<script id="landing-page-js-js-extra">
+var smoothmigrationAjax = {"ajax_url":"https:\/\/smoothmigration.co.za\/wp-admin\/admin-ajax.php","nonce":"86dc122408"};
+</script>
+<script src="https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/js/landing-page.js?ver=1.0.0-5" id="landing-page-js-js"></script>
+<script id="sm-locale-js-extra">
+var SM_LOCALE_DATA = {"regions":{"us":{"domain":"smoothmigration.net","label":"United States","languages":{"en":"English","fr":"Fran\u00e7ais","es":"Espa\u00f1ol","de":"Deutsch"},"hreflang":["en-US"]},"ca":{"domain":"smoothmigration.ca","label":"Canada","languages":{"en":"English","fr":"Fran\u00e7ais","es":"Espa\u00f1ol","de":"Deutsch"},"hreflang":["en-CA","fr-CA"]},"uk":{"domain":"smoothmigration.uk","label":"United Kingdom","languages":{"en-GB":"English (UK)","fr":"Fran\u00e7ais","es":"Espa\u00f1ol","de":"Deutsch"},"hreflang":["en-GB"]},"au":{"domain":"smoothmigration.com.au","label":"Australia","languages":{"en-AU":"English (AU)","fr":"Fran\u00e7ais","es":"Espa\u00f1ol","de":"Deutsch"},"hreflang":["en-AU"]},"za":{"domain":"smoothmigration.co.za","label":"South Africa","languages":{"en-ZA":"English (ZA)","fr":"Fran\u00e7ais","es":"Espa\u00f1ol","de":"Deutsch"},"hreflang":["en-ZA"]}},"currentRegion":"za","currentHost":"smoothmigration.co.za","currentPath":"\/","allowedDomains":["smoothmigration.net","smoothmigration.ca","smoothmigration.uk","smoothmigration.com.au","smoothmigration.co.za"],"xDefaultDomain":"smoothmigration.net","debugEnabled":"","langInPath":""};
+</script>
+<script src="https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/js/locale.js?ver=1756260837" id="sm-locale-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2.30.0/dist/globe.gl.min.js" id="globe-gl-js"></script>
+<script id="sm-globe-js-before">
+window.SmoothGlobeData = {"arcs":[{"startLat":51.5074,"startLng":-0.1278,"endLat":-33.8688,"endLng":151.2093,"colorStart":"#7c3aed","colorEnd":"#22d3ee"},{"startLat":40.7128,"startLng":-74.006,"endLat":51.5074,"endLng":-0.1278,"colorStart":"#22c55e","colorEnd":"#eab308"},{"startLat":48.8566,"startLng":2.3522,"endLat":-34.6037,"endLng":-58.3816,"colorStart":"#ef4444","colorEnd":"#60a5fa"}],"points":[{"lat":51.5074,"lng":-0.1278,"name":"UK"},{"lat":-33.8688,"lng":151.2093,"name":"Australia"},{"lat":40.7128,"lng":-74.006,"name":"USA"},{"lat":48.8566,"lng":2.3522,"name":"France"}],"reduced":false};
+</script>
+<script src="https://smoothmigration.co.za/wp-content/themes/smoothmigration/assets/js/smooth-globe.js?ver=1.0.0" id="sm-globe-js"></script>
+</body>
+</html> 
+
+<!-- Page cached by LiteSpeed Cache 7.3 on 2025-08-27 02:31:21 -->
