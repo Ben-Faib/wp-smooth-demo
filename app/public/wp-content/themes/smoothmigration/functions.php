@@ -17,6 +17,8 @@ require_once get_template_directory() . '/inc/enqueue.php';
 require_once get_template_directory() . '/inc/ajax.php';
 require_once get_template_directory() . '/inc/seo-meta.php';
 require_once get_template_directory() . '/inc/icons.php';
+// Performance/optimization filters (LiteSpeed exclusions, script attrs)
+require_once get_template_directory() . '/inc/optimize-filters.php';
 // Locale switcher (hard-coded region/domain map and glass UI)
 require_once get_template_directory() . '/inc/locale-switcher.php';
 

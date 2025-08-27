@@ -63,7 +63,8 @@ function smoothmigration_landing_page_meta_tags() {
     echo '<meta name="keywords" content="' . esc_attr( $meta_keywords ) . '">' . "\n";
     echo '<meta name="author" content="Smooth Migration Global">' . "\n";
     echo '<meta name="robots" content="index, follow">' . "\n";
-    echo '<link rel="canonical" href="' . esc_url( $site_url ) . '">' . "\n";
+    // Single canonical only; match WP's trailing-slash home URL
+    echo '<link rel="canonical" href="' . esc_url( trailingslashit( $site_url ) ) . '">' . "\n";
     
     // Open Graph tags for social media
     echo '<!-- Open Graph Meta Tags -->' . "\n";
@@ -73,13 +74,6 @@ function smoothmigration_landing_page_meta_tags() {
     echo '<meta property="og:url" content="' . esc_url( $site_url ) . '">' . "\n";
     echo '<meta property="og:image" content="' . esc_url( $logo_url ) . '">' . "\n";
     echo '<meta property="og:site_name" content="Smooth Migration Global">' . "\n";
-    echo '<meta property="og:locale" content="en_US">' . "\n";
-    
-    // Social preview meta (generic, no platform-specific branding)
-    echo '<meta property="og:type" content="website">' . "\n";
-    echo '<meta property="og:title" content="International Relocation Services | Smooth Migration Global">' . "\n";
-    echo '<meta property="og:description" content="' . esc_attr( $meta_description ) . '">' . "\n";
-    echo '<meta property="og:image" content="' . esc_url( $logo_url ) . '">' . "\n";
     
     // Additional SEO tags
     echo '<!-- Additional SEO Tags -->' . "\n";

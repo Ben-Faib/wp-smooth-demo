@@ -181,5 +181,9 @@
 -->
 
 <?php wp_footer(); ?>
+<?php
+// Build timestamp comment for cache sanity checks (safe to keep; negligible size)
+echo "\n<!-- build: " . esc_html( gmdate( 'c' ) ) . " UTC -->\n";
+?>
 </body>
 </html>

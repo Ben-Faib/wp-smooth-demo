@@ -23,7 +23,7 @@ function sm_globe_register_assets() {
         'sm-globe',
         get_template_directory_uri() . '/assets/js/smooth-globe.js',
         array( 'globe-gl' ),
-        SMOOTHMIGRATION_VERSION,
+        ( @filemtime( get_template_directory() . '/assets/js/smooth-globe.js' ) ?: ( defined( 'SMOOTHMIGRATION_VERSION' ) ? SMOOTHMIGRATION_VERSION : '1.0.0' ) ),
         true
     );
 
@@ -32,7 +32,7 @@ function sm_globe_register_assets() {
         'sm-globe',
         get_template_directory_uri() . '/assets/css/smooth-globe.css',
         array(),
-        SMOOTHMIGRATION_VERSION
+        ( @filemtime( get_template_directory() . '/assets/css/smooth-globe.css' ) ?: ( defined( 'SMOOTHMIGRATION_VERSION' ) ? SMOOTHMIGRATION_VERSION : '1.0.0' ) )
     );
 }
 add_action( 'wp_enqueue_scripts', 'sm_globe_register_assets' );

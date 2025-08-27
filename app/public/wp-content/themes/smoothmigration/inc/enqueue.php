@@ -13,8 +13,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Enqueue styles and scripts.
  */
 function smoothmigration_enqueue_assets() {
-    $asset_nonce = get_option( 'sm_asset_nonce', '1' );
-    $ver = SMOOTHMIGRATION_VERSION . '-' . $asset_nonce;
+    $theme_dir = get_template_directory();
+    $child_dir = get_stylesheet_directory();
+
+    $file_ver = function( $relative_path, $is_child = false ) use ( $theme_dir, $child_dir ) {
+        $base = $is_child ? $child_dir : $theme_dir;
+        $path = rtrim( $base, '/' ) . '/' . ltrim( $relative_path, '/' );
+        $mtime = @filemtime( $path );
+        if ( $mtime ) {
+            return (string) $mtime;
+        }
+        // Fallback to theme version to avoid empty versions
+        return defined( 'SMOOTHMIGRATION_VERSION' ) ? SMOOTHMIGRATION_VERSION : '1.0.0';
+    };
     // Bootstrap CSS & JS (via CDN)
     wp_enqueue_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', array(), '5.3.3' );
     
@@ -34,24 +45,25 @@ function smoothmigration_enqueue_assets() {
     wp_enqueue_style( 'aileron-font', 'https://fonts.cdnfonts.com/css/aileron', array(), null );
     wp_enqueue_style( 'playfair-font', 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap', array(), null );
 
-    // Theme stylesheet (depends on Bootstrap and fonts so we place it after)
-    wp_enqueue_style( 'smoothmigration-style', get_stylesheet_uri(), array( 'bootstrap', 'smooth-fa', 'aileron-font', 'playfair-font' ), $ver );
+    // Theme stylesheet (child-first if present)
+    $style_ver = $file_ver( 'style.css', true );
+    wp_enqueue_style( 'smoothmigration-style', get_stylesheet_uri(), array( 'bootstrap', 'smooth-fa', 'aileron-font', 'playfair-font' ), $style_ver );
 
     // Icon utilities (sizes, motion preferences)
-    wp_enqueue_style( 'sm-icons', get_template_directory_uri() . '/assets/css/icons.css', array( 'smoothmigration-style' ), $ver );
+    wp_enqueue_style( 'sm-icons', get_template_directory_uri() . '/assets/css/icons.css', array( 'smoothmigration-style' ), $file_ver( 'assets/css/icons.css' ) );
 
     // Widget fixes for floating elements and chat widgets
-    wp_enqueue_style( 'widget-fixes', get_template_directory_uri() . '/assets/css/widget-fixes.css', array( 'smoothmigration-style' ), $ver );
+    wp_enqueue_style( 'widget-fixes', get_template_directory_uri() . '/assets/css/widget-fixes.css', array( 'smoothmigration-style' ), $file_ver( 'assets/css/widget-fixes.css' ) );
 
     // Bootstrap bundle (includes Popper)
     wp_enqueue_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), '5.3.3', true );
     
     // Custom theme JavaScript
-    wp_enqueue_script( 'smoothmigration-js', get_template_directory_uri() . '/assets/js/theme.js', array( 'bootstrap' ), $ver, true );
+    wp_enqueue_script( 'smoothmigration-js', get_template_directory_uri() . '/assets/js/theme.js', array( 'bootstrap' ), $file_ver( 'assets/js/theme.js' ), true );
 
     // Enqueue guides system JavaScript on guides pages
     if ( is_page_template( 'page-guides-enhanced.php' ) || is_page_template( 'page-guides.php' ) || is_singular( 'guide' ) ) {
-        wp_enqueue_script( 'smoothmigration-guides', get_template_directory_uri() . '/assets/js/guides.js', array( 'smoothmigration-js' ), $ver, true );
+        wp_enqueue_script( 'smoothmigration-guides', get_template_directory_uri() . '/assets/js/guides.js', array( 'smoothmigration-js' ), $file_ver( 'assets/js/guides.js' ), true );
         
         // Localize guides script
         wp_localize_script( 'smoothmigration-guides', 'guideAjax', array(
@@ -73,8 +85,8 @@ function smoothmigration_enqueue_assets() {
 
     // Landing Page specific styles and scripts (only load on front page)
     if ( is_front_page() ) {
-        wp_enqueue_style( 'landing-page', get_template_directory_uri() . '/assets/css/landing-page.css', array( 'smoothmigration-style' ), $ver );
-        wp_enqueue_script( 'landing-page-js', get_template_directory_uri() . '/assets/js/landing-page.js', array( 'bootstrap', 'smoothmigration-js' ), $ver, true );
+        wp_enqueue_style( 'landing-page', get_template_directory_uri() . '/assets/css/landing-page.css', array( 'smoothmigration-style' ), $file_ver( 'assets/css/landing-page.css' ) );
+        wp_enqueue_script( 'landing-page-js', get_template_directory_uri() . '/assets/js/landing-page.js', array( 'bootstrap', 'smoothmigration-js' ), $file_ver( 'assets/js/landing-page.js' ), true );
         
         // Pass data to landing page JavaScript
         wp_localize_script( 'landing-page-js', 'smoothmigrationAjax', array(
@@ -85,8 +97,8 @@ function smoothmigration_enqueue_assets() {
 
     // Quick View Assets (only load if the quick view modal is likely to be used)
     if ( is_page( 'services' ) || is_singular( 'service' ) || is_tax( 'service_type' ) ) {
-        wp_enqueue_style( 'quick-view', get_template_directory_uri() . '/assets/css/quick-view.css', array(), SMOOTHMIGRATION_VERSION );
-        wp_enqueue_script( 'quick-view-js', get_template_directory_uri() . '/assets/js/quick-view.js', array( 'jquery' ), SMOOTHMIGRATION_VERSION, true );
+        wp_enqueue_style( 'quick-view', get_template_directory_uri() . '/assets/css/quick-view.css', array(), $file_ver( 'assets/css/quick-view.css' ) );
+        wp_enqueue_script( 'quick-view-js', get_template_directory_uri() . '/assets/js/quick-view.js', array( 'jquery' ), $file_ver( 'assets/js/quick-view.js' ), true );
         
         // Pass data to JavaScript
         wp_localize_script( 'quick-view-js', 'smoothmigration', array(
