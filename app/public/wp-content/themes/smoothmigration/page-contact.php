@@ -663,29 +663,7 @@ get_header();
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.form-container:hover {
-    background:
-        linear-gradient(135deg,
-            rgba(255, 255, 255, 0.09) 0%,
-            rgba(255, 255, 255, 0.04) 25%,
-            rgba(255, 255, 255, 0.02) 50%,
-            rgba(255, 255, 255, 0.04) 75%,
-            rgba(255, 255, 255, 0.09) 100%);
-    backdrop-filter: blur(28px) saturate(190%) contrast(130%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(130%);
-    border-image: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.4) 0%,
-        rgba(59, 130, 246, 0.2) 25%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(59, 130, 246, 0.2) 75%,
-        rgba(255, 255, 255, 0.4) 100%) 1;
-    box-shadow:
-        0 20px 80px rgba(0, 0, 0, 0.12),
-        0 12px 48px rgba(255, 255, 255, 0.15),
-        inset 0 3px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -3px 0 rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px) scale(1.005);
-}
+/* Hover effects removed for .form-container */
 
 .form-container::before {
     content: '';
@@ -774,9 +752,7 @@ get_header();
     pointer-events: none;
 }
 
-.form-container:hover .form-wrapper::before {
-    opacity: 1;
-}
+/* Hover effects removed for .form-container .form-wrapper::before */
 
 .forminator-integration .forminator-ui {
     /* Style overrides for Forminator */
@@ -889,30 +865,9 @@ get_header();
     z-index: -1;
 }
 
-.forminator-integration .forminator-button:hover {
-    transform: translateY(-4px) scale(1.03) !important;
-    box-shadow:
-        0 12px 40px rgba(59, 130, 246, 0.35),
-        0 8px 24px rgba(0, 0, 0, 0.12),
-        inset 0 2px 0 rgba(255, 255, 255, 0.25) !important;
-    background:
-        linear-gradient(135deg,
-            rgba(59, 130, 246, 0.8) 0%,
-            rgba(30, 64, 175, 0.85) 25%,
-            rgba(59, 130, 246, 0.8) 50%,
-            rgba(30, 64, 175, 0.85) 75%,
-            rgba(59, 130, 246, 0.8) 100%) !important;
-    border-image: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.6) 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        rgba(255, 255, 255, 0.6) 100%) 1 !important;
-    backdrop-filter: blur(20px) saturate(170%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(170%) !important;
-}
+/* Hover effects removed for .forminator-button */
 
-.forminator-integration .forminator-button:hover::before {
-    left: 100%;
-}
+/* Hover sheen removed for .forminator-button::before on hover */
 
 .forminator-integration .forminator-button:active {
     transform: translateY(-1px) scale(0.98) !important;
@@ -930,12 +885,7 @@ get_header();
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.privacy-notice:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.18);
-    transform: translateY(-1px) scale(1.01);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-}
+/* Hover effects removed for .privacy-notice */
 
 .form-header {
     position: relative;
@@ -1006,10 +956,7 @@ body.page-template-page-contact,
     opacity: 1;
 }
 
-.form-sticky-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-xl);
-}
+/* Hover effects removed for .form-sticky-submit */
 
 .trust-feature {
     display: flex;
@@ -2079,6 +2026,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const services = params.get('services');
 
             let did = false;
+            let hasUrlParams = false;
+
+            // Check if any URL parameters are present
+            if (from || to || date || interest || message || services) {
+                hasUrlParams = true;
+            }
+
             if (from) {
                 const el = findByLabelContains(form, ['moving from','from country','from']) || findByNameGuess(form, ['from','movingfrom','origin']);
                 did = setValue(el, from) || did;
@@ -2155,7 +2109,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            if (did) {
+            // Only show floating note if prefill actually happened from URL parameters
+            if (did && hasUrlParams) {
                 // Visual note - floating sidebar
                 createFloatingPrefillNote();
 
@@ -2438,6 +2393,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 badge.setAttribute('style', 'position:fixed;right:12px;bottom:12px;padding:6px 10px;border-radius:8px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#1e3a8a;font-weight:700;font-size:11px;z-index:99999;pointer-events:none;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif');
                 badge.textContent = 'Cubes Debug ON';
                 document.body.appendChild(badge);
+            }
+        } catch (e) {}
+    })();
+
+    // Live-debug helper: disable blur/transform effects via ?noblur=1 or ?ux=1
+    (function disableBlurViaQS() {
+        try {
+            const qs = new URLSearchParams(window.location.search);
+            const noblur = qs.get('noblur') || qs.get('no_blur');
+            const uxDebug = document.documentElement.classList.contains('ux-debug');
+            if ((noblur && /^(1|true|on|yes)$/i.test(noblur)) || uxDebug) {
+                const style = document.createElement('style');
+                style.textContent = `
+                    .page-template-page-contact .form-container,
+                    .page-template-page-contact .form-container:hover {
+                        backdrop-filter: none !important;
+                        -webkit-backdrop-filter: none !important;
+                        transform: none !important;
+                    }
+                    .page-template-page-contact .forminator-integration .forminator-input:focus,
+                    .page-template-page-contact .forminator-integration .forminator-textarea:focus,
+                    .page-template-page-contact .forminator-integration .forminator-select:focus {
+                        box-shadow: none !important;
+                        outline: none !important;
+                    }
+                `;
+                document.head.appendChild(style);
             }
         } catch (e) {}
     })();
