@@ -839,9 +839,11 @@ get_header();
         0 4px 16px rgba(0, 0, 0, 0.05),
         inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
     outline: none !important;
-    transform: translateY(-2px) scale(1.01);
-    backdrop-filter: blur(20px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+}
+
+/* Avoid text blur on focus: keep form container stable while interacting */
+.form-container:hover:focus-within {
+    transform: none;
 }
 
 .forminator-integration .forminator-button {
@@ -1343,7 +1345,7 @@ body.page-template-page-contact,
     right: 0;
     width: 100%;
     height: 100%;
-    z-index: 4; /* Above form content so cubes can be hovered */
+    z-index: 1; /* Behind form content to avoid intercepting clicks on fields */
     pointer-events: auto; /* Allow cube interactions; we'll scope inside SVG */
     overflow: hidden;
     max-width: 100vw; /* Ensure it never exceeds viewport width */
