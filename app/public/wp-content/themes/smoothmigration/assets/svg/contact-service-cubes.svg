@@ -203,18 +203,22 @@
       <!-- Right face -->
       <polygon points="45,0 56,-11 56,34 45,45" fill="url(#vehicleGradient)" opacity="1"/>
 
-      <!-- Icon: Car Side View -->
-      <!-- Main car body -->
-      <path d="M14 28 C14 26, 15 25, 17 25 L29 25 C31 25, 32 26, 32 28 L32 32 C32 34, 31 35, 29 35 L17 35 C15 35, 14 34, 14 32 Z"
-            fill="none" stroke="white" stroke-width="2" opacity="0.9"/>
+      <!-- Icon: Front-view Car (higher recognizability at small sizes) -->
+      <!-- Car body -->
+      <path d="M12 26 L33 26 C34.6 26 35.5 25.1 35.5 23.6 L34 19.5 C33.4 18 32.3 17 30.7 17 L14.3 17 C12.7 17 11.6 18 11 19.5 L9.5 23.6 C9.5 25.1 10.4 26 12 26 Z"
+            fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
       <!-- Windshield -->
-      <path d="M18 25 L22 20 L26 20 L30 25" fill="none" stroke="white" stroke-width="1.5" opacity="0.8"/>
-      <!-- Roof line -->
-      <line x1="22" y1="20" x2="26" y2="20" stroke="white" stroke-width="1.5" opacity="0.8"/>
-      <!-- Front wheel -->
-      <circle cx="18" cy="35" r="3.5" fill="none" stroke="white" stroke-width="2" opacity="0.9"/>
-      <!-- Rear wheel -->
-      <circle cx="28" cy="35" r="3.5" fill="none" stroke="white" stroke-width="2" opacity="0.9"/>
+      <path d="M16 18 L28 18" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+      <!-- Headlights -->
+      <circle cx="14" cy="24" r="1.5" fill="white" opacity="0.95"/>
+      <circle cx="31" cy="24" r="1.5" fill="white" opacity="0.95"/>
+      <!-- Grill -->
+      <line x1="19" y1="24" x2="25" y2="24" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity="0.9"/>
+      <!-- Bumper hint -->
+      <line x1="12.5" y1="27" x2="32.5" y2="27" stroke="white" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/>
+      <!-- Wheels -->
+      <circle cx="16" cy="31.5" r="4.2" fill="none" stroke="white" stroke-width="2.2" opacity="0.95"/>
+      <circle cx="28.5" cy="31.5" r="4.2" fill="none" stroke="white" stroke-width="2.2" opacity="0.95"/>
     </g>
     <animateTransform attributeName="transform"
                       attributeType="XML"

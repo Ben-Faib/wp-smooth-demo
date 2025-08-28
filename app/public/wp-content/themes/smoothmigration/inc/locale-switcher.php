@@ -1,9 +1,16 @@
 <?php
 /**
- * Smooth Migration - Hard-coded Region/Language Switcher
- * - Glassmorphism UI (pill, chip, sheet)
- * - hreflang alternates across TLDs
- * - Client-side suggestion and routing
+ * Smooth Migration - Region/Language Switcher
+ * - Modern, compact UI: floating pill, suggestion chip, modal sheet
+ * - Emits hreflang/og:locale tags unless SEO plugin handles them
+ * - Client-side suggestion and routing between country TLDs
+ *
+ * QA/Debug toggles (append to any URL):
+ *   ?localeOpen=1         Open the modal immediately
+ *   ?localePrompt=1       Force show country suggestion chip
+ *   ?region=ca&lang=fr    Preselect region/language in UI
+ *   ?resetLocale=1        Clear locale cookies/storage
+ *   ?localeDebug=1        Show debug overlay
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -199,12 +206,12 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 		public static function render_ui() {
 			?>
 			<div id="sm-locale-root" class="sm-locale-root" aria-live="polite">
-				<button id="sm-locale-pill" class="sm-pill material" type="button" aria-haspopup="dialog" aria-controls="sm-locale-sheet">
+				<button id="sm-locale-pill" class="sm-pill" type="button" aria-haspopup="dialog" aria-controls="sm-locale-sheet">
 					<span class="sm-pill-ico" aria-hidden="true">🌐</span>
 					<span id="sm-pill-text">Region · Language</span>
 				</button>
 
-				<div id="sm-locale-chip" class="sm-chip material" hidden>
+				<div id="sm-locale-chip" class="sm-chip" hidden>
 					<span id="sm-chip-text">Looks like Canada. Switch?</span>
 					<div class="sm-chip-actions">
 						<button id="sm-chip-switch" class="sm-btn sm-primary" type="button">Switch</button>
@@ -214,25 +221,26 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 
 				<div id="sm-locale-sheet" class="sm-sheet" role="dialog" aria-modal="true" aria-hidden="true">
 					<div class="sm-sheet-backdrop" data-close="1"></div>
-					<div class="sm-sheet-panel material" role="document" tabindex="-1" aria-labelledby="sm-sheet-title">
+					<div class="sm-sheet-panel" role="document" tabindex="-1" aria-labelledby="sm-sheet-title">
 						<header class="sm-sheet-header">
-							<h2 id="sm-sheet-title" class="sm-sheet-title">Region &amp; Language</h2>
-							<button class="sm-close" data-close="1" aria-label="Close">✕</button>
+							<h2 id="sm-sheet-title" class="sm-sheet-title">Region &amp; language</h2>
+							<div style="display: flex; align-items: center; gap: 8px;">
+								<button id="sm-done" class="sm-done-btn" type="button" disabled>Done</button>
+								<button class="sm-close" data-close="1" aria-label="Close dialog">✕</button>
+							</div>
 						</header>
-						<div class="sm-sheet-body">
-							<section>
-								<h3 class="sm-section-title">Region</h3>
-								<div id="sm-region-grid" class="sm-region-grid"></div>
-							</section>
-							<section>
-								<h3 class="sm-section-title">Language</h3>
-								<div id="sm-lang-list" class="sm-lang-list"></div>
-							</section>
+						<div class="sm-sheet-content">
+							<div class="sm-sheet-body">
+								<section class="sm-regions-section">
+									<h3 id="sm-regions-title" class="sm-section-title">Region</h3>
+									<div id="sm-region-grid" class="sm-region-grid" role="radiogroup" aria-labelledby="sm-regions-title"></div>
+								</section>
+								<section class="sm-languages-section">
+									<h3 id="sm-languages-title" class="sm-section-title">Language</h3>
+									<div id="sm-lang-list" class="sm-lang-list" role="radiogroup" aria-labelledby="sm-languages-title"></div>
+								</section>
+							</div>
 						</div>
-						<footer class="sm-sheet-footer">
-							<button id="sm-go" class="sm-btn sm-primary" type="button">Go</button>
-							<button id="sm-stay-here" class="sm-btn" type="button" data-close="1">Stay here</button>
-						</footer>
 					</div>
 				</div>
 

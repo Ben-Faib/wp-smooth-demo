@@ -14,23 +14,12 @@ get_header(); ?>
     <div class="hero-overlay-dark" aria-hidden="true"></div>
     
     <!-- World map moved to right column; service cubes relocated below hero -->
-    
     <div class="container">
         <div class="row align-items-center min-vh-100">
             <div class="col-lg-8">
                 <div class="hero-content">
-                    <!-- Trust Signals -->
-                    <div class="trust-signals mb-4">
-                        <div class="trust-badges">
-                            <span class="trust-badge"><span class="icon-glow me-2"><?php echo sm_icon('earth-americas', 'solid', ''); ?></span>Global coverage</span>
-                            <span class="trust-metric"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?> successful relocations</span>
-                        </div>
-                    </div>
-                    <div class="small text-light" style="opacity:.9">No additional or hidden costs.</div>
-                    
                     <h1 class="hero-headline">Your international relocation,<br>made simple.</h1>
                     <p class="hero-subheadline">Get your clear, step-by-step plan and vetted providers—tailored to your destination, timing, and budget. Even if you're moving internationally for the first time, you'll have expert guidance every step of the way.</p>
-                    
                     <!-- Enhanced CTA Group with Self-Segmentation -->
                     <div class="hero-cta-group">
                         <a href="/services" class="btn btn-primary btn-lg cta-relocating">
@@ -50,7 +39,6 @@ get_header(); ?>
                             <small class="text-light">Next available consultation: Today at 3 PM</small>
                         </p>
                     </div>
-                    
                     <!-- Scroll Cue -->
                     <div class="scroll-cue">
                         <span class="scroll-text">Scroll to discover</span>
@@ -263,10 +251,6 @@ get_header(); ?>
     <div class="container">
         <div class="text-center mb-5">
             <div class="stats-row">
-                <div class="stat-item">
-                    <div class="stat-number"><?php echo esc_html( preg_replace('/\D+$/', '', get_option( 'sm_successful_relocations', '2500+' ) ) ); ?>+<sup class="ms-1"><a class="text-muted" href="/methodology" aria-label="See methodology">*</a></sup></div>
-                    <div class="stat-label">Successful Moves</div>
-                </div>
                 <div class="stat-item">
                     <div class="stat-number"><?php echo esc_html( get_option( 'sm_customer_satisfaction', '98%' ) ); ?></div>
                     <div class="stat-label">Customer Satisfaction</div>

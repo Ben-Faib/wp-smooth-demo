@@ -820,7 +820,10 @@ get_header();
 
 .team-photo {
     position: relative;
-    height: 280px;
+    /* Use portrait aspect ratio to reduce unwanted cropping on headshots */
+    aspect-ratio: 4 / 5;
+    height: auto;
+    min-height: 280px;
     background: var(--bg-light);
     display: flex;
     align-items: center;
@@ -846,7 +849,8 @@ get_header();
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    /* Bias framing slightly toward the top to keep faces visible */
+    object-position: center 20%;
     border-radius: 0;
     transition: transform 0.3s ease;
 }
@@ -1118,7 +1122,13 @@ get_header();
     }
     
     .team-photo {
-        height: 220px;
+        aspect-ratio: 4 / 5;
+        height: auto;
+        min-height: 220px;
+    }
+    
+    .team-image {
+        object-position: center 28%;
     }
     
     .team-name {

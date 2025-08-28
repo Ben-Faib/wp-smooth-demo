@@ -661,6 +661,8 @@ get_header();
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Prevent height changes during validation to avoid SVG shifting */
+    min-height: 400px;
 }
 
 /* Hover effects removed for .form-container */
@@ -761,6 +763,9 @@ get_header();
 
 .forminator-integration .forminator-field {
     margin-bottom: 1rem !important;
+    /* Reserve space for error messages to prevent layout shifts */
+    min-height: 3rem;
+    position: relative;
 }
 
 .forminator-integration .forminator-input,
@@ -817,8 +822,56 @@ get_header();
     outline: none !important;
 }
 
-/* Avoid text blur on focus: keep form container stable while interacting */
-.form-container:hover:focus-within {
+/* Prevent layout shifts from Forminator error messages */
+.forminator-integration .forminator-error-message {
+    position: absolute !important;
+    bottom: -2rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10 !important;
+    opacity: 0 !important;
+    transform: translateY(10px) !important;
+    transition: all 0.3s ease !important;
+    pointer-events: none !important;
+}
+
+.forminator-integration .forminator-error-message.show,
+.forminator-integration .forminator-field.has-error .forminator-error-message {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+/* Also handle any other form validation message containers */
+.forminator-integration .forminator-field-error,
+.forminator-integration .forminator-field .error-message,
+.forminator-integration .forminator-field .forminator-error {
+    position: absolute !important;
+    bottom: -2rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10 !important;
+    opacity: 0 !important;
+    transform: translateY(10px) !important;
+    transition: all 0.3s ease !important;
+    pointer-events: none !important;
+}
+
+.forminator-integration .forminator-field.has-error .forminator-field-error,
+.forminator-integration .forminator-field.has-error .error-message,
+.forminator-integration .forminator-field.has-error .forminator-error,
+.forminator-integration .forminator-field.error .forminator-field-error,
+.forminator-integration .forminator-field.error .error-message,
+.forminator-integration .forminator-field.error .forminator-error {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+/* Avoid text blur on focus: keep form content stable while interacting, but preserve SVG background transform */
+.form-container:hover:focus-within .form-wrapper,
+.form-container:hover:focus-within .form-header,
+.form-container:hover:focus-within .form-footer {
     transform: none;
 }
 
@@ -1292,14 +1345,14 @@ body.page-template-page-contact,
     right: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Behind form content to avoid intercepting clicks on fields */
-    pointer-events: auto; /* Allow cube interactions; we'll scope inside SVG */
-    overflow: hidden;
+    z-index: 3; /* Above form content to ensure reliable hover */
+    pointer-events: none; /* Pass through by default; re-enable only on shapes */
+    overflow: visible;
     max-width: 100vw; /* Ensure it never exceeds viewport width */
-    max-height: 100vh; /* Ensure it never exceeds viewport height */
-    /* Hard clip any scaled contents to avoid page-width changes */
-    -webkit-clip-path: inset(0);
-    clip-path: inset(0);
+    max-height: none; /* Allow cubes to extend beyond section height */
+    /* Remove clip-path to allow cubes to extend */
+    -webkit-clip-path: none;
+    clip-path: none;
 }
 
 /* Debug helpers */
@@ -1320,14 +1373,15 @@ body.page-template-page-contact,
     transform-origin: center;
     animation: none; /* Keep cubes bouncy but stop global float to avoid horizontal scroll */
     transition: opacity 0.4s ease;
-    /* Allow hovering the cubes in side gutters */
-    pointer-events: auto;
+    /* Pass through by default; re-enable only on inner <g> shapes */
+    pointer-events: none;
     max-width: 100%; /* Constrain to parent container */
     max-height: 100%; /* Constrain to parent container */
 }
 
 .floating-contact-service-cubes .floating-cube {
-    pointer-events: auto;
+    /* Disable pointer events on outer group to prevent enlarged filter bbox collisions */
+    pointer-events: none;
 }
 
 .floating-contact-service-cubes svg {
@@ -1343,15 +1397,21 @@ body.page-template-page-contact,
     /* Preserve aspect ratio and prevent overflow */
     object-fit: contain;
     overflow: hidden;
-    /* We'll restrict pointer events to the cube groups explicitly */
-    pointer-events: auto;
-    transform: translateY(140px) scale(1.6); /* Larger scale to sit beside the form */
+    /* Pass through at the root; only inner <g> handles events */
+    pointer-events: none;
+    transform: translate(20px, 130px) scale(1.2); /* Fine-tuned scale and position, shifted slightly right */
     transform-origin: center center;
 }
 
-/* Disable pointer events for everything in the SVG by default, then re-enable for cubes */
+/* Disable pointer events for everything in the SVG by default */
 .floating-contact-service-cubes svg * {
     pointer-events: none;
+}
+
+/* Enable pointer events only on the inner <g> elements that contain the actual cube drawings */
+.floating-contact-service-cubes .floating-cube > g,
+.floating-contact-service-cubes .floating-cube > g * {
+    pointer-events: auto;
 }
 
 .floating-contact-service-cubes:hover {
@@ -1363,7 +1423,6 @@ body.page-template-page-contact,
     opacity: 1;
     /* Remove transition that interferes with SVG animations */
     cursor: pointer;
-    pointer-events: auto; /* Re-enable interaction on cube groups */
 }
 
 /* Ensure contact SVG cubes ignore any global scroll/floating animations */
@@ -1374,36 +1433,45 @@ body.page-template-page-contact,
     opacity: 1 !important; /* Do not override transform/animation so SMIL bounciness remains */
 }
 
-.floating-contact-service-cubes .floating-cube:hover {
-    transform: none !important; /* Stay stationary on hover */
+/* Pointer cursor for actual interactive inner <g> shapes */
+.floating-contact-service-cubes .floating-cube > g,
+.floating-contact-service-cubes .floating-cube > g * {
+    cursor: pointer;
 }
-/* Apply visual treatment to inner <g> so we don't override the SVG filter attribute */
-.floating-contact-service-cubes .floating-cube:hover > g {
+/* Apply visual treatment to inner <g> elements on hover */
+.floating-contact-service-cubes .floating-cube > g.is-hover,
+.floating-contact-service-cubes .floating-cube > g:hover {
     filter: brightness(1.15);
 }
 
-/* Individual cube hover effects with color-specific glows */
-.floating-contact-service-cubes .housing-cube:hover > g {
+/* Individual cube hover effects with color-specific glows on inner <g> */
+.floating-contact-service-cubes .housing-cube > g.is-hover,
+.floating-contact-service-cubes .housing-cube > g:hover {
     filter: brightness(1.15) drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
 }
 
-.floating-contact-service-cubes .banking-cube:hover > g {
+.floating-contact-service-cubes .banking-cube > g.is-hover,
+.floating-contact-service-cubes .banking-cube > g:hover {
     filter: brightness(1.15) drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
 }
 
-.floating-contact-service-cubes .phone-cube:hover > g {
+.floating-contact-service-cubes .phone-cube > g.is-hover,
+.floating-contact-service-cubes .phone-cube > g:hover {
     filter: brightness(1.15) drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
 }
 
-.floating-contact-service-cubes .insurance-cube:hover > g {
+.floating-contact-service-cubes .insurance-cube > g.is-hover,
+.floating-contact-service-cubes .insurance-cube > g:hover {
     filter: brightness(1.15) drop-shadow(0 0 8px rgba(239, 68, 68, 0.4));
 }
 
-.floating-contact-service-cubes .shipping-cube:hover > g {
+.floating-contact-service-cubes .shipping-cube > g.is-hover,
+.floating-contact-service-cubes .shipping-cube > g:hover {
     filter: brightness(1.15) drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
 }
 
-.floating-contact-service-cubes .vehicle-cube:hover > g {
+.floating-contact-service-cubes .vehicle-cube > g.is-hover,
+.floating-contact-service-cubes .vehicle-cube > g:hover {
     filter: brightness(1.15) drop-shadow(0 0 8px rgba(6, 182, 212, 0.4));
 }
 
@@ -1636,12 +1704,12 @@ body.page-template-page-contact,
         /* Ensure proper scaling on tablets */
         object-fit: contain;
         overflow: hidden;
-        transform: translateY(60px) scale(1.2) !important; /* Lighter scale on tablet */
+        transform: translate(15px, 90px) scale(1.08) !important; /* Fine-tuned scale for tablets, shifted right */
     }
 
     .contact-service-cubes-background {
         max-width: 100vw;
-        max-height: 100vh;
+        max-height: none; /* Allow cubes to extend beyond section height */
     }
 }
 
@@ -1666,7 +1734,7 @@ body.page-template-page-contact,
 
     .contact-service-cubes-background {
         max-width: 100vw;
-        max-height: 100vh;
+        max-height: none; /* Allow cubes to extend beyond section height */
     }
 }
 
@@ -1943,11 +2011,64 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initialize compact form functionality
-    initializeCompactForm();
+            // Initialize compact form functionality
+        initializeCompactForm();
 
-    // Initialize service cube tooltips
-    initializeServiceCubeTooltips();
+        // Prevent layout shifts from Forminator validation messages
+        function preventValidationLayoutShift() {
+            // Use MutationObserver to watch for error message additions
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach((node) => {
+                            if (node.nodeType === Node.ELEMENT_NODE) {
+                                // Check if this is a Forminator error message
+                                if (node.classList && (
+                                    node.classList.contains('forminator-error-message') ||
+                                    node.classList.contains('forminator-field-error') ||
+                                    node.matches('.error-message, .forminator-error')
+                                )) {
+                                    // Ensure it uses absolute positioning
+                                    node.style.position = 'absolute';
+                                    node.style.bottom = '-2rem';
+                                    node.style.left = '0';
+                                    node.style.right = '0';
+                                    node.style.zIndex = '10';
+                                    node.style.opacity = '0';
+                                    node.style.transform = 'translateY(10px)';
+                                    node.style.transition = 'all 0.3s ease';
+                                    node.style.pointerEvents = 'none';
+
+                                    // Show with animation
+                                    requestAnimationFrame(() => {
+                                        node.style.opacity = '1';
+                                        node.style.transform = 'translateY(0)';
+                                        node.style.pointerEvents = 'auto';
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Observe the entire form for changes
+            const form = document.querySelector('.forminator-integration form, .forminator-ui form');
+            if (form) {
+                observer.observe(form, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true,
+                    attributeFilter: ['class']
+                });
+            }
+        }
+
+        // Initialize layout shift prevention
+        preventValidationLayoutShift();
+
+        // Initialize service cube tooltips
+        initializeServiceCubeTooltips();
 
 
 
@@ -2232,7 +2353,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initializeServiceCubeTooltips() {
-        const cubes = document.querySelectorAll('.floating-cube');
+        const cubes = document.querySelectorAll('.floating-cube > g');
         const tooltip = document.createElement('div');
         tooltip.className = 'service-tooltip';
         tooltip.setAttribute('role', 'tooltip');
@@ -2251,7 +2372,10 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         function getServiceKeyFromCube(el) {
-            return Array.from(el.classList).find(c => c !== 'floating-cube' && /-cube$/.test(c)) || '';
+            // Since we're now targeting the inner <g>, we need to find the parent .floating-cube
+            const parentCube = el.closest('.floating-cube');
+            if (!parentCube) return '';
+            return Array.from(parentCube.classList).find(c => c !== 'floating-cube' && /-cube$/.test(c)) || '';
         }
 
         function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
@@ -2267,73 +2391,131 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip.style.top = ty + 'px';
         }
 
+        // Hover/tooltip state and fallback detection
+        let activeHoverCount = 0;
+        let hadDirectCubeEvents = false;
+        let currentHoverEl = null;
+
+        function setSMILPlayState(el, play) {
+            try {
+                const svgRoot = (el.ownerSVGElement) || document.querySelector('.floating-contact-service-cubes svg');
+                if (!svgRoot || typeof svgRoot.pauseAnimations !== 'function') return;
+                if (play) svgRoot.unpauseAnimations();
+                else svgRoot.pauseAnimations();
+            } catch(e) {}
+        }
+
+        function showTooltipAtPointerLike(e, el) {
+            const key = getServiceKeyFromCube(el);
+            const service = services[key];
+            if (!service) return;
+            const content = tooltip.querySelector('.tooltip-content');
+            content.querySelector('h4').textContent = service.title;
+            content.querySelector('p').textContent = service.description;
+            positionTooltip(e.clientX, e.clientY);
+            tooltip.classList.add('show');
+            tooltip.setAttribute('aria-hidden', 'false');
+        }
+
+        function showTooltipAtCenterEl(el) {
+            const key = getServiceKeyFromCube(el);
+            const service = services[key];
+            if (!service) return;
+            const content = tooltip.querySelector('.tooltip-content');
+            content.querySelector('h4').textContent = service.title;
+            content.querySelector('p').textContent = service.description;
+            const r = el.getBoundingClientRect();
+            positionTooltip(r.left + r.width / 2, r.top);
+            tooltip.classList.add('show');
+            tooltip.setAttribute('aria-hidden', 'false');
+        }
+
+        function hideTooltip() {
+            tooltip.classList.remove('show');
+            tooltip.setAttribute('aria-hidden', 'true');
+        }
+
+        function enteringFromOutside(e, el) { return !(el.contains(e.relatedTarget)); }
+        function leavingToOutside(e, el) { return !(el.contains(e.relatedTarget)); }
+
         cubes.forEach(cube => {
             // Make focusable for keyboard users
             cube.setAttribute('tabindex', '0');
             cube.setAttribute('role', 'button');
             cube.setAttribute('aria-describedby', 'service-tooltip');
 
-            // Pause bobbing SMIL <animateTransform> on hover/focus and resume on leave/blur
-            function setSMILPlayState(el, play) {
-                try {
-                    // The animateTransform is a sibling inside each cube group
-                    const anim = el.querySelector('animateTransform');
-                    if (!anim) return;
-                    const svgRoot = el.ownerSVGElement || document.querySelector('.floating-contact-service-cubes svg');
-                    if (!svgRoot || typeof svgRoot.pauseAnimations !== 'function') return;
-                    // Pause only this element's animation by toggling beginElement/endElement if supported is limited;
-                    // fallback: pause all and resume all quickly to emulate pause-per-element is not possible,
-                    // so we adjust the element's style to stop transformation while hovered (already handled in CSS).
-                    // Prefer pausing the entire SVG only while a cube is hovered to keep it simple.
-                    if (play) { svgRoot.unpauseAnimations(); }
-                    else { svgRoot.pauseAnimations(); }
-                } catch (e) {}
-            }
+            cube.addEventListener('pointerover', (e) => {
+                if (!enteringFromOutside(e, cube)) return;
+                hadDirectCubeEvents = true;
+                currentHoverEl = cube;
+                cube.classList.add('is-hover');
+                showTooltipAtCenterEl(cube);
+                if (activeHoverCount++ === 0) setSMILPlayState(cube, false);
+            });
+            cube.addEventListener('pointermove', (e) => {
+                if (currentHoverEl === cube) showTooltipAtPointerLike(e, cube);
+            });
+            cube.addEventListener('pointerout', (e) => {
+                if (!leavingToOutside(e, cube)) return;
+                currentHoverEl = null;
+                cube.classList.remove('is-hover');
+                hideTooltip();
+                if (--activeHoverCount <= 0) { activeHoverCount = 0; setSMILPlayState(cube, true); }
+            });
 
-            function showTooltipAtPointer(e) {
-                const key = getServiceKeyFromCube(cube);
-                const service = services[key];
-                if (!service) return;
-                const content = tooltip.querySelector('.tooltip-content');
-                content.querySelector('h4').textContent = service.title;
-                content.querySelector('p').textContent = service.description;
-                positionTooltip(e.clientX, e.clientY);
-                tooltip.classList.add('show');
-                tooltip.setAttribute('aria-hidden', 'false');
-            }
+            // Keyboard users
+            cube.addEventListener('focus', () => {
+                currentHoverEl = cube;
+                cube.classList.add('is-hover');
+                showTooltipAtCenterEl(cube);
+                if (activeHoverCount++ === 0) setSMILPlayState(cube, false);
+            });
+            cube.addEventListener('blur', () => {
+                currentHoverEl = null;
+                cube.classList.remove('is-hover');
+                hideTooltip();
+                if (--activeHoverCount <= 0) { activeHoverCount = 0; setSMILPlayState(cube, true); }
+            });
 
-            function showTooltipAtCenter() {
-                const key = getServiceKeyFromCube(cube);
-                const service = services[key];
-                if (!service) return;
-                const content = tooltip.querySelector('.tooltip-content');
-                content.querySelector('h4').textContent = service.title;
-                content.querySelector('p').textContent = service.description;
-                const r = cube.getBoundingClientRect();
-                positionTooltip(r.left + r.width / 2, r.top);
-                tooltip.classList.add('show');
-                tooltip.setAttribute('aria-hidden', 'false');
-            }
-
-            function hideTooltip() {
-                tooltip.classList.remove('show');
-                tooltip.setAttribute('aria-hidden', 'true');
-            }
-
-            cube.addEventListener('mouseenter', (e) => { showTooltipAtCenter(e); setSMILPlayState(cube, false); });
-            cube.addEventListener('mousemove', showTooltipAtPointer);
-            cube.addEventListener('mouseleave', (e) => { hideTooltip(e); setSMILPlayState(cube, true); });
-            cube.addEventListener('focus', (e) => { showTooltipAtCenter(e); setSMILPlayState(cube, false); });
-            cube.addEventListener('blur', (e) => { hideTooltip(e); setSMILPlayState(cube, true); });
-            cube.addEventListener('touchstart', function(e) {
-                if (e.touches && e.touches[0]) {
-                    showTooltipAtPointer(e.touches[0]);
-                } else {
-                    showTooltipAtCenter();
-                }
+            // Touch
+            cube.addEventListener('touchstart', (e) => {
+                const p = (e.touches && e.touches[0]) || e;
+                currentHoverEl = cube;
+                cube.classList.add('is-hover');
+                showTooltipAtPointerLike(p, cube);
+                if (activeHoverCount++ === 0) setSMILPlayState(cube, false);
             }, { passive: true });
-            cube.addEventListener('touchend', (e) => { hideTooltip(e); setSMILPlayState(cube, true); });
+            cube.addEventListener('touchend', () => {
+                currentHoverEl = null;
+                cube.classList.remove('is-hover');
+                hideTooltip();
+                if (--activeHoverCount <= 0) { activeHoverCount = 0; setSMILPlayState(cube, true); }
+            });
         });
+
+        // Fallback detection via elementsFromPoint
+        document.addEventListener('pointermove', (e) => {
+            if (hadDirectCubeEvents) return;
+            const els = document.elementsFromPoint(e.clientX, e.clientY);
+            const hit = els.find(n => n.closest && n.closest('.floating-cube > g'));
+            if (hit) {
+                const g = hit.closest('.floating-cube > g');
+                if (currentHoverEl !== g) {
+                    if (currentHoverEl) currentHoverEl.classList.remove('is-hover');
+                    currentHoverEl = g;
+                    g.classList.add('is-hover');
+                    showTooltipAtCenterEl(g);
+                    if (activeHoverCount++ === 0) setSMILPlayState(g, false);
+                }
+                showTooltipAtPointerLike(e, g);
+            } else if (currentHoverEl) {
+                currentHoverEl.classList.remove('is-hover');
+                currentHoverEl = null;
+                hideTooltip();
+                if (--activeHoverCount <= 0) { activeHoverCount = 0; setSMILPlayState(document.querySelector('.floating-contact-service-cubes svg') || document.body, true); }
+            }
+        }, { passive: true });
+        
     }
 
     // Ensure SVG animations start properly and don't get interrupted
@@ -2341,9 +2523,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const svgElement = document.querySelector('.floating-contact-service-cubes svg');
         if (!svgElement) return;
         // Keep SMIL/animateTransform bounciness; only remove global CSS animation classes
-        svgElement.querySelectorAll('.floating-cube').forEach((g) => {
-            g.classList.remove('animate-on-scroll', 'animate-float', 'animate-in');
-            g.style.opacity = '1';
+        // Target the outer .floating-cube groups for class removal
+        svgElement.querySelectorAll('.floating-cube').forEach((cubeGroup) => {
+            cubeGroup.classList.remove('animate-on-scroll', 'animate-float', 'animate-in');
+            cubeGroup.style.opacity = '1';
+            // Also ensure inner <g> elements are properly initialized
+            const innerG = cubeGroup.querySelector('g');
+            if (innerG) {
+                innerG.style.opacity = '1';
+            }
         });
         // Ensure the wrapper itself doesn't animate globally
         const wrapper = document.querySelector('.floating-contact-service-cubes');
@@ -2353,6 +2541,56 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         svgElement.style.animation = 'none';
         svgElement.style.transition = 'none';
+    }
+
+    // Install translucent hitbox overlays inside each inner <g> for debugging
+    function installCubesDebugHitboxes() {
+        const svg = document.querySelector('.floating-contact-service-cubes svg');
+        if (!svg) return;
+        const groups = svg.querySelectorAll('.floating-cube > g');
+
+        groups.forEach(g => {
+            if (g.querySelector('rect.debug-bbox')) return;
+            const bb = g.getBBox();
+            const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            r.setAttribute('class', 'debug-bbox');
+            r.setAttribute('x', bb.x);
+            r.setAttribute('y', bb.y);
+            r.setAttribute('width', bb.width);
+            r.setAttribute('height', bb.height);
+            r.setAttribute('fill', 'rgba(59,130,246,0.08)');
+            r.setAttribute('stroke', 'rgba(59,130,246,0.6)');
+            r.setAttribute('stroke-width', '1.25');
+            r.setAttribute('vector-effect', 'non-scaling-stroke');
+            r.style.pointerEvents = 'none';
+            g.appendChild(r);
+        });
+
+        let dot = document.getElementById('cubes-debug-dot');
+        if (!dot) {
+            dot = document.createElement('div');
+            dot.id = 'cubes-debug-dot';
+            dot.setAttribute('style', 'position:fixed;width:8px;height:8px;border-radius:50%;background:#1e40af;border:2px solid rgba(59,130,246,.6);z-index:10002;pointer-events:none;transform:translate(-50%,-50%);');
+            document.body.appendChild(dot);
+            const label = document.createElement('div');
+            label.id = 'cubes-debug-label';
+            label.setAttribute('style', 'position:fixed;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.1);color:#111;font:12px/1.6 system-ui,sans-serif;z-index:10002;pointer-events:none;transform:translate(8px,-22px);');
+            document.body.appendChild(label);
+
+            document.addEventListener('pointermove', (e) => {
+                dot.style.left = e.clientX + 'px';
+                dot.style.top = e.clientY + 'px';
+                const els = document.elementsFromPoint(e.clientX, e.clientY);
+                const hit = els.find(n => n.closest && n.closest('.floating-cube > g'));
+                const key = hit ? (Array.from(hit.closest('.floating-cube').classList).find(c => c.endsWith('-cube')) || '') : '';
+                const lbl = document.getElementById('cubes-debug-label');
+                if (lbl) {
+                    lbl.style.left = e.clientX + 'px';
+                    lbl.style.top = e.clientY + 'px';
+                    lbl.textContent = key ? `hit: ${key}` : 'hit: none';
+                }
+            }, { passive: true });
+        }
     }
 
     // Initialize SVG cubes on page load
@@ -2379,6 +2617,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const cubesParam = params.get('cubes');
             const debugParam = params.get('debug') || params.get('cubes_debug');
+            const hitParam = params.get('cubes_hit');
 
             if (cubesParam && /^(off|0|false)$/i.test(cubesParam)) {
                 bg.remove();
@@ -2393,6 +2632,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 badge.setAttribute('style', 'position:fixed;right:12px;bottom:12px;padding:6px 10px;border-radius:8px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#1e3a8a;font-weight:700;font-size:11px;z-index:99999;pointer-events:none;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif');
                 badge.textContent = 'Cubes Debug ON';
                 document.body.appendChild(badge);
+            }
+
+            if (hitParam && /^(1|true|on)$/i.test(hitParam)) {
+                try {
+                    installCubesDebugHitboxes();
+                } catch(e) {}
             }
         } catch (e) {}
     })();
