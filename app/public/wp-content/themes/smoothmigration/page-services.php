@@ -31,8 +31,6 @@ get_header();
             <div class="travel-marker-2"></div>
         </div>
         <div class="container">
-            <div class="row align-items-start position-relative">
-                <div class="col-lg-7">
             <?php
             // Curated list of service categories (reduced set)
             $curated_slugs = array('realtor','banking-services','data-and-phone-plans','vehicles','international-moving','insurance');
@@ -185,7 +183,7 @@ get_header();
                         $color = $enhancement ? $enhancement['color'] : 'primary';
 
                     ?>
-                        <div class="col-md-6">
+                        <div class="col-lg-4 col-md-6">
                             <div class="enhanced-service-card animate-on-scroll" style="animation-delay: <?php echo $index * 0.1; ?>s;">
                                 <div class="service-card-header">
                                     <div class="service-icon-modern bg-<?php echo $color; ?>">
@@ -243,20 +241,6 @@ get_header();
                     </div>
                 </div>
             <?php endif; ?>
-                </div>
-                <div class="col-lg-5 d-none d-lg-block">
-                    <!-- Globe positioned within service cards boundaries -->
-                    <?php
-                    $no_globe = isset($_GET['noglobe']) && $_GET['noglobe'] === '1';
-                    if ( ! $no_globe ) : ?>
-                        <div class="services-globe-wrapper" id="services-globe-wrapper">
-                            <div class="services-parallax-globe" id="services-globe-container">
-                                <?php echo do_shortcode('[smooth_globe height="400px" id="smooth-globe-services"]'); ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -572,22 +556,7 @@ get_header();
     transition: transform .2s ease-out, opacity .3s ease-out;
 }
 
-/* Optional: a faint halo behind the globe */
-.services-parallax-globe {
-    position: relative;
-    z-index: 1;
-}
-.services-parallax-globe::before {
-    content: '';
-    position: absolute;
-    inset: -60px;
-    border-radius: 50%;
-    background:
-        conic-gradient(from 0deg at 50% 50%, color-mix(in srgb, var(--secondary-light) 18%, transparent) 0 12%, transparent 12% 100%);
-    filter: blur(20px);
-    opacity: .45;
-    z-index: -1;
-}
+
 
 /* Debug toggle to preview stronger background via ?bg=1 */
 .debug-bg .services-grid::before,
@@ -616,14 +585,10 @@ get_header();
     }
 }
 
-/* Sticky globe spacing within services page */
-.services-sticky-globe {
-    top: calc(var(--sm-topbar-height, 0px) + 80px);
-}
-
-/* Tighten grid container to the left on xl screens */
-@media (min-width: 1200px) {
-    #servicesGrid { padding-right: 1rem; }
+/* Center the services grid on all screen sizes */
+#servicesGrid {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 </style>
 
@@ -681,11 +646,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const p = new URLSearchParams(location.search);
     if (p.get('bg') === '1') document.documentElement.classList.add('debug-bg');
 
-    // Add scroll-enhanced class to globe for better parallax
-    const globeContainer = document.querySelector('.services-parallax-globe');
-    if (globeContainer) {
-        globeContainer.classList.add('scroll-enhanced');
-    }
+
 
     // Add floating elements animation control
     const floatingElements = document.querySelector('.floating-elements');
