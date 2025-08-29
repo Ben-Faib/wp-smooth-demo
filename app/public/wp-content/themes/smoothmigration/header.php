@@ -33,7 +33,7 @@
                 else : ?>
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/smooth-migration-logo.png" alt="" class="header-logo" style="height: 40px; width: auto;">
                 <?php endif; ?>
-                <span class="site-title ms-2" style="font-weight: 600; font-size: 1.25rem;"><?php bloginfo( 'name' ); ?></span>
+
             </a>
             
             <button class="navbar-toggler mobile-menu-trigger" type="button" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +107,7 @@
       else : ?>
           <img src="<?php echo get_template_directory_uri(); ?>/assets/images/smooth-migration-logo.png" alt="" class="mobile-logo">
       <?php endif; ?>
-      <span class="mobile-menu-title" id="mobileNavLabel"><?php bloginfo( 'name' ); ?></span>
+
     </div>
     <button type="button" class="mobile-menu-close" aria-label="Close menu">
       <span class="close-line"></span>
