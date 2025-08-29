@@ -155,7 +155,7 @@ get_header(); ?>
 
             <!-- Center: Realtor Locator (core) -->
             <div class="col-lg-4 col-md-6">
-                <a href="/realtor-form" class="service-card-link">
+                <a href="/realtor-locator" class="service-card-link">
                     <div class="service-card service-card--core interactive-card" aria-describedby="realtor-core-desc">
                         <span class="core-badge">Core</span>
                         <div class="service-illustration" aria-hidden="true"><span class="icon-glow"><?php

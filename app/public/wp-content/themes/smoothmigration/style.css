@@ -292,14 +292,14 @@ section {
 .hero-landing .hero-content { position: relative; z-index: 2; }
 
 /* Realtor Form Page specific styles */
-.realtor-form-wrapper {
+.realtor-locator-wrapper {
   max-width: 100%;
 }
 
 @media (min-width: 992px) {
   /* On desktops keep the form from stretching excessively */
-  .realtor-form-wrapper .forminator-ui,
-  .realtor-form-wrapper form {
+  .realtor-locator-wrapper .forminator-ui,
+  .realtor-locator-wrapper form {
     max-width: 100%;
   }
 }
@@ -310,7 +310,7 @@ section {
 /* ---------------------------- */
 
 /* Realtor section background */
-.realtor-form-section {
+.realtor-locator-section {
   background: var(--bg-light);
 }
 

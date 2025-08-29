@@ -89,7 +89,7 @@ This document provides human-readable summaries and talking points for each part
 
 ### Realtor Referral Form
 - Overview: A simple form to capture your housing needs; we match you with vetted realtors.
-- Link: /realtor-form
+- Link: /realtor-locator
 
 Notes:
 - Replace or augment founding years and details after editorial review.

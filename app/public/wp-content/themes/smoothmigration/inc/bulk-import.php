@@ -604,6 +604,151 @@ function smoothmigration_generate_service_content( string $brand_name ): string 
 }
 
 /**
+ * Import services from a country-level *_context.jsonl file if present in the container path.
+ *
+ * Each JSONL line is expected to look like the user's example with keys:
+ * - text: multi-line string containing sections like Overview:/Why we recommend:/How it helps:/Link:
+ * - metadata: { country, partner, category, widget? }
+ *
+ * Behavior:
+ * - Upsert a `service` per partner (using canonical mapping)
+ * - Assign taxonomy from metadata.category when available
+ * - Set/append region (country)
+ * - Set affiliate URL from Link: in text when present
+ * - Build post_content from the parsed sections; overwrite only if requested or if empty
+ * - Store optional widget HTML (sanitized) into _service_widget_html meta and append to content
+ */
+function smoothmigration_import_services_from_country_jsonl( string $container_path, string $region = '', bool $overwrite = false ): array {
+    $result = array(
+        'success' => true,
+        'message' => '',
+        'processed' => 0,
+        'errors' => array(),
+        'debug' => '',
+    );
+
+    // Find *_context.jsonl in the container folder
+    $pattern = rtrim( $container_path, '/\\' ) . '/*_context.jsonl';
+    $matches = glob( $pattern );
+
+    if ( empty( $matches ) ) {
+        $result['message'] = 'No JSONL context file found.';
+        return $result;
+    }
+
+    $jsonl_path = $matches[0];
+    $lines_processed = 0;
+
+    $fh = @fopen( $jsonl_path, 'r' );
+    if ( ! $fh ) {
+        return array( 'success' => false, 'message' => 'Could not open JSONL file for reading.', 'processed' => 0, 'errors' => array(), 'debug' => '' );
+    }
+
+    while ( ( $line = fgets( $fh ) ) !== false ) {
+        $line = trim( $line );
+        if ( $line === '' ) { continue; }
+        $row = json_decode( $line, true );
+        if ( ! is_array( $row ) ) { continue; }
+
+        $text     = (string) ( $row['text'] ?? '' );
+        $meta     = (array)  ( $row['metadata'] ?? array() );
+        $partner  = trim( (string) ( $meta['partner'] ?? '' ) );
+        $country  = trim( (string) ( $meta['country'] ?? $region ) );
+        $category = trim( (string) ( $meta['category'] ?? '' ) );
+        $widget   = isset( $meta['widget'] ) ? (string) $meta['widget'] : '';
+
+        if ( $partner === '' ) { continue; }
+
+        // Extract sections from `$text`
+        $overview = '';
+        $why      = '';
+        $how      = '';
+        $link     = '';
+
+        if ( preg_match( '/Overview:\s*(.+?)(?:\n[A-Z][^\n]+:|\Z)/si', $text, $m ) ) {
+            $overview = trim( $m[1] );
+        }
+        if ( preg_match( '/Why\s+we\s+recommend:\s*(.+?)(?:\n[A-Z][^\n]+:|\Z)/si', $text, $m ) ) {
+            $why = trim( $m[1] );
+        }
+        if ( preg_match( '/How\s+it\s+helps:\s*(.+?)(?:\n[A-Z][^\n]+:|\Z)/si', $text, $m ) ) {
+            $how = trim( $m[1] );
+        }
+        if ( preg_match( '/Link:\s*([^\s]+)/i', $text, $m ) ) {
+            $link = esc_url_raw( trim( $m[1] ) );
+        }
+
+        // Canonical brand mapping and service type
+        list( $brand_name, $brand_slug ) = smoothmigration_enhanced_brand_mapping( $partner );
+        $type_slug = $category ? smoothmigration_map_service_type_folder( $category ) : smoothmigration_guess_type_from_filename( $brand_name );
+
+        // Upsert service
+        $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug );
+        if ( ! $service_id ) {
+            $result['errors'][] = 'Failed to upsert service for partner: ' . $brand_name;
+            continue;
+        }
+
+        // Build content from sections
+        $content_parts = array();
+        if ( $overview !== '' ) { $content_parts[] = '<h2>Overview</h2><p>' . wp_kses_post( $overview ) . '</p>'; }
+        if ( $why !== '' )      { $content_parts[] = '<h3>Why we recommend</h3><p>' . wp_kses_post( $why ) . '</p>'; }
+        if ( $how !== '' )      { $content_parts[] = '<h3>How it helps</h3><p>' . wp_kses_post( $how ) . '</p>'; }
+
+        // Optional widget (limited allowed tags/attrs)
+        if ( $widget ) {
+            $allowed = array(
+                'object' => array( 'data' => true, 'width' => true, 'height' => true, 'type' => true, 'title' => true, 'class' => true ),
+                'param'  => array( 'name' => true, 'value' => true ),
+                'embed'  => array( 'src' => true, 'type' => true, 'width' => true, 'height' => true, 'allowfullscreen' => true, 'allowscriptaccess' => true ),
+                'iframe' => array( 'src' => true, 'width' => true, 'height' => true, 'frameborder' => true, 'allow' => true, 'allowfullscreen' => true, 'title' => true, 'class' => true ),
+            );
+            $widget_safe = wp_kses( $widget, $allowed );
+            if ( $widget_safe ) {
+                update_post_meta( $service_id, '_service_widget_html', $widget_safe );
+            }
+        }
+
+        $new_content = implode( "\n", $content_parts );
+
+        // Respect overwrite flag or only fill if empty
+        $existing = get_post( $service_id );
+        $existing_content = $existing ? (string) $existing->post_content : '';
+        if ( $overwrite || $existing_content === '' ) {
+            wp_update_post( array( 'ID' => $service_id, 'post_content' => $new_content ) );
+        }
+
+        // Affiliate URL from JSONL text has precedence when present
+        if ( $link ) {
+            update_post_meta( $service_id, '_service_affiliate_url', $link );
+        }
+
+        // Ensure taxonomy assignment and regions
+        if ( $type_slug ) {
+            wp_set_object_terms( $service_id, $type_slug, 'service_type', false );
+        }
+        if ( $country ) {
+            $existing_regions = (string) get_post_meta( $service_id, '_service_regions', true );
+            $regions_array = array_filter( array_map( 'trim', explode( ',', $existing_regions ) ) );
+            if ( ! in_array( $country, $regions_array, true ) ) {
+                $regions_array[] = $country;
+                update_post_meta( $service_id, '_service_regions', implode( ', ', $regions_array ) );
+            }
+        }
+
+        $lines_processed++;
+    }
+
+    fclose( $fh );
+
+    $result['processed'] = $lines_processed;
+    $result['message'] = 'Processed ' . intval( $lines_processed ) . ' JSONL records.';
+    $result['debug'] = 'JSONL file: ' . basename( $jsonl_path );
+
+    return $result;
+}
+
+/**
  * Handle zip file upload and extraction
  */
 function smoothmigration_handle_zip_upload( array $zip_file, string $region = '' ): array {
@@ -677,6 +822,19 @@ function smoothmigration_debug_folder_structure( string $base_path ): array {
     // Detect structure type
     $structure = smoothmigration_detect_folder_structure( $container_path );
     $debug_info[] = "Structure detected: " . $structure['type'];
+
+    // JSONL presence summary
+    $jsonl_matches = glob( rtrim( $container_path, '/\\' ) . '/*_context.jsonl' );
+    if ( ! empty( $jsonl_matches ) ) {
+        $debug_info[] = "JSONL found: " . basename( $jsonl_matches[0] );
+        // Count lines quickly
+        $line_count = 0;
+        $fh = @fopen( $jsonl_matches[0], 'r' );
+        if ( $fh ) { while ( fgets( $fh ) !== false ) { $line_count++; } fclose( $fh ); }
+        $debug_info[] = "JSONL records: " . $line_count;
+    } else {
+        $debug_info[] = "JSONL found: none";
+    }
     
     if ( $structure['type'] === '3-layer' ) {
         // Analyze brand folders directly
@@ -959,6 +1117,17 @@ South Africa/
                         <p class="description">Optional: Specify the region/country for these services to enable geographic targeting.</p>
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="overwrite_content">Overwrite Content</label>
+                    </th>
+                    <td>
+                        <label>
+                            <input type="checkbox" name="overwrite_content" id="overwrite_content" value="1">
+                            Overwrite existing service content with JSONL content (if JSONL is present)
+                        </label>
+                    </td>
+                </tr>
             </table>
             
             <p class="submit">
@@ -1007,6 +1176,7 @@ South Africa/
 function smoothmigration_handle_bulk_import_submission(): array {
     $method = sanitize_text_field( $_POST['import_method'] ?? 'zip' );
     $region = sanitize_text_field( $_POST['region'] ?? '' );
+    $overwrite = ! empty( $_POST['overwrite_content'] );
     
     if ( $method === 'zip' ) {
         if ( ! isset( $_FILES['zip_file'] ) || $_FILES['zip_file']['error'] !== UPLOAD_ERR_OK ) {
@@ -1023,8 +1193,22 @@ function smoothmigration_handle_bulk_import_submission(): array {
         $extracted_path = $zip_result['extracted_path'];
         $import_path = smoothmigration_find_brand_container_folder( $extracted_path );
         
-        // Process the folder structure
-        $results = smoothmigration_process_folder_structure( $import_path, $region );
+        // First, import JSONL-driven content if present
+        $jsonl_results = smoothmigration_import_services_from_country_jsonl( $import_path, $region, $overwrite );
+
+        // Then, process the folder structure for logos
+        $folder_results = smoothmigration_process_folder_structure( $import_path, $region );
+
+        // Merge results for display
+        $results = array(
+            'success' => ( ! empty( $jsonl_results['success'] ) && ! empty( $folder_results['success'] ) ),
+            'message' => trim( ( $jsonl_results['message'] ? '[JSONL] ' . $jsonl_results['message'] : '' ) . ' ' . ( $folder_results['message'] ? '[LOGOS] ' . $folder_results['message'] : '' ) ),
+            'processed' => intval( $jsonl_results['processed'] ?? 0 ) + intval( $folder_results['processed'] ?? 0 ),
+            'errors' => array_merge( $jsonl_results['errors'] ?? array(), $folder_results['errors'] ?? array() ),
+            'services_created' => $folder_results['services_created'] ?? array(),
+            'structure_type' => $folder_results['structure_type'] ?? '',
+            'debug' => trim( ( $jsonl_results['debug'] ?? '' ) . "\n" . ( $folder_results['debug'] ?? '' ) ),
+        );
         
         // Clean up temporary files
         smoothmigration_cleanup_temp_files( $extracted_path );

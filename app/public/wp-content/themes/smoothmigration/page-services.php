@@ -171,7 +171,7 @@ get_header();
                 <div class="row g-4" id="servicesGrid">
                     <?php
                     foreach ( $service_types as $index => $type ) :
-                        $term_link = isset( $type->__virtual ) ? '/realtor-form' : get_term_link( $type );
+                        $term_link = isset( $type->__virtual ) ? '/realtor-locator' : get_term_link( $type );
                         $enhancement = $service_enhancements[$type->slug] ?? null;
 
                         // Use enhanced data if available, otherwise fallback to original

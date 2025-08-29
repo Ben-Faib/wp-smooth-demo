@@ -59,6 +59,15 @@ $term_name = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[
 				<div class="col-lg-8">
                     <article class="service-article">
                         <?php the_content(); ?>
+                        <?php $svc_widget = get_post_meta( get_the_ID(), '_service_widget_html', true ); if ( $svc_widget ) : ?>
+                        <hr class="my-5" />
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body">
+                                <h2 class="h5 mb-3">Booking / Price Widget</h2>
+                                <div class="service-embed"><?php echo $svc_widget; ?></div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
                         <hr class="my-5" />
                         <h2 id="how" class="h4">How It Helps Relocators</h2>
                         <ul>
