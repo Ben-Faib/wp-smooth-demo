@@ -186,6 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
     }
+
+    // Sheen animation removed
 });
 
 // Global functions for landing page

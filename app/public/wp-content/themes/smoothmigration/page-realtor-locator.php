@@ -211,7 +211,7 @@ get_header();
                         <div class="benefits-list">
                             <div class="benefit-item">
                                 <div class="benefit-icon">
-                                    <i class="fas fa-certificate"></i>
+                                    <span class="benefit-emoji" aria-hidden="true">✅</span>
                                 </div>
                                 <div class="benefit-content">
                                     <h4>Vetted Professionals</h4>
@@ -221,7 +221,7 @@ get_header();
                             
                             <div class="benefit-item">
                                 <div class="benefit-icon">
-                                    <i class="fas fa-globe"></i>
+                                    <span class="benefit-emoji" aria-hidden="true">🌍</span>
                                 </div>
                                 <div class="benefit-content">
                                     <h4>International Expertise</h4>
@@ -231,7 +231,7 @@ get_header();
                             
                             <div class="benefit-item">
                                 <div class="benefit-icon">
-                                    <i class="fas fa-video"></i>
+                                    <span class="benefit-emoji" aria-hidden="true">🎥</span>
                                 </div>
                                 <div class="benefit-content">
                                     <h4>Remote-Friendly Service</h4>
@@ -241,7 +241,7 @@ get_header();
                             
                             <div class="benefit-item">
                                 <div class="benefit-icon">
-                                    <i class="fas fa-shield-alt"></i>
+                                    <span class="benefit-emoji" aria-hidden="true">🛡️</span>
                                 </div>
                                 <div class="benefit-content">
                                     <h4>Quality Guarantee</h4>
@@ -901,11 +901,12 @@ get_header();
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
     color: white;
     flex-shrink: 0;
     box-shadow: var(--shadow-md);
 }
+
+.benefit-emoji { font-size: 24px; line-height: 1; display: block; }
 
 .benefit-content h4 {
     color: var(--text-dark);

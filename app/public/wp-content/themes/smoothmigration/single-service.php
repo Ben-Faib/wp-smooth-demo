@@ -13,6 +13,13 @@ $brand_color = get_post_meta( get_the_ID(), '_service_brand_color', true ) ?: '#
 $company_url = get_post_meta( get_the_ID(), '_service_company_url', true );
 $service_terms = get_the_terms( get_the_ID(), 'service_type' );
 $term_name = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->name : '';
+$term_slug = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->slug : '';
+
+// Determine appropriate button text based on service type
+$button_text = 'Continue to Partner';
+if (strpos($term_slug, 'insurance') !== false) {
+    $button_text = 'Get a Quote';
+}
 ?>
 
 <main id="main" class="site-main service-single" role="main">
@@ -111,7 +118,7 @@ $term_name = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[
 								<li>Seamless fit in our relocation workflow</li>
 							</ul>
 							<?php if ( $affiliate_url ) : ?>
-								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary w-100 mt-3">Use Partner Link</a>
+								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary w-100 mt-3"><?php echo esc_html( $button_text ); ?></a>
 							<?php endif; ?>
 						</div>
 					</div>
@@ -136,7 +143,7 @@ $term_name = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[
             <strong><?php the_title(); ?></strong>
             <div class="d-flex gap-2">
                 <?php if ( $affiliate_url ) : ?>
-                <a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary">Use Partner Link</a>
+                <a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary"><?php echo esc_html( $button_text ); ?></a>
                 <?php endif; ?>
                 <a href="/contact" class="btn btn-outline-primary">Talk to Our Team</a>
             </div>

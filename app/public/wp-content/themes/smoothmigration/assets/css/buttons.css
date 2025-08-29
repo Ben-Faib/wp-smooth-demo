@@ -460,18 +460,14 @@
    Sprint 2.2 - Advanced Button Micro-interactions
    ======================================== */
 
-/* Magnetic hover effect for primary CTAs */
+/* Magnetic hover effect (opt-in via data attribute) */
 @media (hover: hover) and (pointer: fine) {
-  .btn-primary,
-  .btn-cta,
   .btn[data-magnetic="true"] {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform-style: preserve-3d;
     position: relative;
   }
   
-  .btn-primary:hover:not(.loading),
-  .btn-cta:hover:not(.loading),
   .btn[data-magnetic="true"]:hover:not(.loading) {
     will-change: transform;
     transition: all 0.15s ease-out;
@@ -823,8 +819,6 @@ a.social-link:focus-visible {
   }
   
   /* Disable magnetic effects on touch devices */
-  .btn-primary,
-  .btn-cta,
   .btn[data-magnetic="true"] {
     transition: background-color 0.2s ease, 
                 box-shadow 0.2s ease, 
@@ -860,8 +854,6 @@ a.social-link:focus-visible {
   }
   
   /* Reduce magnetic effects on mobile */
-  .btn-primary:hover:not(.loading),
-  .btn-cta:hover:not(.loading),
   .btn[data-magnetic="true"]:hover:not(.loading) {
     transform: none;
   }

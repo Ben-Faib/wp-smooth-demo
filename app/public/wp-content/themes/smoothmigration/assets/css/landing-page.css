@@ -1605,6 +1605,145 @@ html {
     }
 }
 
+/* Sticky Consult Toast (80/20 layout with dedicated close area) */
+.consult-toast {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: var(--bs-toast-border-radius, 0.75rem);
+    /* Glassmorphism without gradients */
+    background: rgba(255,255,255,0.20);
+    -webkit-backdrop-filter: saturate(200%) blur(22px);
+    backdrop-filter: saturate(200%) blur(22px);
+    box-shadow: 0 12px 34px rgba(0,0,0,0.18);
+}
+
+/* Remove gradient overlay */
+.consult-toast::before { display: none; }
+
+.consult-toast-body {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(64px, 1fr);
+    align-items: stretch;
+    padding: 0; /* override .toast-body default to allow full-height close area */
+}
+
+.consult-toast-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 12px 12px 14px;
+    min-width: 0; /* allow text to truncate gracefully */
+}
+
+/* Sheen animation removed */
+
+.consult-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.consult-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    color: #ffffff;
+}
+
+.consult-title {
+    color: #ffffff;
+}
+
+.consult-subtitle { color: rgba(255,255,255,0.85); }
+
+.consult-cta {
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.consult-toast-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 48px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    border-left: 1px solid rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    color: #ffffff; /* for platforms that use currentColor */
+}
+
+.consult-x {
+    font-size: 22px;
+    line-height: 1;
+    color: #ffffff; /* default white X */
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.consult-toast-right:hover,
+.consult-toast-right:focus {
+    background: rgba(0,0,0,0.06); /* glass-friendly hover */
+}
+
+.consult-toast-right:hover .consult-x,
+.consult-toast-right:focus .consult-x {
+    color: #dc3545; /* red X on hover/focus */
+}
+
+.consult-toast-right:active .consult-x {
+    transform: scale(0.95);
+}
+
+.consult-toast-right:focus-visible {
+    outline: 3px solid var(--accent-color, #2563eb);
+    outline-offset: -3px; /* keep outline inside the button area */
+}
+
+/* Support reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .consult-toast-right,
+    .consult-x {
+        transition: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .consult-toast-right:hover,
+    .consult-toast-right:focus {
+        background: #d1d5db;
+    }
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .consult-toast {
+        background: rgba(255,255,255,0.98);
+        border: 1px solid var(--border-light, #e6e8eb);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    }
+}
+
+/* Dark mode refinement for glass */
+@media (prefers-color-scheme: dark) {
+    .consult-toast {
+        background: rgba(17,24,39,0.55);
+        border-color: rgba(255,255,255,0.18);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+    .consult-title { color: #F9FAFB; }
+    .consult-subtitle { color: rgba(249,250,251,0.85); }
+    .consult-toast-right { border-left-color: rgba(255,255,255,0.12); }
+    .consult-toast-right:hover,
+    .consult-toast-right:focus { background: rgba(255,255,255,0.06); }
+    .consult-x { color: #ffffff; }
+}
+
 /* ========================================
    Sprint 2.1 - Enhanced Counter Animations
    ======================================== */

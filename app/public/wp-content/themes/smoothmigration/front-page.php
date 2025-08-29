@@ -410,15 +410,19 @@ get_header(); ?>
 
 <!-- Sticky consult box -->
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
-    <div class="toast show shadow" role="status" aria-live="polite" aria-atomic="true">
-        <div class="toast-body d-flex align-items-center gap-3">
-            <div class="flex-shrink-0" aria-hidden="true"><?php echo sm_icon('comment-dots', 'solid', 'text-primary icon'); ?></div>
-            <div>
-                <strong>Consulting services available</strong>
-                <div class="small text-muted">Talk to a specialist today</div>
+    <div class="toast show shadow consult-toast" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-body consult-toast-body">
+            <div class="consult-toast-left">
+                <div class="consult-icon" aria-hidden="true"><?php echo sm_icon('comment-dots', 'solid', 'text-primary'); ?></div>
+                <div class="consult-copy">
+                    <div class="consult-title"><strong>Consulting services available</strong></div>
+                    <div class="consult-subtitle small text-muted">Talk to a specialist today</div>
+                </div>
+                <a class="btn btn-primary btn-sm consult-cta" href="/contact">Book now</a>
             </div>
-            <a class="btn btn-primary btn-sm" href="/contact">Book now</a>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Dismiss"></button>
+            <button type="button" class="consult-toast-right" data-bs-dismiss="toast" aria-label="Dismiss consulting services offer" title="Dismiss">
+                <span class="consult-x" aria-hidden="true">&times;</span>
+            </button>
         </div>
     </div>
     <script>document.addEventListener('DOMContentLoaded',function(){var t=document.querySelector('.toast'); if(t&&bootstrap?.Toast){ new bootstrap.Toast(t,{autohide:false}).show(); }});</script>

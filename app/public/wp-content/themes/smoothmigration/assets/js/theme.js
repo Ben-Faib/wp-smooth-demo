@@ -463,6 +463,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
 
+        // Graceful mobile theme toggle (no-op if toggle not present)
+        setupMobileThemeToggle() {
+            const toggles = this.mobileMenu.querySelectorAll('.mobile-theme-toggle, .theme-toggle, [data-action="toggle-theme"]');
+            if (!toggles.length) {
+                // Initialize from saved preference even if no toggle exists
+                try {
+                    const saved = localStorage.getItem('sm-theme');
+                    if (saved) document.documentElement.setAttribute('data-theme', saved);
+                } catch(e) {}
+                return;
+            }
+
+            // Apply saved preference on load
+            try {
+                const saved = localStorage.getItem('sm-theme');
+                if (saved) document.documentElement.setAttribute('data-theme', saved);
+            } catch(e) {}
+
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const root = document.documentElement;
+                    const current = root.getAttribute('data-theme');
+                    const next = current === 'dark' ? 'light' : 'dark';
+                    root.setAttribute('data-theme', next);
+                    try { localStorage.setItem('sm-theme', next); } catch(e) {}
+                });
+            });
+        }
+
+
 
         setupKeyboardNavigation() {
             this.mobileMenu.addEventListener('keydown', (e) => {
@@ -859,7 +890,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sprint 2.2 - Enhanced Button Micro-interactions System
     class AdvancedButtonInteractions {
         constructor() {
-            this.magneticButtons = document.querySelectorAll('.btn-primary, .btn-cta, .btn[data-magnetic="true"]');
+            this.magneticButtons = document.querySelectorAll('.btn[data-magnetic="true"]');
             this.allButtons = document.querySelectorAll('.btn');
             this.setupMagneticEffect();
             this.setupEnhancedRipples();

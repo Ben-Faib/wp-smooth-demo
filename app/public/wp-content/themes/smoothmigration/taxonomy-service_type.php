@@ -224,9 +224,11 @@ $term = get_queried_object();
                         $logo_src = '';
                         if ( $logo_html && preg_match('/src=\"([^\"]+)\"/i', $logo_html, $m) ) { $logo_src = $m[1]; }
                         $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words( strip_tags( get_the_content() ), 24 );
+                        $service_terms = get_the_terms( get_the_ID(), 'service_type' );
+                        $service_type_slug = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->slug : '';
                     ?>
                     <div class="col-lg-12">
-                        <div class="card h-100 shadow-sm service-list-card" data-title="<?php echo esc_attr( get_the_title() ); ?>" data-excerpt="<?php echo esc_attr( $excerpt ); ?>" data-logo="<?php echo esc_url( $logo_src ); ?>" data-link="<?php echo esc_url( get_permalink() ); ?>" data-affiliate="<?php echo esc_url( $affiliate ?: '' ); ?>">
+                        <div class="card h-100 shadow-sm service-list-card" data-title="<?php echo esc_attr( get_the_title() ); ?>" data-excerpt="<?php echo esc_attr( $excerpt ); ?>" data-logo="<?php echo esc_url( $logo_src ); ?>" data-link="<?php echo esc_url( get_permalink() ); ?>" data-affiliate="<?php echo esc_url( $affiliate ?: '' ); ?>" data-service-type="<?php echo esc_attr( $service_type_slug ); ?>">
                             <div class="card-body d-flex align-items-center justify-content-between flex-wrap gap-3">
                                 <div class="d-flex align-items-center gap-3">
                                     <?php echo $logo_html ?: ''; ?>
@@ -278,7 +280,7 @@ $term = get_queried_object();
             <div class="modal-footer d-flex justify-content-between">
 
                 <div class="d-flex gap-2">
-                    <a id="qvAffiliate" href="#" target="_blank" rel="nofollow noopener" class="btn btn-primary">Use Partner Link</a>
+                    <a id="qvAffiliate" href="#" target="_blank" rel="nofollow noopener" class="btn btn-primary">Explore Partner Services</a>
                     <a id="qvLearn" href="#" class="btn btn-outline-primary">Learn More</a>
                 </div>
             </div>
@@ -322,11 +324,20 @@ document.addEventListener('DOMContentLoaded', function(){
             const logo = card.dataset.logo;
             const link = card.dataset.link;
             const affiliate = card.dataset.affiliate || link;
+            const serviceType = card.dataset.serviceType || '';
+
+            // Determine button text based on service type
+            let buttonText = 'Explore Partner Services';
+            if (serviceType.includes('insurance')) {
+                buttonText = 'Get a Quote';
+            }
+
             document.getElementById('qvTitle').textContent = title;
             const logoEl = document.getElementById('qvLogo');
             if (logo){ logoEl.src = logo; logoEl.style.display='block'; } else { logoEl.style.display='none'; }
             document.getElementById('qvExcerpt').textContent = excerpt || '';
             document.getElementById('qvAffiliate').href = affiliate;
+            document.getElementById('qvAffiliate').textContent = buttonText;
             document.getElementById('qvLearn').href = link;
             if (bsModal) { bsModal.show(); }
         });
