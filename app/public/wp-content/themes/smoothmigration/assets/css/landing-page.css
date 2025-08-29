@@ -8,10 +8,10 @@
     color: white;
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: 92vh; /* reduce dead space */
     display: flex;
-    align-items: center;
-    padding-top: 80px; /* Account for fixed header */
+    align-items: flex-start; /* top-align content */
+    padding-top: 72px; /* slightly less to lift content */
 }
 
 .hero-map-container {

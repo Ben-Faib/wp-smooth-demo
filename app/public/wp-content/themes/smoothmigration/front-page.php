@@ -15,7 +15,7 @@ get_header(); ?>
     
     <!-- World map moved to right column; service cubes relocated below hero -->
     <div class="container">
-        <div class="row align-items-center min-vh-100">
+        <div class="row align-items-start min-vh-75">
             <div class="col-lg-8">
                 <div class="hero-content">
                     <h1 class="hero-headline">Your international relocation,<br>made simple.</h1>

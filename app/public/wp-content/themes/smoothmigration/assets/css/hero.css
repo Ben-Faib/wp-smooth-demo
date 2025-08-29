@@ -3,10 +3,10 @@
   background: var(--gradient-hero), 
               url('../images/pexels-vlada-karpovich-7368191.jpg') center/cover;
   background-blend-mode: overlay;
-  padding-top: 8rem; /* space for fixed header */
-  min-height: 100vh;
+  padding-top: 5.5rem; /* space for fixed header; reduced to lift content */
+  min-height: 92vh; /* slightly shorter to reduce dead space */
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* top-align content rather than vertically centering */
   color: #fff;
   position: relative;
   overflow: hidden;
