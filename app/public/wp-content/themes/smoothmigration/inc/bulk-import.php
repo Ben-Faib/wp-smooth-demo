@@ -369,8 +369,8 @@ function smoothmigration_process_brand_folder( string $folder_path, string $fold
 /**
  * Find or create a service post
  */
-function smoothmigration_find_or_create_service( string $brand_name, string $brand_slug, string $region = '', string $service_type_override = '' ): int {
-    // First try to find existing service by canonical slug
+function smoothmigration_find_or_create_service( string $brand_name, string $brand_slug, string $region = '', string $service_type_override = '', bool $create_if_missing = true ): int {
+    // 1) Prefer canonical meta lookup
     $existing_posts = get_posts( array(
         'post_type' => 'service',
         'posts_per_page' => 1,
@@ -379,41 +379,105 @@ function smoothmigration_find_or_create_service( string $brand_name, string $bra
         ),
         'fields' => 'ids'
     ) );
-    
+
     if ( ! empty( $existing_posts ) ) {
         $post_id = (int) $existing_posts[0];
-        
-        // Update region if provided
+
+        // Append region if provided
         if ( $region ) {
             $existing_regions = get_post_meta( $post_id, '_service_regions', true );
-            $regions_array = $existing_regions ? explode( ',', $existing_regions ) : array();
-            
-            if ( ! in_array( $region, $regions_array ) ) {
+            $regions_array = $existing_regions ? array_map( 'trim', explode( ',', $existing_regions ) ) : array();
+            if ( ! in_array( $region, $regions_array, true ) ) {
                 $regions_array[] = $region;
-                update_post_meta( $post_id, '_service_regions', implode( ',', $regions_array ) );
+                update_post_meta( $post_id, '_service_regions', implode( ', ', $regions_array ) );
             }
         }
-        
+
+        // Ensure type set if provided and currently missing
+        if ( $service_type_override ) {
+            $current_types = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'ids' ) );
+            if ( empty( $current_types ) ) {
+                wp_set_object_terms( $post_id, $service_type_override, 'service_type', false );
+            }
+        }
+
         return $post_id;
     }
-    
-    // Create new service
+
+    // 2) Fallback: find by slug (existing post without canonical meta)
+    $by_slug = get_page_by_path( $brand_slug, OBJECT, 'service' );
+    if ( $by_slug ) {
+        $post_id = (int) $by_slug->ID;
+        update_post_meta( $post_id, '_service_canonical', $brand_slug );
+
+        if ( $region ) {
+            $existing_regions = get_post_meta( $post_id, '_service_regions', true );
+            $regions_array = $existing_regions ? array_map( 'trim', explode( ',', $existing_regions ) ) : array();
+            if ( ! in_array( $region, $regions_array, true ) ) {
+                $regions_array[] = $region;
+                update_post_meta( $post_id, '_service_regions', implode( ', ', $regions_array ) );
+            }
+        }
+
+        if ( $service_type_override ) {
+            $current_types = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'ids' ) );
+            if ( empty( $current_types ) ) {
+                wp_set_object_terms( $post_id, $service_type_override, 'service_type', false );
+            }
+        }
+
+        return $post_id;
+    }
+
+    // 3) Fallback: find by title (case-normalized)
+    $by_title = get_page_by_title( $brand_name, OBJECT, 'service' );
+    if ( $by_title ) {
+        $post_id = (int) $by_title->ID;
+
+        // Normalize slug and store canonical
+        wp_update_post( array( 'ID' => $post_id, 'post_name' => $brand_slug ) );
+        update_post_meta( $post_id, '_service_canonical', $brand_slug );
+
+        if ( $region ) {
+            $existing_regions = get_post_meta( $post_id, '_service_regions', true );
+            $regions_array = $existing_regions ? array_map( 'trim', explode( ',', $existing_regions ) ) : array();
+            if ( ! in_array( $region, $regions_array, true ) ) {
+                $regions_array[] = $region;
+                update_post_meta( $post_id, '_service_regions', implode( ', ', $regions_array ) );
+            }
+        }
+
+        if ( $service_type_override ) {
+            $current_types = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'ids' ) );
+            if ( empty( $current_types ) ) {
+                wp_set_object_terms( $post_id, $service_type_override, 'service_type', false );
+            }
+        }
+
+        return $post_id;
+    }
+
+    // 4) Stop here when not allowed to create (e.g., JSONL-only enrichment)
+    if ( ! $create_if_missing ) {
+        return 0;
+    }
+
+    // 5) Create new service
     $type_slug = $service_type_override ?: smoothmigration_guess_type_from_filename( $brand_name );
-    
+
     // Get known affiliate links
     $affiliate_map = smoothmigration_get_affiliate_links();
     $affiliate_url = '';
-    
     foreach ( $affiliate_map as $brand => $url ) {
         if ( strtolower( $brand_name ) === strtolower( $brand ) ) {
             $affiliate_url = $url;
             break;
         }
     }
-    
+
     // Rich content for service
     $content = smoothmigration_generate_service_content( $brand_name );
-    
+
     $post_data = array(
         'post_title' => $brand_name,
         'post_content' => $content,
@@ -421,27 +485,29 @@ function smoothmigration_find_or_create_service( string $brand_name, string $bra
         'post_type' => 'service',
         'post_name' => $brand_slug,
     );
-    
+
     $post_id = wp_insert_post( $post_data );
-    
+
     if ( is_wp_error( $post_id ) || ! $post_id ) {
         return 0;
     }
-    
+
     // Set taxonomy
-    wp_set_object_terms( $post_id, $type_slug, 'service_type', false );
-    
+    if ( $type_slug ) {
+        wp_set_object_terms( $post_id, $type_slug, 'service_type', false );
+    }
+
     // Set metadata
     update_post_meta( $post_id, '_service_canonical', $brand_slug );
-    
+
     if ( $affiliate_url ) {
         update_post_meta( $post_id, '_service_affiliate_url', esc_url_raw( $affiliate_url ) );
     }
-    
+
     if ( $region ) {
         update_post_meta( $post_id, '_service_regions', $region );
     }
-    
+
     return $post_id;
 }
 
@@ -682,10 +748,10 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
         list( $brand_name, $brand_slug ) = smoothmigration_enhanced_brand_mapping( $partner );
         $type_slug = $category ? smoothmigration_map_service_type_folder( $category ) : smoothmigration_guess_type_from_filename( $brand_name );
 
-        // Upsert service
-        $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug );
+        // Find existing service only (do not create from JSONL)
+        $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug, false );
         if ( ! $service_id ) {
-            $result['errors'][] = 'Failed to upsert service for partner: ' . $brand_name;
+            $result['errors'][] = 'Skipped JSONL update; service not initialized from folders: ' . $brand_name;
             continue;
         }
 
@@ -725,7 +791,10 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
 
         // Ensure taxonomy assignment and regions
         if ( $type_slug ) {
-            wp_set_object_terms( $service_id, $type_slug, 'service_type', false );
+            $current_types = wp_get_post_terms( $service_id, 'service_type', array( 'fields' => 'ids' ) );
+            if ( $overwrite || empty( $current_types ) ) {
+                wp_set_object_terms( $service_id, $type_slug, 'service_type', false );
+            }
         }
         if ( $country ) {
             $existing_regions = (string) get_post_meta( $service_id, '_service_regions', true );
@@ -1192,22 +1261,22 @@ function smoothmigration_handle_bulk_import_submission(): array {
         // Find the main folder in extracted content
         $extracted_path = $zip_result['extracted_path'];
         $import_path = smoothmigration_find_brand_container_folder( $extracted_path );
-        
-        // First, import JSONL-driven content if present
-        $jsonl_results = smoothmigration_import_services_from_country_jsonl( $import_path, $region, $overwrite );
 
-        // Then, process the folder structure for logos
+        // First, process the folder structure to initialize services (logos + slugs/types)
         $folder_results = smoothmigration_process_folder_structure( $import_path, $region );
+
+        // Then, enrich with JSONL-driven content if present (no new services created)
+        $jsonl_results = smoothmigration_import_services_from_country_jsonl( $import_path, $region, $overwrite );
 
         // Merge results for display
         $results = array(
-            'success' => ( ! empty( $jsonl_results['success'] ) && ! empty( $folder_results['success'] ) ),
-            'message' => trim( ( $jsonl_results['message'] ? '[JSONL] ' . $jsonl_results['message'] : '' ) . ' ' . ( $folder_results['message'] ? '[LOGOS] ' . $folder_results['message'] : '' ) ),
-            'processed' => intval( $jsonl_results['processed'] ?? 0 ) + intval( $folder_results['processed'] ?? 0 ),
-            'errors' => array_merge( $jsonl_results['errors'] ?? array(), $folder_results['errors'] ?? array() ),
+            'success' => ( ! empty( $folder_results['success'] ) && ! empty( $jsonl_results['success'] ) ),
+            'message' => trim( ( $folder_results['message'] ? '[LOGOS] ' . $folder_results['message'] : '' ) . ' ' . ( $jsonl_results['message'] ? '[JSONL] ' . $jsonl_results['message'] : '' ) ),
+            'processed' => intval( $folder_results['processed'] ?? 0 ) + intval( $jsonl_results['processed'] ?? 0 ),
+            'errors' => array_merge( $folder_results['errors'] ?? array(), $jsonl_results['errors'] ?? array() ),
             'services_created' => $folder_results['services_created'] ?? array(),
             'structure_type' => $folder_results['structure_type'] ?? '',
-            'debug' => trim( ( $jsonl_results['debug'] ?? '' ) . "\n" . ( $folder_results['debug'] ?? '' ) ),
+            'debug' => trim( ( $folder_results['debug'] ?? '' ) . "\n" . ( $jsonl_results['debug'] ?? '' ) ),
         );
         
         // Clean up temporary files
