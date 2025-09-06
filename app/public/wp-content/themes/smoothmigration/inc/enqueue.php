@@ -98,7 +98,7 @@ function smoothmigration_enqueue_assets() {
     // Quick View Assets (only load if the quick view modal is likely to be used)
     if ( is_page( 'services' ) || is_singular( 'service' ) || is_tax( 'service_type' ) ) {
         wp_enqueue_style( 'quick-view', get_template_directory_uri() . '/assets/css/quick-view.css', array(), $file_ver( 'assets/css/quick-view.css' ) );
-        wp_enqueue_script( 'quick-view-js', get_template_directory_uri() . '/assets/js/quick-view.js', array( 'jquery' ), $file_ver( 'assets/js/quick-view.js' ), true );
+        wp_enqueue_script( 'quick-view-js', get_template_directory_uri() . '/assets/js/quick-view.js', array( 'bootstrap' ), $file_ver( 'assets/js/quick-view.js' ), true );
         
         // Pass data to JavaScript
         wp_localize_script( 'quick-view-js', 'smoothmigration', array(

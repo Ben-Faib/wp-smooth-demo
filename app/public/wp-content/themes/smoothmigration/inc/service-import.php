@@ -49,6 +49,7 @@ function smoothmigration_guess_type_from_filename( string $filename ): string {
         'bank' => 'banking-services',
         'homeloan' => 'banking-services',
         'home loan' => 'banking-services',
+        'ownr' => 'banking-services',
 
         // Data and Phone Plans
         'verizon' => 'data-and-phone-plans',
@@ -110,6 +111,7 @@ function smoothmigration_map_canonical_brand( string $text ): array {
         'Remitly' => array('remitly'),
         'XE Money Transfer' => array('xe'),
         'Experts in Moving' => array('experts in moving', 'sirelo', 'intercoastal', 'trigl'),
+        'Ownr' => array('ownr', 'ownr company set up'),
     );
     foreach ( $map as $canonical => $needles ) {
         foreach ( $needles as $needle ) {
@@ -333,7 +335,7 @@ function smoothmigration_import_services_from_media_library(): array {
 	smoothmigration_ensure_core_service_terms();
 
 	$keywords = array(
-		'wise','remit','remitly','chime','bank','homeloan','home loan','xe',
+		'wise','remit','remitly','chime','bank','homeloan','home loan','xe','ownr','company set up',
 		'verizon','visible','boost','mobile',
 		'carvana','avis','discovercars','rentcars','intlauto','international auto',
 		'sirelo','intercoastal','trigl','experts in moving','move',
@@ -446,6 +448,16 @@ function smoothmigration_render_service_importer_page(): void {
 		$ok = ! empty( $result['success'] );
 		echo '<div class="notice notice-' . ( $ok ? 'success' : 'error' ) . '"><p>' . esc_html( $message ) . '</p></div>';
 	}
+	if ( isset( $_POST['smoothmigration_fix_missing'] ) && check_admin_referer( 'smoothmigration_service_import' ) ) {
+		$fix = smoothmigration_fix_missing_service_logos();
+		$ok = ! empty( $fix['success'] );
+		$summary = sprintf( 'Checked %d services. Assigned %d logos. %d still missing.', intval( $fix['checked'] ), intval( $fix['assigned'] ), intval( $fix['missing'] ) );
+		echo '<div class="notice notice-' . ( $ok ? 'success' : 'warning' ) . '"><p>' . esc_html( $summary ) . '</p>';
+		if ( ! empty( $fix['details'] ) ) {
+			echo '<pre style="white-space: pre-wrap; font-family: monospace; font-size: 12px; max-height: 320px; overflow:auto; background:#f6f7f7; padding: 10px;">' . esc_html( implode( "\n", $fix['details'] ) ) . '</pre>';
+		}
+		echo '</div>';
+	}
 	?>
 	<div class="wrap">
 		<h1>Import Services from Media Library</h1>
@@ -462,6 +474,11 @@ function smoothmigration_render_service_importer_page(): void {
 		<form method="post">
 			<?php wp_nonce_field( 'smoothmigration_service_import' ); ?>
 			<p><input type="submit" name="smoothmigration_run_import" class="button button-primary" value="Run Import from Media Library"></p>
+		</form>
+		<form method="post" style="margin-top:1rem;">
+			<?php wp_nonce_field( 'smoothmigration_service_import' ); ?>
+			<p><input type="submit" name="smoothmigration_fix_missing" class="button" value="Fix Missing Service Logos (assign from existing uploads)"></p>
+			<p class="description">Scans your Media Library for files matching each brand and assigns the most suitable logo variant where missing. Supports PNG/JPG/WEBP/SVG. Requires files to include the brand in the filename or title.</p>
 		</form>
 	</div>
 	<?php

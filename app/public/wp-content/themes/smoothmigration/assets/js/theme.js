@@ -866,9 +866,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Modal enhancements
+    // Modal enhancements (skip Quick View to avoid double animations)
     document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('show.bs.modal', function() {
+            if (this.id === 'quickViewModal' || this.classList.contains('quickview-modal')) return;
             this.style.display = 'block';
             this.style.opacity = '0';
             this.style.transform = 'scale(0.9)';
@@ -881,6 +882,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         modal.addEventListener('hide.bs.modal', function() {
+            if (this.id === 'quickViewModal' || this.classList.contains('quickview-modal')) return;
             this.style.transition = 'all 0.2s ease';
             this.style.opacity = '0';
             this.style.transform = 'scale(0.9)';

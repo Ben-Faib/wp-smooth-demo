@@ -70,7 +70,9 @@ function smoothmigration_get_service_logo_id( int $post_id, string $context = 'c
 function smoothmigration_get_service_logo( int $post_id, string $context = 'card', $size = 'medium', array $attrs = array() ): string {
 	$logo_id = smoothmigration_get_service_logo_id( $post_id, $context );
 	if ( $logo_id ) {
-		return wp_get_attachment_image( $logo_id, $size, false, $attrs );
+		$mime = get_post_mime_type( $logo_id );
+		$render_size = ( $mime === 'image/svg+xml' ) ? 'full' : $size;
+		return wp_get_attachment_image( $logo_id, $render_size, false, $attrs );
 	}
 	// Final fallback to featured image if available
 	$thumb_id = get_post_thumbnail_id( $post_id );
@@ -80,4 +82,10 @@ function smoothmigration_get_service_logo( int $post_id, string $context = 'card
 	return '';
 }
 
+
+/**
+ * Locate a likely Brand Logo attachment for a service using its canonical slug or title.
+ * Helps when variant meta is not yet set on the post.
+ */
+// (Intentionally no media-library fallback; logos must be assigned via logo variant meta or featured image.)
 

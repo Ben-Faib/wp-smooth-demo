@@ -194,6 +194,9 @@ function smoothmigration_map_service_type_folder( string $folder_name ): string 
         'financial' => 'banking-services',
         'finance' => 'banking-services',
         'remittance' => 'banking-services',
+        'business registration' => 'banking-services',
+        'company formation' => 'banking-services',
+        'company registration' => 'banking-services',
         
         'data and phone plans' => 'data-and-phone-plans',
         'telecommunication' => 'data-and-phone-plans',
@@ -529,8 +532,9 @@ function smoothmigration_find_or_create_service( string $brand_name, string $bra
 
         // Ensure type set if provided and currently missing
         if ( $service_type_override ) {
-            $current_types = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'ids' ) );
-            if ( empty( $current_types ) ) {
+            // Ensure taxonomy reflects override when provided (correct mismatches)
+            $current_type_slugs = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'slugs' ) );
+            if ( empty( $current_type_slugs ) || ! in_array( $service_type_override, $current_type_slugs, true ) ) {
                 wp_set_object_terms( $post_id, $service_type_override, 'service_type', false );
             }
         }
@@ -554,8 +558,9 @@ function smoothmigration_find_or_create_service( string $brand_name, string $bra
         }
 
         if ( $service_type_override ) {
-            $current_types = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'ids' ) );
-            if ( empty( $current_types ) ) {
+            // Ensure taxonomy reflects override when provided (correct mismatches)
+            $current_type_slugs = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'slugs' ) );
+            if ( empty( $current_type_slugs ) || ! in_array( $service_type_override, $current_type_slugs, true ) ) {
                 wp_set_object_terms( $post_id, $service_type_override, 'service_type', false );
             }
         }
@@ -582,8 +587,9 @@ function smoothmigration_find_or_create_service( string $brand_name, string $bra
         }
 
         if ( $service_type_override ) {
-            $current_types = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'ids' ) );
-            if ( empty( $current_types ) ) {
+            // Ensure taxonomy reflects override when provided (correct mismatches)
+            $current_type_slugs = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'slugs' ) );
+            if ( empty( $current_type_slugs ) || ! in_array( $service_type_override, $current_type_slugs, true ) ) {
                 wp_set_object_terms( $post_id, $service_type_override, 'service_type', false );
             }
         }

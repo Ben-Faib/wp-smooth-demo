@@ -238,7 +238,9 @@ $term = get_queried_object();
                                     <h3 class="card-title h5 mb-0"><?php the_title(); ?></h3>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <button class="btn btn-outline-primary btn-sm js-quick-view">Quick View</button>
+                                    <button class="btn btn-outline-primary btn-sm btn-quick-view"
+                                        data-service-type="<?php echo esc_attr( $service_type_slug ); ?>"
+                                        data-service-type-name="<?php echo esc_attr( get_the_title() ); ?>">Quick View</button>
                                     <button class="btn btn-outline-secondary btn-sm js-add-plan" data-id="<?php the_ID(); ?>">Add to My Plan</button>
                                     <a href="<?php the_permalink(); ?>" class="btn btn-primary btn-sm">Learn More</a>
                                 </div>
@@ -266,33 +268,7 @@ $term = get_queried_object();
     </div>
 </main>
 
-<!-- Quick View Modal -->
-<div class="modal fade" id="serviceQuickView" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="qvTitle">Service</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="d-flex gap-3 align-items-start flex-wrap">
-                    <img id="qvLogo" src="" alt="" style="height:56px;width:auto;display:none" />
-                    <p id="qvExcerpt" class="mb-0 text-muted"></p>
-                </div>
-            </div>
-            <div class="modal-footer d-flex justify-content-between">
-
-                <div class="d-flex gap-2">
-                    <a id="qvAffiliate" href="#" target="_blank" rel="nofollow noopener" class="btn btn-primary">Explore Partner Services</a>
-                    <a id="qvLearn" href="#" class="btn btn-outline-primary">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
-
+<!-- Removed per unified global Quick View modal (in footer via inc/ajax.php) -->
 <!-- My Plan Tray -->
 <div id="planTray" class="plan-tray shadow">
     <div class="plan-header">My Plan <span class="badge bg-primary" id="planCount">0</span></div>
@@ -315,37 +291,6 @@ $term = get_queried_object();
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-    // Quick View modal
-    const modalEl = document.getElementById('serviceQuickView');
-    let bsModal;
-    if (window.bootstrap && modalEl){ bsModal = new bootstrap.Modal(modalEl); }
-    document.querySelectorAll('.js-quick-view').forEach(btn => {
-        btn.addEventListener('click', function(){
-            const card = this.closest('.service-list-card');
-            const title = card.dataset.title;
-            const excerpt = card.dataset.excerpt;
-            const logo = card.dataset.logo;
-            const link = card.dataset.link;
-            const affiliate = card.dataset.affiliate || link;
-            const serviceType = card.dataset.serviceType || '';
-
-            // Determine button text based on service type
-            let buttonText = 'Explore Partner Services';
-            if (serviceType.includes('insurance')) {
-                buttonText = 'Get a Quote';
-            }
-
-            document.getElementById('qvTitle').textContent = title;
-            const logoEl = document.getElementById('qvLogo');
-            if (logo){ logoEl.src = logo; logoEl.style.display='block'; } else { logoEl.style.display='none'; }
-            document.getElementById('qvExcerpt').textContent = excerpt || '';
-            document.getElementById('qvAffiliate').href = affiliate;
-            document.getElementById('qvAffiliate').textContent = buttonText;
-            document.getElementById('qvLearn').href = link;
-            if (bsModal) { bsModal.show(); }
-        });
-    });
-
     // My Plan tray
     const key='smPlan';
     const tray = document.getElementById('planTray');

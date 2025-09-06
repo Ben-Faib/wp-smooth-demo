@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
         constructor() {
             this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             this.activeModal = null;
+            this.modalListenersAttached = false;
+            this.lastOpeningCard = null;
             this.initializeFlipCards();
             this.initializeQuickViewModal();
             this.initializeAccessibilityFeatures();
@@ -123,69 +125,77 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         initializeQuickViewModal() {
-            // Enhanced Quick View functionality with card-to-modal transition
+            // Prevent duplicate bindings if script was enqueued twice
+            window.smoothMigration = window.smoothMigration || {};
+            if (window.smoothMigration.__qvHandlerBound) return;
+            window.smoothMigration.__qvHandlerBound = true;
+
+            // Single delegated handler to prevent duplicate bindings
             document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('btn-quick-view') || 
-                    e.target.closest('.btn-quick-view')) {
-                    
-                    e.preventDefault();
-                    
-                    const button = e.target.classList.contains('btn-quick-view') 
-                        ? e.target 
-                        : e.target.closest('.btn-quick-view');
-                    
-                    this.openQuickViewModal(button);
+                const trigger = e.target.classList.contains('btn-quick-view')
+                    ? e.target
+                    : e.target.closest('.btn-quick-view');
+                if (!trigger) return;
+                e.preventDefault();
+                e.stopPropagation();
+                this.openQuickViewModal(trigger);
+            });
+        }
+
+        attachModalListeners(modal) {
+            if (this.modalListenersAttached) return;
+            this.modalListenersAttached = true;
+            modal.addEventListener('shown.bs.modal', () => {
+                if (this.lastOpeningCard) {
+                    this.lastOpeningCard.classList.remove('modal-opening');
+                }
+                this.focusModalContent(modal);
+            });
+            modal.addEventListener('hidden.bs.modal', () => {
+                if (this.lastOpeningCard) {
+                    this.lastOpeningCard.classList.remove('modal-opening');
+                    this.lastOpeningCard = null;
                 }
             });
         }
 
         openQuickViewModal(button) {
-            const serviceType = button.dataset.serviceType || 'general';
-            const serviceTypeName = button.dataset.serviceTypeName || 'Service';
-            const card = button.closest('.service-card');
+            const card = button.closest('.service-list-card, .service-card');
+            const serviceType = button.dataset.serviceType || card?.dataset.serviceType || 'general';
+            const serviceTypeName = button.dataset.serviceTypeName || card?.dataset.title || 'Service';
 
-            // Add card opening animation
             if (card && !this.prefersReducedMotion) {
                 card.classList.add('modal-opening');
+                this.lastOpeningCard = card;
             }
 
-            // Create or get existing modal
             let modal = document.getElementById('quickViewModal');
             if (!modal) {
                 modal = this.createQuickViewModal();
+            } else {
+                // Ensure Quick View modal has a distinct class for scoped behavior
+                modal.classList.add('quickview-modal');
+            }
+            this.attachModalListeners(modal);
+
+            if (card && (card.dataset.title || card.dataset.link || card.dataset.excerpt)) {
+                this.updateModalContentFromCard(modal, card);
+            } else {
+                this.updateModalContent(modal, serviceType, serviceTypeName);
             }
 
-            // Update modal content
-            this.updateModalContent(modal, serviceType, serviceTypeName);
-
-            // Show modal with enhanced animation
-            const bsModal = new bootstrap.Modal(modal, {
+            const bsModal = bootstrap.Modal.getOrCreateInstance(modal, {
                 backdrop: true,
                 keyboard: true,
                 focus: true
             });
-
-            // Enhanced modal events
-            modal.addEventListener('shown.bs.modal', () => {
-                if (card) {
-                    card.classList.remove('modal-opening');
-                }
-                this.focusModalContent(modal);
-            });
-
-            modal.addEventListener('hidden.bs.modal', () => {
-                if (card) {
-                    card.classList.remove('modal-opening');
-                }
-            });
-
             bsModal.show();
             this.activeModal = bsModal;
         }
 
         createQuickViewModal() {
             const modal = document.createElement('div');
-            modal.className = 'modal fade';
+            modal.className = 'modal fade quickview-modal';
             modal.id = 'quickViewModal';
             modal.setAttribute('tabindex', '-1');
             modal.setAttribute('aria-labelledby', 'quickViewModalLabel');
@@ -198,13 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <h5 class="modal-title" id="quickViewModalLabel">Quick View</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="text-center">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="modal-body"></div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
@@ -214,6 +218,37 @@ document.addEventListener('DOMContentLoaded', function() {
             
             document.body.appendChild(modal);
             return modal;
+        }
+
+        updateModalContentFromCard(modal, card) {
+            const title = card.dataset.title || 'Service';
+            const excerpt = card.dataset.excerpt || '';
+            const logo = card.dataset.logo || '';
+            const link = card.dataset.link || '#';
+            const affiliate = card.dataset.affiliate || link;
+            const serviceType = (card.dataset.serviceType || '').toLowerCase();
+
+            let affiliateText = 'Explore Partner Services';
+            if (serviceType.includes('insurance')) {
+                affiliateText = 'Get a Quote';
+            }
+
+            const titleEl = modal.querySelector('.modal-title');
+            if (titleEl) titleEl.textContent = title;
+
+            const bodyEl = modal.querySelector('.modal-body');
+            if (bodyEl) {
+                bodyEl.innerHTML = `
+                    <div class="d-flex gap-3 align-items-start flex-wrap">
+                        ${logo ? `<img src="${logo}" alt="" style="height:56px;width:auto" />` : ''}
+                        <p class="mb-0 text-muted">${excerpt}</p>
+                    </div>
+                    <div class="d-flex gap-2 mt-3">
+                        <a id="qvAffiliate" href="${affiliate}" target="_blank" rel="nofollow noopener" class="btn btn-primary">${affiliateText}</a>
+                        <a id="qvLearn" href="${link}" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                `;
+            }
         }
 
         updateModalContent(modal, serviceType, serviceTypeName) {
@@ -354,21 +389,12 @@ document.addEventListener('DOMContentLoaded', function() {
     window.smoothMigration = window.smoothMigration || {};
     window.smoothMigration.serviceCardInteractions = serviceCardInteractions;
 
-    // Legacy jQuery support for existing implementations
-    if (typeof jQuery !== 'undefined') {
-        jQuery(document).ready(function($) {
-            // Maintain backward compatibility with existing Quick View buttons
-            $(document).on('click', '.btn-quick-view', function(e) {
-                if (!$(this).closest('.service-card-back').length) {
-                    // This is an original quick view button, not from our flip cards
-                    e.preventDefault();
-                    
-                    const serviceType = $(this).data('service-type') || 'general';
-                    const serviceTypeName = $(this).data('service-type-name') || 'Service';
-                    
-                    serviceCardInteractions.openQuickView(serviceType, serviceTypeName);
-                }
-            });
-        });
-    }
-}); 
+    // Debug: auto-open first Quick View for verification (?qvDebug=1)
+    try {
+        const qs = new URLSearchParams(window.location.search);
+        if (qs.get('qvDebug') === '1') {
+            const btn = document.querySelector('.btn-quick-view') || document.querySelector('.js-quick-view');
+            if (btn) serviceCardInteractions.openQuickViewModal(btn);
+        }
+    } catch(e) {}
+});
