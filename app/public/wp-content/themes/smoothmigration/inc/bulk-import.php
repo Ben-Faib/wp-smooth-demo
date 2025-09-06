@@ -240,6 +240,106 @@ function smoothmigration_map_service_type_folder( string $folder_name ): string 
 }
 
 /**
+ * Helper: whether a folder contains images directly or one level down.
+ */
+function smoothmigration_brand_folder_has_images( string $path ): bool {
+    $images_here = smoothmigration_get_image_files( $path );
+    if ( ! empty( $images_here ) ) {
+        return true;
+    }
+    // one-level nested check (e.g., logos/, images/)
+    $subdirs = array_filter( scandir( $path ), function( $item ) use ( $path ) {
+        $full = $path . '/' . $item;
+        return $item !== '.' && $item !== '..' && is_dir( $full ) && ! smoothmigration_is_system_folder( $item );
+    });
+    foreach ( $subdirs as $sd ) {
+        if ( ! empty( smoothmigration_get_image_files( $path . '/' . $sd ) ) ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Build a brand index from a container path.
+ * Returns array keyed by canonical slug => [ path, folder, type_slug ].
+ * Detects 3-layer and 4-layer structures robustly.
+ */
+function smoothmigration_build_brand_index( string $container_path ): array {
+    $index = array();
+
+    $level1 = array_filter( scandir( $container_path ), function( $item ) use ( $container_path ) {
+        $full = $container_path . '/' . $item;
+        return $item !== '.' && $item !== '..' && is_dir( $full ) && ! smoothmigration_is_system_folder( $item );
+    });
+
+    // Decide structure by sampling level1
+    $structure = 'unknown';
+    foreach ( $level1 as $l1 ) {
+        $p1 = $container_path . '/' . $l1;
+        $has_direct = smoothmigration_brand_folder_has_images( $p1 );
+        if ( $has_direct ) { $structure = '3-layer'; break; }
+        // Check one level down for images
+        $l2dirs = array_filter( scandir( $p1 ), function( $item ) use ( $p1 ) {
+            $full = $p1 . '/' . $item;
+            return $item !== '.' && $item !== '..' && is_dir( $full ) && ! smoothmigration_is_system_folder( $item );
+        });
+        foreach ( $l2dirs as $l2 ) {
+            if ( smoothmigration_brand_folder_has_images( $p1 . '/' . $l2 ) ) { $structure = '4-layer'; break 2; }
+        }
+    }
+
+    if ( $structure === '3-layer' ) {
+        foreach ( $level1 as $brand_folder ) {
+            $brand_path = $container_path . '/' . $brand_folder;
+            if ( ! smoothmigration_brand_folder_has_images( $brand_path ) ) { continue; }
+            list( $name, $slug ) = smoothmigration_enhanced_brand_mapping( $brand_folder );
+            $index[ $slug ] = array(
+                'path' => $brand_path,
+                'folder' => $brand_folder,
+                'type_slug' => smoothmigration_guess_type_from_filename( $name ),
+            );
+        }
+        return $index;
+    }
+
+    // Assume 4-layer fallback
+    foreach ( $level1 as $service_type_folder ) {
+        $type_slug = smoothmigration_map_service_type_folder( $service_type_folder );
+        $p1 = $container_path . '/' . $service_type_folder;
+        $brand_folders = array_filter( scandir( $p1 ), function( $item ) use ( $p1 ) {
+            $full = $p1 . '/' . $item;
+            return $item !== '.' && $item !== '..' && is_dir( $full ) && ! smoothmigration_is_system_folder( $item );
+        });
+        foreach ( $brand_folders as $brand_folder ) {
+            $brand_path = $p1 . '/' . $brand_folder;
+            if ( ! smoothmigration_brand_folder_has_images( $brand_path ) ) { continue; }
+            list( $name, $slug ) = smoothmigration_enhanced_brand_mapping( $brand_folder );
+            $index[ $slug ] = array(
+                'path' => $brand_path,
+                'folder' => $brand_folder,
+                'type_slug' => $type_slug,
+            );
+        }
+    }
+
+    return $index;
+}
+
+/**
+ * Check if a service already has any logo assigned.
+ */
+function smoothmigration_service_has_any_logo( int $service_id ): bool {
+    return (bool) (
+        get_post_meta( $service_id, '_service_logo_primary', true ) ||
+        get_post_meta( $service_id, '_service_logo_on_light', true ) ||
+        get_post_meta( $service_id, '_service_logo_on_dark', true ) ||
+        get_post_meta( $service_id, '_service_logo_square', true ) ||
+        has_post_thumbnail( $service_id )
+    );
+}
+
+/**
  * Process a folder structure and import services with logos
  * Supports both 3-layer and 4-layer structures
  */
@@ -363,31 +463,34 @@ function smoothmigration_process_brand_folder( string $folder_path, string $fold
         return $result;
     }
     
-    // Get all image files in the folder
+    // Get all image files in the folder (and also check one-level nested subfolders like logos/, images/)
     $image_files = smoothmigration_get_image_files( $folder_path );
-    
+
+    // If none directly, scan one level down for common nested directories
     if ( empty( $image_files ) ) {
-        // Get more details for debugging
-        $all_files = is_dir( $folder_path ) ? scandir( $folder_path ) : array();
-        $all_files = array_filter( $all_files, function( $file ) {
-            return $file !== '.' && $file !== '..';
+        $subdirs = array_filter( scandir( $folder_path ), function( $file ) use ( $folder_path ) {
+            $full = $folder_path . '/' . $file;
+            return $file !== '.' && $file !== '..' && is_dir( $full ) && ! smoothmigration_is_system_folder( $file );
         });
-        
-        $result['message'] = sprintf( 
-            'No image files found in folder. Found %d total files: %s', 
-            count( $all_files ),
-            implode( ', ', array_slice( $all_files, 0, 5 ) ) . ( count( $all_files ) > 5 ? '...' : '' )
-        );
-        return $result;
-    }
-    
-    // Process each image file
-    foreach ( $image_files as $image_file ) {
-        $image_path = $folder_path . '/' . $image_file;
-        $import_result = smoothmigration_import_brand_image( $image_path, $image_file, $service_id, $brand_name );
-        
-        if ( $import_result['success'] ) {
-            $result['logos_imported']++;
+        foreach ( $subdirs as $sd ) {
+            $nested_path = $folder_path . '/' . $sd;
+            $nested_images = smoothmigration_get_image_files( $nested_path );
+            foreach ( $nested_images as $image_file ) {
+                $image_path = $nested_path . '/' . $image_file;
+                $import_result = smoothmigration_import_brand_image( $image_path, $image_file, $service_id, $brand_name );
+                if ( $import_result['success'] ) {
+                    $result['logos_imported']++;
+                }
+            }
+        }
+    } else {
+        // Process each image file
+        foreach ( $image_files as $image_file ) {
+            $image_path = $folder_path . '/' . $image_file;
+            $import_result = smoothmigration_import_brand_image( $image_path, $image_file, $service_id, $brand_name );
+            if ( $import_result['success'] ) {
+                $result['logos_imported']++;
+            }
         }
     }
     
@@ -736,6 +839,10 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
     $jsonl_path = $matches[0];
     $lines_processed = 0;
 
+    // Build a brand index so we can attach logos even if the folder scan missed them earlier
+    $brand_index = smoothmigration_build_brand_index( $container_path );
+    $debug_attached = array();
+
     $fh = @fopen( $jsonl_path, 'r' );
     if ( ! $fh ) {
         return array( 'success' => false, 'message' => 'Could not open JSONL file for reading.', 'processed' => 0, 'errors' => array(), 'debug' => '' );
@@ -779,21 +886,39 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
         list( $brand_name, $brand_slug ) = smoothmigration_enhanced_brand_mapping( $partner );
         $type_slug = $category ? smoothmigration_map_service_type_folder( $category ) : smoothmigration_guess_type_from_filename( $brand_name );
 
-        // Find existing service only (do not create from JSONL)
-        $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug, false );
+        // Find or create the service from JSONL
+        $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug );
 
         // Fallback: try normalized partner label if initial lookup failed (handles parentheses, etc.)
         if ( ! $service_id ) {
             $normalized_partner = smoothmigration_normalize_partner_label( $partner );
             if ( $normalized_partner !== $partner ) {
                 list( $brand_name, $brand_slug ) = smoothmigration_enhanced_brand_mapping( $normalized_partner );
-                $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug, false );
+                $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug );
             }
         }
 
         if ( ! $service_id ) {
-            $result['errors'][] = 'Skipped JSONL update; service not initialized from folders: ' . $brand_name;
+            $result['errors'][] = 'Skipped JSONL update; could not create service for: ' . $brand_name;
             continue;
+        }
+
+        // If the service has no logos yet, attach from folder index when available
+        if ( ! smoothmigration_service_has_any_logo( $service_id ) && isset( $brand_index[ $brand_slug ] ) ) {
+            $entry = $brand_index[ $brand_slug ];
+            // Prefer type from index if we have it
+            $type_from_index = (string) ( $entry['type_slug'] ?? '' );
+            if ( $type_from_index ) {
+                $current_types = wp_get_post_terms( $service_id, 'service_type', array( 'fields' => 'ids' ) );
+                if ( $overwrite || empty( $current_types ) ) {
+                    wp_set_object_terms( $service_id, $type_from_index, 'service_type', false );
+                }
+            }
+            // Import brand images from the folder
+            $brand_result = smoothmigration_process_brand_folder( $entry['path'], $entry['folder'], $country, $type_from_index ?: $type_slug );
+            if ( ! empty( $brand_result['logos_imported'] ) ) {
+                $debug_attached[] = $brand_name . ' (+' . intval( $brand_result['logos_imported'] ) . ' logo' . ( $brand_result['logos_imported'] == 1 ? '' : 's' ) . ')';
+            }
         }
 
         // Build content from sections
@@ -853,7 +978,7 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
 
     $result['processed'] = $lines_processed;
     $result['message'] = 'Processed ' . intval( $lines_processed ) . ' JSONL records.';
-    $result['debug'] = 'JSONL file: ' . basename( $jsonl_path );
+    $result['debug'] = 'JSONL file: ' . basename( $jsonl_path ) . ( ! empty( $debug_attached ) ? "\nAttached logos for: " . implode( ', ', $debug_attached ) : '' );
 
     return $result;
 }
