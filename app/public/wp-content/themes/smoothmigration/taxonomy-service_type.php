@@ -221,6 +221,9 @@ $term = get_queried_object();
                     <?php
                         $affiliate = get_post_meta( get_the_ID(), '_service_affiliate_url', true );
                         $logo_html = function_exists('smoothmigration_get_service_logo') ? smoothmigration_get_service_logo( get_the_ID(), 'list', 'medium', array('style'=>'height:36px;width:auto') ) : '';
+                        if ( empty( $logo_html ) && has_post_thumbnail() ) {
+                            $logo_html = get_the_post_thumbnail( get_the_ID(), 'medium', array( 'style' => 'height:36px;width:auto' ) );
+                        }
                         $logo_src = '';
                         if ( $logo_html && preg_match('/src=\"([^\"]+)\"/i', $logo_html, $m) ) { $logo_src = $m[1]; }
                         $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words( strip_tags( get_the_content() ), 24 );
