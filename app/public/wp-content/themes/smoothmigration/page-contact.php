@@ -335,9 +335,9 @@ get_header();
                                     Canada
                                 </p>
                                 <p class="address mt-4">
-                                    <strong>England Office</strong><br>
+                                    <strong>United Kingdom Office</strong><br>
                                     Bournevale Rd,<br>
-                                    London, England<br>
+                                    London, United Kingdom<br>
                                     SW16 2BA<br>
                                     United Kingdom
                                 </p>

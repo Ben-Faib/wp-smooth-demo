@@ -77,11 +77,11 @@ get_header();
                         
                         <!-- General Questions -->
                         <div class="faq-section" data-category="general">
-                            <h3 class="section-title">General Questions</h3>
+                            <h2 class="section-title">General Questions</h2>
                             
                             <div class="faq-item" data-faq-id="1">
                                 <div class="faq-header" data-target="#faq1">
-                                    <h4 class="faq-question">What is international relocation to Smooth Migration Global?</h4>
+                                    <h3 class="faq-question">What is international relocation to Smooth Migration Global?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq1">
@@ -100,7 +100,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="2">
                                 <div class="faq-header" data-target="#faq2">
-                                    <h4 class="faq-question">What services do you provide? Are you an immigration agency?</h4>
+                                    <h3 class="faq-question">What services do you provide? Are you an immigration agency?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq2">
@@ -125,7 +125,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="3">
                                 <div class="faq-header" data-target="#faq3">
-                                    <h4 class="faq-question">Can anyone contact Smooth Migration or only referred clients?</h4>
+                                    <h3 class="faq-question">Can anyone contact Smooth Migration or only referred clients?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq3">
@@ -150,11 +150,11 @@ get_header();
 
                         <!-- Services Questions -->
                         <div class="faq-section" data-category="services">
-                            <h3 class="section-title">Services</h3>
+                            <h2 class="section-title">Services</h2>
                             
                             <div class="faq-item" data-faq-id="4">
                                 <div class="faq-header" data-target="#faq4">
-                                    <h4 class="faq-question">How does your insurance work?</h4>
+                                    <h3 class="faq-question">How does your insurance work?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq4">
@@ -175,7 +175,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="5">
                                 <div class="faq-header" data-target="#faq5">
-                                    <h4 class="faq-question">How do you help teachers relocate?</h4>
+                                    <h3 class="faq-question">How do you help teachers relocate?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq5">
@@ -197,7 +197,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="6">
                                 <div class="faq-header" data-target="#faq6">
-                                    <h4 class="faq-question">Do you offer business services?</h4>
+                                    <h3 class="faq-question">Do you offer business services?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq6">
@@ -225,7 +225,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="7">
                                 <div class="faq-header" data-target="#faq7">
-                                    <h4 class="faq-question">Can you assist in setting up our company when we arrive?</h4>
+                                    <h3 class="faq-question">Can you assist in setting up our company when we arrive?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq7">
@@ -267,7 +267,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="8">
                                 <div class="faq-header" data-target="#faq8">
-                                    <h4 class="faq-question">Our immigration agency recommended that we ask Smooth Migration which insurance options we need - where do we start?</h4>
+                                    <h3 class="faq-question">Our immigration agency recommended that we ask Smooth Migration which insurance options we need - where do we start?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq8">
@@ -313,7 +313,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="9">
                                 <div class="faq-header" data-target="#faq9">
-                                    <h4 class="faq-question">How do I get a shipping quote if it's not on your website?</h4>
+                                    <h3 class="faq-question">How do I get a shipping quote if it's not on your website?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq9">
@@ -339,11 +339,11 @@ get_header();
 
                         <!-- Pricing Questions -->
                         <div class="faq-section" data-category="pricing">
-                            <h3 class="section-title">Pricing</h3>
+                            <h2 class="section-title">Pricing</h2>
                             
                             <div class="faq-item" data-faq-id="10">
                                 <div class="faq-header" data-target="#faq10">
-                                    <h4 class="faq-question">How does Smooth Migration negotiate better pricing?</h4>
+                                    <h3 class="faq-question">How does Smooth Migration negotiate better pricing?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq10">
@@ -372,11 +372,11 @@ get_header();
 
                         <!-- Process Questions -->
                         <div class="faq-section" data-category="process">
-                            <h3 class="section-title">Process</h3>
+                            <h2 class="section-title">Process</h2>
                             
                             <div class="faq-item" data-faq-id="11">
                                 <div class="faq-header" data-target="#faq11">
-                                    <h4 class="faq-question">How does Smooth Migration work?</h4>
+                                    <h3 class="faq-question">How does Smooth Migration work?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq11">
@@ -419,7 +419,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="12">
                                 <div class="faq-header" data-target="#faq12">
-                                    <h4 class="faq-question">How long do I have to be in my new country before I can apply for a mortgage?</h4>
+                                    <h3 class="faq-question">How long do I have to be in my new country before I can apply for a mortgage?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq12">
@@ -443,7 +443,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="13">
                                 <div class="faq-header" data-target="#faq13">
-                                    <h4 class="faq-question">What are the best ways to build a credit record in my new country?</h4>
+                                    <h3 class="faq-question">What are the best ways to build a credit record in my new country?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq13">
@@ -465,7 +465,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="14">
                                 <div class="faq-header" data-target="#faq14">
-                                    <h4 class="faq-question">Could I get financing for used vehicles as a new resident?</h4>
+                                    <h3 class="faq-question">Could I get financing for used vehicles as a new resident?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq14">
@@ -492,7 +492,7 @@ get_header();
                             
                             <div class="faq-item" data-faq-id="15">
                                 <div class="faq-header" data-target="#faq15">
-                                    <h4 class="faq-question">Does mortgage financing work the same in every country that you cover?</h4>
+                                    <h3 class="faq-question">Does mortgage financing work the same in every country that you cover?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq15">
@@ -521,11 +521,11 @@ get_header();
 
                         <!-- Support Questions -->
                         <div class="faq-section" data-category="support">
-                            <h3 class="section-title">Support</h3>
+                            <h2 class="section-title">Support</h2>
                             
                             <div class="faq-item" data-faq-id="16">
                                 <div class="faq-header" data-target="#faq16">
-                                    <h4 class="faq-question">Does Smooth Migration have support if there is a problem?</h4>
+                                    <h3 class="faq-question">Does Smooth Migration have support if there is a problem?</h3>
                                     <i class="fas fa-plus faq-icon"></i>
                                 </div>
                                 <div class="collapse" id="faq16">
@@ -1291,5 +1291,4 @@ function clearSearch() {
 </script>
 
 <?php
-get_footer(); 
 get_footer(); 

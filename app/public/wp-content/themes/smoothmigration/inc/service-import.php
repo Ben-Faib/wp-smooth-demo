@@ -113,8 +113,12 @@ function smoothmigration_map_canonical_brand( string $text ): array {
     );
     foreach ( $map as $canonical => $needles ) {
         foreach ( $needles as $needle ) {
-            if ( $needle && str_contains( $t, $needle ) ) {
-                return array( $canonical, sanitize_title( $canonical ) );
+            if ( $needle ) {
+                // word-boundary style match to avoid substring collisions like Homewise -> Wise
+                $pattern = '/(?<![a-z0-9])' . preg_quote( strtolower( $needle ), '/' ) . '(?![a-z0-9])/i';
+                if ( preg_match( $pattern, $t ) ) {
+                    return array( $canonical, sanitize_title( $canonical ) );
+                }
             }
         }
     }

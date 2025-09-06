@@ -168,7 +168,7 @@ get_header();
                                 </div>
                                 <div class="timeline-content">
                                     <h4>The Experience</h4>
-                                    <p>Our founder's journey spans four countries - from South Africa to England at 17, becoming one of the youngest foreigners licensed before the Supreme Court in London, then to the USA in 2019 where Smooth Migration was born.</p>
+                                    <p>Our founder's journey spans four countries - from South Africa to the United Kingdom at 17, becoming one of the youngest foreigners licensed before the Supreme Court in London, then to the USA in 2019 where Smooth Migration was born.</p>
                                 </div>
                             </div>
                             
@@ -337,9 +337,9 @@ get_header();
                         <div class="team-info">
                             <h4 class="team-name">Grant Sakinofsky</h4>
                             <p class="team-role">Founder & Director</p>
-                            <p class="team-description">Grant's journey began early — working since age 8, he graduated at 17 and used his savings to move to England, where he became one of the youngest foreigners in recent British history to be licensed before the Supreme Court in London.</p>
+                            <p class="team-description">Grant's journey began early — working since age 8, he graduated at 17 and used his savings to move to the United Kingdom, where he became one of the youngest foreigners in recent British history to be licensed before the Supreme Court in London.</p>
                             <p class="team-description">A former national age group champion in springboard diving, provincial gymnast, and rock climber, Grant brings both athletic discipline and legal precision to international relocation.</p>
-                            <p class="team-description">After excelling across South Africa and England, Grant moved to the USA in 2019 where he got licensed in real estate and founded Smooth Migration. In 2022, he relocated to Canada, earning additional qualifications from UBC and becoming one of the only non-US, non-Canadian citizens to hold real estate licenses in both countries.</p>
+                            <p class="team-description">After excelling across South Africa and the United Kingdom, Grant moved to the USA in 2019 where he got licensed in real estate and founded Smooth Migration. In 2022, he relocated to Canada, earning additional qualifications from UBC and becoming one of the only non-US, non-Canadian citizens to hold real estate licenses in both countries.</p>
                             <p class="team-description">Currently serving on a Canadian non-profit board, Grant's 35+ years span four countries and multiple industries.</p>
                             <div class="team-expertise">
                                 <span class="expertise-tag">Internationally Qualified Across Multiple Industries</span>
@@ -418,7 +418,7 @@ get_header();
                         <div class="team-info">
                             <h4 class="team-name">Robert Wood</h4>
                             <p class="team-role">Operations Manager - United Kingdom</p>
-                            <p class="team-description">Originally from Australia, Robert has made the United Kingdom his home for over 20 years, working extensively across both England and Scotland with a focus on customer-facing roles.</p>
+                            <p class="team-description">Originally from Australia, Robert has made the United Kingdom his home for over 20 years, working extensively across the United Kingdom with a focus on customer-facing roles.</p>
                             <p class="team-description">His international perspective expanded further during his time in Italy, where he provided ongoing business support to locally based companies, gaining invaluable insight into European business culture.</p>
                             <p class="team-description">With over two decades of experience spanning Hospitality, New Business Development, and Customer Relations, Robert has developed an exceptional ability to connect with people from all backgrounds.</p>
                             <p class="team-description">As a highly skilled customer relations expert and experienced marketing professional, he brings his own unique flair to everything he does.</p>

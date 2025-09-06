@@ -40,6 +40,9 @@ add_action( 'admin_menu', 'smoothmigration_register_bulk_import_menu' );
  * Enhanced brand mapping that includes folder name detection
  */
 function smoothmigration_enhanced_brand_mapping( string $text ): array {
+    // Normalize partner labels (strip disclaimers like "(hold listing...)" and harmonize variants)
+    $text = smoothmigration_normalize_partner_label( $text );
+
     // Use existing canonical mapping first
     $canonical = smoothmigration_map_canonical_brand( $text );
     
@@ -60,6 +63,9 @@ function smoothmigration_enhanced_brand_mapping( string $text ): array {
             'squareone tenant insurance' => array('SquareOne Insurance', 'squareone-insurance'),
             'boost mobile usa' => array('Boost Mobile', 'boost-mobile'),
             'visible by verizon' => array('Visible', 'visible'),
+            // Helpful Canada harmonization
+            'national bank of canada' => array('National Bank of Canada', 'national-bank-of-canada'),
+            'ownr company set up' => array('Ownr', 'ownr'),
         );
         
         foreach ( $folder_map as $needle => $mapping ) {
@@ -70,6 +76,31 @@ function smoothmigration_enhanced_brand_mapping( string $text ): array {
     }
     
     return $canonical;
+}
+
+/**
+ * Normalize partner labels by removing disclaimers and harmonizing frequent variants.
+ */
+function smoothmigration_normalize_partner_label( string $text ): string {
+    $out = trim( $text );
+
+    // Remove trailing parentheses that are disclaimers: (hold ...), (update ...), (pending ...)
+    $out = preg_replace( '/\s*\((?:hold|update|pending|contract|listing)[^)]+\)\s*$/i', '', $out );
+
+    // Common harmonizations
+    $map = array(
+        '/\bairalo\s*e[\s-]*sim\b/i' => 'Airalo',
+        '/\bxe\s*money\s*transfers?\b/i' => 'XE Money Transfer',
+        '/\bownr\s*company\s*set\s*up\b/i' => 'Ownr',
+        '/\bnational\s*bank\s*of\s*canada\b/i' => 'National Bank of Canada',
+    );
+    foreach ( $map as $pattern => $replacement ) {
+        $out = preg_replace( $pattern, $replacement, $out );
+    }
+
+    // Collapse internal whitespace
+    $out = preg_replace( '/\s+/', ' ', $out );
+    return trim( $out );
 }
 
 /**
@@ -750,6 +781,16 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
 
         // Find existing service only (do not create from JSONL)
         $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug, false );
+
+        // Fallback: try normalized partner label if initial lookup failed (handles parentheses, etc.)
+        if ( ! $service_id ) {
+            $normalized_partner = smoothmigration_normalize_partner_label( $partner );
+            if ( $normalized_partner !== $partner ) {
+                list( $brand_name, $brand_slug ) = smoothmigration_enhanced_brand_mapping( $normalized_partner );
+                $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug, false );
+            }
+        }
+
         if ( ! $service_id ) {
             $result['errors'][] = 'Skipped JSONL update; service not initialized from folders: ' . $brand_name;
             continue;
@@ -1290,8 +1331,21 @@ function smoothmigration_handle_bulk_import_submission(): array {
         if ( ! $folder_path || ! is_dir( $folder_path ) ) {
             return array( 'success' => false, 'message' => 'Invalid folder path specified.' );
         }
-        
-        return smoothmigration_process_folder_structure( $folder_path, $region );
+
+        // Align behavior with ZIP: process logos, then enrich via JSONL if present
+        $import_path = smoothmigration_find_brand_container_folder( $folder_path );
+        $folder_results = smoothmigration_process_folder_structure( $import_path, $region );
+        $jsonl_results = smoothmigration_import_services_from_country_jsonl( $import_path, $region, $overwrite );
+
+        return array(
+            'success' => ( ! empty( $folder_results['success'] ) && ! empty( $jsonl_results['success'] ) ),
+            'message' => trim( ( $folder_results['message'] ? '[LOGOS] ' . $folder_results['message'] : '' ) . ' ' . ( $jsonl_results['message'] ? '[JSONL] ' . $jsonl_results['message'] : '' ) ),
+            'processed' => intval( $folder_results['processed'] ?? 0 ) + intval( $jsonl_results['processed'] ?? 0 ),
+            'errors' => array_merge( $folder_results['errors'] ?? array(), $jsonl_results['errors'] ?? array() ),
+            'services_created' => $folder_results['services_created'] ?? array(),
+            'structure_type' => $folder_results['structure_type'] ?? '',
+            'debug' => trim( ( $folder_results['debug'] ?? '' ) . "\n" . ( $jsonl_results['debug'] ?? '' ) ),
+        );
     
     } elseif ( $method === 'debug' ) {
         if ( ! isset( $_FILES['zip_file'] ) || $_FILES['zip_file']['error'] !== UPLOAD_ERR_OK ) {
