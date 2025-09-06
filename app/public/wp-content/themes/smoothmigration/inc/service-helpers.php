@@ -33,6 +33,9 @@ function smoothmigration_get_service_logo_id( int $post_id, string $context = 'c
 		default:
 			if ( $on_light ) return $on_light;
 			if ( $primary ) return $primary;
+			// Fallbacks to ensure a logo appears on listings even if only dark/square variants exist
+			if ( $on_dark ) return $on_dark;
+			if ( $square ) return $square;
 	}
 
 	return (int) get_post_thumbnail_id( $post_id );
