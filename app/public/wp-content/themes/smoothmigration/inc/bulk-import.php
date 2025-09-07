@@ -84,6 +84,11 @@ function smoothmigration_enhanced_brand_mapping( string $text ): array {
 function smoothmigration_normalize_partner_label( string $text ): string {
     $out = trim( $text );
 
+    // Insert spaces for CamelCase to align folder names like "ExpatRide" with "Expat Ride"
+    $out = preg_replace( '/([a-z])([A-Z])/', '$1 $2', $out );
+    // Normalize underscores to spaces
+    $out = str_replace( '_', ' ', $out );
+
     // Remove trailing parentheses that are disclaimers: (hold ...), (update ...), (pending ...)
     $out = preg_replace( '/\s*\((?:hold|update|pending|contract|listing)[^)]+\)\s*$/i', '', $out );
 
@@ -93,6 +98,8 @@ function smoothmigration_normalize_partner_label( string $text ): string {
         '/\bxe\s*money\s*transfers?\b/i' => 'XE Money Transfer',
         '/\bownr\s*company\s*set\s*up\b/i' => 'Ownr',
         '/\bnational\s*bank\s*of\s*canada\b/i' => 'National Bank of Canada',
+        '/\bexpat\s*ride\b/i' => 'Expat Ride',
+        '/\bexpatride\b/i' => 'Expat Ride',
     );
     foreach ( $map as $pattern => $replacement ) {
         $out = preg_replace( $pattern, $replacement, $out );
@@ -507,6 +514,30 @@ function smoothmigration_process_brand_folder( string $folder_path, string $fold
  * Find or create a service post
  */
 function smoothmigration_find_or_create_service( string $brand_name, string $brand_slug, string $region = '', string $service_type_override = '', bool $create_if_missing = true ): int {
+    // Runtime cache to avoid duplicate lookups/creates within a single request
+    static $runtime_cache = array();
+    $cache_key = strtolower( trim( $brand_slug ) ?: sanitize_title( $brand_name ) );
+    if ( isset( $runtime_cache[ $cache_key ] ) && $runtime_cache[ $cache_key ] ) {
+        $post_id_cached = (int) $runtime_cache[ $cache_key ];
+        // Ensure type/region enrichment on cached post
+        if ( $post_id_cached ) {
+            if ( $region ) {
+                $existing_regions = get_post_meta( $post_id_cached, '_service_regions', true );
+                $regions_array = $existing_regions ? array_map( 'trim', explode( ',', $existing_regions ) ) : array();
+                if ( ! in_array( $region, $regions_array, true ) ) {
+                    $regions_array[] = $region;
+                    update_post_meta( $post_id_cached, '_service_regions', implode( ', ', $regions_array ) );
+                }
+            }
+            if ( $service_type_override ) {
+                $current_type_slugs = wp_get_post_terms( $post_id_cached, 'service_type', array( 'fields' => 'slugs' ) );
+                if ( empty( $current_type_slugs ) || ! in_array( $service_type_override, $current_type_slugs, true ) ) {
+                    wp_set_object_terms( $post_id_cached, $service_type_override, 'service_type', false );
+                }
+            }
+        }
+        return $post_id_cached;
+    }
     // 1) Prefer canonical meta lookup
     $existing_posts = get_posts( array(
         'post_type' => 'service',
@@ -566,6 +597,32 @@ function smoothmigration_find_or_create_service( string $brand_name, string $bra
         }
 
         return $post_id;
+    }
+
+    // 2b) DB-level fallback by post_name to catch edge cases get_page_by_path misses
+    if ( empty( $post_id ) ) {
+        global $wpdb;
+        $maybe_id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_name = %s LIMIT 1", 'service', $brand_slug ) );
+        if ( $maybe_id ) {
+            $post_id = $maybe_id;
+            update_post_meta( $post_id, '_service_canonical', $brand_slug );
+            if ( $region ) {
+                $existing_regions = get_post_meta( $post_id, '_service_regions', true );
+                $regions_array = $existing_regions ? array_map( 'trim', explode( ',', $existing_regions ) ) : array();
+                if ( ! in_array( $region, $regions_array, true ) ) {
+                    $regions_array[] = $region;
+                    update_post_meta( $post_id, '_service_regions', implode( ', ', $regions_array ) );
+                }
+            }
+            if ( $service_type_override ) {
+                $current_type_slugs = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'slugs' ) );
+                if ( empty( $current_type_slugs ) || ! in_array( $service_type_override, $current_type_slugs, true ) ) {
+                    wp_set_object_terms( $post_id, $service_type_override, 'service_type', false );
+                }
+            }
+            $runtime_cache[ $cache_key ] = $post_id;
+            return $post_id;
+        }
     }
 
     // 3) Fallback: find by title (case-normalized)
@@ -648,7 +705,9 @@ function smoothmigration_find_or_create_service( string $brand_name, string $bra
         update_post_meta( $post_id, '_service_regions', $region );
     }
 
-    return $post_id;
+    // Cache and return
+    $runtime_cache[ $cache_key ] = (int) $post_id;
+    return (int) $post_id;
 }
 
 /**
@@ -673,22 +732,64 @@ function smoothmigration_import_brand_image( string $image_path, string $filenam
     
     $result['attachment_id'] = $attachment_id;
     
-    // Set Asset Type taxonomy (append to preserve any prior terms)
-    wp_set_object_terms( $attachment_id, array( 'brand-logo' ), 'sm_asset_type', true );
+    // Determine asset type terms from filename and extension
+    $asset_terms = function_exists( 'smoothmigration_get_asset_type_terms' )
+        ? smoothmigration_get_asset_type_terms( $filename )
+        : array();
+    if ( empty( $asset_terms ) ) {
+        $asset_terms = smoothmigration_get_asset_type_terms( $filename );
+    }
 
-    // Also tag attachment for its owning Service and Type for cascade deletion
-    if ( function_exists( 'smoothmigration_tag_attachment_for_service' ) ) {
-        smoothmigration_tag_attachment_for_service( $attachment_id, $service_id );
+    // Build taxonomy terms: asset terms + service/type scoping terms (without forcing brand-logo)
+    $terms_to_apply = is_array( $asset_terms ) ? $asset_terms : array();
+    
+    // Ensure Service-specific term exists and add it
+    if ( function_exists( 'smoothmigration_get_service_canonical_slug' ) ) {
+        $service_slug = (string) smoothmigration_get_service_canonical_slug( $service_id );
+        if ( $service_slug !== '' ) {
+            $service_term_slug = 'service-' . $service_slug;
+            if ( ! term_exists( $service_term_slug, 'sm_asset_type' ) ) {
+                wp_insert_term(
+                    'Service: ' . ucwords( str_replace( '-', ' ', $service_slug ) ),
+                    'sm_asset_type',
+                    array( 'slug' => $service_term_slug )
+                );
+            }
+            $terms_to_apply[] = $service_term_slug;
+        }
     }
     
-    // Determine logo variant slot
-    $variant = smoothmigration_classify_logo_variant( $filename );
+    // Ensure Type term exists and add it
+    $type_slugs = wp_get_post_terms( $service_id, 'service_type', array( 'fields' => 'slugs' ) );
+    if ( ! empty( $type_slugs ) ) {
+        $type_slug = (string) $type_slugs[0];
+        $type_term_slug = 'type-' . $type_slug;
+        if ( ! term_exists( $type_term_slug, 'sm_asset_type' ) ) {
+            $term_obj = get_term_by( 'slug', $type_slug, 'service_type' );
+            $label = $term_obj ? $term_obj->name : ucwords( str_replace( '-', ' ', $type_slug ) );
+            wp_insert_term(
+                'Type: ' . $label,
+                'sm_asset_type',
+                array( 'slug' => $type_term_slug )
+            );
+        }
+        $terms_to_apply[] = $type_term_slug;
+    }
     
-    // Assign to service
-    smoothmigration_assign_logo_to_service( $service_id, $attachment_id, $variant );
-    
+    if ( ! empty( $terms_to_apply ) ) {
+        wp_set_object_terms( $attachment_id, array_values( array_unique( $terms_to_apply ) ), 'sm_asset_type', true );
+    }
+
+    // Only assign logo slots when this file is actually a logo asset
+    if ( in_array( 'brand-logo', $asset_terms, true ) ) {
+        $variant = smoothmigration_classify_logo_variant( $filename );
+        smoothmigration_assign_logo_to_service( $service_id, $attachment_id, $variant );
+        $result['message'] = "Imported {$filename} as {$variant} variant";
+    } else {
+        $result['message'] = "Imported {$filename} as creative asset";
+    }
+
     $result['success'] = true;
-    $result['message'] = "Imported {$filename} as {$variant} variant";
     
     return $result;
 }
@@ -897,15 +998,15 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
         list( $brand_name, $brand_slug ) = smoothmigration_enhanced_brand_mapping( $partner );
         $type_slug = $category ? smoothmigration_map_service_type_folder( $category ) : smoothmigration_guess_type_from_filename( $brand_name );
 
-        // Find or create the service from JSONL
-        $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug );
+        // Find the service from JSONL without creating new ones (enrichment only)
+        $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug, false );
 
         // Fallback: try normalized partner label if initial lookup failed (handles parentheses, etc.)
         if ( ! $service_id ) {
             $normalized_partner = smoothmigration_normalize_partner_label( $partner );
             if ( $normalized_partner !== $partner ) {
                 list( $brand_name, $brand_slug ) = smoothmigration_enhanced_brand_mapping( $normalized_partner );
-                $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug );
+                $service_id = smoothmigration_find_or_create_service( $brand_name, $brand_slug, $country, $type_slug, false );
             }
         }
 
@@ -1445,6 +1546,11 @@ function smoothmigration_handle_bulk_import_submission(): array {
         // Then, enrich with JSONL-driven content if present (no new services created)
         $jsonl_results = smoothmigration_import_services_from_country_jsonl( $import_path, $region, $overwrite );
 
+        // Finally, consolidate any accidental duplicates by brand
+        if ( function_exists( 'smoothmigration_consolidate_services_by_brand' ) ) {
+            $con = smoothmigration_consolidate_services_by_brand();
+        } else { $con = array(); }
+
         // Merge results for display
         $results = array(
             'success' => ( ! empty( $folder_results['success'] ) && ! empty( $jsonl_results['success'] ) ),
@@ -1453,7 +1559,7 @@ function smoothmigration_handle_bulk_import_submission(): array {
             'errors' => array_merge( $folder_results['errors'] ?? array(), $jsonl_results['errors'] ?? array() ),
             'services_created' => $folder_results['services_created'] ?? array(),
             'structure_type' => $folder_results['structure_type'] ?? '',
-            'debug' => trim( ( $folder_results['debug'] ?? '' ) . "\n" . ( $jsonl_results['debug'] ?? '' ) ),
+            'debug' => trim( ( $folder_results['debug'] ?? '' ) . "\n" . ( $jsonl_results['debug'] ?? '' ) . ( ! empty( $con['details'] ) ? "\nConsolidation: " . implode( '; ', (array) $con['details'] ) : '' ) ),
         );
         
         // Clean up temporary files
@@ -1472,6 +1578,9 @@ function smoothmigration_handle_bulk_import_submission(): array {
         $import_path = smoothmigration_find_brand_container_folder( $folder_path );
         $folder_results = smoothmigration_process_folder_structure( $import_path, $region );
         $jsonl_results = smoothmigration_import_services_from_country_jsonl( $import_path, $region, $overwrite );
+        if ( function_exists( 'smoothmigration_consolidate_services_by_brand' ) ) {
+            $con = smoothmigration_consolidate_services_by_brand();
+        } else { $con = array(); }
 
         return array(
             'success' => ( ! empty( $folder_results['success'] ) && ! empty( $jsonl_results['success'] ) ),
@@ -1480,7 +1589,7 @@ function smoothmigration_handle_bulk_import_submission(): array {
             'errors' => array_merge( $folder_results['errors'] ?? array(), $jsonl_results['errors'] ?? array() ),
             'services_created' => $folder_results['services_created'] ?? array(),
             'structure_type' => $folder_results['structure_type'] ?? '',
-            'debug' => trim( ( $folder_results['debug'] ?? '' ) . "\n" . ( $jsonl_results['debug'] ?? '' ) ),
+            'debug' => trim( ( $folder_results['debug'] ?? '' ) . "\n" . ( $jsonl_results['debug'] ?? '' ) . ( ! empty( $con['details'] ) ? "\nConsolidation: " . implode( '; ', (array) $con['details'] ) : '' ) ),
         );
     
     } elseif ( $method === 'debug' ) {

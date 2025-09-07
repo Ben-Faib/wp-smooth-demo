@@ -182,70 +182,111 @@ function smoothmigration_tag_attachment_for_service( int $attachment_id, int $se
  */
 function smoothmigration_get_service_logo_candidates( int $service_id ): array {
 	$slug = smoothmigration_get_service_canonical_slug( $service_id );
-	$terms = array();
-	if ( $slug ) {
-		$terms[] = 'service-' . $slug;
-	}
-	$type_slugs = wp_get_post_terms( $service_id, 'service_type', array( 'fields' => 'slugs' ) );
-	if ( ! empty( $type_slugs ) ) {
-		$terms[] = 'type-' . (string) $type_slugs[0];
-	}
+	$brand_title = (string) get_the_title( $service_id );
+	$brand_title_lower = strtolower( $brand_title );
+	$brand_slug = (string) $slug;
 
-	$args = array(
+	// Helper to build candidate array from IDs
+	$build_candidates = static function( array $ids ): array {
+		$out = array();
+		foreach ( $ids as $aid ) {
+			$mime = (string) get_post_mime_type( $aid );
+			if ( $mime && strpos( $mime, 'image/' ) !== 0 && $mime !== 'image/svg+xml' ) {
+				continue;
+			}
+			$file_rel = (string) get_post_meta( $aid, '_wp_attached_file', true );
+			$basename = $file_rel ? basename( $file_rel ) : sanitize_title( (string) get_the_title( $aid ) );
+			$variant  = function_exists( 'smoothmigration_classify_logo_variant' )
+				? smoothmigration_classify_logo_variant( $basename )
+				: ( preg_match( '/(white|light|invert|inverted)/i', $basename ) ? 'on_dark'
+					: ( preg_match( '/(black|dark|color|regular)/i', $basename ) ? 'on_light'
+						: ( preg_match( '/(square|icon|badge|mark)/i', $basename ) ? 'square' : 'primary' ) ) );
+			$out[] = array(
+				'id'      => (int) $aid,
+				'variant' => $variant,
+				'mime'    => $mime,
+				'name'    => $basename,
+			);
+		}
+		return $out;
+	};
+
+	// 1) Strict: attachments tagged for THIS service (brand-logo AND service-{slug})
+	$strict_ids = get_posts( array(
 		'post_type'      => 'attachment',
 		'post_status'    => 'inherit',
 		'numberposts'    => -1,
 		'fields'         => 'ids',
-	);
-
-	if ( ! empty( $terms ) ) {
-		$args['tax_query'] = array(
-			'relation' => 'OR',
-			array(
-				'taxonomy' => 'sm_asset_type',
-				'field'    => 'slug',
-				'terms'    => $terms,
-			),
+		'tax_query'      => array(
+			'relation' => 'AND',
 			array(
 				'taxonomy' => 'sm_asset_type',
 				'field'    => 'slug',
 				'terms'    => array( 'brand-logo' ),
 			),
-		);
-	} else {
-		$args['tax_query'] = array(
 			array(
 				'taxonomy' => 'sm_asset_type',
 				'field'    => 'slug',
-				'terms'    => array( 'brand-logo' ),
+				'terms'    => array( 'service-' . $slug ),
 			),
-		);
+		),
+	) );
+	if ( ! empty( $strict_ids ) ) {
+		return $build_candidates( $strict_ids );
 	}
 
-	$ids = get_posts( $args );
+	// 2) Fallback: brand-logo assets filtered by brand tokens in title or filename
+	$broad_ids = get_posts( array(
+		'post_type'      => 'attachment',
+		'post_status'    => 'inherit',
+		'numberposts'    => -1,
+		'fields'         => 'ids',
+		's'              => $brand_title,
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'sm_asset_type',
+				'field'    => 'slug',
+				'terms'    => array( 'brand-logo' ),
+			),
+		),
+	) );
 
-	$candidates = array();
-	foreach ( $ids as $aid ) {
-		$mime = (string) get_post_mime_type( $aid );
-		if ( $mime && strpos( $mime, 'image/' ) !== 0 && $mime !== 'image/svg+xml' ) {
-			continue;
-		}
+	$filtered = array();
+	foreach ( $broad_ids as $aid ) {
+		$title = strtolower( (string) get_the_title( $aid ) );
 		$file_rel = (string) get_post_meta( $aid, '_wp_attached_file', true );
-		$basename = $file_rel ? basename( $file_rel ) : sanitize_title( (string) get_the_title( $aid ) );
-		$variant = function_exists( 'smoothmigration_classify_logo_variant' )
-			? smoothmigration_classify_logo_variant( $basename )
-			: ( preg_match( '/(white|light|invert|inverted)/i', $basename ) ? 'on_dark'
-				: ( preg_match( '/(black|dark|color|regular)/i', $basename ) ? 'on_light'
-					: ( preg_match( '/(square|icon|badge|mark)/i', $basename ) ? 'square' : 'primary' ) ) );
-
-		$candidates[] = array(
-			'id'      => (int) $aid,
-			'variant' => $variant,
-			'mime'    => $mime,
-			'name'    => $basename,
-		);
+		$basename = strtolower( $file_rel ? basename( $file_rel ) : '' );
+		$compact  = str_replace( array( ' ', '-' ), '', $brand_title_lower );
+		if (
+			( $brand_title_lower !== '' && ( strpos( $title, $brand_title_lower ) !== false || strpos( $basename, $brand_title_lower ) !== false ) )
+			|| ( $brand_slug !== '' && ( strpos( $title, $brand_slug ) !== false || strpos( $basename, $brand_slug ) !== false ) )
+			|| ( $compact !== '' && ( strpos( $title, $compact ) !== false || strpos( $basename, $compact ) !== false ) )
+		) {
+			$filtered[] = $aid;
+		}
 	}
-	return $candidates;
+	if ( ! empty( $filtered ) ) {
+		return $build_candidates( $filtered );
+	}
+
+	// 3) Last resort: any attachment strictly tagged with service-{slug}
+	$service_only_ids = array();
+	if ( $slug ) {
+		$service_only_ids = get_posts( array(
+			'post_type'      => 'attachment',
+			'post_status'    => 'inherit',
+			'numberposts'    => -1,
+			'fields'         => 'ids',
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'sm_asset_type',
+					'field'    => 'slug',
+					'terms'    => array( 'service-' . $slug ),
+				),
+			),
+		) );
+	}
+	return $build_candidates( $service_only_ids );
 }
 
 /**
@@ -296,5 +337,47 @@ function smoothmigration_pick_best_logo_candidate( int $service_id, string $cont
 		}
 	}
 	return $best;
+}
+
+/**
+ * Derive sm_asset_type terms from a filename.
+ * Examples: [brand-logo], [banner, banner-300x250], [animated], [format-png]
+ */
+function smoothmigration_get_asset_type_terms( string $filename ): array {
+    $terms = array();
+    $f = strtolower( $filename );
+    $ext = strtolower( (string) pathinfo( $filename, PATHINFO_EXTENSION ) );
+
+    if ( $ext !== '' ) {
+        $terms[] = 'format-' . $ext;
+    }
+
+    // Brand logo signals
+    if ( preg_match( '/\b(logo|brand|mark|icon)\b/i', $f ) ) {
+        $terms[] = 'brand-logo';
+    }
+
+    // Banner/creative signals (GDN sizes, common ad dimensions, or keywords)
+    $dimension_terms = array();
+    if ( preg_match_all( '/(\d{2,4})[xX](\d{2,4})/', $f, $matches, PREG_SET_ORDER ) ) {
+        foreach ( $matches as $m ) {
+            $w = isset( $m[1] ) ? (string) $m[1] : '';
+            $h = isset( $m[2] ) ? (string) $m[2] : '';
+            if ( $w !== '' && $h !== '' ) {
+                $dimension_terms[] = 'banner-' . $w . 'x' . $h;
+            }
+        }
+    }
+    if ( ! empty( $dimension_terms ) || strpos( $f, 'banner' ) !== false || strpos( $f, 'gdn' ) !== false || preg_match( '/\b(ad|ads)\b/i', $f ) ) {
+        $terms[] = 'banner';
+        $terms = array_merge( $terms, $dimension_terms );
+    }
+
+    // Animated
+    if ( $ext === 'gif' ) {
+        $terms[] = 'animated';
+    }
+
+    return array_values( array_unique( $terms ) );
 }
 

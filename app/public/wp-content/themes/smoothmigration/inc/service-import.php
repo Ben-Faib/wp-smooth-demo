@@ -500,6 +500,51 @@ function smoothmigration_fix_missing_service_logos(): array {
 }
 
 /**
+ * Consolidate duplicate Service posts by brand canonical slug.
+ * - Picks the earliest post as canonical per brand slug
+ * - Moves featured images from duplicates into free logo slots on canonical
+ * - Deletes duplicate posts
+ * - Normalizes canonical title/slug meta
+ */
+function smoothmigration_consolidate_services_by_brand(): array {
+    $grouped = array();
+    $services = get_posts( array( 'post_type' => 'service', 'numberposts' => -1 ) );
+    foreach ( $services as $p ) {
+        list( $brand, $slug ) = smoothmigration_map_canonical_brand( $p->post_title );
+        $grouped[ $slug ] = $grouped[ $slug ] ?? array();
+        $grouped[ $slug ][] = $p;
+    }
+    $removed = 0; $updated = 0; $merged = 0; $details = array();
+    foreach ( $grouped as $slug => $posts ) {
+        if ( count( $posts ) < 2 ) { continue; }
+        // Choose the earliest post as canonical
+        usort( $posts, function( $a, $b ) { return strtotime( $a->post_date_gmt ) <=> strtotime( $b->post_date_gmt ); } );
+        $canonical = array_shift( $posts );
+        $cid = (int) $canonical->ID;
+        update_post_meta( $cid, '_service_canonical', $slug );
+        foreach ( $posts as $dup ) {
+            $did = (int) $dup->ID;
+            // Try to capture its featured image into a free variant slot
+            $thumb = (int) get_post_thumbnail_id( $did );
+            if ( $thumb ) {
+                $slot = smoothmigration_classify_logo_variant( (string) $dup->post_title );
+                if ( $slot === 'on_dark' && ! get_post_meta( $cid, '_service_logo_on_dark', true ) ) { update_post_meta( $cid, '_service_logo_on_dark', $thumb ); $merged++; }
+                elseif ( $slot === 'on_light' && ! get_post_meta( $cid, '_service_logo_on_light', true ) ) { update_post_meta( $cid, '_service_logo_on_light', $thumb ); $merged++; }
+                elseif ( $slot === 'square' && ! get_post_meta( $cid, '_service_logo_square', true ) ) { update_post_meta( $cid, '_service_logo_square', $thumb ); $merged++; }
+                elseif ( ! get_post_meta( $cid, '_service_logo_primary', true ) ) { update_post_meta( $cid, '_service_logo_primary', $thumb ); $merged++; }
+            }
+            wp_delete_post( $did, true );
+            $removed++;
+        }
+        // Normalize canonical title/slug
+        wp_update_post( array( 'ID' => $cid, 'post_name' => $slug, 'post_title' => smoothmigration_map_canonical_brand( $canonical->post_title )[0] ) );
+        $updated++;
+        $details[] = sprintf( 'Consolidated brand "%s": kept #%d, removed %d dup(s).', $slug, $cid, count( $posts ) );
+    }
+    return array( 'updated' => $updated, 'removed' => $removed, 'merged' => $merged, 'details' => $details );
+}
+
+/**
  * Admin page to trigger import.
  */
 function smoothmigration_register_service_importer_menu(): void {
