@@ -9,40 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-/**
- * Create Elementor pages.
- */
-function smoothmigration_create_elementor_pages() {
-    if ( isset( $_POST['create_elementor_pages'] ) && check_admin_referer( 'smoothmigration_elementor_setup_nonce', 'smoothmigration_elementor_nonce' ) ) {
-        // Create homepage
-        smoothmigration_create_homepage_with_full_content();
-        
-        // Create about page
-        $about_page = array(
-            'post_title'   => 'About Us',
-            'post_content' => '<!-- wp:paragraph --><p>Learn more about our company.</p><!-- /wp:paragraph -->',
-            'post_status'  => 'publish',
-            'post_author'  => 1,
-            'post_type'    => 'page',
-        );
-        wp_insert_post( $about_page );
-        
-        // Create services page
-        $services_page = array(
-            'post_title'   => 'Services',
-            'post_content' => '<!-- wp:paragraph --><p>Explore our services.</p><!-- /wp:paragraph -->',
-            'post_status'  => 'publish',
-            'post_author'  => 1,
-            'post_type'    => 'page',
-        );
-        wp_insert_post( $services_page );
-
-        // Redirect back to the setup page with a success message
-        wp_redirect( admin_url( 'themes.php?page=elementor-setup&status=success' ) );
-        exit;
-    }
-}
-add_action( 'admin_init', 'smoothmigration_create_elementor_pages' );
+// Elementor page creation functions removed
 
 /**
  * Create homepage with full content.
@@ -205,10 +172,4 @@ function smoothmigration_fill_rich_content() {
     }
 }
 
-/**
- * Cleanup empty Elementor flags.
- */
-function smoothmigration_cleanup_empty_elementor_flags() {
-    global $wpdb;
-    $wpdb->query( "DELETE FROM `{$wpdb->postmeta}` WHERE `meta_key` = '_elementor_edit_mode' AND `meta_value` = ''" );
-} 
+// Elementor cleanup functions removed 

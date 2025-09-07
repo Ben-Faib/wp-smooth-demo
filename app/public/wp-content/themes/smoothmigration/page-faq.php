@@ -825,8 +825,8 @@ get_header();
     transform: rotate(45deg) scale(1.1);
 }
 
-/* Professional Fade + Slide Animation */
-.collapse {
+/* Professional Fade + Slide Animation (scoped to FAQ only) */
+.faq-accordion .collapse {
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -836,7 +836,7 @@ get_header();
                 transform 0.3s ease 0.1s;
 }
 
-.collapse.show {
+.faq-accordion .collapse.show {
     max-height: 1000px; /* Generous height for content */
     opacity: 1;
     transform: translateY(0);
@@ -877,10 +877,10 @@ get_header();
 
 /* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
-    .collapse,
-    .collapse.show,
+    .faq-accordion .collapse,
+    .faq-accordion .collapse.show,
     .faq-answer,
-    .collapse.show .faq-answer > * {
+    .faq-accordion .collapse.show .faq-answer > * {
         transition: none !important;
         animation: none !important;
         transform: none !important;
@@ -1212,8 +1212,8 @@ document.addEventListener('DOMContentLoaded', function() {
             header.setAttribute('aria-expanded', 'false');
             icon.style.transform = 'rotate(0deg)';
         } else {
-            // Close all other open items first
-            document.querySelectorAll('.collapse.show').forEach(openItem => {
+            // Close all other open FAQ items first
+            document.querySelectorAll('.faq-accordion .collapse.show').forEach(openItem => {
                 openItem.classList.remove('show');
                 const openHeader = document.querySelector(`[data-target="#${openItem.id}"]`);
                 if (openHeader) {

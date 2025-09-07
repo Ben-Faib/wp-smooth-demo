@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Section animations with staggered timing
-        const sectionsToAnimate = document.querySelectorAll('.how-it-works, .services-snapshot, .why-us, .social-proof, .about-snippet, .resources-section');
+        const sectionsToAnimate = document.querySelectorAll('.services-snapshot, .why-us, .social-proof, .about-snippet, .resources-section');
         sectionsToAnimate.forEach((section, index) => {
             section.classList.add('animate-on-scroll', 'animate-section');
             section.style.animationDelay = `${index * 0.2}s`;

@@ -270,22 +270,22 @@ get_header();
                 </div>
                 <div class="col-lg-5">
                     <form id="servicesMiniWizard" class="wizard-form bg-white text-dark p-4 rounded-4 shadow-lg" aria-labelledby="wizardTitle" novalidate>
-                        <h3 id="wizardTitle" class="h5 fw-bold mb-3"><i class="fas fa-wand-magic-sparkles me-2 text-accent"></i>Get your personalized relocation plan</h3>
+                        <h3 id="wizardTitle" class="h5 fw-bold mb-3 text-dark"><i class="fas fa-wand-magic-sparkles me-2 text-accent"></i>Get your personalized relocation plan</h3>
                         <div class="row g-3">
                             <div class="col-12">
-                                <label for="fromCountry" class="form-label">Moving from</label>
+                                <label for="fromCountry" class="form-label text-dark">Moving from</label>
                                 <input type="text" class="form-control" id="fromCountry" name="from" placeholder="e.g., South Africa" autocomplete="country-name" required />
                             </div>
                             <div class="col-12">
-                                <label for="toCountry" class="form-label">Moving to</label>
+                                <label for="toCountry" class="form-label text-dark">Moving to</label>
                                 <input type="text" class="form-control" id="toCountry" name="to" placeholder="e.g., Canada" autocomplete="country-name" required />
                             </div>
                             <div class="col-12">
-                                <label for="moveDate" class="form-label">Target move date</label>
+                                <label for="moveDate" class="form-label text-dark">Target move date</label>
                                 <input type="date" class="form-control" id="moveDate" name="date" />
                             </div>
                             <div class="col-12">
-                                <label for="interest" class="form-label">Primary interest</label>
+                                <label for="interest" class="form-label text-dark">Primary interest</label>
                                 <select id="interest" name="interest" class="form-select">
                                     <option value="">Select a category (optional)</option>
                                     <option value="banking-services">Banking</option>
@@ -300,7 +300,7 @@ get_header();
                         <div class="d-grid mt-3">
                             <button class="btn btn-accent btn-lg" type="submit" aria-describedby="wizardTitle"><i class="fas fa-paper-plane me-2"></i>Get Expert Guidance</button>
                         </div>
-                        <p class="small text-muted mt-2 mb-0">Free and personalized. We’ll follow up within 24 hours.</p>
+                        <p class="small text-dark mt-2 mb-0">Free and personalized. We'll follow up within 24 hours.</p>
                     </form>
                 </div>
             </div>

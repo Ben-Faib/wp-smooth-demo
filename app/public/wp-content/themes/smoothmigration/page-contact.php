@@ -449,7 +449,7 @@ get_header();
 }
 
 .badge-contact {
-    background: rgba(59, 130, 246, 0.2);
+    background: rgba(59, 130, 246, 0.7);
     color: var(--primary-color);
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius-2xl);

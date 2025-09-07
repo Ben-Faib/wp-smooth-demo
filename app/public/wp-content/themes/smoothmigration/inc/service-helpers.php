@@ -31,6 +31,20 @@ function smoothmigration_get_service_logo_id( int $post_id, string $context = 'c
 		return false;
 	};
 
+	// Explicit admin-selected overrides from Service Tools
+	if ( $context === 'list' ) {
+		$override_list = (int) get_post_meta( $post_id, '_service_image_list_override', true );
+		if ( $valid( $override_list ) ) {
+			return $override_list;
+		}
+	}
+	if ( $context === 'dark' || $context === 'hero' || $context === 'header' ) {
+		$override_header = (int) get_post_meta( $post_id, '_service_image_header_override', true );
+		if ( $valid( $override_header ) ) {
+			return $override_header;
+		}
+	}
+
 	// Build candidate lists by context, preferring variants suitable for background
 	$candidates = array();
 	switch ( $context ) {
@@ -53,6 +67,14 @@ function smoothmigration_get_service_logo_id( int $post_id, string $context = 'c
 	foreach ( $candidates as $candidate_id ) {
 		if ( $valid( $candidate_id ) ) {
 			return (int) $candidate_id;
+		}
+	}
+
+	// Try taxonomy-backed fallback using sm_asset_type tags (service-*, type-*, brand-logo)
+	if ( function_exists( 'smoothmigration_pick_best_logo_candidate' ) ) {
+		$tax_id = (int) smoothmigration_pick_best_logo_candidate( $post_id, $context );
+		if ( $valid( $tax_id ) ) {
+			return $tax_id;
 		}
 	}
 
@@ -88,4 +110,191 @@ function smoothmigration_get_service_logo( int $post_id, string $context = 'card
  * Helps when variant meta is not yet set on the post.
  */
 // (Intentionally no media-library fallback; logos must be assigned via logo variant meta or featured image.)
+
+/**
+ * Get a service's canonical slug, falling back to post_name/title when meta is absent.
+ */
+function smoothmigration_get_service_canonical_slug( int $service_id ): string {
+	$slug = (string) get_post_meta( $service_id, '_service_canonical', true );
+	if ( $slug === '' ) {
+		$p = get_post( $service_id );
+		if ( $p ) {
+			$slug = sanitize_title( (string) ( $p->post_name ?: $p->post_title ) );
+		}
+	}
+	return $slug;
+}
+
+/**
+ * Tag an attachment for a Service using sm_asset_type taxonomy.
+ * Terms applied:
+ * - brand-logo
+ * - service-{canonical-slug}
+ * - type-{service_type_slug}
+ *
+ * Terms are appended (non-destructive).
+ */
+function smoothmigration_tag_attachment_for_service( int $attachment_id, int $service_id ): void {
+	if ( get_post_type( $attachment_id ) !== 'attachment' ) {
+		return;
+	}
+
+	$terms = array( 'brand-logo' );
+
+	// Ensure Service-specific term exists and add it
+	$service_slug = smoothmigration_get_service_canonical_slug( $service_id );
+	if ( $service_slug ) {
+		$service_term_slug = 'service-' . $service_slug;
+		if ( ! term_exists( $service_term_slug, 'sm_asset_type' ) ) {
+			wp_insert_term(
+				'Service: ' . ucwords( str_replace( '-', ' ', $service_slug ) ),
+				'sm_asset_type',
+				array( 'slug' => $service_term_slug )
+			);
+		}
+		$terms[] = $service_term_slug;
+	}
+
+	// Ensure Type term exists and add it
+	$type_slugs = wp_get_post_terms( $service_id, 'service_type', array( 'fields' => 'slugs' ) );
+	if ( ! empty( $type_slugs ) ) {
+		$type_slug = (string) $type_slugs[0];
+		$type_term_slug = 'type-' . $type_slug;
+		if ( ! term_exists( $type_term_slug, 'sm_asset_type' ) ) {
+			$term_obj = get_term_by( 'slug', $type_slug, 'service_type' );
+			$label = $term_obj ? $term_obj->name : ucwords( str_replace( '-', ' ', $type_slug ) );
+			wp_insert_term(
+				'Type: ' . $label,
+				'sm_asset_type',
+				array( 'slug' => $type_term_slug )
+			);
+		}
+		$terms[] = $type_term_slug;
+	}
+
+	// Append terms without removing any existing Asset Type terms on the attachment
+	wp_set_object_terms( $attachment_id, $terms, 'sm_asset_type', true );
+}
+
+
+/**
+ * Build candidate logo attachments from sm_asset_type tags for a service.
+ */
+function smoothmigration_get_service_logo_candidates( int $service_id ): array {
+	$slug = smoothmigration_get_service_canonical_slug( $service_id );
+	$terms = array();
+	if ( $slug ) {
+		$terms[] = 'service-' . $slug;
+	}
+	$type_slugs = wp_get_post_terms( $service_id, 'service_type', array( 'fields' => 'slugs' ) );
+	if ( ! empty( $type_slugs ) ) {
+		$terms[] = 'type-' . (string) $type_slugs[0];
+	}
+
+	$args = array(
+		'post_type'      => 'attachment',
+		'post_status'    => 'inherit',
+		'numberposts'    => -1,
+		'fields'         => 'ids',
+	);
+
+	if ( ! empty( $terms ) ) {
+		$args['tax_query'] = array(
+			'relation' => 'OR',
+			array(
+				'taxonomy' => 'sm_asset_type',
+				'field'    => 'slug',
+				'terms'    => $terms,
+			),
+			array(
+				'taxonomy' => 'sm_asset_type',
+				'field'    => 'slug',
+				'terms'    => array( 'brand-logo' ),
+			),
+		);
+	} else {
+		$args['tax_query'] = array(
+			array(
+				'taxonomy' => 'sm_asset_type',
+				'field'    => 'slug',
+				'terms'    => array( 'brand-logo' ),
+			),
+		);
+	}
+
+	$ids = get_posts( $args );
+
+	$candidates = array();
+	foreach ( $ids as $aid ) {
+		$mime = (string) get_post_mime_type( $aid );
+		if ( $mime && strpos( $mime, 'image/' ) !== 0 && $mime !== 'image/svg+xml' ) {
+			continue;
+		}
+		$file_rel = (string) get_post_meta( $aid, '_wp_attached_file', true );
+		$basename = $file_rel ? basename( $file_rel ) : sanitize_title( (string) get_the_title( $aid ) );
+		$variant = function_exists( 'smoothmigration_classify_logo_variant' )
+			? smoothmigration_classify_logo_variant( $basename )
+			: ( preg_match( '/(white|light|invert|inverted)/i', $basename ) ? 'on_dark'
+				: ( preg_match( '/(black|dark|color|regular)/i', $basename ) ? 'on_light'
+					: ( preg_match( '/(square|icon|badge|mark)/i', $basename ) ? 'square' : 'primary' ) ) );
+
+		$candidates[] = array(
+			'id'      => (int) $aid,
+			'variant' => $variant,
+			'mime'    => $mime,
+			'name'    => $basename,
+		);
+	}
+	return $candidates;
+}
+
+/**
+ * Pick the best candidate by context and file type.
+ */
+function smoothmigration_pick_best_logo_candidate( int $service_id, string $context = 'card' ): int {
+	$candidates = smoothmigration_get_service_logo_candidates( $service_id );
+	if ( empty( $candidates ) ) {
+		return 0;
+	}
+
+	// Variant weights per context
+	switch ( $context ) {
+		case 'dark':
+		case 'hero':
+			$vw = array( 'on_dark' => 100, 'primary' => 80, 'square' => 70, 'on_light' => 60 );
+			break;
+		case 'square':
+		case 'badge':
+			$vw = array( 'square' => 100, 'primary' => 80, 'on_light' => 70, 'on_dark' => 60 );
+			break;
+		case 'list':
+		case 'card':
+		default:
+			$vw = array( 'on_light' => 100, 'primary' => 80, 'square' => 70, 'on_dark' => 60 );
+			break;
+	}
+
+	$mw = array(
+		'image/svg+xml' => 50,
+		'image/png'     => 40,
+		'image/webp'    => 35,
+		'image/jpeg'    => 30,
+		'image/gif'     => 10,
+	);
+
+	$best = 0; $best_score = -1;
+	foreach ( $candidates as $c ) {
+		$variant = isset( $c['variant'] ) ? (string) $c['variant'] : 'primary';
+		$mime    = isset( $c['mime'] ) ? (string) $c['mime'] : '';
+		$score   = (int) ( $vw[ $variant ] ?? 50 ) + (int) ( $mw[ $mime ] ?? 20 );
+		if ( isset( $c['name'] ) && stripos( (string) $c['name'], 'logo' ) !== false ) {
+			$score += 3;
+		}
+		if ( $score > $best_score ) {
+			$best_score = $score;
+			$best = (int) $c['id'];
+		}
+	}
+	return $best;
+}
 

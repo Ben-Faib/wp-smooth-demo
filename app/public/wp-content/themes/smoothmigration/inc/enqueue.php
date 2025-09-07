@@ -31,8 +31,7 @@ function smoothmigration_enqueue_assets() {
     
     // Remove potential conflicting FA styles from plugins/builders
     $fa_conflicts = array(
-        'fontawesome', 'font-awesome', 'fontawesome-free', 'fa', 'elementor-icons-fa-solid',
-        'elementor-icons-fa-regular', 'elementor-icons-fa-brands', 'elementor-icons-shared-0'
+        'fontawesome', 'font-awesome', 'fontawesome-free', 'fa'
     );
     foreach ( $fa_conflicts as $handle ) {
         wp_dequeue_style( $handle );
@@ -112,8 +111,7 @@ add_action( 'wp_enqueue_scripts', 'smoothmigration_enqueue_assets' );
 // Late pass to ensure no plugin re-adds old FA after our enqueue
 function smoothmigration_ensure_fa_last() {
     $fa_conflicts = array(
-        'fontawesome', 'font-awesome', 'fontawesome-free', 'fa', 'elementor-icons-fa-solid',
-        'elementor-icons-fa-regular', 'elementor-icons-fa-brands', 'elementor-icons-shared-0'
+        'fontawesome', 'font-awesome', 'fontawesome-free', 'fa'
     );
     foreach ( $fa_conflicts as $handle ) {
         wp_dequeue_style( $handle );

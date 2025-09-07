@@ -291,6 +291,10 @@ function smoothmigration_upsert_service_from_logo( string $filename, string $abs
         if ( ! has_post_thumbnail( $post_id ) ) {
             set_post_thumbnail( $post_id, $attachment_id );
         }
+        // Tag the attachment for this service/type for cascade deletion
+        if ( function_exists( 'smoothmigration_tag_attachment_for_service' ) ) {
+            smoothmigration_tag_attachment_for_service( $attachment_id, $post_id );
+        }
     }
 
 	// Set affiliate URL when known
@@ -372,6 +376,127 @@ function smoothmigration_import_services_from_media_library(): array {
 	}
 
 	return array( 'success' => true, 'message' => sprintf( 'Processed %d Brand Logo attachments, skipped %d.', $processed, $skipped ) );
+}
+
+/**
+ * Fix Missing Service Logos: assign logo meta from tagged assets and set featured image if missing.
+ */
+function smoothmigration_fix_missing_service_logos(): array {
+	$services = get_posts( array( 'post_type' => 'service', 'post_status' => 'any', 'numberposts' => -1 ) );
+	$checked = 0; $assigned = 0; $missing = 0; $details = array();
+
+	foreach ( $services as $p ) {
+		$checked++;
+		$sid = (int) $p->ID;
+
+		$has_any = (bool) (
+			get_post_meta( $sid, '_service_logo_primary', true ) ||
+			get_post_meta( $sid, '_service_logo_on_light', true ) ||
+			get_post_meta( $sid, '_service_logo_on_dark', true ) ||
+			get_post_meta( $sid, '_service_logo_square', true ) ||
+			has_post_thumbnail( $sid )
+		);
+
+		$cands = function_exists( 'smoothmigration_get_service_logo_candidates' ) ? smoothmigration_get_service_logo_candidates( $sid ) : array();
+
+		// If no candidates tagged to the service, try generic Brand Logo by name and tag them for future
+		if ( empty( $cands ) ) {
+			$name = (string) get_the_title( $sid );
+			$maybe = get_posts( array(
+				'post_type'      => 'attachment',
+				'post_status'    => 'inherit',
+				'numberposts'    => -1,
+				'fields'         => 'ids',
+				's'              => $name,
+				'tax_query'      => array(
+					array( 'taxonomy' => 'sm_asset_type', 'field' => 'slug', 'terms' => array( 'brand-logo' ) ),
+				),
+			) );
+			foreach ( $maybe as $aid ) {
+				if ( function_exists( 'smoothmigration_tag_attachment_for_service' ) ) {
+					smoothmigration_tag_attachment_for_service( (int) $aid, $sid );
+				}
+			}
+			if ( $maybe ) {
+				$cands = smoothmigration_get_service_logo_candidates( $sid );
+			}
+		}
+
+		if ( empty( $cands ) ) {
+			$missing++;
+			$details[] = 'No logo assets found for: ' . $p->post_title;
+			continue;
+		}
+
+		// Bucket by variant and rank by mime
+		$by_variant = array( 'on_light' => array(), 'on_dark' => array(), 'square' => array(), 'primary' => array() );
+		foreach ( $cands as $c ) {
+			$v = isset( $c['variant'] ) ? (string) $c['variant'] : 'primary';
+			if ( isset( $by_variant[ $v ] ) ) { $by_variant[ $v ][] = $c; } else { $by_variant['primary'][] = $c; }
+		}
+		$mime_score = function( $mime ) {
+			switch ( $mime ) {
+				case 'image/svg+xml': return 50;
+				case 'image/png': return 40;
+				case 'image/webp': return 35;
+				case 'image/jpeg': return 30;
+				case 'image/gif': return 10;
+				default: return 20;
+			}
+		};
+		foreach ( $by_variant as $k => $arr ) {
+			usort( $arr, function( $a, $b ) use ( $mime_score ) {
+				return $mime_score( $b['mime'] ?? '' ) <=> $mime_score( $a['mime'] ?? '' );
+			} );
+			$by_variant[ $k ] = $arr;
+		}
+
+		$map = array(
+			'_service_logo_on_light' => 'on_light',
+			'_service_logo_on_dark'  => 'on_dark',
+			'_service_logo_square'   => 'square',
+			'_service_logo_primary'  => 'primary',
+		);
+
+		$assigned_this = 0;
+		foreach ( $map as $meta_key => $variant ) {
+			if ( get_post_meta( $sid, $meta_key, true ) ) { continue; }
+			$pick = isset( $by_variant[ $variant ][0]['id'] ) ? (int) $by_variant[ $variant ][0]['id'] : 0;
+			if ( ! $pick && $variant !== 'primary' ) {
+				$pick = isset( $by_variant['primary'][0]['id'] ) ? (int) $by_variant['primary'][0]['id'] : 0;
+			}
+			if ( $pick ) {
+				update_post_meta( $sid, $meta_key, $pick );
+				$assigned++; $assigned_this++;
+				if ( ! has_post_thumbnail( $sid ) ) {
+					set_post_thumbnail( $sid, $pick );
+				}
+			}
+		}
+
+		if ( ! $has_any && $assigned_this === 0 ) {
+			$best = function_exists( 'smoothmigration_pick_best_logo_candidate' ) ? (int) smoothmigration_pick_best_logo_candidate( $sid, 'card' ) : 0;
+			if ( $best ) {
+				update_post_meta( $sid, '_service_logo_primary', $best );
+				if ( ! has_post_thumbnail( $sid ) ) {
+					set_post_thumbnail( $sid, $best );
+				}
+				$assigned++; $assigned_this++;
+			}
+		}
+
+		if ( $assigned_this ) {
+			$details[] = 'Assigned ' . $assigned_this . ' logo slot(s) for: ' . $p->post_title;
+		}
+	}
+
+	return array(
+		'success'  => true,
+		'checked'  => $checked,
+		'assigned' => $assigned,
+		'missing'  => $missing,
+		'details'  => $details,
+	);
 }
 
 /**

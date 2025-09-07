@@ -54,8 +54,6 @@
                         <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
                             <li><a class="dropdown-item" href="/faq">FAQ</a></li>
                             <li><a class="dropdown-item" href="/guides">Guides</a></li>
-                            <li><a class="dropdown-item" href="/case-studies">Case Studies</a></li>
-                            <li><a class="dropdown-item" href="/how-it-works">How it works</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -135,12 +133,6 @@
           </li>
           <li class="mobile-submenu-item" style="--item-index: 1">
             <a class="mobile-menu-link" href="/guides">Guides</a>
-          </li>
-          <li class="mobile-submenu-item" style="--item-index: 2">
-            <a class="mobile-menu-link" href="/case-studies">Case Studies</a>
-          </li>
-          <li class="mobile-submenu-item" style="--item-index: 3">
-            <a class="mobile-menu-link" href="/how-it-works">How it works</a>
           </li>
         </ul>
       </li>

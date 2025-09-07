@@ -29,7 +29,6 @@ function smoothmigration_theme_setup() {
     register_nav_menus( array(
         'primary'                  => __( 'Primary Menu', 'smoothmigration' ),
         'country_flags'            => __( 'Country Flags', 'smoothmigration' ),
-        'how_it_works_links'       => __( 'How It Works Links', 'smoothmigration' ),
         'featured_services'        => __( 'Featured Services', 'smoothmigration' ),
         'footer_categories'        => __( 'Footer Categories', 'smoothmigration' ),
         'social'                   => __( 'Social Links', 'smoothmigration' ),

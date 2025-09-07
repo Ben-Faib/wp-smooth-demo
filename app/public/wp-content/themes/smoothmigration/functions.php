@@ -31,7 +31,7 @@ require_once get_template_directory() . '/inc/guide-helpers.php';
 require_once get_template_directory() . '/inc/guide-demo-content.php';
 
 // Integrations.
-require_once get_template_directory() . '/inc/elementor.php';
+// Elementor integration removed
 
 // Demo content.
 require_once get_template_directory() . '/inc/demo-content.php';
@@ -52,11 +52,19 @@ require_once get_template_directory() . '/inc/options.php';
 require_once get_template_directory() . '/inc/stats.php';
 // Globe shortcode and assets
 require_once get_template_directory() . '/inc/globe.php';
+// Unified Service Tools (bulk import + delete UIs)
+require_once get_template_directory() . '/inc/service-tools.php';
 
 // Media taxonomies (Asset Type: Brand Logo)
 require_once get_template_directory() . '/inc/media-taxonomies.php';
 // Media bulk assignment tool
 require_once get_template_directory() . '/inc/media-bulk-assign.php';
+
+// Allow SVG uploads for vector logos
+add_filter( 'upload_mimes', function( $mimes ) {
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+} );
 
 // Redirect old telecommunication slug to new data-and-phone-plans
 add_action( 'template_redirect', function() {

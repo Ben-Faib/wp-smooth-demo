@@ -673,8 +673,13 @@ function smoothmigration_import_brand_image( string $image_path, string $filenam
     
     $result['attachment_id'] = $attachment_id;
     
-    // Set Asset Type taxonomy
-    wp_set_object_terms( $attachment_id, array( 'brand-logo' ), 'sm_asset_type', false );
+    // Set Asset Type taxonomy (append to preserve any prior terms)
+    wp_set_object_terms( $attachment_id, array( 'brand-logo' ), 'sm_asset_type', true );
+
+    // Also tag attachment for its owning Service and Type for cascade deletion
+    if ( function_exists( 'smoothmigration_tag_attachment_for_service' ) ) {
+        smoothmigration_tag_attachment_for_service( $attachment_id, $service_id );
+    }
     
     // Determine logo variant slot
     $variant = smoothmigration_classify_logo_variant( $filename );

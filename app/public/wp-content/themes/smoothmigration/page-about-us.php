@@ -324,8 +324,8 @@ get_header();
                 </div>
             </div>
             
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-6 col-md-6">
                     <div class="team-card animate-on-scroll">
                         <div class="team-photo">
                             <?php echo get_team_member_image('Grant', 'Grant Sakinofsky'); ?>
@@ -351,7 +351,7 @@ get_header();
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.2s;">
                         <div class="team-photo">
                             <?php echo get_team_member_image(array('Erin-about', 'Erin Copeland', 'Erin'), 'Erin Copeland'); ?>
@@ -378,7 +378,7 @@ get_header();
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.4s;">
                         <div class="team-photo">
                             <?php echo get_team_member_image('Christian', 'Christian Harmbeck'); ?>
@@ -406,7 +406,7 @@ get_header();
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="team-card animate-on-scroll" style="animation-delay: 0.1s;">
                         <div class="team-photo">
                             <?php echo get_team_member_image(array('Rob-about', 'Robert Wood', 'Rob'), 'Robert Wood'); ?>

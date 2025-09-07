@@ -68,59 +68,8 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- 2. Interactive How It Works Section -->
+<!-- 2. Interactive How It Works Section - REMOVED -->
 <main id="main">
-<section class="how-it-works py-5" aria-labelledby="how-it-works-title">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 id="how-it-works-title" class="section-title">How It Works For You</h2>
-            <p class="section-subtitle">You answer a few questions, get your personalized plan, and connect to vetted partners who understand your needs—see quick category links below.</p>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="step-card interactive-card text-center" tabindex="0">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Complete our questionnaire</h3>
-                    <p class="step-description">Tell us your relocation specifics—your destination, timing, family, and priorities.</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="step-card interactive-card text-center" tabindex="0">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Select services from your plan</h3>
-                    <p class="step-description">Use your custom plan to pick services and see your tasks at each stage. Try our <a href="/ai-relocator" class="text-primary fw-bold">AI Relocator</a> for personalized suggestions.</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="step-card interactive-card text-center" tabindex="0">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Get your preferred-rate quotes</h3>
-                    <p class="step-description">You receive tailored quotes from our trusted partners—often at rates better than going direct.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-4">
-            <?php if ( has_nav_menu( 'how_it_works_links' ) ) : ?>
-                <nav aria-label="How it works quick links">
-                    <?php
-                    wp_nav_menu( array(
-                        'theme_location' => 'how_it_works_links',
-                        'container'      => false,
-                        'menu_class'     => 'nav justify-content-center gap-2 mb-3',
-                        'fallback_cb'    => false,
-                        'depth'          => 1,
-                    ) );
-                    ?>
-                </nav>
-            <?php endif; ?>
-            <a href="/services" class="btn btn-outline-primary">Browse all categories (free) →</a>
-        </div>
-    </div>
-</section>
 
 <!-- 3. Limited Services Snapshot (3x2 Grid) -->
 <section class="services-snapshot py-5 bg-light position-relative" aria-labelledby="services-title">
@@ -535,7 +484,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
     
     // Add animation classes to sections and observe them
-    const sectionsToAnimate = document.querySelectorAll('.how-it-works, .services-snapshot, .why-us, .social-proof, .about-snippet, .resources-section');
+    const sectionsToAnimate = document.querySelectorAll('.services-snapshot, .why-us, .social-proof, .about-snippet, .resources-section');
     sectionsToAnimate.forEach((section, index) => {
         section.classList.add('animate-on-scroll');
         section.style.animationDelay = `${index * 0.2}s`;
