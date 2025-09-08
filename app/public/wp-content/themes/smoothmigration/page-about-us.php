@@ -821,9 +821,9 @@ get_header();
 .team-photo {
     position: relative;
     /* Use portrait aspect ratio to reduce unwanted cropping on headshots */
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 2 / 3;
     height: auto;
-    min-height: 280px;
+    min-height: 200px;
     background: var(--bg-light);
     display: flex;
     align-items: center;
@@ -857,6 +857,28 @@ get_header();
 
 .team-card:hover .team-image {
     transform: scale(1.02);
+}
+
+/* Desktop side-by-side layout for team cards */
+@media (min-width: 992px) {
+    .our-team .team-card {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        align-items: start;
+        gap: 1.5rem;
+        min-height: unset;
+    }
+
+    .our-team .team-photo {
+        aspect-ratio: 1 / 1;
+        height: 240px;
+        max-height: 240px;
+        border-radius: var(--border-radius-xl);
+    }
+
+    .our-team .team-info {
+        padding: 1.75rem 1.75rem 1.75rem 0;
+    }
 }
 
 .team-social {
@@ -1124,7 +1146,7 @@ get_header();
     .team-photo {
         aspect-ratio: 4 / 5;
         height: auto;
-        min-height: 220px;
+        min-height: 180px;
     }
     
     .team-image {

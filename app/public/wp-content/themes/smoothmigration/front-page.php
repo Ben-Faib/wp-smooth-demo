@@ -31,7 +31,7 @@ get_header(); ?>
                             Become a Partner
                         </a>
                     </div>
-                    <div class="small text-light" style="opacity:.95">100% free to use. We’re paid by partners for referrals—and we rigorously vet every partner. No hidden costs.</div>
+                    <div class="small text-light" style="opacity:.95">We rigorously vet every partner—and put our clients first.</div>
                     <!-- Urgency without pressure -->
                     <div class="urgency-signals mt-3">
                         <p class="urgency-text">
@@ -102,11 +102,10 @@ get_header(); ?>
                 </a>
             </div>
 
-            <!-- Center: Realtor Locator (core) -->
+            <!-- Center: Realtor Locator -->
             <div class="col-lg-4 col-md-6">
                 <a href="/realtor-locator" class="service-card-link">
-                    <div class="service-card service-card--core interactive-card" aria-describedby="realtor-core-desc">
-                        <span class="core-badge">Core</span>
+                    <div class="service-card interactive-card" aria-describedby="realtor-core-desc">
                         <div class="service-illustration" aria-hidden="true"><span class="icon-glow"><?php
                         $realtor_accent = get_template_directory() . '/assets/lottie/realtor-accent.json';
                         if ( file_exists( $realtor_accent ) ) {
