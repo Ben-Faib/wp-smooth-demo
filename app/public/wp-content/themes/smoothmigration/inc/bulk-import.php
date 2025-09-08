@@ -57,9 +57,7 @@ function smoothmigration_enhanced_brand_mapping( string $text ): array {
             'visitors coverage' => array('Visitors Coverage', 'visitors-coverage'),
             'figo pet insurance' => array('Figo Pet Insurance', 'figo-pet-insurance'),
             'international autosource' => array('International AutoSource', 'international-autosource'),
-            'experts in moving' => array('Experts in Moving', 'experts-in-moving'),
-            'sirelo(expertsinmoving)' => array('Experts in Moving', 'experts-in-moving'),
-            'sirelo' => array('Experts in Moving', 'experts-in-moving'),
+            // No forced aliasing for Sirelo; keep as-is
             'squareone tenant insurance' => array('SquareOne Insurance', 'squareone-insurance'),
             'boost mobile usa' => array('Boost Mobile', 'boost-mobile'),
             'visible by verizon' => array('Visible', 'visible'),
@@ -84,8 +82,8 @@ function smoothmigration_enhanced_brand_mapping( string $text ): array {
 function smoothmigration_normalize_partner_label( string $text ): string {
     $out = trim( $text );
 
-    // Insert spaces for CamelCase to align folder names like "ExpatRide" with "Expat Ride"
-    $out = preg_replace( '/([a-z])([A-Z])/', '$1 $2', $out );
+    // Preserve original casing and spacing; only normalize underscores to spaces
+    // (Do not split CamelCase so "ExpatRide" remains unchanged)
     // Normalize underscores to spaces
     $out = str_replace( '_', ' ', $out );
 
@@ -98,8 +96,7 @@ function smoothmigration_normalize_partner_label( string $text ): string {
         '/\bxe\s*money\s*transfers?\b/i' => 'XE Money Transfer',
         '/\bownr\s*company\s*set\s*up\b/i' => 'Ownr',
         '/\bnational\s*bank\s*of\s*canada\b/i' => 'National Bank of Canada',
-        '/\bexpat\s*ride\b/i' => 'Expat Ride',
-        '/\bexpatride\b/i' => 'Expat Ride',
+        // Do not coerce ExpatRide -> Expat Ride; keep input as-is
     );
     foreach ( $map as $pattern => $replacement ) {
         $out = preg_replace( $pattern, $replacement, $out );

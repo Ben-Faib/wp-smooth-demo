@@ -110,7 +110,9 @@ function smoothmigration_map_canonical_brand( string $text ): array {
         'Wise' => array('wise', 'transferwise'),
         'Remitly' => array('remitly'),
         'XE Money Transfer' => array('xe'),
-        'Experts in Moving' => array('experts in moving', 'sirelo', 'intercoastal', 'trigl'),
+        // Treat Sirelo as its own brand; do not alias to Experts in Moving
+        'Sirelo' => array('sirelo'),
+        'Experts in Moving' => array('experts in moving', 'intercoastal', 'trigl'),
         'Ownr' => array('ownr', 'ownr company set up'),
     );
     foreach ( $map as $canonical => $needles ) {
