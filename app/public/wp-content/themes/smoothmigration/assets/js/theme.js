@@ -1330,11 +1330,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (open) {
                         accordion.setAttribute('hidden', '');
                         btn.setAttribute('aria-expanded', 'false');
-                        btn.textContent = 'Read bio';
+                        btn.textContent = 'Read Bio';
                     } else {
                         accordion.removeAttribute('hidden');
                         btn.setAttribute('aria-expanded', 'true');
-                        btn.textContent = 'Hide bio';
+                        btn.textContent = 'Hide Bio';
                     }
                 } else {
                     // Populate and show modal

@@ -332,9 +332,9 @@ get_header();
                             <?php echo get_team_member_image('Grant', 'Grant Sakinofsky', 'avatar-img'); ?>
                         </div>
                         <h4 class="member-name">Grant Sakinofsky</h4>
-                        <p class="member-role">Founder & Director</p>
+                        <p class="member-role">Founder & director</p>
                         <div class="member-actions">
-                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read bio</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read Bio</button>
                             <div class="social-icons" aria-label="Grant social links">
                                 <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                                 <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
@@ -363,9 +363,9 @@ get_header();
                             <?php echo get_team_member_image(array('Erin-about', 'Erin Copeland', 'Erin'), 'Erin Copeland', 'avatar-img'); ?>
                         </div>
                         <h4 class="member-name">Erin Copeland</h4>
-                        <p class="member-role"><span class="role-base">Operations Manager</span><span class="role-region">North&nbsp;America</span></p>
+                        <p class="member-role"><span class="role-base">Operations manager</span><span class="role-region">North&nbsp;America</span></p>
                         <div class="member-actions">
-                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read bio</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read Bio</button>
                             <div class="social-icons" aria-label="Erin social links">
                                 <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                                 <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
@@ -395,9 +395,9 @@ get_header();
                             <?php echo get_team_member_image('Christian', 'Christian Harmbeck', 'avatar-img'); ?>
                         </div>
                         <h4 class="member-name">Christian Harmbeck</h4>
-                        <p class="member-role"><span class="role-base">Operations Manager</span><span class="role-region">Southern&nbsp;Africa</span></p>
+                        <p class="member-role"><span class="role-base">Operations manager</span><span class="role-region">Southern&nbsp;Africa</span></p>
                         <div class="member-actions">
-                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read bio</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read Bio</button>
                             <div class="social-icons" aria-label="Christian social links">
                                 <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                                 <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
@@ -428,9 +428,9 @@ get_header();
                             <?php echo get_team_member_image(array('Rob-about', 'Robert Wood', 'Rob'), 'Robert Wood', 'avatar-img'); ?>
                         </div>
                         <h4 class="member-name">Robert Wood</h4>
-                        <p class="member-role"><span class="role-base">Operations Manager</span><span class="role-region">United&nbsp;Kingdom</span></p>
+                        <p class="member-role"><span class="role-base">Operations manager</span><span class="role-region">United&nbsp;Kingdom</span></p>
                         <div class="member-actions">
-                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read bio</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read Bio</button>
                             <div class="social-icons" aria-label="Robert social links">
                                 <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                                 <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
