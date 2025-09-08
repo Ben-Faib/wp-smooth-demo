@@ -323,116 +323,156 @@ get_header();
                     <p class="section-subtitle">Experienced international professionals who have lived and worked across the globe.</p>
                 </div>
             </div>
-            
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-6 col-md-6">
-                    <div class="team-card animate-on-scroll">
-                        <div class="team-photo">
-                            <?php echo get_team_member_image('Grant', 'Grant Sakinofsky'); ?>
-                            <div class="team-social">
-                                <a href="#" class="social-link" aria-label="Grant Sakinofsky on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#" class="social-link" aria-label="Email Grant Sakinofsky"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+
+            <!-- Compact 4-column grid of avatars -->
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 team-grid">
+                <div class="col">
+                    <div class="team-member text-center">
+                        <div class="avatar-wrap">
+                            <?php echo get_team_member_image('Grant', 'Grant Sakinofsky', 'avatar-img'); ?>
+                        </div>
+                        <h4 class="member-name">Grant Sakinofsky</h4>
+                        <p class="member-role">Founder & Director</p>
+                        <div class="member-actions">
+                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read bio</button>
+                            <div class="social-icons" aria-label="Grant social links">
+                                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
-                        <div class="team-info">
-                            <h4 class="team-name">Grant Sakinofsky</h4>
-                            <p class="team-role">Founder & Director</p>
-                            <p class="team-description">Grant's journey began early — working since age 8, he graduated at 17 and used his savings to move to the United Kingdom, where he became one of the youngest foreigners in recent British history to be licensed before the Supreme Court in London.</p>
-                            <p class="team-description">A former national age group champion in springboard diving, provincial gymnast, and rock climber, Grant brings both athletic discipline and legal precision to international relocation.</p>
-                            <p class="team-description">After excelling across South Africa and the United Kingdom, Grant moved to the USA in 2019 where he got licensed in real estate and founded Smooth Migration. In 2022, he relocated to Canada, earning additional qualifications from UBC and becoming one of the only non-US, non-Canadian citizens to hold real estate licenses in both countries.</p>
-                            <p class="team-description">Currently serving on a Canadian non-profit board, Grant's 35+ years span four countries and multiple industries.</p>
-                            <div class="team-expertise">
-                                <span class="expertise-tag">Internationally Qualified Across Multiple Industries</span>
-                                <span class="expertise-tag">Dual Real Estate Licenses</span>
-                                <span class="expertise-tag">Former National Athlete</span>
-                                <span class="expertise-tag">Non-Profit Director</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6 col-md-6">
-                    <div class="team-card animate-on-scroll" style="animation-delay: 0.2s;">
-                        <div class="team-photo">
-                            <?php echo get_team_member_image(array('Erin-about', 'Erin Copeland', 'Erin'), 'Erin Copeland'); ?>
-                            <div class="team-social">
-                                <a href="#" class="social-link" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#" class="social-link" aria-label="Send email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h4 class="team-name">Erin Copeland</h4>
-                            <p class="team-role">Operations Manager - North America</p>
-                            <p class="team-description">Erin is a true veteran of international living, having navigated relocations across seven different countries.</p>
-                            <p class="team-description">Her unique background as a former Science and Biology teacher gives her exceptional organizational skills and attention to detail that prove invaluable in managing complex relocations.</p>
-                            <p class="team-description">With teaching qualifications from the University of Waterloo in Canada and a Master’s in Education from Griffith University in Australia, Erin combines academic rigor with practical experience.</p>
-                            <p class="team-description">She ran an established online tutoring company serving clients across multiple countries, demonstrating her ability to manage international operations and cross-cultural communication.</p>
-                            <p class="team-description">Her strong background in logistics, organization, and communication makes her the perfect bridge between our clients and their new destinations.</p>
-                            <div class="team-expertise">
-                                <span class="expertise-tag">7 Countries Experience</span>
-                                <span class="expertise-tag">Master’s in Education</span>
-                                <span class="expertise-tag">International Tutoring</span>
-                                <span class="expertise-tag">Logistics Expert</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6 col-md-6">
-                    <div class="team-card animate-on-scroll" style="animation-delay: 0.4s;">
-                        <div class="team-photo">
-                            <?php echo get_team_member_image('Christian', 'Christian Harmbeck'); ?>
-                            <div class="team-social">
-                                <a href="#" class="social-link" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#" class="social-link" aria-label="Send email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h4 class="team-name">Christian Harmbeck</h4>
-                            <p class="team-role">Operations Manager - Southern Africa</p>
-                            <p class="team-description">Christian brings a wealth of international business expertise, having lived and worked across several countries while mastering three languages.</p>
-                            <p class="team-description">As a driven business leader with a remarkable 25+ year track record, he has successfully scaled profitable companies and achieved successful exits across hospitality, retail and other sectors.</p>
-                            <p class="team-description">As a globally certified business and executive coach, Christian excels at empowering teams and business owners to reach their full potential.</p>
-                            <p class="team-description">He's a versatile business generalist who specializes in systemizing workflows and creating independent, self-sustaining operations.</p>
-                            <p class="team-description">His passion lies in driving organizational success through empowered teams, streamlined processes, and deep industry-specific knowledge.</p>
-                            <p class="team-description">Christian's strength in building robust customer relations and fostering positive company cultures makes him invaluable for clients navigating new business environments.</p>
-                            <div class="team-expertise">
-                                <span class="expertise-tag">Trilingual</span>
-                                <span class="expertise-tag">Certified Executive Coach</span>
-                                <span class="expertise-tag">Successful Exits</span>
-                                <span class="expertise-tag">Workflow Systems</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6 col-md-6">
-                    <div class="team-card animate-on-scroll" style="animation-delay: 0.1s;">
-                        <div class="team-photo">
-                            <?php echo get_team_member_image(array('Rob-about', 'Robert Wood', 'Rob'), 'Robert Wood'); ?>
-                            <div class="team-social">
-                                <a href="#" class="social-link" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#" class="social-link" aria-label="Send email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-info">
-                            <h4 class="team-name">Robert Wood</h4>
-                            <p class="team-role">Operations Manager - United Kingdom</p>
-                            <p class="team-description">Originally from Australia, Robert has made the United Kingdom his home for over 20 years, working extensively across the United Kingdom with a focus on customer-facing roles.</p>
-                            <p class="team-description">His international perspective expanded further during his time in Italy, where he provided ongoing business support to locally based companies, gaining invaluable insight into European business culture.</p>
-                            <p class="team-description">With over two decades of experience spanning Hospitality, New Business Development, and Customer Relations, Robert has developed an exceptional ability to connect with people from all backgrounds.</p>
-                            <p class="team-description">As a highly skilled customer relations expert and experienced marketing professional, he brings his own unique flair to everything he does.</p>
-                            <p class="team-description">His deep understanding of what it means to build a life in a new country, combined with his natural talent for making people feel at ease, makes him the perfect advocate for our UK-bound clients.</p>
-                            <div class="team-expertise">
-                                <span class="expertise-tag">20+ Years of UK Experience</span>
-                                <span class="expertise-tag">Cross-European Business</span>
-                                <span class="expertise-tag">Customer Relations Expert</span>
-                                <span class="expertise-tag">Marketing Professional</span>
+                        <div class="bio-accordion" hidden>
+                            <div class="bio-content">
+                                <p>Grant's journey began early — working since age 8, he graduated at 17 and used his savings to move to the United Kingdom, where he became one of the youngest foreigners in recent British history to be licensed before the Supreme Court in London.</p>
+                                <p>A former national age group champion in springboard diving, provincial gymnast, and rock climber, Grant brings both athletic discipline and legal precision to international relocation.</p>
+                                <p>After excelling across South Africa and the United Kingdom, Grant moved to the USA in 2019 where he got licensed in real estate and founded Smooth Migration. In 2022, he relocated to Canada, earning additional qualifications from UBC and becoming one of the only non-US, non-Canadian citizens to hold real estate licenses in both countries.</p>
+                                <p>Currently serving on a Canadian non-profit board, Grant's 35+ years span four countries and multiple industries.</p>
+                                <div class="team-expertise mt-2">
+                                    <span class="expertise-tag">Internationally Qualified Across Multiple Industries</span>
+                                    <span class="expertise-tag">Dual Real Estate Licenses</span>
+                                    <span class="expertise-tag">Former National Athlete</span>
+                                    <span class="expertise-tag">Non-Profit Director</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="col">
+                    <div class="team-member text-center">
+                        <div class="avatar-wrap">
+                            <?php echo get_team_member_image(array('Erin-about', 'Erin Copeland', 'Erin'), 'Erin Copeland', 'avatar-img'); ?>
+                        </div>
+                        <h4 class="member-name">Erin Copeland</h4>
+                        <p class="member-role"><span class="role-base">Operations Manager</span><span class="role-region">North&nbsp;America</span></p>
+                        <div class="member-actions">
+                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read bio</button>
+                            <div class="social-icons" aria-label="Erin social links">
+                                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="bio-accordion" hidden>
+                            <div class="bio-content">
+                                <p>Erin is a true veteran of international living, having navigated relocations across seven different countries.</p>
+                                <p>Her unique background as a former Science and Biology teacher gives her exceptional organizational skills and attention to detail that prove invaluable in managing complex relocations.</p>
+                                <p>With teaching qualifications from the University of Waterloo in Canada and a Master’s in Education from Griffith University in Australia, Erin combines academic rigor with practical experience.</p>
+                                <p>She ran an established online tutoring company serving clients across multiple countries, demonstrating her ability to manage international operations and cross-cultural communication.</p>
+                                <p>Her strong background in logistics, organization, and communication makes her the perfect bridge between our clients and their new destinations.</p>
+                                <div class="team-expertise mt-2">
+                                    <span class="expertise-tag">7 Countries Experience</span>
+                                    <span class="expertise-tag">Master’s in Education</span>
+                                    <span class="expertise-tag">International Tutoring</span>
+                                    <span class="expertise-tag">Logistics Expert</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="team-member text-center">
+                        <div class="avatar-wrap">
+                            <?php echo get_team_member_image('Christian', 'Christian Harmbeck', 'avatar-img'); ?>
+                        </div>
+                        <h4 class="member-name">Christian Harmbeck</h4>
+                        <p class="member-role"><span class="role-base">Operations Manager</span><span class="role-region">Southern&nbsp;Africa</span></p>
+                        <div class="member-actions">
+                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read bio</button>
+                            <div class="social-icons" aria-label="Christian social links">
+                                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="bio-accordion" hidden>
+                            <div class="bio-content">
+                                <p>Christian brings a wealth of international business expertise, having lived and worked across several countries while mastering three languages.</p>
+                                <p>As a driven business leader with a remarkable 25+ year track record, he has successfully scaled profitable companies and achieved successful exits across hospitality, retail and other sectors.</p>
+                                <p>As a globally certified business and executive coach, Christian excels at empowering teams and business owners to reach their full potential.</p>
+                                <p>He's a versatile business generalist who specializes in systemizing workflows and creating independent, self-sustaining operations.</p>
+                                <p>His passion lies in driving organizational success through empowered teams, streamlined processes, and deep industry-specific knowledge.</p>
+                                <p>Christian's strength in building robust customer relations and fostering positive company cultures makes him invaluable for clients navigating new business environments.</p>
+                                <div class="team-expertise mt-2">
+                                    <span class="expertise-tag">Trilingual</span>
+                                    <span class="expertise-tag">Certified Executive Coach</span>
+                                    <span class="expertise-tag">Successful Exits</span>
+                                    <span class="expertise-tag">Workflow Systems</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="team-member text-center">
+                        <div class="avatar-wrap">
+                            <?php echo get_team_member_image(array('Rob-about', 'Robert Wood', 'Rob'), 'Robert Wood', 'avatar-img'); ?>
+                        </div>
+                        <h4 class="member-name">Robert Wood</h4>
+                        <p class="member-role"><span class="role-base">Operations Manager</span><span class="role-region">United&nbsp;Kingdom</span></p>
+                        <div class="member-actions">
+                            <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read bio</button>
+                            <div class="social-icons" aria-label="Robert social links">
+                                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="bio-accordion" hidden>
+                            <div class="bio-content">
+                                <p>Originally from Australia, Robert has made the United Kingdom his home for over 20 years, working extensively across the United Kingdom with a focus on customer-facing roles.</p>
+                                <p>His international perspective expanded further during his time in Italy, where he provided ongoing business support to locally based companies, gaining invaluable insight into European business culture.</p>
+                                <p>With over two decades of experience spanning Hospitality, New Business Development, and Customer Relations, Robert has developed an exceptional ability to connect with people from all backgrounds.</p>
+                                <p>As a highly skilled customer relations expert and experienced marketing professional, he brings his own unique flair to everything he does.</p>
+                                <p>His deep understanding of what it means to build a life in a new country, combined with his natural talent for making people feel at ease, makes him the perfect advocate for our UK-bound clients.</p>
+                                <div class="team-expertise mt-2">
+                                    <span class="expertise-tag">20+ Years of UK Experience</span>
+                                    <span class="expertise-tag">Cross-European Business</span>
+                                    <span class="expertise-tag">Customer Relations Expert</span>
+                                    <span class="expertise-tag">Marketing Professional</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop modal for bios -->
+            <div class="modal fade" id="teamBioModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-role text-primary fw-semibold mb-2"></div>
+                            <div class="modal-body-content"></div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <div class="modal-socials d-flex gap-2"></div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -991,6 +1031,103 @@ get_header();
     background: var(--primary-lighter);
     margin: 1rem 0 0.5rem 0;
     border-radius: 2px;
+}
+
+/* Compact team grid avatars */
+.team-grid .team-member {
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-2xl);
+    padding: 1.25rem;
+    height: 100%;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar-wrap {
+    --ring-color: var(--primary-color);
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 0.75rem;
+    position: relative;
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+.avatar-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid var(--ring-color);
+    pointer-events: none;
+}
+
+.avatar-img, .avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+.member-name {
+    font-weight: 700;
+    margin: 0.25rem 0 0.1rem;
+    font-size: 1rem;
+}
+
+.member-role {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Ensure role and region are on separate lines and region doesn't break */
+.member-role .role-base,
+.member-role .role-region {
+    display: block;
+}
+
+.member-role .role-region {
+    white-space: nowrap;
+}
+
+.member-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+}
+
+.member-actions .social-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Normalize button height to icon size for perfect vertical alignment */
+.team-grid .member-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    line-height: 1;
+    padding: 0 1rem;
+}
+
+/* Mobile accordion */
+@media (max-width: 767.98px) {
+    .team-grid .bio-accordion[hidden] { display: none !important; }
+    .team-grid .bio-accordion { text-align: left; margin-top: 0.75rem; }
 }
 
 .mission-vision {

@@ -1301,6 +1301,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, { threshold: 0.25 });
     document.querySelectorAll('.why-us .icon-glow, .resource-link .icon-glow, .resource-icon .icon-glow').forEach(el => faIconObserver.observe(el));
+
+    // Team bio interactions (desktop modal, mobile accordion)
+    (function initTeamBios() {
+        const grid = document.querySelector('.team-grid');
+        if (!grid) return;
+
+        const isMobile = () => window.matchMedia('(max-width: 767.98px)').matches;
+
+        // Build modal instance lazily
+        let modalEl = document.getElementById('teamBioModal');
+        let modalInstance = modalEl ? bootstrap.Modal.getOrCreateInstance(modalEl) : null;
+
+        grid.querySelectorAll('.team-member').forEach(member => {
+            const btn = member.querySelector('.read-bio');
+            const name = member.querySelector('.member-name')?.textContent?.trim() || '';
+            const role = member.querySelector('.member-role')?.textContent?.trim() || '';
+            const socials = member.querySelector('.social-icons')?.innerHTML || '';
+            const bioContent = member.querySelector('.bio-content');
+            const accordion = member.querySelector('.bio-accordion');
+
+            if (!btn || !bioContent) return;
+
+            btn.addEventListener('click', () => {
+                if (isMobile()) {
+                    // Toggle accordion
+                    const open = accordion.hasAttribute('hidden') ? false : true;
+                    if (open) {
+                        accordion.setAttribute('hidden', '');
+                        btn.setAttribute('aria-expanded', 'false');
+                        btn.textContent = 'Read bio';
+                    } else {
+                        accordion.removeAttribute('hidden');
+                        btn.setAttribute('aria-expanded', 'true');
+                        btn.textContent = 'Hide bio';
+                    }
+                } else {
+                    // Populate and show modal
+                    if (!modalEl) return;
+                    modalEl.querySelector('.modal-title').textContent = name;
+                    modalEl.querySelector('.modal-role').textContent = role;
+                    modalEl.querySelector('.modal-body-content').innerHTML = bioContent.innerHTML;
+                    const socialWrap = modalEl.querySelector('.modal-socials');
+                    socialWrap.innerHTML = socials;
+                    modalInstance.show();
+                }
+            });
+        });
+    })();
 });
 
 // Performance monitoring utility
