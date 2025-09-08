@@ -211,7 +211,7 @@ get_header();
                                     <i class="fas fa-briefcase"></i>
                                 </div>
                                 <div class="stat-details">
-                                    <h3>60+</h3>
+                                    <h3>35+</h3>
                                     <p>Years Combined Experience</p>
                                 </div>
                             </div>
@@ -487,7 +487,7 @@ get_header();
                             <i class="fas fa-bullseye display-3 text-accent"></i>
                         </div>
                         <h3 class="content-title">Our Mission</h3>
-                        <p class="content-description">To leverage our team's collective 60+ years of international living and working experience to eliminate the stress and complexity of relocation for professionals and families worldwide.</p>
+                        <p class="content-description">To leverage our team's collective 35+ years of international living and working experience to eliminate the stress and complexity of relocation for professionals and families worldwide.</p>
                         <div class="mission-points">
                             <div class="point-item">
                                 <i class="fas fa-check-circle text-accent"></i>
