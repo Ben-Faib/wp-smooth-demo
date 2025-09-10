@@ -53,11 +53,8 @@ function smoothmigration_theme_setup() {
     // Add support for responsive embeds
     add_theme_support( 'responsive-embeds' );
     
-    // Add support for custom color palette
-    add_theme_support( 'editor-color-palette' );
-    
-    // Add support for custom font sizes
-    add_theme_support( 'editor-font-sizes' );
+    // Removed bare editor supports to avoid passing booleans to core.
+    // If needed later, re-add with proper arrays to define palette and sizes.
 }
 add_action( 'after_setup_theme', 'smoothmigration_theme_setup' );
 
