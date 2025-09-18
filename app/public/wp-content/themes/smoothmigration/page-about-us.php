@@ -336,8 +336,8 @@ get_header();
                         <div class="member-actions">
                             <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read Bio</button>
                             <div class="social-icons" aria-label="Grant social links">
-                                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                                <a href="https://www.linkedin.com/in/grant-sakinofsky/" class="social-link" aria-label="Grant on LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="mailto:contact@smoothmigration.net" class="social-link" aria-label="Email contact@smoothmigration.net"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="bio-accordion" hidden>
@@ -367,8 +367,8 @@ get_header();
                         <div class="member-actions">
                             <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read Bio</button>
                             <div class="social-icons" aria-label="Erin social links">
-                                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                                <a href="https://www.linkedin.com/in/erin-copeland-176732244/" class="social-link" aria-label="Erin on LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="mailto:contact@smoothmigration.net" class="social-link" aria-label="Email contact@smoothmigration.net"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="bio-accordion" hidden>
@@ -399,8 +399,8 @@ get_header();
                         <div class="member-actions">
                             <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read Bio</button>
                             <div class="social-icons" aria-label="Christian social links">
-                                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                                <a href="https://www.linkedin.com/in/christianharbeck/" class="social-link" aria-label="Christian on LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="mailto:contact@smoothmigration.net" class="social-link" aria-label="Email contact@smoothmigration.net"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="bio-accordion" hidden>
@@ -432,8 +432,7 @@ get_header();
                         <div class="member-actions">
                             <button type="button" class="btn btn-outline-primary btn-sm read-bio" aria-expanded="false">Read Bio</button>
                             <div class="social-icons" aria-label="Robert social links">
-                                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+                                <a href="mailto:contact@smoothmigration.net" class="social-link" aria-label="Email contact@smoothmigration.net"><i class="fas fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="bio-accordion" hidden>
