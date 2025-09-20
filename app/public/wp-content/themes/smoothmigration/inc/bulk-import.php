@@ -1036,17 +1036,60 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
         if ( $why !== '' )      { $content_parts[] = '<h3>Why we recommend</h3><p>' . wp_kses_post( $why ) . '</p>'; }
         if ( $how !== '' )      { $content_parts[] = '<h3>How it helps</h3><p>' . wp_kses_post( $how ) . '</p>'; }
 
-        // Optional widget (limited allowed tags/attrs)
-        if ( $widget ) {
-            $allowed = array(
-                'object' => array( 'data' => true, 'width' => true, 'height' => true, 'type' => true, 'title' => true, 'class' => true ),
-                'param'  => array( 'name' => true, 'value' => true ),
-                'embed'  => array( 'src' => true, 'type' => true, 'width' => true, 'height' => true, 'allowfullscreen' => true, 'allowscriptaccess' => true ),
-                'iframe' => array( 'src' => true, 'width' => true, 'height' => true, 'frameborder' => true, 'allow' => true, 'allowfullscreen' => true, 'title' => true, 'class' => true ),
-            );
-            $widget_safe = wp_kses( $widget, $allowed );
-            if ( $widget_safe ) {
-                update_post_meta( $service_id, '_service_widget_html', $widget_safe );
+        // Optional widget (supports HTML tags or attribute-only strings)
+        if ( $widget && strtolower( trim( $widget ) ) !== 'n/a' ) {
+            $widget_html = '';
+
+            // Case 1: Full HTML provided (object/iframe/embed/script)
+            if ( strpos( $widget, '<' ) !== false ) {
+                $widget_html = $widget;
+            } else {
+                // Case 2: Attribute-only string (e.g., src="https://...bootstrap.js" data-aff-ref="...")
+                // Parse key="value" pairs into an array
+                $attrs = array();
+                if ( preg_match_all( '/([a-zA-Z0-9_-]+)\s*=\s*"([^"]*)"/', $widget, $m, PREG_SET_ORDER ) ) {
+                    foreach ( $m as $pair ) {
+                        $k = strtolower( $pair[1] );
+                        $v = $pair[2];
+                        $attrs[ $k ] = $v;
+                    }
+                }
+
+                // Build a VisitorsCoverage script tag when src matches their widget
+                $src = isset( $attrs['src'] ) ? trim( (string) $attrs['src'] ) : '';
+                if ( $src !== '' && preg_match( '#^https://www\.visitorscoverage\.com/partner-widget/v1/quote/bootstrap\.js$#', $src ) ) {
+                    $aff = isset( $attrs['data-aff-ref'] ) ? (string) $attrs['data-aff-ref'] : '';
+                    $type = 'text/javascript';
+                    $widget_html = '<script type="' . esc_attr( $type ) . '" src="' . esc_url( $src ) . '"' . ( $aff !== '' ? ' data-aff-ref="' . esc_attr( $aff ) . '"' : '' ) . '></script>';
+                }
+            }
+
+            if ( $widget_html !== '' ) {
+                // Allow only a strict set of tags/attributes
+                $allowed = array(
+                    'object' => array( 'data' => true, 'width' => true, 'height' => true, 'type' => true, 'title' => true, 'class' => true ),
+                    'param'  => array( 'name' => true, 'value' => true ),
+                    'embed'  => array( 'src' => true, 'type' => true, 'width' => true, 'height' => true, 'allowfullscreen' => true, 'allowscriptaccess' => true ),
+                    'iframe' => array( 'src' => true, 'width' => true, 'height' => true, 'frameborder' => true, 'allow' => true, 'allowfullscreen' => true, 'title' => true, 'class' => true ),
+                    // Strictly permit script for vetted partner widgets only
+                    'script' => array( 'type' => true, 'src' => true, 'async' => true, 'defer' => true, 'id' => true, 'data-aff-ref' => true ),
+                );
+
+                // Final safety: if a <script> src is present, restrict to known host
+                if ( preg_match( '#<script[^>]+src=\"([^\"]+)\"#i', $widget_html, $mm ) ) {
+                    $allowed_src = (string) $mm[1];
+                    if ( ! preg_match( '#^https://www\.visitorscoverage\.com/partner-widget/v1/quote/bootstrap\.js$#', $allowed_src ) ) {
+                        // Disallow unknown scripts
+                        $widget_html = '';
+                    }
+                }
+
+                if ( $widget_html !== '' ) {
+                    $widget_safe = wp_kses( $widget_html, $allowed );
+                    if ( $widget_safe ) {
+                        update_post_meta( $service_id, '_service_widget_html', $widget_safe );
+                    }
+                }
             }
         }
 

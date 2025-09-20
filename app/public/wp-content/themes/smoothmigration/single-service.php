@@ -71,7 +71,7 @@ if (strpos($term_slug, 'insurance') !== false) {
                         <div class="card shadow-sm mb-4">
                             <div class="card-body">
                                 <h2 class="h5 mb-3">Booking / Price Widget</h2>
-                                <div class="service-embed"><?php echo $svc_widget; ?></div>
+                                <div class="service-embed"><?php echo do_shortcode( $svc_widget ); ?></div>
                             </div>
                         </div>
                         <?php endif; ?>

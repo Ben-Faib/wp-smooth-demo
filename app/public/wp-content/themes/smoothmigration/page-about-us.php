@@ -54,12 +54,25 @@ function get_team_member_image($search_terms, $alt_text = '', $class = 'team-ima
 
         if (!empty($attachments)) {
             $attachment = $attachments[0];
-            $image_url = wp_get_attachment_image_url($attachment->ID, 'full');
+            // Prefer responsive images with srcset/sizes and lazy loading for mobile a11y/performance
+            $image_html = wp_get_attachment_image(
+                $attachment->ID,
+                'medium_large',
+                false,
+                array(
+                    'class' => $class,
+                    'alt' => $alt_text,
+                    'loading' => 'lazy',
+                    'decoding' => 'async',
+                    'sizes' => '(max-width: 768px) 140px, 180px',
+                )
+            );
             if ($debug) {
+                $image_url = wp_get_attachment_image_url($attachment->ID, 'medium_large');
                 echo "\n<!-- sm_debug_team: term='" . esc_html($term) . "' matched attachment ID " . intval($attachment->ID) . " url=" . esc_url($image_url) . " -->\n";
             }
-            if ($image_url) {
-                return '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($alt_text) . '" class="' . esc_attr($class) . '" />';
+            if ($image_html) {
+                return $image_html;
             }
         } else {
             if ($debug) {
@@ -117,7 +130,7 @@ get_header();
                         <div class="about-graphic">
                             <div class="world-connections">
                                 <div class="central-hub">
-                                    <i class="fas fa-home display-3 text-accent"></i>
+                                    <i class="fas fa-home display-3 text-accent" aria-hidden="true"></i>
                                 </div>
                                 <div class="connection-lines"></div>
                                 <div class="location-dots" aria-hidden="true">
@@ -164,7 +177,7 @@ get_header();
                         <div class="story-timeline">
                             <div class="timeline-item">
                                 <div class="timeline-marker">
-                                    <i class="fas fa-lightbulb"></i>
+                                    <i class="fas fa-lightbulb" aria-hidden="true"></i>
                                 </div>
                                 <div class="timeline-content">
                                     <h4>The Experience</h4>
@@ -174,7 +187,7 @@ get_header();
                             
                             <div class="timeline-item">
                                 <div class="timeline-marker">
-                                    <i class="fas fa-rocket"></i>
+                                    <i class="fas fa-rocket" aria-hidden="true"></i>
                                 </div>
                                 <div class="timeline-content">
                                     <h4>The Vision</h4>
@@ -184,7 +197,7 @@ get_header();
                             
                             <div class="timeline-item">
                                 <div class="timeline-marker">
-                                    <i class="fas fa-globe"></i>
+                                    <i class="fas fa-globe" aria-hidden="true"></i>
                                 </div>
                                 <div class="timeline-content">
                                     <h4>The Team</h4>
@@ -199,7 +212,7 @@ get_header();
                         <div class="story-stats-grid">
                             <div class="story-stat">
                                 <div class="stat-icon">
-                                    <i class="fas fa-globe"></i>
+                                    <i class="fas fa-globe" aria-hidden="true"></i>
                                 </div>
                                 <div class="stat-details">
                                     <h3>15+</h3>
@@ -208,7 +221,7 @@ get_header();
                             </div>
                             <div class="story-stat">
                                 <div class="stat-icon">
-                                    <i class="fas fa-briefcase"></i>
+                                    <i class="fas fa-briefcase" aria-hidden="true"></i>
                                 </div>
                                 <div class="stat-details">
                                     <h3>35+</h3>
@@ -217,7 +230,7 @@ get_header();
                             </div>
                             <div class="story-stat">
                                 <div class="stat-icon">
-                                    <i class="fas fa-language"></i>
+                                    <i class="fas fa-language" aria-hidden="true"></i>
                                 </div>
                                 <div class="stat-details">
                                     <h3>5+</h3>
@@ -226,7 +239,7 @@ get_header();
                             </div>
                             <div class="story-stat">
                                 <div class="stat-icon">
-                                    <i class="fas fa-award"></i>
+                                    <i class="fas fa-award" aria-hidden="true"></i>
                                 </div>
                                 <div class="stat-details">
                                     <h3>4</h3>
@@ -254,7 +267,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="value-card animate-on-scroll">
                         <div class="value-icon">
-                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart" aria-hidden="true"></i>
                         </div>
                         <h3 class="value-title">Empathy First</h3>
                         <p class="value-description">We understand the emotional and practical challenges of international relocation because we've been there ourselves.</p>
@@ -264,7 +277,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="value-card animate-on-scroll" style="animation-delay: 0.2s;">
                         <div class="value-icon bg-secondary">
-                            <i class="fas fa-shield-alt"></i>
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
                         </div>
                         <h3 class="value-title">Trust & Transparency</h3>
                         <p class="value-description">We maintain complete transparency in our processes and only work with thoroughly vetted, trusted partners.</p>
@@ -274,7 +287,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="value-card animate-on-scroll" style="animation-delay: 0.4s;">
                         <div class="value-icon bg-success">
-                            <i class="fas fa-lightbulb"></i>
+                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
                         </div>
                         <h3 class="value-title">Innovation</h3>
                         <p class="value-description">We continuously improve our platform and services using data insights and customer feedback.</p>
@@ -284,7 +297,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="value-card animate-on-scroll" style="animation-delay: 0.1s;">
                         <div class="value-icon bg-warning">
-                            <i class="fas fa-hands-helping"></i>
+                            <i class="fas fa-hands-helping" aria-hidden="true"></i>
                         </div>
                         <h3 class="value-title">Support</h3>
                         <p class="value-description">Our commitment doesn't end when you arrive. We provide ongoing support throughout your relocation journey.</p>
@@ -294,7 +307,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="value-card animate-on-scroll" style="animation-delay: 0.3s;">
                         <div class="value-icon bg-info">
-                            <i class="fas fa-globe"></i>
+                            <i class="fas fa-globe" aria-hidden="true"></i>
                         </div>
                         <h3 class="value-title">Global Perspective</h3>
                         <p class="value-description">Our international team brings diverse cultural perspectives and local expertise to every relocation.</p>
@@ -304,7 +317,7 @@ get_header();
                 <div class="col-lg-4 col-md-6">
                     <div class="value-card animate-on-scroll" style="animation-delay: 0.5s;">
                         <div class="value-icon bg-danger">
-                            <i class="fas fa-medal"></i>
+                            <i class="fas fa-medal" aria-hidden="true"></i>
                         </div>
                         <h3 class="value-title">Excellence</h3>
                         <p class="value-description">We strive for excellence in every interaction, service delivery, and customer experience.</p>
@@ -325,7 +338,7 @@ get_header();
             </div>
 
             <!-- Compact 4-column grid of avatars -->
-            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 team-grid">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 team-grid">
                 <div class="col">
                     <div class="team-member text-center">
                         <div class="avatar-wrap">
@@ -455,16 +468,16 @@ get_header();
             </div>
 
             <!-- Desktop modal for bios -->
-            <div class="modal fade" id="teamBioModal" tabindex="-1" aria-hidden="true">
+            <div class="modal fade" id="teamBioModal" tabindex="-1" aria-labelledby="teamBioModalLabel" aria-describedby="teamBioModalDesc" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title"></h5>
+                            <h5 class="modal-title" id="teamBioModalLabel"></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="modal-role text-primary fw-semibold mb-2"></div>
-                            <div class="modal-body-content"></div>
+                            <div class="modal-body-content" id="teamBioModalDesc"></div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <div class="modal-socials d-flex gap-2"></div>
@@ -483,7 +496,7 @@ get_header();
                 <div class="col-lg-6">
                     <div class="mission-content animate-on-scroll">
                         <div class="content-icon">
-                            <i class="fas fa-bullseye display-3 text-accent"></i>
+                            <i class="fas fa-bullseye display-3 text-accent" aria-hidden="true"></i>
                         </div>
                         <h3 class="content-title">Our Mission</h3>
                         <p class="content-description">To leverage our team's collective 35+ years of international living and working experience to eliminate the stress and complexity of relocation for professionals and families worldwide.</p>
@@ -506,7 +519,7 @@ get_header();
                 <div class="col-lg-6">
                     <div class="vision-content animate-on-scroll" style="animation-delay: 0.3s;">
                         <div class="content-icon">
-                            <i class="fas fa-eye display-3 text-accent"></i>
+                            <i class="fas fa-eye display-3 text-accent" aria-hidden="true"></i>
                         </div>
                         <h3 class="content-title">Our Vision</h3>
                         <p class="content-description">To be the leading relocation service powered by professionals who have lived the expat experience, providing unmatched expertise and genuine understanding of international moves.</p>
@@ -536,15 +549,15 @@ get_header();
                         <p class="lead mb-4">Work with professionals who have lived the expat experience across four continents. Let our personal knowledge guide your successful relocation.</p>
                         <div class="cta-features d-flex flex-wrap gap-4">
                             <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-star text-primary me-2"></i>
+                                <i class="fas fa-star text-primary me-2" aria-hidden="true"></i>
                                 <span>Superior Service</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-tags text-primary me-2"></i>
+                                <i class="fas fa-tags text-primary me-2" aria-hidden="true"></i>
                                 <span>Superior Pricing</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
-                                <i class="fas fa-microchip text-primary me-2"></i>
+                                <i class="fas fa-microchip text-primary me-2" aria-hidden="true"></i>
                                 <span>Superior Technology</span>
                             </div>
                         </div>
@@ -746,6 +759,11 @@ get_header();
     color: var(--text-light);
     line-height: 1.7;
     margin: 0;
+}
+
+/* Add a bit more space between consecutive paragraphs */
+.timeline-content p + p {
+    margin-top: 1rem;
 }
 
 .story-stats-grid {
@@ -998,6 +1016,15 @@ get_header();
     padding-top: 1rem;
 }
 
+/* Bio paragraphs: slightly increased spacing between paragraphs for readability */
+.bio-content p {
+    line-height: 1.65;
+    margin: 0 0 1rem;
+}
+.bio-content p + p {
+    margin-top: 1.1rem;
+}
+
 .expertise-tag {
     background: var(--primary-lighter);
     color: var(--primary-color);
@@ -1134,15 +1161,15 @@ get_header();
 }
 
 .content-icon {
-    margin-bottom: 2rem;
+        margin-bottom: 0.75rem;
 }
 
-.content-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    color: white;
-}
+    .content-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        color: white;
+    }
 
 .content-description {
     font-size: 1.1rem;
@@ -1245,19 +1272,45 @@ get_header();
     }
     
     .timeline-item {
-        flex-direction: column;
+        display: block;
+        position: relative;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1.25rem;
+        padding-right: 0; /* allow text to span full width */
     }
-    
+
     .timeline-marker {
-        margin-right: 0;
-        margin-bottom: 1rem;
+        margin: 0;
+        width: 56px;
+        height: 56px;
+        position: absolute;
+        left: 4px;
+        top: -16px; /* raise icon slightly */
+    }
+
+    .timeline-content p {
+        margin-top: 0.9rem; /* nudge paragraph a bit lower */
     }
     
     .story-stats-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr); /* quadrant layout on mobile */
+        gap: 0.75rem;
+    }
+
+    .story-stat {
+        padding: 1.25rem;
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .stat-details h3 {
+        font-size: 1.6rem;
+        margin-bottom: 0.25rem;
     }
     
     .vision-goals {
@@ -1289,6 +1342,35 @@ get_header();
         object-position: center 28%;
     }
     
+    /* Mobile improvements for team grid */
+    .avatar-wrap {
+        width: 140px;
+        height: 140px;
+    }
+
+    .member-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .team-grid .member-actions .btn {
+        width: 100%;
+        min-height: 44px; /* Ensure touch target size */
+    }
+
+    .member-actions .social-icons {
+        justify-content: center;
+    }
+
+    .team-grid .social-link {
+        width: 44px;
+        height: 44px;
+    }
+
+    .member-role .role-region {
+        white-space: normal;
+    }
+    
     .team-name {
         font-size: 1.2rem;
     }
@@ -1302,6 +1384,53 @@ get_header();
         width: 20px;
         margin: 0.8rem 0 0.3rem 0;
     }
+
+    /* Dots are decorative on mobile; avoid implying interactivity */
+    .dot {
+        cursor: default;
+    }
+    .dot:hover {
+        transform: none;
+    }
+
+    /* Mission & Vision: left-aligned icon with centered headings and full-width body */
+    .mission-content,
+    .vision-content { position: relative; }
+
+    .mission-content .content-icon,
+    .vision-content .content-icon {
+        position: absolute;
+        left: 4px;
+        top: -14px;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        pointer-events: none;
+    }
+
+    .mission-content .content-title,
+    .vision-content .content-title { text-align: center; }
+
+    .mission-content .content-description,
+    .vision-content .content-description { margin-top: 0.9rem; }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .hero-pattern { animation: none !important; }
+    .dot { animation: none !important; }
+    .dot:hover { transform: none !important; }
+    .team-card:hover .team-image { transform: none !important; }
+    .story-stat:hover { transform: none !important; }
+}
+
+/* Visible focus outlines for keyboard users */
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 </style>
 
@@ -1340,18 +1469,108 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Smooth scrolling for anchor links
+    // Smooth scrolling for anchor links with reduced-motion support and focus management
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     anchorLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#' || href.length < 2) return;
+            const targetElement = document.querySelector(href);
+            if (!targetElement) return;
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            targetElement.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+            if (!targetElement.hasAttribute('tabindex')) targetElement.setAttribute('tabindex', '-1');
+            targetElement.focus({ preventScroll: true });
+        });
+    });
+
+    // Team bios: add ARIA wiring, toggle accordion on mobile, modal on desktop
+    document.querySelectorAll('.team-member').forEach((member, index) => {
+        const btn = member.querySelector('.read-bio');
+        const bioAccordion = member.querySelector('.bio-accordion');
+        const nameEl = member.querySelector('.member-name');
+        const roleEl = member.querySelector('.member-role');
+        const socialsEl = member.querySelector('.social-icons');
+
+        if (!btn || !bioAccordion) return;
+
+        // ARIA relationships
+        const panelId = bioAccordion.id || `bio-${index}`;
+        bioAccordion.id = panelId;
+        bioAccordion.setAttribute('role', 'region');
+        bioAccordion.setAttribute('tabindex', '-1');
+        if (nameEl) {
+            const nameId = nameEl.id || `name-${index}`;
+            nameEl.id = nameId;
+            bioAccordion.setAttribute('aria-labelledby', nameId);
+        }
+        btn.setAttribute('aria-controls', panelId);
+
+        btn.addEventListener('click', function() {
+            const isMobile = window.matchMedia('(max-width: 991.98px)').matches;
+
+            if (isMobile) {
+                // Close other open bios
+                const container = member.closest('.team-grid') || document;
+                container.querySelectorAll('.bio-accordion:not([hidden])').forEach(openAcc => {
+                    if (openAcc !== bioAccordion) {
+                        openAcc.setAttribute('hidden', '');
+                        const openBtn = openAcc.closest('.team-member')?.querySelector('.read-bio');
+                        if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+                    }
                 });
+
+                const isHidden = bioAccordion.hasAttribute('hidden');
+                if (isHidden) {
+                    bioAccordion.removeAttribute('hidden');
+                    btn.setAttribute('aria-expanded', 'true');
+                    // Update button label for clarity
+                    const originalText = btn.getAttribute('data-label-read') || 'Read Bio';
+                    const hideText = btn.getAttribute('data-label-hide') || 'Hide Bio';
+                    btn.textContent = hideText;
+                    // Move focus into the expanded panel
+                    bioAccordion.focus();
+                } else {
+                    bioAccordion.setAttribute('hidden', '');
+                    btn.setAttribute('aria-expanded', 'false');
+                    const originalText = btn.getAttribute('data-label-read') || 'Read Bio';
+                    btn.textContent = originalText;
+                }
+                return;
+            }
+
+            // Desktop: show modal
+            const modalEl = document.getElementById('teamBioModal');
+            if (!modalEl) {
+                // Fallback to inline toggle if modal isn't available
+                bioAccordion.toggleAttribute('hidden');
+                btn.setAttribute('aria-expanded', String(!bioAccordion.hasAttribute('hidden')));
+                return;
+            }
+
+            const titleEl = modalEl.querySelector('.modal-title');
+            const roleOut = modalEl.querySelector('.modal-role');
+            const bodyOut = modalEl.querySelector('.modal-body-content');
+            const socialsOut = modalEl.querySelector('.modal-socials');
+
+            if (titleEl && nameEl) titleEl.textContent = nameEl.textContent.trim();
+            if (roleOut && roleEl) roleOut.textContent = roleEl.textContent.trim();
+            if (bodyOut) bodyOut.innerHTML = bioAccordion.querySelector('.bio-content')?.innerHTML || '';
+            if (socialsOut) socialsOut.innerHTML = socialsEl?.innerHTML || '';
+
+            if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+                // Restore focus to trigger on close
+                modalEl.addEventListener('hidden.bs.modal', function onHidden() {
+                    modalEl.removeEventListener('hidden.bs.modal', onHidden);
+                    btn.focus();
+                });
+            } else {
+                // Fallback
+                bioAccordion.toggleAttribute('hidden');
+                btn.setAttribute('aria-expanded', String(!bioAccordion.hasAttribute('hidden')));
             }
         });
     });

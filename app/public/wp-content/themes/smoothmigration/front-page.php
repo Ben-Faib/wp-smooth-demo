@@ -246,29 +246,22 @@ get_header(); ?>
             </div>
         </div>
         
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-6 col-md-8">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"Moving to Canada was so much less stressful than I expected. Smooth Migration handled everything and best of all, it didn't cost us a penny!"</div>
-                    <div class="testimonial-author">— Sarah M., UK → Canada</div>
+                    <div class="testimonial-text">“Our clients have been benefitting from Smooth Migrations services, and I have personally used one of their services for my own insurance, that was far better than other companies that I approached.
+We appreciate the continued ongoing support our clients receive from Smooth Migration, whom we highly recommend.”</div>
+                    <div class="testimonial-author">— Diane – Owner, New Routes Canada</div>
                 </div>
             </div>
             
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-6 col-md-8">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">"I was shocked at how much money we saved! The team gave us quality advice and connected us with professionals who really understood our unique situation."</div>
-                    <div class="testimonial-author">— James R., SA → USA</div>
+                    <div class="testimonial-text">“We have worked with Smooth Migration for nearly three years and have found their innovative approach to their clients and sourcing the best solutions very beneficial.
+We look forward to a continued and productive ongoing relationship between our companies.”</div>
+                    <div class="testimonial-author">— Jesse Abrams – Co Founder, CEO of Homewise</div>
                 </div>
             </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">"Everything was so straightforward! They gave us a clear roadmap for our move to the UK, introduced us to reliable providers, and the best part was that their service came at no cost to us."</div>
-                    <div class="testimonial-author">— Emily W., USA → UK</div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 </section>

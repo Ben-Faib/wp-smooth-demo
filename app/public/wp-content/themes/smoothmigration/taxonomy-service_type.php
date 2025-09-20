@@ -84,6 +84,7 @@ $term = get_queried_object();
                             'insurance' => array(
                                 'headers' => array('Brand', 'Best For', 'Coverage Type', 'Details'),
                                 'data' => array(
+                                    'visitors-coverage' => array('Best For' => 'Travel medical insurance & visitors to US', 'Coverage Type' => 'Comparison marketplace'),
                                     'covermore' => array('Best For' => 'Travel & health insurance', 'Coverage Type' => 'Comprehensive'),
                                     'figo' => array('Best For' => 'Pet insurance', 'Coverage Type' => 'Pet-specific'),
                                     'lemonade' => array('Best For' => 'Tenant insurance', 'Coverage Type' => 'Rental protection'),

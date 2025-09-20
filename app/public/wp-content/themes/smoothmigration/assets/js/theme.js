@@ -1306,6 +1306,9 @@ document.addEventListener('DOMContentLoaded', function() {
     (function initTeamBios() {
         const grid = document.querySelector('.team-grid');
         if (!grid) return;
+        
+        // Avoid double-binding on About page; its template ships an inline handler
+        if (grid.closest('.about-page')) return;
 
         const isMobile = () => window.matchMedia('(max-width: 767.98px)').matches;
 
