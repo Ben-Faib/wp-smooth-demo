@@ -70,7 +70,7 @@ if (strpos($term_slug, 'insurance') !== false) {
                         <hr class="my-5" />
                         <div class="card shadow-sm mb-4" id="svcWidget">
                             <div class="card-body">
-                                <h2 class="h5 mb-3">get a quote!</h2>
+                                <h2 class="h5 mb-3">Get a quote!</h2>
                                 <div class="service-embed" data-widget-ready="0" aria-busy="true">
                                     <div class="svc-loading-overlay" role="status" aria-live="polite">
                                         <div class="text-center w-100">
