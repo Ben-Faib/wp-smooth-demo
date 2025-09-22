@@ -227,10 +227,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const link = card.dataset.link || '#';
             const affiliate = card.dataset.affiliate || link;
             const serviceType = (card.dataset.serviceType || '').toLowerCase();
+            const hasWidget = (card.dataset.hasWidget || '0') === '1';
 
             let affiliateText = 'Explore Partner Services';
             if (serviceType.includes('insurance')) {
                 affiliateText = 'Get a Quote';
+            }
+
+            // If this service has an on-site widget, route to service page with a widget intent param
+            let ctaHref = affiliate;
+            let ctaTarget = ' target="_blank"';
+            let ctaRel = ' rel="nofollow noopener"';
+            if (hasWidget) {
+                const base = link.replace(/#.*$/, '');
+                const sep = base.includes('?') ? '&' : '?';
+                ctaHref = `${base}${sep}toWidget=1`;
+                ctaTarget = '';
+                ctaRel = '';
             }
 
             const titleEl = modal.querySelector('.modal-title');
@@ -244,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p class="mb-0 text-muted">${excerpt}</p>
                     </div>
                     <div class="d-flex gap-2 mt-3">
-                        <a id="qvAffiliate" href="${affiliate}" target="_blank" rel="nofollow noopener" class="btn btn-primary">${affiliateText}</a>
+                        <a id="qvAffiliate" href="${ctaHref}"${ctaTarget}${ctaRel} class="btn btn-primary">${affiliateText}</a>
                         <a id="qvLearn" href="${link}" class="btn btn-outline-primary">Learn More</a>
                     </div>
                 `;

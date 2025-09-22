@@ -68,10 +68,22 @@ if (strpos($term_slug, 'insurance') !== false) {
                         <?php the_content(); ?>
                         <?php $svc_widget = get_post_meta( get_the_ID(), '_service_widget_html', true ); if ( $svc_widget ) : ?>
                         <hr class="my-5" />
-                        <div class="card shadow-sm mb-4">
+                        <div class="card shadow-sm mb-4" id="svcWidget">
                             <div class="card-body">
-                                <h2 class="h5 mb-3">Booking / Price Widget</h2>
-                                <div class="service-embed"><?php echo do_shortcode( $svc_widget ); ?></div>
+                                <h2 class="h5 mb-3">get a quote!</h2>
+                                <div class="service-embed" data-widget-ready="0" aria-busy="true">
+                                    <div class="svc-loading-overlay" role="status" aria-live="polite">
+                                        <div class="text-center w-100">
+                                            <div class="spinner-border text-primary" aria-hidden="true"></div>
+                                            <p class="small text-muted mt-2 mb-0">Hold on tight — loading options…</p>
+                                        </div>
+                                    </div>
+                                    <div class="svc-widget-target"></div>
+                                    <noscript>
+                                        <?php echo do_shortcode( $svc_widget ); ?>
+                                    </noscript>
+                                </div>
+                                <template id="svcWidgetTpl"><?php echo do_shortcode( $svc_widget ); ?></template>
                             </div>
                         </div>
                         <?php endif; ?>
@@ -154,6 +166,11 @@ if (strpos($term_slug, 'insurance') !== false) {
 <style>
 .sticky-cta{position:sticky;bottom:0;background:#fff}
 .service-tabs .nav-link{border-radius:999px}
+#svcWidget{scroll-margin-top:100px}
+#svcWidget .service-embed{position:relative;min-height:220px}
+#svcWidget .svc-loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.85)}
+#svcWidget:not(.svc-widget-loading) .svc-loading-overlay{display:none}
+@media (prefers-reduced-motion: reduce){#svcWidget .spinner-border{animation:none!important}}
 </style>
 
 <script>
@@ -170,6 +187,88 @@ document.addEventListener('DOMContentLoaded', function(){
       if (window.gtag) { gtag('event','affiliate_click',{brand: '<?php echo esc_js( get_the_title() ); ?>', url: this.href}); }
     });
   });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+	(function(){
+		var card = document.getElementById('svcWidget');
+		if(!card) return;
+		var embed = card.querySelector('.service-embed');
+		var target = embed.querySelector('.svc-widget-target');
+		var tpl = document.getElementById('svcWidgetTpl');
+		var qs = new URLSearchParams(window.location.search);
+		var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var debug = qs.get('widgetDebug') === '1';
+		var loaded = false;
+
+		function log(){ if(debug && window.console) console.log.apply(console, arguments); }
+
+		function execScripts(scope){
+			scope.querySelectorAll('script').forEach(function(old){
+				var s = document.createElement('script');
+				for (var i=0;i<old.attributes.length;i++){ var a=old.attributes[i]; s.setAttribute(a.name,a.value); }
+				s.text = old.text || old.textContent;
+				old.parentNode.replaceChild(s, old);
+			});
+		}
+
+		function show(){ card.classList.add('svc-widget-loading'); embed.setAttribute('aria-busy','true'); }
+		function hide(){ card.classList.remove('svc-widget-loading'); embed.removeAttribute('aria-busy'); }
+
+		function load(){
+			if(loaded) return;
+			loaded = true;
+			log('Widget: start lazy load');
+			show();
+			if(tpl){ target.innerHTML = tpl.innerHTML; execScripts(target); }
+			var iframes = target.querySelectorAll('iframe');
+			var done = false, count = 0;
+			function finish(){
+				if(done) return; done = true;
+				hide();
+				log('Widget: loaded');
+				if (qs.get('toWidget') === '1' || window.location.hash === '#svcWidget') {
+					card.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+				}
+			}
+			if(iframes.length){
+				iframes.forEach(function(f){
+					f.addEventListener('load', function(){ count++; if(count===iframes.length) finish(); });
+				});
+				setTimeout(finish, 2000);
+			}else{
+				setTimeout(finish, 900);
+			}
+		}
+
+		var observer = new IntersectionObserver(function(entries){
+			entries.forEach(function(entry){ if(entry.isIntersecting){ load(); observer.disconnect(); } });
+		}, { rootMargin: '300px 0px', threshold: 0.01 });
+		observer.observe(card);
+
+		if(qs.get('toWidget') === '1'){
+			setTimeout(function(){
+				card.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+			}, 100);
+			load();
+			try{
+				var url = new URL(window.location.href);
+				url.searchParams.delete('toWidget');
+				window.history.replaceState({}, '', url.pathname + url.hash);
+			}catch(e){}
+		}
+
+		if(window.location.hash === '#svcWidget'){
+			load();
+			if(!prefersReduced){
+				setTimeout(function(){
+					card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				}, 300);
+			}
+		}
+	})();
 });
 </script>
 <?php get_footer();

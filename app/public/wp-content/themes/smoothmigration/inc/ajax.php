@@ -67,9 +67,13 @@ function smoothmigration_get_services_for_type() {
     if ( $services_query->have_posts() ) {
         while ( $services_query->have_posts() ) {
             $services_query->the_post();
+            // Shorter, cleaner excerpt for Quick View via AJAX
+            $raw = has_excerpt() ? get_the_excerpt() : strip_tags( get_the_content() );
+            $raw = preg_replace( '/^\s*(Overview|Summary)[:\s]+/i', '', (string) $raw );
+            $short = wp_trim_words( trim( preg_replace( '/\s+/', ' ', (string) $raw ) ), 18, '…' );
             $services_data[] = array(
                 'title'   => get_the_title(),
-                'excerpt' => has_excerpt() ? get_the_excerpt() : '',
+                'excerpt' => $short,
             );
         }
     }

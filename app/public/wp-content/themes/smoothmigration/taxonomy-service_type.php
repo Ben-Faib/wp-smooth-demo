@@ -227,12 +227,16 @@ $term = get_queried_object();
                         }
                         $logo_src = '';
                         if ( $logo_html && preg_match('/src=\"([^\"]+)\"/i', $logo_html, $m) ) { $logo_src = $m[1]; }
-                        $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words( strip_tags( get_the_content() ), 24 );
+                        // Shorter, cleaner quick view: drop leading "Overview" and trim to ~18 words
+                        $raw_excerpt = has_excerpt() ? get_the_excerpt() : strip_tags( get_the_content() );
+                        $raw_excerpt = preg_replace( '/^\s*(Overview|Summary)[:\s]+/i', '', (string) $raw_excerpt );
+                        $excerpt = wp_trim_words( trim( preg_replace( '/\s+/', ' ', (string) $raw_excerpt ) ), 18, '…' );
                         $service_terms = get_the_terms( get_the_ID(), 'service_type' );
                         $service_type_slug = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->slug : '';
                     ?>
                     <div class="col-lg-12">
-                        <div class="card h-100 shadow-sm service-list-card" data-title="<?php echo esc_attr( get_the_title() ); ?>" data-excerpt="<?php echo esc_attr( $excerpt ); ?>" data-logo="<?php echo esc_url( $logo_src ); ?>" data-link="<?php echo esc_url( get_permalink() ); ?>" data-affiliate="<?php echo esc_url( $affiliate ?: '' ); ?>" data-service-type="<?php echo esc_attr( $service_type_slug ); ?>">
+                        <?php $has_widget = get_post_meta( get_the_ID(), '_service_widget_html', true ) ? '1' : '0'; ?>
+                        <div class="card h-100 shadow-sm service-list-card" data-title="<?php echo esc_attr( get_the_title() ); ?>" data-excerpt="<?php echo esc_attr( $excerpt ); ?>" data-logo="<?php echo esc_url( $logo_src ); ?>" data-link="<?php echo esc_url( get_permalink() ); ?>" data-affiliate="<?php echo esc_url( $affiliate ?: '' ); ?>" data-service-type="<?php echo esc_attr( $service_type_slug ); ?>" data-has-widget="<?php echo esc_attr( $has_widget ); ?>">
                             <div class="card-body d-flex align-items-center justify-content-between flex-wrap gap-3">
                                 <div class="d-flex align-items-center gap-3">
                                     <?php echo $logo_html ?: ''; ?>
