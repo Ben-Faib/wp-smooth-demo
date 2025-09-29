@@ -67,6 +67,17 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 			return array_values( array_map( function ( $r ) { return $r['domain']; }, self::$regions ) );
 		}
 
+		private static function flag_for( $region ) {
+			switch ( $region ) {
+				case 'us': return '🇺🇸';
+				case 'ca': return '🇨🇦';
+				case 'uk': return '🇬🇧';
+				case 'au': return '🇦🇺';
+				case 'za': return '🇿🇦';
+				default: return '🌐';
+			}
+		}
+
 		private static function region_from_host() {
 			$host = isset( $_SERVER['HTTP_HOST'] ) ? strtolower( $_SERVER['HTTP_HOST'] ) : '';
 			foreach ( self::$regions as $key => $cfg ) {
@@ -207,7 +218,7 @@ if ( ! class_exists( 'SM_Locale_Switcher' ) ) {
 			?>
 			<div id="sm-locale-root" class="sm-locale-root" aria-live="polite">
 				<button id="sm-locale-pill" class="sm-pill" type="button" aria-haspopup="dialog" aria-controls="sm-locale-sheet">
-					<span class="sm-pill-ico" aria-hidden="true">🌐</span>
+					<span class="sm-pill-ico" aria-hidden="true"><?php echo esc_html( self::flag_for( self::region_from_host() ) ); ?></span>
 					<span id="sm-pill-text">Region · Language</span>
 				</button>
 

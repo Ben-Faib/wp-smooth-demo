@@ -40,6 +40,7 @@
 	// Build UI
 	const $pill = document.getElementById('sm-locale-pill');
 	const $pillText = document.getElementById('sm-pill-text');
+	const $pillIco = document.querySelector('#sm-locale-pill .sm-pill-ico');
 	const $chip = document.getElementById('sm-locale-chip');
 	const $chipText = document.getElementById('sm-chip-text');
 	const $chipSwitch = document.getElementById('sm-chip-switch');
@@ -221,7 +222,8 @@
 	function refreshPill() {
 		const r = REGIONS[state.region];
 		const langLabel = (r.languages && r.languages[state.lang]) || 'English';
-		$pillText.textContent = `${flagEmojiFor(state.region)} ${langLabel}`;
+		$pillText.textContent = `${langLabel}`;
+		if ($pillIco) { $pillIco.textContent = flagEmojiFor(state.region); }
 	}
 
 
