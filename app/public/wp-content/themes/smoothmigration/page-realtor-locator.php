@@ -7,6 +7,13 @@
  */
 
 get_header();
+// Determine if we should show the SparrowShare "Newcomer Room rentals" button
+// Show on .ca domains by default; allow debug overrides via query params
+$__sm_host = $_SERVER['HTTP_HOST'] ?? parse_url( home_url(), PHP_URL_HOST );
+$__sm_is_ca = is_string($__sm_host) && ( substr($__sm_host, -3) === '.ca' || (bool) preg_match('/\.ca$/', $__sm_host) );
+$__sm_force_show = isset($_GET['sm_show_rooms']);
+$__sm_force_hide = isset($_GET['sm_hide_rooms']);
+$__sm_show_sparrow_btn = ! $__sm_force_hide && ($__sm_is_ca || $__sm_force_show);
 ?>
 
 <main id="main" class="site-main realtor-locator-page" role="main">
@@ -51,6 +58,12 @@ get_header();
                                 <i class="fas fa-play me-2"></i>
                                 How It Works
                             </a>
+<?php if ($__sm_show_sparrow_btn) : ?>
+                            <a href="https://sparrowshare.com/housemates" class="btn btn-outline-light btn-lg ms-3" target="_blank" rel="noopener">
+                                <i class="fas fa-door-open me-2"></i>
+                                Newcomer Room rentals
+                            </a>
+<?php endif; ?>
                         </div>
                         
                         <div class="trust-metrics mt-4">
