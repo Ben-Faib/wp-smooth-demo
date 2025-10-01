@@ -963,12 +963,13 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
         $row = json_decode( $line, true );
         if ( ! is_array( $row ) ) { continue; }
 
-        $text     = (string) ( $row['text'] ?? '' );
-        $meta     = (array)  ( $row['metadata'] ?? array() );
-        $partner  = trim( (string) ( $meta['partner'] ?? '' ) );
-        $country  = trim( (string) ( $meta['country'] ?? $region ) );
-        $category = trim( (string) ( $meta['category'] ?? '' ) );
-        $widget   = isset( $meta['widget'] ) ? (string) $meta['widget'] : '';
+        $text       = (string) ( $row['text'] ?? '' );
+        $meta       = (array)  ( $row['metadata'] ?? array() );
+        $partner    = trim( (string) ( $meta['partner'] ?? '' ) );
+        $country    = trim( (string) ( $meta['country'] ?? $region ) );
+        $category   = trim( (string) ( $meta['category'] ?? '' ) );
+        $widget     = isset( $meta['widget'] ) ? (string) $meta['widget'] : '';
+        $quick_view = isset( $meta['quick_view'] ) ? trim( (string) $meta['quick_view'] ) : '';
 
         if ( $partner === '' ) { continue; }
 
@@ -1105,6 +1106,24 @@ function smoothmigration_import_services_from_country_jsonl( string $container_p
         // Affiliate URL from JSONL text has precedence when present
         if ( $link ) {
             update_post_meta( $service_id, '_service_affiliate_url', $link );
+        }
+
+        // Store quick view content from Service_Blurbs.xlsx when available
+        // This provides a concise, curated description for quick preview displays
+        if ( $quick_view !== '' ) {
+            // Only update if we have new content or overwrite is enabled
+            $existing_quick_view = (string) get_post_meta( $service_id, '_service_quick_view', true );
+            if ( $overwrite || $existing_quick_view === '' ) {
+                update_post_meta( $service_id, '_service_quick_view', wp_kses_post( $quick_view ) );
+            }
+        } else {
+            // Fallback: if no quick_view provided but we need one, generate from overview
+            $existing_quick_view = (string) get_post_meta( $service_id, '_service_quick_view', true );
+            if ( $existing_quick_view === '' && $overview !== '' ) {
+                // Use overview as fallback quick view (truncate if too long)
+                $fallback_quick_view = wp_trim_words( $overview, 50, '...' );
+                update_post_meta( $service_id, '_service_quick_view', wp_kses_post( $fallback_quick_view ) );
+            }
         }
 
         // Ensure taxonomy assignment and regions

@@ -227,10 +227,18 @@ $term = get_queried_object();
                         }
                         $logo_src = '';
                         if ( $logo_html && preg_match('/src=\"([^\"]+)\"/i', $logo_html, $m) ) { $logo_src = $m[1]; }
-                        // Shorter, cleaner quick view: drop leading "Overview" and trim to ~18 words
-                        $raw_excerpt = has_excerpt() ? get_the_excerpt() : strip_tags( get_the_content() );
-                        $raw_excerpt = preg_replace( '/^\s*(Overview|Summary)[:\s]+/i', '', (string) $raw_excerpt );
-                        $excerpt = wp_trim_words( trim( preg_replace( '/\s+/', ' ', (string) $raw_excerpt ) ), 18, '…' );
+                        
+                        // Prioritize curated quick view from Service_Blurbs.xlsx
+                        $quick_view_meta = get_post_meta( get_the_ID(), '_service_quick_view', true );
+                        if ( ! empty( $quick_view_meta ) ) {
+                            $excerpt = $quick_view_meta;
+                        } else {
+                            // Fallback: generate excerpt from post content
+                            $raw_excerpt = has_excerpt() ? get_the_excerpt() : strip_tags( get_the_content() );
+                            $raw_excerpt = preg_replace( '/^\s*(Overview|Summary)[:\s]+/i', '', (string) $raw_excerpt );
+                            $excerpt = wp_trim_words( trim( preg_replace( '/\s+/', ' ', (string) $raw_excerpt ) ), 18, '…' );
+                        }
+                        
                         $service_terms = get_the_terms( get_the_ID(), 'service_type' );
                         $service_type_slug = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->slug : '';
                     ?>

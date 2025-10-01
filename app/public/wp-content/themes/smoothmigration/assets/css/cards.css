@@ -704,14 +704,352 @@
   }
 }
 
+/* ========================================
+   ENHANCED QUICK VIEW MODAL STYLING
+   Sprint 2.4 - Conversion-Focused Layout
+   ======================================== */
+
+/* Main Container */
+.qv-enhanced-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header Section - Logo & Value Prop */
+.qv-header-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid color-mix(in srgb, var(--primary-light), transparent 85%);
+}
+
+.qv-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  background: color-mix(in srgb, var(--bg-white), transparent 5%);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid color-mix(in srgb, var(--primary-light), transparent 90%);
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+.qv-logo {
+  height: 64px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+
+.qv-value-prop {
+  position: relative;
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--primary-light), transparent 92%) 0%, 
+    color-mix(in srgb, var(--secondary-light), transparent 94%) 100%);
+  border-left: 4px solid var(--primary-color);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary-color), transparent 90%);
+}
+
+.qv-quote-icon {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  opacity: 0.15;
+}
+
+.qv-value-text {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  font-weight: 500;
+  padding-left: 1rem;
+}
+
+/* Benefits Section */
+.qv-benefits-section {
+  background: color-mix(in srgb, var(--bg-white), transparent 3%);
+  border-radius: var(--border-radius-lg);
+  padding: 1.25rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--primary-light), transparent 85%);
+}
+
+.qv-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.qv-section-title i {
+  font-size: 1.1rem;
+}
+
+.qv-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.qv-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  background: color-mix(in srgb, var(--primary-light), transparent 95%);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.qv-benefit-item:hover {
+  background: color-mix(in srgb, var(--primary-light), transparent 90%);
+  border-left-color: var(--primary-color);
+  transform: translateX(4px);
+}
+
+.qv-benefit-item i {
+  color: var(--primary-color);
+  font-size: 1rem;
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+}
+
+.qv-benefit-item span {
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Description Fallback */
+.qv-description {
+  padding: 1.25rem 1.5rem;
+  background: color-mix(in srgb, var(--bg-white), transparent 3%);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid color-mix(in srgb, var(--primary-light), transparent 85%);
+}
+
+.qv-description-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Trust Signals Section */
+.qv-trust-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.qv-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--primary-color), transparent 92%) 0%,
+    color-mix(in srgb, var(--secondary-color), transparent 94%) 100%);
+  border: 1px solid color-mix(in srgb, var(--primary-color), transparent 80%);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--primary-color), transparent 93%);
+}
+
+.qv-trust-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary-color), transparent 85%);
+  border-color: var(--primary-color);
+}
+
+.qv-trust-badge i {
+  font-size: 0.9rem;
+}
+
+/* CTA Section */
+.qv-cta-section {
+  display: flex;
+  gap: 0.875rem;
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--primary-light), transparent 85%);
+}
+
+.qv-btn-primary,
+.qv-btn-secondary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  border: 2px solid;
+  position: relative;
+  overflow: hidden;
+}
+
+.qv-btn-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  border-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary-color), transparent 70%);
+}
+
+.qv-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.qv-btn-primary:hover::before {
+  left: 100%;
+}
+
+.qv-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--primary-color), transparent 60%);
+  border-color: var(--primary-dark);
+}
+
+.qv-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary-color), transparent 75%);
+}
+
+.qv-btn-secondary {
+  background: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.qv-btn-secondary:hover {
+  background: color-mix(in srgb, var(--primary-light), transparent 90%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary-color), transparent 85%);
+}
+
+.qv-btn-secondary:active {
+  transform: translateY(0);
+}
+
+.qv-btn-primary i,
+.qv-btn-secondary i {
+  font-size: 0.95rem;
+  transition: transform 0.3s ease;
+}
+
+.qv-btn-primary:hover i {
+  transform: translateX(3px);
+}
+
+.qv-btn-secondary:hover i {
+  transform: scale(1.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qv-enhanced-content {
+    gap: 1.25rem;
+  }
+
+  .qv-header-section {
+    gap: 0.875rem;
+  }
+
+  .qv-logo {
+    height: 52px;
+  }
+
+  .qv-value-prop {
+    padding: 1rem 1.25rem;
+  }
+
+  .qv-value-text {
+    font-size: 1rem;
+    padding-left: 0.5rem;
+  }
+
+  .qv-benefits-section {
+    padding: 1rem 1.25rem;
+  }
+
+  .qv-benefit-item {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .qv-benefit-item span {
+    font-size: 0.9rem;
+  }
+
+  .qv-cta-section {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .qv-btn-primary,
+  .qv-btn-secondary {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .qv-trust-section {
+    gap: 0.5rem;
+  }
+
+  .qv-trust-badge {
+    padding: 0.4rem 0.875rem;
+    font-size: 0.8rem;
+  }
+}
+
 /* Accessibility enhancements */
 @media (prefers-reduced-motion: reduce) {
   .service-card-inner,
   .service-flip-button i,
   .modal-dialog,
-  .service-card {
+  .service-card,
+  .qv-benefit-item,
+  .qv-btn-primary,
+  .qv-btn-secondary,
+  .qv-trust-badge {
     animation: none !important;
     transition: none !important;
+  }
+  
+  .qv-btn-primary::before {
+    display: none;
   }
   
   .service-card-flip.flipped .service-card-inner {

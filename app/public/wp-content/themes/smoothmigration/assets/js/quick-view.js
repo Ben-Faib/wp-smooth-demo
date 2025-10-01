@@ -251,17 +251,209 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const bodyEl = modal.querySelector('.modal-body');
             if (bodyEl) {
+                // Parse the blurb intelligently
+                const parsedContent = this.parseBlurb(excerpt, title, serviceType);
+                
                 bodyEl.innerHTML = `
-                    <div class="d-flex gap-3 align-items-start flex-wrap">
-                        ${logo ? `<img src="${logo}" alt="" style="height:56px;width:auto" />` : ''}
-                        <p class="mb-0 text-muted">${excerpt}</p>
-                    </div>
-                    <div class="d-flex gap-2 mt-3">
-                        <a id="qvAffiliate" href="${ctaHref}"${ctaTarget}${ctaRel} class="btn btn-primary">${affiliateText}</a>
-                        <a id="qvLearn" href="${link}" class="btn btn-outline-primary">Learn More</a>
+                    <div class="qv-enhanced-content">
+                        <!-- Logo and Value Prop Section -->
+                        <div class="qv-header-section">
+                            ${logo ? `
+                                <div class="qv-logo-container">
+                                    <img src="${logo}" alt="${title}" class="qv-logo" />
+                                </div>
+                            ` : ''}
+                            ${parsedContent.valueProp ? `
+                                <div class="qv-value-prop">
+                                    <i class="fas fa-quote-left qv-quote-icon"></i>
+                                    <p class="qv-value-text">${parsedContent.valueProp}</p>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <!-- Key Benefits Section -->
+                        ${parsedContent.benefits.length > 0 ? `
+                            <div class="qv-benefits-section">
+                                <h6 class="qv-section-title">
+                                    <i class="fas fa-check-circle"></i> Key Benefits
+                                </h6>
+                                <ul class="qv-benefits-list">
+                                    ${parsedContent.benefits.map(benefit => `
+                                        <li class="qv-benefit-item">
+                                            <i class="fas fa-check"></i>
+                                            <span>${benefit}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+
+                        <!-- Full Description (if no parsing available) -->
+                        ${!parsedContent.valueProp && parsedContent.benefits.length === 0 ? `
+                            <div class="qv-description">
+                                <p class="qv-description-text">${excerpt}</p>
+                            </div>
+                        ` : ''}
+
+                        <!-- Trust Signals & Badges -->
+                        <div class="qv-trust-section">
+                            ${parsedContent.trustSignals.map(signal => `
+                                <span class="qv-trust-badge">
+                                    <i class="${signal.icon}"></i> ${signal.text}
+                                </span>
+                            `).join('')}
+                            ${parsedContent.trustSignals.length === 0 ? `
+                                <span class="qv-trust-badge">
+                                    <i class="fas fa-shield-alt"></i> Verified Partner
+                                </span>
+                            ` : ''}
+                        </div>
+
+                        <!-- Call to Action Section -->
+                        <div class="qv-cta-section">
+                            <a id="qvAffiliate" href="${ctaHref}"${ctaTarget}${ctaRel} class="btn btn-primary qv-btn-primary">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>${affiliateText}</span>
+                            </a>
+                            <a id="qvLearn" href="${link}" class="btn btn-outline-primary qv-btn-secondary">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Learn More</span>
+                            </a>
+                        </div>
                     </div>
                 `;
             }
+        }
+
+        /**
+         * Intelligently parse blurb content to extract structure
+         * @param {string} blurb - The full blurb text
+         * @param {string} title - Service title
+         * @param {string} serviceType - Service category
+         * @returns {Object} Parsed content with valueProp, benefits, and trustSignals
+         */
+        parseBlurb(blurb, title, serviceType) {
+            const parsed = {
+                valueProp: '',
+                benefits: [],
+                trustSignals: []
+            };
+
+            if (!blurb) return parsed;
+
+            // Remove the "ServiceName — Category:" prefix if present
+            let cleanedBlurb = blurb.replace(/^[^—]+—\s*[^:]+:\s*/i, '');
+            
+            // Split into sentences
+            const sentences = cleanedBlurb.split(/\.\s+/).filter(s => s.trim().length > 0);
+            
+            if (sentences.length === 0) {
+                return parsed;
+            }
+
+            // First sentence is usually the value prop
+            parsed.valueProp = sentences[0] + (sentences[0].endsWith('.') ? '' : '.');
+
+            // Look for bullet-separated benefits (• symbol)
+            if (cleanedBlurb.includes('•')) {
+                const bulletSection = cleanedBlurb.split('•').slice(1);
+                parsed.benefits = bulletSection
+                    .map(b => b.replace(/\.$/, '').trim())
+                    .filter(b => b.length > 0 && b.length < 150);
+            }
+            // Look for benefits in sentences containing keywords
+            else if (sentences.length > 1) {
+                for (let i = 1; i < Math.min(sentences.length, 4); i++) {
+                    const sentence = sentences[i].trim();
+                    // Check if sentence describes a feature/benefit
+                    if (sentence.length > 15 && sentence.length < 120) {
+                        // Look for benefit indicators
+                        const benefitKeywords = /\b(offers?|provides?|includes?|features?|helps?|allows?|enables?|supports?|delivers?|ensures?|gives?)\b/i;
+                        if (benefitKeywords.test(sentence) || i <= 3) {
+                            parsed.benefits.push(sentence + (sentence.endsWith('.') ? '' : '.'));
+                        }
+                    }
+                }
+                // Limit to 4 benefits max
+                parsed.benefits = parsed.benefits.slice(0, 4);
+            }
+
+            // Extract trust signals from text - only use specific, high-value patterns
+            const trustPatterns = [
+                // Numbers with units (most valuable)
+                { 
+                    pattern: /(\d+(?:[\+M]|million)?)\s*(?:\+)?\s*(customers?|users?|members?|clients?|reviews?|countries|locations|cities|years?)/gi, 
+                    icon: 'fas fa-users',
+                    extract: (match) => {
+                        // Clean up the match to create a natural phrase
+                        const text = match[0].replace(/\s+/g, ' ').trim();
+                        if (text.match(/\d/)) return this.capitalizeFirst(text);
+                        return null;
+                    }
+                },
+                // Ratings
+                { 
+                    pattern: /rated\s+(\d+(?:\.\d+)?)\s*(?:\/\s*\d+)?\s*stars?/gi,
+                    icon: 'fas fa-star',
+                    extract: (match) => this.capitalizeFirst(match[0])
+                },
+                { 
+                    pattern: /(\d+(?:\.\d+)?)\s*(?:\/\s*\d+)?\s*star[s]?\s+rated/gi,
+                    icon: 'fas fa-star',
+                    extract: (match) => this.capitalizeFirst(match[0])
+                },
+                // Credentials (only if part of meaningful phrase)
+                { 
+                    pattern: /(?:licensed|verified|certified|accredited|approved|backed)\s+(?:by|and|in)\s+[\w\s]{2,20}(?:\.|,|$)/gi,
+                    icon: 'fas fa-shield-alt',
+                    extract: (match) => {
+                        const text = match[0].replace(/[.,]$/, '').trim();
+                        if (text.length > 10 && text.length < 50) return this.capitalizeFirst(text);
+                        return null;
+                    }
+                },
+                // 24/7 support (specific)
+                { 
+                    pattern: /24\/7\s+(?:support|assistance|customer\s+support|help)/gi,
+                    icon: 'fas fa-headset',
+                    extract: (match) => this.capitalizeFirst(match[0])
+                }
+            ];
+
+            // Process each pattern
+            trustPatterns.forEach(({ pattern, icon, extract }) => {
+                if (parsed.trustSignals.length >= 3) return; // Max 3 badges
+                
+                const matches = cleanedBlurb.matchAll(pattern);
+                for (const match of matches) {
+                    if (parsed.trustSignals.length >= 3) break;
+                    
+                    const extractedText = extract(match);
+                    if (extractedText && extractedText.length > 5 && extractedText.length < 60) {
+                        // Avoid duplicates
+                        const isDuplicate = parsed.trustSignals.some(
+                            signal => signal.text.toLowerCase() === extractedText.toLowerCase()
+                        );
+                        
+                        if (!isDuplicate) {
+                            parsed.trustSignals.push({
+                                text: extractedText,
+                                icon: icon
+                            });
+                        }
+                    }
+                }
+            });
+
+            return parsed;
+        }
+
+        /**
+         * Capitalize first letter of a string
+         */
+        capitalizeFirst(str) {
+            if (!str) return '';
+            return str.charAt(0).toUpperCase() + str.slice(1);
         }
 
         updateModalContent(modal, serviceType, serviceTypeName) {

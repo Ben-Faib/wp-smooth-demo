@@ -67,10 +67,18 @@ function smoothmigration_get_services_for_type() {
     if ( $services_query->have_posts() ) {
         while ( $services_query->have_posts() ) {
             $services_query->the_post();
-            // Shorter, cleaner excerpt for Quick View via AJAX
-            $raw = has_excerpt() ? get_the_excerpt() : strip_tags( get_the_content() );
-            $raw = preg_replace( '/^\s*(Overview|Summary)[:\s]+/i', '', (string) $raw );
-            $short = wp_trim_words( trim( preg_replace( '/\s+/', ' ', (string) $raw ) ), 18, '…' );
+            
+            // Prioritize curated quick view from Service_Blurbs.xlsx
+            $quick_view_meta = get_post_meta( get_the_ID(), '_service_quick_view', true );
+            if ( ! empty( $quick_view_meta ) ) {
+                $short = $quick_view_meta;
+            } else {
+                // Fallback: generate excerpt from post content
+                $raw = has_excerpt() ? get_the_excerpt() : strip_tags( get_the_content() );
+                $raw = preg_replace( '/^\s*(Overview|Summary)[:\s]+/i', '', (string) $raw );
+                $short = wp_trim_words( trim( preg_replace( '/\s+/', ' ', (string) $raw ) ), 18, '…' );
+            }
+            
             $services_data[] = array(
                 'title'   => get_the_title(),
                 'excerpt' => $short,
