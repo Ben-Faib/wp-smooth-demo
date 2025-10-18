@@ -74,7 +74,10 @@ if (strpos($term_slug, 'insurance') !== false) {
 			<div class="row g-5">
 				<div class="col-lg-8">
                     <article class="service-article">
-                        <?php the_content(); ?>
+                        <div id="overview">
+                            <?php the_content(); ?>
+                        </div>
+                        
                         <?php $svc_widget = get_post_meta( get_the_ID(), '_service_widget_html', true ); if ( $svc_widget ) : ?>
                         <hr class="my-5" />
                         <div class="card shadow-sm mb-4" id="svcWidget">
@@ -96,37 +99,6 @@ if (strpos($term_slug, 'insurance') !== false) {
                             </div>
                         </div>
                         <?php endif; ?>
-                        <hr class="my-5" />
-                        <h2 id="how" class="h4">How It Helps Relocators</h2>
-                        <ul>
-                            <li>Step-by-step onboarding suited to cross-border moves</li>
-                            <li>Clear timelines and document requirements</li>
-                            <li>Works well alongside our other services</li>
-                        </ul>
-                        <h2 id="fees" class="h4 mt-4">Fees & Speed</h2>
-                        <p class="text-muted">Indicative. See partner site for latest pricing.</p>
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead><tr><th>Scenario</th><th>Typical Fee</th><th>Typical Speed</th></tr></thead>
-                                <tbody>
-                                    <tr><td>Standard</td><td>Low</td><td>1–2 days</td></tr>
-                                    <tr><td>Express</td><td>Medium</td><td>Same day</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <h2 id="countries" class="h4 mt-4">Supported Countries</h2>
-                        <p>Broad global coverage. Use the partner site to confirm your corridor.</p>
-                        <h2 id="faq" class="h4 mt-4">FAQs</h2>
-                        <div class="accordion" id="svcFaq">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="q1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1">Do I need local ID?</button></h2>
-                                <div id="a1" class="accordion-collapse collapse show" data-bs-parent="#svcFaq"><div class="accordion-body">Most services accept passport; some require local proof of address.</div></div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="q2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2">Can I start before I land?</button></h2>
-                                <div id="a2" class="accordion-collapse collapse" data-bs-parent="#svcFaq"><div class="accordion-body">Often yes. Some verifications can be done remotely.</div></div>
-                            </div>
-                        </div>
                         
                         <?php
                         // Display full awards section if they exist
