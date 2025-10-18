@@ -381,3 +381,182 @@ function smoothmigration_get_asset_type_terms( string $filename ): array {
     return array_values( array_unique( $terms ) );
 }
 
+/**
+ * Get all awards for a service.
+ * 
+ * @param int $post_id Service post ID
+ * @return array Array of award data
+ */
+function smoothmigration_get_service_awards( int $post_id ): array {
+    $awards = get_post_meta( $post_id, '_service_awards', true );
+    if ( ! is_array( $awards ) ) {
+        return array();
+    }
+    // Filter out awards without a title
+    return array_filter( $awards, function( $award ) {
+        return ! empty( $award['title'] );
+    } );
+}
+
+/**
+ * Display a single award badge.
+ * 
+ * @param array $award Award data array
+ * @param string $context Display context (hero, sidebar, section)
+ * @return string HTML output
+ */
+function smoothmigration_display_award_badge( array $award, string $context = 'sidebar' ): string {
+    if ( empty( $award['title'] ) ) {
+        return '';
+    }
+    
+    $badge_id = absint( $award['badge_id'] ?? 0 );
+    $title = esc_html( $award['title'] );
+    $org = esc_html( $award['organization'] ?? '' );
+    $year = esc_html( $award['year'] ?? '' );
+    $desc = esc_html( $award['description'] ?? '' );
+    $link = esc_url( $award['link'] ?? '' );
+    
+    $output = '';
+    
+    switch ( $context ) {
+        case 'hero':
+            // Compact badge for hero section
+            $output .= '<div class="award-badge award-badge-hero">';
+            if ( $badge_id ) {
+                $img = wp_get_attachment_image( $badge_id, 'thumbnail', false, array(
+                    'class' => 'award-badge-img',
+                    'alt' => $title,
+                    'loading' => 'eager'
+                ) );
+                if ( $link ) {
+                    $output .= '<a href="' . $link . '" target="_blank" rel="noopener" aria-label="' . $title . '">' . $img . '</a>';
+                } else {
+                    $output .= $img;
+                }
+            }
+            $output .= '</div>';
+            break;
+            
+        case 'sidebar':
+            // Vertical layout for sidebar
+            $output .= '<div class="award-badge award-badge-sidebar">';
+            if ( $badge_id ) {
+                $output .= '<div class="award-badge-image">';
+                $output .= wp_get_attachment_image( $badge_id, 'medium', false, array(
+                    'class' => 'award-badge-img',
+                    'alt' => $title,
+                    'loading' => 'lazy'
+                ) );
+                $output .= '</div>';
+            }
+            $output .= '<div class="award-badge-content">';
+            if ( $org ) {
+                $output .= '<div class="award-badge-org">' . $org . ( $year ? ' ' . $year : '' ) . '</div>';
+            }
+            $output .= '<div class="award-badge-title">' . $title . '</div>';
+            $output .= '</div>';
+            $output .= '</div>';
+            break;
+            
+        case 'section':
+            // Full display for dedicated section
+            $output .= '<div class="award-badge award-badge-section">';
+            if ( $badge_id ) {
+                $output .= '<div class="award-badge-image">';
+                $output .= wp_get_attachment_image( $badge_id, 'large', false, array(
+                    'class' => 'award-badge-img',
+                    'alt' => $title,
+                    'loading' => 'lazy'
+                ) );
+                $output .= '</div>';
+            }
+            $output .= '<div class="award-badge-content">';
+            if ( $org || $year ) {
+                $output .= '<div class="award-badge-meta">';
+                if ( $org ) {
+                    $output .= '<span class="award-badge-org">' . $org . '</span>';
+                }
+                if ( $year ) {
+                    $output .= '<span class="award-badge-year">' . $year . '</span>';
+                }
+                $output .= '</div>';
+            }
+            $output .= '<h3 class="award-badge-title">' . $title . '</h3>';
+            if ( $desc ) {
+                $output .= '<p class="award-badge-desc">' . $desc . '</p>';
+            }
+            if ( $link ) {
+                $output .= '<a href="' . $link . '" target="_blank" rel="noopener" class="award-badge-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>';
+            }
+            $output .= '</div>';
+            $output .= '</div>';
+            break;
+    }
+    
+    return $output;
+}
+
+/**
+ * Display the full awards section.
+ * 
+ * @param int $post_id Service post ID
+ * @param string $context Display context (hero, sidebar, section)
+ * @return void
+ */
+function smoothmigration_display_awards_section( int $post_id, string $context = 'section' ): void {
+    $awards = smoothmigration_get_service_awards( $post_id );
+    
+    if ( empty( $awards ) ) {
+        return;
+    }
+    
+    $class = 'service-awards service-awards-' . esc_attr( $context );
+    
+    echo '<div class="' . $class . '">';
+    
+    if ( $context === 'hero' ) {
+        // Hero: horizontal compact badges
+        echo '<div class="award-badges-hero">';
+        $count = 0;
+        foreach ( $awards as $award ) {
+            if ( $count >= 3 ) break; // Max 3 badges in hero
+            echo smoothmigration_display_award_badge( $award, 'hero' );
+            $count++;
+        }
+        echo '</div>';
+    } elseif ( $context === 'sidebar' ) {
+        // Sidebar: vertical stacked badges
+        echo '<h3 class="h5">Awards & Recognition</h3>';
+        foreach ( $awards as $award ) {
+            echo smoothmigration_display_award_badge( $award, 'sidebar' );
+        }
+    } else {
+        // Section: full accordion display
+        echo '<h2 id="awards" class="h4 mt-4">Awards & Recognition</h2>';
+        echo '<div class="accordion" id="awardsAccordion">';
+        foreach ( $awards as $index => $award ) {
+            $accordion_id = 'award' . $index;
+            $is_first = ( $index === 0 );
+            echo '<div class="accordion-item">';
+            echo '<h3 class="accordion-header" id="heading' . $accordion_id . '">';
+            echo '<button class="accordion-button' . ( ! $is_first ? ' collapsed' : '' ) . '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $accordion_id . '" aria-expanded="' . ( $is_first ? 'true' : 'false' ) . '" aria-controls="collapse' . $accordion_id . '">';
+            echo esc_html( $award['title'] );
+            if ( ! empty( $award['year'] ) ) {
+                echo ' (' . esc_html( $award['year'] ) . ')';
+            }
+            echo '</button>';
+            echo '</h3>';
+            echo '<div id="collapse' . $accordion_id . '" class="accordion-collapse collapse' . ( $is_first ? ' show' : '' ) . '" data-bs-parent="#awardsAccordion">';
+            echo '<div class="accordion-body">';
+            echo smoothmigration_display_award_badge( $award, 'section' );
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+        echo '</div>';
+    }
+    
+    echo '</div>';
+}
+

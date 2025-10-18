@@ -135,6 +135,14 @@ function smoothmigration_add_service_meta_boxes() {
         'side',
         'default'
     );
+    add_meta_box(
+        'service_awards',
+        __( 'Awards & Recognition', 'smoothmigration' ),
+        'smoothmigration_service_awards_callback',
+        'service',
+        'normal',
+        'default'
+    );
 }
 add_action( 'add_meta_boxes', 'smoothmigration_add_service_meta_boxes' );
 
@@ -317,6 +325,170 @@ function smoothmigration_service_regions_callback( $post ) {
 }
 
 /**
+ * Callback function for the "Awards & Recognition" meta box.
+ */
+function smoothmigration_service_awards_callback( $post ) {
+    $awards = get_post_meta( $post->ID, '_service_awards', true );
+    if ( ! is_array( $awards ) ) {
+        $awards = array();
+    }
+    
+    // Ensure at least one empty award for the UI
+    if ( empty( $awards ) ) {
+        $awards = array( array(
+            'title' => '',
+            'organization' => '',
+            'year' => '',
+            'badge_id' => '',
+            'description' => '',
+            'link' => ''
+        ) );
+    }
+    ?>
+    <div id="service-awards-repeater">
+        <div class="awards-list">
+            <?php foreach ( $awards as $index => $award ) : ?>
+                <div class="award-item" data-index="<?php echo esc_attr( $index ); ?>" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
+                    <h4 style="margin-top: 0;">
+                        Award #<?php echo $index + 1; ?>
+                        <button type="button" class="button button-small remove-award" style="float: right; color: #a00;">Remove</button>
+                    </h4>
+                    
+                    <p>
+                        <label><strong>Award Title</strong></label><br>
+                        <input type="text" name="service_awards[<?php echo $index; ?>][title]" value="<?php echo esc_attr( $award['title'] ?? '' ); ?>" class="widefat" placeholder="e.g., Best Bank for Newcomers to Canada">
+                    </p>
+                    
+                    <p>
+                        <label><strong>Organization</strong></label><br>
+                        <input type="text" name="service_awards[<?php echo $index; ?>][organization]" value="<?php echo esc_attr( $award['organization'] ?? '' ); ?>" class="regular-text" placeholder="e.g., MoneySense">
+                        
+                        <label style="margin-left: 20px;"><strong>Year</strong></label>
+                        <input type="text" name="service_awards[<?php echo $index; ?>][year]" value="<?php echo esc_attr( $award['year'] ?? '' ); ?>" class="small-text" placeholder="2024">
+                    </p>
+                    
+                    <p>
+                        <label><strong>Award Badge Image</strong></label><br>
+                        <input type="hidden" name="service_awards[<?php echo $index; ?>][badge_id]" value="<?php echo esc_attr( $award['badge_id'] ?? '' ); ?>" class="award-badge-id">
+                        <button type="button" class="button select-award-badge">Select Badge Image</button>
+                        <button type="button" class="button remove-award-badge" style="display: <?php echo ! empty( $award['badge_id'] ) ? 'inline-block' : 'none'; ?>;">Remove Image</button>
+                        <div class="award-badge-preview" style="margin-top: 10px;">
+                            <?php if ( ! empty( $award['badge_id'] ) ) {
+                                echo wp_get_attachment_image( $award['badge_id'], 'medium', false, array( 'style' => 'max-width: 200px; height: auto;' ) );
+                            } ?>
+                        </div>
+                    </p>
+                    
+                    <p>
+                        <label><strong>Description (Optional)</strong></label><br>
+                        <textarea name="service_awards[<?php echo $index; ?>][description]" class="widefat" rows="2" placeholder="Additional details about this award"><?php echo esc_textarea( $award['description'] ?? '' ); ?></textarea>
+                    </p>
+                    
+                    <p>
+                        <label><strong>Award Link (Optional)</strong></label><br>
+                        <input type="url" name="service_awards[<?php echo $index; ?>][link]" value="<?php echo esc_url( $award['link'] ?? '' ); ?>" class="widefat" placeholder="https://...">
+                    </p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        
+        <button type="button" class="button button-primary add-award">+ Add Another Award</button>
+    </div>
+    
+    <script>
+    jQuery(document).ready(function($) {
+        var awardIndex = <?php echo count( $awards ); ?>;
+        
+        // Add award
+        $('.add-award').on('click', function() {
+            var template = `
+                <div class="award-item" data-index="${awardIndex}" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; background: #f9f9f9;">
+                    <h4 style="margin-top: 0;">
+                        Award #${awardIndex + 1}
+                        <button type="button" class="button button-small remove-award" style="float: right; color: #a00;">Remove</button>
+                    </h4>
+                    
+                    <p>
+                        <label><strong>Award Title</strong></label><br>
+                        <input type="text" name="service_awards[${awardIndex}][title]" value="" class="widefat" placeholder="e.g., Best Bank for Newcomers to Canada">
+                    </p>
+                    
+                    <p>
+                        <label><strong>Organization</strong></label><br>
+                        <input type="text" name="service_awards[${awardIndex}][organization]" value="" class="regular-text" placeholder="e.g., MoneySense">
+                        
+                        <label style="margin-left: 20px;"><strong>Year</strong></label>
+                        <input type="text" name="service_awards[${awardIndex}][year]" value="" class="small-text" placeholder="2024">
+                    </p>
+                    
+                    <p>
+                        <label><strong>Award Badge Image</strong></label><br>
+                        <input type="hidden" name="service_awards[${awardIndex}][badge_id]" value="" class="award-badge-id">
+                        <button type="button" class="button select-award-badge">Select Badge Image</button>
+                        <button type="button" class="button remove-award-badge" style="display: none;">Remove Image</button>
+                        <div class="award-badge-preview" style="margin-top: 10px;"></div>
+                    </p>
+                    
+                    <p>
+                        <label><strong>Description (Optional)</strong></label><br>
+                        <textarea name="service_awards[${awardIndex}][description]" class="widefat" rows="2" placeholder="Additional details about this award"></textarea>
+                    </p>
+                    
+                    <p>
+                        <label><strong>Award Link (Optional)</strong></label><br>
+                        <input type="url" name="service_awards[${awardIndex}][link]" value="" class="widefat" placeholder="https://...">
+                    </p>
+                </div>
+            `;
+            $('.awards-list').append(template);
+            awardIndex++;
+        });
+        
+        // Remove award
+        $(document).on('click', '.remove-award', function() {
+            if (confirm('Are you sure you want to remove this award?')) {
+                $(this).closest('.award-item').remove();
+            }
+        });
+        
+        // Select badge image
+        $(document).on('click', '.select-award-badge', function() {
+            var button = $(this);
+            var container = button.closest('p');
+            var hiddenInput = container.find('.award-badge-id');
+            var preview = container.find('.award-badge-preview');
+            var removeBtn = container.find('.remove-award-badge');
+            
+            var frame = wp.media({
+                title: 'Select Award Badge Image',
+                button: { text: 'Use this image' },
+                multiple: false,
+                library: { type: 'image' }
+            });
+            
+            frame.on('select', function() {
+                var attachment = frame.state().get('selection').first().toJSON();
+                hiddenInput.val(attachment.id);
+                preview.html('<img src="' + attachment.url + '" style="max-width: 200px; height: auto;">');
+                removeBtn.show();
+            });
+            
+            frame.open();
+        });
+        
+        // Remove badge image
+        $(document).on('click', '.remove-award-badge', function() {
+            var container = $(this).closest('p');
+            container.find('.award-badge-id').val('');
+            container.find('.award-badge-preview').empty();
+            $(this).hide();
+        });
+    });
+    </script>
+    <?php
+}
+
+/**
  * Save meta box data.
  */
 function smoothmigration_save_service_meta( $post_id ) {
@@ -371,6 +543,28 @@ function smoothmigration_save_service_meta( $post_id ) {
     // Handle checkbox
     $featured = isset( $_POST['service_featured'] ) ? '1' : '0';
     update_post_meta( $post_id, '_service_featured', $featured );
+    
+    // Handle awards repeater
+    if ( isset( $_POST['service_awards'] ) && is_array( $_POST['service_awards'] ) ) {
+        $awards = array();
+        foreach ( $_POST['service_awards'] as $award ) {
+            // Only save awards that have at least a title
+            if ( ! empty( $award['title'] ) ) {
+                $awards[] = array(
+                    'title' => sanitize_text_field( $award['title'] ),
+                    'organization' => sanitize_text_field( $award['organization'] ?? '' ),
+                    'year' => sanitize_text_field( $award['year'] ?? '' ),
+                    'badge_id' => absint( $award['badge_id'] ?? 0 ),
+                    'description' => sanitize_textarea_field( $award['description'] ?? '' ),
+                    'link' => esc_url_raw( $award['link'] ?? '' ),
+                );
+            }
+        }
+        update_post_meta( $post_id, '_service_awards', $awards );
+    } else {
+        // If no awards submitted, clear the meta
+        delete_post_meta( $post_id, '_service_awards' );
+    }
 }
 add_action( 'save_post', 'smoothmigration_save_service_meta' );
 

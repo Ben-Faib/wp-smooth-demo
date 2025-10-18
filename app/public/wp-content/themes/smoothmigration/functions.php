@@ -42,6 +42,8 @@ require_once get_template_directory() . '/inc/demo-content.php';
 require_once get_template_directory() . '/inc/service-import.php';
 // Bulk import system for folder/zip uploads
 require_once get_template_directory() . '/inc/bulk-import.php';
+// Single service import tool for domain-specific updates
+require_once get_template_directory() . '/inc/service-single-import.php';
 // Demo script for bulk import (add ?bulk_import_demo=1 to test)
 require_once get_template_directory() . '/bulk-import-demo.php';
 // 4-layer structure conversion guide (add ?test_4layer=1 to test)

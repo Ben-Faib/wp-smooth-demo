@@ -37,6 +37,12 @@ if (strpos($term_slug, 'insurance') !== false) {
 							<?php endif; ?>
 							<a href="/contact" class="btn btn-outline-light btn-lg">Talk to Our Team</a>
 						</div>
+						<?php 
+						// Display awards in hero if they exist
+						if ( function_exists( 'smoothmigration_display_awards_section' ) ) {
+							smoothmigration_display_awards_section( get_the_ID(), 'hero' );
+						}
+						?>
 					</div>
 				</div>
                 <div class="col-lg-4 text-center">
@@ -55,6 +61,9 @@ if (strpos($term_slug, 'insurance') !== false) {
                 <li class="nav-item"><a class="nav-link" href="#how">How It Helps Relocators</a></li>
                 <li class="nav-item"><a class="nav-link" href="#fees">Fees & Speed</a></li>
                 <li class="nav-item"><a class="nav-link" href="#countries">Countries</a></li>
+                <?php if ( function_exists( 'smoothmigration_get_service_awards' ) && ! empty( smoothmigration_get_service_awards( get_the_ID() ) ) ) : ?>
+                <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
+                <?php endif; ?>
                 <li class="nav-item"><a class="nav-link" href="#faq">FAQs</a></li>
             </ul>
         </div>
@@ -118,6 +127,13 @@ if (strpos($term_slug, 'insurance') !== false) {
                                 <div id="a2" class="accordion-collapse collapse" data-bs-parent="#svcFaq"><div class="accordion-body">Often yes. Some verifications can be done remotely.</div></div>
                             </div>
                         </div>
+                        
+                        <?php
+                        // Display full awards section if they exist
+                        if ( function_exists( 'smoothmigration_display_awards_section' ) && ! empty( smoothmigration_get_service_awards( get_the_ID() ) ) ) {
+                            smoothmigration_display_awards_section( get_the_ID(), 'section' );
+                        }
+                        ?>
                     </article>
 				</div>
 				<div class="col-lg-4">
@@ -134,6 +150,16 @@ if (strpos($term_slug, 'insurance') !== false) {
 							<?php endif; ?>
 						</div>
 					</div>
+
+					<?php
+					// Display awards in sidebar if they exist
+					if ( function_exists( 'smoothmigration_get_service_awards' ) && ! empty( smoothmigration_get_service_awards( get_the_ID() ) ) ) : ?>
+						<div class="card shadow-sm mb-4">
+							<div class="card-body">
+								<?php smoothmigration_display_awards_section( get_the_ID(), 'sidebar' ); ?>
+							</div>
+						</div>
+					<?php endif; ?>
 
 					<div class="card shadow-sm">
 						<div class="card-body">
@@ -171,6 +197,33 @@ if (strpos($term_slug, 'insurance') !== false) {
 #svcWidget .svc-loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.85)}
 #svcWidget:not(.svc-widget-loading) .svc-loading-overlay{display:none}
 @media (prefers-reduced-motion: reduce){#svcWidget .spinner-border{animation:none!important}}
+
+/* Awards Styling */
+.service-awards{margin-top:1.5rem}
+.award-badges-hero{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
+.award-badge-hero{flex:0 0 auto}
+.award-badge-hero img{width:80px;height:80px;object-fit:contain;border-radius:50%;background:#fff;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.award-badge-sidebar{display:flex;gap:0.75rem;align-items:center;padding:0.75rem 0;border-bottom:1px solid #eee}
+.award-badge-sidebar:last-child{border-bottom:none;padding-bottom:0}
+.award-badge-sidebar .award-badge-image{flex-shrink:0}
+.award-badge-sidebar .award-badge-img{width:60px;height:60px;object-fit:contain}
+.award-badge-sidebar .award-badge-org{font-size:0.75rem;color:#6c757d;font-weight:600;text-transform:uppercase}
+.award-badge-sidebar .award-badge-title{font-size:0.875rem;line-height:1.3;margin-top:0.25rem}
+.award-badge-section{display:flex;gap:1.5rem;align-items:flex-start}
+.award-badge-section .award-badge-image{flex-shrink:0}
+.award-badge-section .award-badge-img{width:120px;height:120px;object-fit:contain}
+.award-badge-section .award-badge-meta{display:flex;gap:1rem;margin-bottom:0.5rem;font-size:0.875rem}
+.award-badge-section .award-badge-org{color:#6c757d;font-weight:600}
+.award-badge-section .award-badge-year{color:#6c757d}
+.award-badge-section .award-badge-title{font-size:1.25rem;margin-bottom:0.5rem}
+.award-badge-section .award-badge-desc{color:#6c757d;margin-bottom:1rem}
+.award-badge-section .award-badge-link{display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none}
+.award-badge-section .award-badge-link i{font-size:0.875rem}
+@media (max-width: 768px){
+  .award-badges-hero{justify-content:center}
+  .award-badge-hero img{width:60px;height:60px}
+  .award-badge-section{flex-direction:column;text-align:center}
+}
 </style>
 
 <script>
