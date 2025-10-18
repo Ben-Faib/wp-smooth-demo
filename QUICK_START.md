@@ -20,11 +20,14 @@ Let's verify everything works:
    [nbc_promotion_box]
    [nbc_benefits]
    [nbc_how_it_works]
+   [nbc_fee_structure]
+   [nbc_countries]
+   [nbc_faq]
    ```
 5. Click **Publish**
 6. Click **View Post**
 
-✅ **You should see**: Promotion box, benefits grid, and 4-step process
+✅ **You should see**: All NBC sections with proper navigation links working
 
 If it works, **delete this test post** and continue.
 

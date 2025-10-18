@@ -91,6 +91,8 @@ Paste this into the WordPress editor (switch to "Code Editor" view if needed):
 
 [nbc_fee_structure]
 
+[nbc_countries]
+
 <h2>Additional Services for Newcomers</h2>
 
 <ul>
@@ -216,10 +218,13 @@ Use these shortcodes anywhere in your content:
 - `[nbc_promotion_box]` - Cashback promotion summary
 - `[nbc_benefits]` - 6 key benefits grid
 - `[nbc_eligibility]` - Who's eligible + required documents
-- `[nbc_how_it_works]` - 4-step process
-- `[nbc_fee_structure]` - Fee table for 3 years
-- `[nbc_faq]` - 7 frequently asked questions
+- `[nbc_how_it_works]` - 4-step process (links to #how)
+- `[nbc_fee_structure]` - Fee table for 3 years (links to #fees)
+- `[nbc_countries]` - Where NBC operates (links to #countries)
+- `[nbc_faq]` - 7 frequently asked questions (links to #faq)
 - `[nbc_cta]` - Final call-to-action section
+
+**Note**: The shortcodes with IDs automatically create anchor links that work with the navigation tabs!
 
 ## Customization
 

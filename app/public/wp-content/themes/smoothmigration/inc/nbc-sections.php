@@ -212,8 +212,8 @@ function smoothmigration_nbc_how_it_works_section() {
 function smoothmigration_nbc_fee_structure_section() {
     ob_start();
     ?>
-    <div class="nbc-fee-structure-section mb-5">
-        <h2 class="h3 mb-4">Fee Structure & Savings</h2>
+    <div class="nbc-fee-structure-section mb-5" id="fees">
+        <h2 class="h3 mb-4">Fees & Speed</h2>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead class="table-light">
@@ -264,7 +264,7 @@ function smoothmigration_nbc_fee_structure_section() {
 function smoothmigration_nbc_faq_section() {
     ob_start();
     ?>
-    <div class="nbc-faq-section mb-5">
+    <div class="nbc-faq-section mb-5" id="faq">
         <h2 class="h3 mb-4">Frequently Asked Questions</h2>
         <div class="accordion" id="nbcFaqAccordion">
             <div class="accordion-item">
@@ -364,6 +364,51 @@ function smoothmigration_nbc_faq_section() {
 }
 
 /**
+ * NBC Supported Countries/Regions Section
+ */
+function smoothmigration_nbc_countries_section() {
+    ob_start();
+    ?>
+    <div class="nbc-countries-section mb-5" id="countries">
+        <h2 class="h3 mb-4">Where National Bank Operates</h2>
+        <p class="lead">National Bank of Canada serves customers across all Canadian provinces and territories.</p>
+        
+        <div class="row g-4 mt-3">
+            <div class="col-md-6">
+                <div class="p-4 border rounded h-100">
+                    <h3 class="h5 mb-3"><i class="fa-solid fa-building-columns me-2" style="color: #d4002a;"></i>Branch Network</h3>
+                    <ul class="mb-0">
+                        <li><strong>361+ branches</strong> across Canada</li>
+                        <li><strong>2,071 ABMs</strong> nationwide</li>
+                        <li>Extensive coverage in Quebec and Ontario</li>
+                        <li>Growing presence in Western Canada</li>
+                        <li>Services available in <strong>6 languages</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-4 border rounded h-100">
+                    <h3 class="h5 mb-3"><i class="fa-solid fa-globe me-2" style="color: #d4002a;"></i>International Access</h3>
+                    <ul class="mb-0">
+                        <li>Access funds abroad via <strong>CIRRUS®, Maestro®, and NYCE®</strong> networks</li>
+                        <li>Partner ABMs worldwide (Accel®, Cirrus®, Allpoint®)</li>
+                        <li>International money transfers to 170+ countries</li>
+                        <li>Newcomer support from your home country</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="alert alert-info mt-4">
+            <i class="fa-solid fa-info-circle me-2"></i>
+            <strong>New to Canada?</strong> You can start your application from your home country up to 90 days before arrival. Visit a branch upon arrival or complete verification remotely.
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
+/**
  * NBC CTA Section
  */
 function smoothmigration_nbc_cta_section( $affiliate_url = '' ) {
@@ -402,6 +447,7 @@ add_shortcode( 'nbc_benefits', 'smoothmigration_nbc_benefits_section' );
 add_shortcode( 'nbc_eligibility', 'smoothmigration_nbc_eligibility_section' );
 add_shortcode( 'nbc_how_it_works', 'smoothmigration_nbc_how_it_works_section' );
 add_shortcode( 'nbc_fee_structure', 'smoothmigration_nbc_fee_structure_section' );
+add_shortcode( 'nbc_countries', 'smoothmigration_nbc_countries_section' );
 add_shortcode( 'nbc_faq', 'smoothmigration_nbc_faq_section' );
 add_shortcode( 'nbc_cta', function() {
     $affiliate_url = get_post_meta( get_the_ID(), '_service_affiliate_url', true );
