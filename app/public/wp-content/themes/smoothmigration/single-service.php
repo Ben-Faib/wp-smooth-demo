@@ -147,6 +147,16 @@ if (strpos($term_slug, 'insurance') !== false) {
 		</div>
 	</section>
 
+	<section class="service-support bg-light py-5">
+		<div class="container">
+			<div class="support-banner text-center p-4 p-md-5 rounded-4 shadow-sm bg-white">
+				<h2 class="h4 fw-bold mb-3">Need a specialized service?</h2>
+				<p class="mb-0">Looking for specialized services like international tax advice, business setup, or other services not listed? Our expert team is here to help with personalized solutions within our preferred network providers.</p>
+				<a href="/contact" class="btn btn-primary mt-3">Talk to our team</a>
+			</div>
+		</div>
+	</section>
+
     <!-- Sticky CTA bar -->
     <div class="sticky-cta shadow-lg">
         <div class="container d-flex justify-content-between align-items-center py-2">
@@ -169,6 +179,16 @@ if (strpos($term_slug, 'insurance') !== false) {
 #svcWidget .svc-loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.85)}
 #svcWidget:not(.svc-widget-loading) .svc-loading-overlay{display:none}
 @media (prefers-reduced-motion: reduce){#svcWidget .spinner-border{animation:none!important}}
+
+.service-support .support-banner {
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+.service-support p {
+	font-size: 1.05rem;
+	line-height: 1.6;
+}
 
 /* Awards Styling */
 .service-awards{margin-top:1.5rem}

@@ -278,6 +278,12 @@ $term = get_queried_object();
                 <a href="/services" class="btn btn-primary">Return to All Services</a>
             </div>
         <?php endif; ?>
+
+        <div class="support-banner text-center bg-light p-4 p-md-5 rounded-4 shadow-sm mt-5">
+            <h2 class="h4 fw-bold mb-3">Need a specialized service?</h2>
+            <p class="mb-0">Looking for specialized services like international tax advice, business setup, or other services not listed? Our expert team is here to help with personalized solutions within our preferred network providers.</p>
+            <a href="/contact" class="btn btn-primary mt-3">Talk to our team</a>
+        </div>
     </div>
 </main>
 
@@ -293,6 +299,8 @@ $term = get_queried_object();
 
 <style>
 .service-list-card{border:1px solid var(--border-light,#e6e8eb)}
+.support-banner{max-width:760px;margin:3rem auto 0;}
+.support-banner p{font-size:1.05rem;line-height:1.6;}
 .plan-tray{position:fixed;right:16px;bottom:16px;background:#fff;border-radius:12px;padding:12px;z-index:1050;width:320px;max-height:60vh;display:flex;flex-direction:column}
 .plan-header{font-weight:700;margin-bottom:8px}
 .plan-items{overflow:auto;flex:1;border:1px solid #eee;border-radius:8px;padding:8px;margin-bottom:8px}

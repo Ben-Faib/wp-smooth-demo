@@ -438,7 +438,7 @@ get_header();
                 <div class="col">
                     <div class="team-member text-center">
                         <div class="avatar-wrap">
-                            <?php echo get_team_member_image(array('Rob-about', 'Robert Wood', 'Rob'), 'Robert Wood', 'avatar-img'); ?>
+                            <?php echo get_team_member_image(array('Rob-about', 'Robert Wood', 'Rob'), 'Robert Wood', 'avatar-img avatar-rob'); ?>
                         </div>
                         <h4 class="member-name">Robert Wood</h4>
                         <p class="member-role"><span class="role-base">Operations manager</span><span class="role-region">United&nbsp;Kingdom</span></p>
@@ -545,20 +545,21 @@ get_header();
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <div class="cta-content">
+                        <p class="cta-eyebrow text-primary fw-semibold text-uppercase mb-2">55+ countries personally navigated</p>
                         <h2 class="display-5 fw-bold mb-3">Ready to Start Your Journey?</h2>
-                        <p class="lead mb-4">Work with professionals who have lived the expat experience across four continents. Let our personal knowledge guide your successful relocation.</p>
+                        <p class="lead mb-4">Work with professionals who have lived the expat experience across six continents. Let our personal knowledge guide your successful relocation.</p>
                         <div class="cta-features d-flex flex-wrap gap-4">
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-star text-primary me-2" aria-hidden="true"></i>
-                                <span>Superior Service</span>
+                                <span>Expert guidance at every step</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-tags text-primary me-2" aria-hidden="true"></i>
-                                <span>Superior Pricing</span>
+                                <span>Preferred partner pricing</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-microchip text-primary me-2" aria-hidden="true"></i>
-                                <span>Superior Technology</span>
+                                <span>Technology that keeps you informed</span>
                             </div>
                         </div>
                     </div>
@@ -1099,6 +1100,10 @@ get_header();
     display: block;
 }
 
+.avatar-rob {
+    object-position: center 25%;
+}
+
 .member-name {
     font-weight: 700;
     margin: 0.25rem 0 0.1rem;
@@ -1218,6 +1223,11 @@ get_header();
 
 .contact-cta {
     background: var(--bg-light);
+}
+
+.cta-eyebrow {
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
 }
 
 .cta-features .feature-item {

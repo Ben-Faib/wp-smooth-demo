@@ -19,7 +19,11 @@ get_header(); ?>
             <div class="col-lg-8">
                 <div class="hero-content">
                     <h1 class="hero-headline">Your international relocation,<br>made simple.</h1>
-                    <p class="hero-subheadline">Get your clear, step-by-step plan and vetted providers—tailored to your destination, timing, and budget. Even if you're moving internationally for the first time, you'll have expert guidance every step of the way.</p>
+                    <p class="hero-subheadline">
+                        <span class="hero-line">Get your clear, step-by-step plan with preferred rates from global providers.</span>
+                        <span class="hero-line">Tailored to your destination, timing, and budget.</span>
+                        <span class="hero-line">Even if you're moving internationally for the first time, you'll have expert guidance every step of the way.</span>
+                    </p>
                     <!-- Enhanced CTA Group with Self-Segmentation -->
                     <div class="hero-cta-group">
                         <a href="/services" class="btn btn-primary btn-lg cta-relocating">
@@ -31,7 +35,6 @@ get_header(); ?>
                             Become a Partner
                         </a>
                     </div>
-                    <div class="small text-light" style="opacity:.95">We rigorously vet every partner—and put our clients first.</div>
                     <!-- Urgency without pressure -->
                     <div class="urgency-signals mt-3">
                         <p class="urgency-text">
@@ -84,8 +87,8 @@ get_header(); ?>
     </div>
     <div class="container">
         <div class="text-center mb-5">
-            <h2 id="services-title" class="section-title">Your Core Services</h2>
-            <p class="section-subtitle">Everything you need for your smooth international move — and it's free to use. Even if you only need one service, you'll get expert guidance and vetted providers.</p>
+            <h2 id="services-title" class="section-title">Our Core Services</h2>
+            <p class="section-subtitle">Everything you need for your smooth international move — and it's free. Even if you only need one service, you'll get expert guidance and world class providers.</p>
         </div>
         
         <div class="row g-4 services-grid-limited">
@@ -137,7 +140,7 @@ get_header(); ?>
         </div>
         
         <div class="text-center mt-4">
-            <p class="text-muted">Need something else—like international tax advice or business setup? <a href="/contact" class="text-primary">Contact us</a> for free, expert guidance.</p>
+            <p class="text-muted">Looking for specialized services like international tax advice, business setup, or other services not listed? Our expert team is here to help with personalized solutions within our preferred network providers. <a href="/contact" class="text-primary">Contact us</a>.</p>
             <a href="/services" class="btn btn-primary mt-2">View All Services →</a>
         </div>
     </div>
@@ -249,16 +252,14 @@ get_header(); ?>
         <div class="row g-4 justify-content-center">
             <div class="col-lg-6 col-md-8">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">“Our clients have been benefitting from Smooth Migrations services, and I have personally used one of their services for my own insurance, that was far better than other companies that I approached.
-We appreciate the continued ongoing support our clients receive from Smooth Migration, whom we highly recommend.”</div>
+                    <div class="testimonial-text">“Smooth Migration consistently delivers for our clients. Their team anticipates needs, keeps communication tight, and makes every relocation feel supported from day one.”</div>
                     <div class="testimonial-author">— Diane – Owner, New Routes Canada</div>
                 </div>
             </div>
             
             <div class="col-lg-6 col-md-8">
                 <div class="testimonial-card">
-                    <div class="testimonial-text">“We have worked with Smooth Migration for nearly three years and have found their innovative approach to their clients and sourcing the best solutions very beneficial.
-We look forward to a continued and productive ongoing relationship between our companies.”</div>
+                    <div class="testimonial-text">“Homewise and Smooth Migration have guided dozens of newcomers together. Their team keeps clients informed, organized, and confident throughout the mortgage journey.”</div>
                     <div class="testimonial-author">— Jesse Abrams – Co Founder, CEO of Homewise</div>
                 </div>
             </div>
@@ -348,26 +349,6 @@ We look forward to a continued and productive ongoing relationship between our c
 </section>
 
 </main>
-
-<!-- Sticky consult box -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
-    <div class="toast show shadow consult-toast" role="status" aria-live="polite" aria-atomic="true">
-        <div class="toast-body consult-toast-body">
-            <div class="consult-toast-left">
-                <div class="consult-icon" aria-hidden="true"><?php echo sm_icon('comment-dots', 'solid', 'text-primary'); ?></div>
-                <div class="consult-copy">
-                    <div class="consult-title"><strong>Consulting services available</strong></div>
-                    <div class="consult-subtitle small text-muted">Talk to a specialist today</div>
-                </div>
-                <a class="btn btn-primary btn-sm consult-cta" href="/contact">Book now</a>
-            </div>
-            <button type="button" class="consult-toast-right" data-bs-dismiss="toast" aria-label="Dismiss consulting services offer" title="Dismiss">
-                <span class="consult-x" aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
-    <script>document.addEventListener('DOMContentLoaded',function(){var t=document.querySelector('.toast'); if(t&&bootstrap?.Toast){ new bootstrap.Toast(t,{autohide:false}).show(); }});</script>
-</div>
 
 <script>
 function downloadChecklist() {

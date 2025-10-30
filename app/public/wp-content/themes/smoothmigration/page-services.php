@@ -17,7 +17,7 @@ get_header();
             <div class="row">
                 <div class="col-lg-8">
                     <h1 class="display-5 fw-bold mb-3">Our Services</h1>
-                    <p class="text-muted mb-0">Everything you need for a smooth international move.</p>
+                    <p class="text-muted mb-0">Everything you need for your smooth international move — and it's free. Even if you only need one service, you'll get expert guidance and world class providers.</p>
                 </div>
             </div>
         </div>
@@ -251,11 +251,11 @@ get_header();
                 <div class="col-lg-7">
                     <div class="cta-content">
                         <h2 class="display-5 fw-bold mb-3">Need Something Else?</h2>
-                        <p class="lead mb-4">Looking for specialized services like international tax advice, business setup, or other unique requirements? Our expert team is here to help with personalized solutions.</p>
+                        <p class="lead mb-4">Looking for specialized services like international tax advice, business setup, or other services not listed? Our expert team is here to help with personalized solutions within our preferred network providers.</p>
                         <div class="cta-features d-flex flex-wrap gap-4 mb-4">
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-phone-alt me-2"></i>
-                                <span>Free Consultation</span>
+                                <span>Free, no-pressure consultation</span>
                             </div>
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-clock me-2"></i>
@@ -263,7 +263,7 @@ get_header();
                             </div>
                             <div class="feature-item d-flex align-items-center">
                                 <i class="fas fa-globe me-2"></i>
-                                <span>Global Expertise</span>
+                                <span>Global expertise with vetted partners</span>
                             </div>
                         </div>
                     </div>
@@ -582,6 +582,54 @@ get_header();
     
     .cta-features {
         justify-content: center;
+    }
+
+    .floating-elements {
+        display: none;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .enhanced-service-card {
+        border-radius: 22px;
+        box-shadow: var(--shadow-md);
+    }
+
+    .service-card-header {
+        padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .service-card-body {
+        padding: 0 1.5rem 1.5rem;
+        text-align: center;
+    }
+
+    .service-features {
+        margin-top: 1rem;
+    }
+
+    .features-list {
+        display: grid;
+        gap: 0.4rem 0.6rem;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .features-list li {
+        list-style: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        font-size: 0.95rem;
+    }
+
+    .features-list li i {
+        font-size: 0.95rem;
+    }
+
+    .service-timeline {
+        display: none;
     }
 }
 

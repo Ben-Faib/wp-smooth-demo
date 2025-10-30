@@ -65,13 +65,17 @@
 		b.className = 'sm-region';
 		b.setAttribute('data-region', k);
 		b.setAttribute('aria-pressed', k === state.region ? 'true' : 'false');
-		b.setAttribute('aria-label', `${REGIONS[k].label} region`);
+		const regionCfg = REGIONS[k] || {};
+		b.setAttribute('aria-label', `${regionCfg.label || getCountryCode(k)} region ${regionCfg.domain ? `(${regionCfg.domain})` : ''}`.trim());
 		b.setAttribute('role', 'radio');
 
 
 		b.innerHTML = `
 			<span class="sm-region-flag" aria-hidden="true">${flagEmojiFor(k)}</span>
-			<span class="sm-region-label">${getCountryCode(k)}</span>
+			<span class="sm-region-info">
+				<span class="sm-region-label">${regionCfg.label || getCountryCode(k)}</span>
+				<span class="sm-region-domain">${regionCfg.domain || ''}</span>
+			</span>
 		`;
 
 		b.addEventListener('click', () => {
@@ -180,9 +184,13 @@
 			const autonym = getAutonym(key);
 			const localeCode = getLocaleCode(key);
 
+			const english = getEnglishName(key);
 			b.innerHTML = `
 				<span class="sm-lang-radio" aria-hidden="true"></span>
-				<span class="sm-lang-label">${autonym} (${localeCode})</span>
+				<span class="sm-lang-info">
+					<span class="sm-lang-autonym">${autonym}</span>
+					<span class="sm-lang-meta">${english} · ${localeCode}</span>
+				</span>
 			`;
 
 			b.addEventListener('click', () => {
@@ -222,7 +230,11 @@
 	function refreshPill() {
 		const r = REGIONS[state.region];
 		const langLabel = (r.languages && r.languages[state.lang]) || 'English';
-		$pillText.textContent = `${langLabel}`;
+		const regionLabel = r.label || getCountryCode(state.region);
+		$pillText.textContent = `${regionLabel} · ${langLabel}`;
+		if ($pill) {
+			$pill.setAttribute('title', `${regionLabel} – ${langLabel}`);
+		}
 		if ($pillIco) { $pillIco.textContent = flagEmojiFor(state.region); }
 	}
 

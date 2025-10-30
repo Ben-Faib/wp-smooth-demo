@@ -24,7 +24,7 @@
               <span class="footer-brand-text" itemprop="name">SMOOTH MIGRATION</span>
             </div>
             <p class="footer-description" itemprop="description">Making international relocation smooth and seamless for families and professionals relocating worldwide.</p>
-            <p class="footer-mission text-muted small">Even if you're moving for the first time, you'll get expert guidance and vetted providers to ensure your relocation goes smoothly.</p>
+            <p class="footer-mission text-muted small">Even if you're not moving for the first time, you'll get expert guidance and vetted providers to ensure your relocation goes smoothly.</p>
           </div>
         </div>
         

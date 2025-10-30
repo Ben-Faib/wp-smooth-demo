@@ -327,15 +327,15 @@ $__sm_show_sparrow_btn = ! $__sm_force_hide && ($__sm_is_ca || $__sm_force_show)
                             <div class="quote-icon">
                                 <i class="fas fa-quote-left"></i>
                             </div>
-                            <p class="testimonial-text">"Our realtor understood exactly what we needed as a family moving from London to Singapore. The virtual tours saved us so much time and stress."</p>
+                            <p class="testimonial-text">"Smooth Migration brings us well-prepared newcomers. Every client arrives with a clear brief and documents ready, which lets our Homewise advisors secure the right mortgage faster."</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <span>SC</span>
+                                <span>JA</span>
                             </div>
                             <div class="author-info">
-                                <h5>Sophie Chen</h5>
-                                <span>London → Singapore</span>
+                                <h5>Jesse Abrams</h5>
+                                <span>CEO, Homewise</span>
                                 <div class="rating">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -354,15 +354,15 @@ $__sm_show_sparrow_btn = ! $__sm_force_hide && ($__sm_is_ca || $__sm_force_show)
                             <div class="quote-icon">
                                 <i class="fas fa-quote-left"></i>
                             </div>
-                            <p class="testimonial-text">"The entire process was seamless. From initial consultation to signing the lease, everything was handled professionally and efficiently."</p>
+                            <p class="testimonial-text">"Our newcomers feel supported from the first call. Smooth Migration keeps us updated and coordinates every detail, so our New Routes clients land housing with confidence."</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <span>MR</span>
+                                <span>DN</span>
                             </div>
                             <div class="author-info">
-                                <h5>Michael Rodriguez</h5>
-                                <span>Madrid → Toronto</span>
+                                <h5>Diane</h5>
+                                <span>Owner, New Routes Canada</span>
                                 <div class="rating">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -381,15 +381,15 @@ $__sm_show_sparrow_btn = ! $__sm_force_hide && ($__sm_is_ca || $__sm_force_show)
                             <div class="quote-icon">
                                 <i class="fas fa-quote-left"></i>
                             </div>
-                            <p class="testimonial-text">"Having a local expert who spoke our language and understood our cultural needs made all the difference. Highly recommend!"</p>
+                            <p class="testimonial-text">"Our Toronto realtor already knew our timeline, budget, and wish list before the first viewing. Working with Smooth Migration made relocating with two kids stress-free."</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <span>AP</span>
+                                <span>SK</span>
                             </div>
                             <div class="author-info">
-                                <h5>Aisha Patel</h5>
-                                <span>Mumbai → Dubai</span>
+                                <h5>Sarah Kim</h5>
+                                <span>Relocation Client – Seoul → Toronto</span>
                                 <div class="rating">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
