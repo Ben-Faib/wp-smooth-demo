@@ -120,6 +120,14 @@ function smoothmigration_add_service_meta_boxes() {
         'default'
     );
     add_meta_box(
+        'service_widget_controls',
+        __( 'Quote Widget', 'smoothmigration' ),
+        'smoothmigration_service_widget_controls_callback',
+        'service',
+        'side',
+        'default'
+    );
+    add_meta_box(
         'service_logos_variants',
         __( 'Logo Variants', 'smoothmigration' ),
         'smoothmigration_service_logo_variants_callback',
@@ -274,6 +282,81 @@ function smoothmigration_service_affiliate_callback( $post ) {
     <p>
         <label for="service_affiliate_url"><?php _e( 'Referral/Affiliate URL', 'smoothmigration' ); ?></label>
         <input type="url" id="service_affiliate_url" name="service_affiliate_url" value="<?php echo esc_attr( $affiliate_url ); ?>" class="widefat" placeholder="https://...">
+    </p>
+    <?php
+}
+
+/**
+ * Quote widget visibility controls.
+ */
+function smoothmigration_service_widget_controls_callback( $post ) {
+    $mode_raw  = get_post_meta( $post->ID, '_service_widget_mode', true );
+    $mode      = $mode_raw !== '' ? strtolower( (string) $mode_raw ) : 'auto';
+    $widget    = (string) get_post_meta( $post->ID, '_service_widget_html', true );
+    $has_embed = $widget !== '';
+
+    $should_display = function_exists( 'smoothmigration_service_should_display_widget' )
+        ? smoothmigration_service_should_display_widget( $post->ID )
+        : false;
+
+    $allowed_slugs = function_exists( 'smoothmigration_service_widget_allowed_slugs' )
+        ? smoothmigration_service_widget_allowed_slugs()
+        : array();
+
+    $allowed_labels = array();
+    if ( ! empty( $allowed_slugs ) ) {
+        $terms = get_terms( array(
+            'taxonomy'   => 'service_type',
+            'slug'       => $allowed_slugs,
+            'hide_empty' => false,
+            'fields'     => 'names',
+        ) );
+
+        if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+            $allowed_labels = array_map( 'sanitize_text_field', (array) $terms );
+        }
+    }
+
+    $auto_label = __( 'Auto (matches allowed service types)', 'smoothmigration' );
+    if ( ! empty( $allowed_labels ) ) {
+        $auto_label = sprintf(
+            /* translators: %s list of service type names */
+            __( 'Auto — show for %s', 'smoothmigration' ),
+            implode( ', ', $allowed_labels )
+        );
+    } elseif ( ! empty( $allowed_slugs ) ) {
+        $auto_label = sprintf(
+            /* translators: %s list of service type slugs */
+            __( 'Auto — show when slug contains: %s', 'smoothmigration' ),
+            implode( ', ', $allowed_slugs )
+        );
+    }
+
+    $status = __( 'No widget saved', 'smoothmigration' );
+    if ( $has_embed ) {
+        $status = $should_display
+            ? __( 'Visible on service page', 'smoothmigration' )
+            : __( 'Hidden by current rules', 'smoothmigration' );
+    }
+
+    ?>
+    <p><strong><?php echo esc_html( $status ); ?></strong></p>
+
+    <?php if ( ! $has_embed ) : ?>
+        <p class="description"><?php esc_html_e( 'Import or paste partner widget markup to enable the quote card.', 'smoothmigration' ); ?></p>
+    <?php endif; ?>
+
+    <p>
+        <label for="service_widget_mode" class="screen-reader-text"><?php esc_html_e( 'Quote widget visibility', 'smoothmigration' ); ?></label>
+        <select name="service_widget_mode" id="service_widget_mode" class="widefat">
+            <option value="auto" <?php selected( $mode, 'auto' ); ?>><?php echo esc_html( $auto_label ); ?></option>
+            <option value="force" <?php selected( $mode, 'force' ); ?>><?php esc_html_e( 'Force — always show', 'smoothmigration' ); ?></option>
+            <option value="off" <?php selected( $mode, 'off' ); ?>><?php esc_html_e( 'Disable — never show', 'smoothmigration' ); ?></option>
+        </select>
+    </p>
+
+    <p class="description">
+        <?php esc_html_e( 'Need to remove widgets in bulk? Append ?sm_clean_widgets=1 to any wp-admin URL.', 'smoothmigration' ); ?>
     </p>
     <?php
 }
@@ -540,6 +623,20 @@ function smoothmigration_save_service_meta( $post_id ) {
         }
     }
 
+    if ( isset( $_POST['service_widget_mode'] ) ) {
+        $mode = sanitize_text_field( wp_unslash( $_POST['service_widget_mode'] ) );
+
+        if ( $mode === 'auto' || $mode === '' ) {
+            delete_post_meta( $post_id, '_service_widget_mode' );
+        } elseif ( in_array( $mode, array( 'force', 'on', 'enabled', 'yes' ), true ) ) {
+            update_post_meta( $post_id, '_service_widget_mode', 'force' );
+        } elseif ( in_array( $mode, array( 'off', 'no', 'disable', 'disabled' ), true ) ) {
+            update_post_meta( $post_id, '_service_widget_mode', 'off' );
+        } else {
+            update_post_meta( $post_id, '_service_widget_mode', $mode );
+        }
+    }
+
     // Handle checkbox
     $featured = isset( $_POST['service_featured'] ) ? '1' : '0';
     update_post_meta( $post_id, '_service_featured', $featured );
@@ -590,6 +687,7 @@ function smoothmigration_service_columns( $columns ) {
     $columns['featured'] = __( 'Featured', 'smoothmigration' );
     $columns['company'] = __( 'Company', 'smoothmigration' );
     $columns['regions'] = __( 'Regions', 'smoothmigration' );
+    $columns['widget'] = __( 'Quote Widget', 'smoothmigration' );
     $columns['logo'] = __( 'Logo', 'smoothmigration' );
     return $columns;
 }
@@ -628,6 +726,30 @@ function smoothmigration_service_column_content( $column, $post_id ) {
                 }
             } else {
                 echo '—';
+            }
+            break;
+
+        case 'widget':
+            $widget = (string) get_post_meta( $post_id, '_service_widget_html', true );
+            if ( $widget === '' ) {
+                esc_html_e( 'No widget', 'smoothmigration' );
+                break;
+            }
+
+            $mode_raw = get_post_meta( $post_id, '_service_widget_mode', true );
+            $mode     = $mode_raw !== '' ? strtolower( (string) $mode_raw ) : 'auto';
+            $visible  = function_exists( 'smoothmigration_service_should_display_widget' )
+                ? smoothmigration_service_should_display_widget( $post_id )
+                : false;
+
+            if ( $mode === 'force' ) {
+                esc_html_e( 'Forced on', 'smoothmigration' );
+            } elseif ( in_array( $mode, array( 'off', 'disable', 'disabled' ), true ) ) {
+                esc_html_e( 'Disabled', 'smoothmigration' );
+            } else {
+                echo $visible
+                    ? esc_html__( 'Auto (showing)', 'smoothmigration' )
+                    : esc_html__( 'Auto (hidden)', 'smoothmigration' );
             }
             break;
             
