@@ -78,7 +78,10 @@ if (strpos($term_slug, 'insurance') !== false) {
                             <?php the_content(); ?>
                         </div>
                         
-                        <?php $svc_widget = get_post_meta( get_the_ID(), '_service_widget_html', true ); if ( $svc_widget ) : ?>
+                        <?php
+                        $svc_widget = get_post_meta( get_the_ID(), '_service_widget_html', true );
+                        if ( smoothmigration_service_should_display_widget( get_the_ID() ) ) :
+                        ?>
                         <hr class="my-5" />
                         <div class="card shadow-sm mb-4" id="svcWidget">
                             <div class="card-body">

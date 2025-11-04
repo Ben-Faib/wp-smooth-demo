@@ -83,3 +83,72 @@ add_action( 'template_redirect', function() {
         exit;
     }
 });
+
+// On-demand widget cleanup toggle (?sm_clean_widgets=1 in wp-admin).
+add_action( 'admin_init', function() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+    if ( empty( $_GET['sm_clean_widgets'] ) ) {
+        return;
+    }
+
+    $flag = sanitize_text_field( wp_unslash( $_GET['sm_clean_widgets'] ) );
+    if ( $flag !== '1' ) {
+        return;
+    }
+
+    if ( ! function_exists( 'smoothmigration_cleanup_service_widgets' ) ) {
+        return;
+    }
+
+    $result = smoothmigration_cleanup_service_widgets();
+
+    update_option( 'smoothmigration_widget_cleanup_notice', array(
+        'time'          => time(),
+        'processed'     => (int) ( $result['processed'] ?? 0 ),
+        'removed_ids'   => (array) ( $result['removed_ids'] ?? array() ),
+        'kept_ids'      => (array) ( $result['kept_ids'] ?? array() ),
+        'forced_ids'    => (array) ( $result['forced_ids'] ?? array() ),
+        'toggled_ids'   => (array) ( $result['toggled_ids'] ?? array() ),
+        'allowed_slugs' => (array) ( $result['allowed_slugs'] ?? array() ),
+    ) );
+
+    wp_safe_redirect( remove_query_arg( 'sm_clean_widgets' ) );
+    exit;
+} );
+
+add_action( 'admin_notices', function() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+    $notice = get_option( 'smoothmigration_widget_cleanup_notice' );
+    if ( empty( $notice['time'] ) ) {
+        return;
+    }
+
+    delete_option( 'smoothmigration_widget_cleanup_notice' );
+
+    $removed_count = isset( $notice['removed_ids'] ) ? count( (array) $notice['removed_ids'] ) : 0;
+    $forced_count  = isset( $notice['forced_ids'] ) ? count( (array) $notice['forced_ids'] ) : 0;
+    $toggled_count = isset( $notice['toggled_ids'] ) ? count( (array) $notice['toggled_ids'] ) : 0;
+    $allowed_slugs = isset( $notice['allowed_slugs'] ) ? implode( ', ', (array) $notice['allowed_slugs'] ) : '';
+
+    $kept_count = isset( $notice['kept_ids'] ) ? count( (array) $notice['kept_ids'] ) : 0;
+
+    $message  = sprintf(
+        'Widget cleanup finished. Removed %1$d widgets; kept %2$d (forced: %3$d, manual off cleared: %4$d).',
+        $removed_count,
+        $kept_count,
+        $forced_count,
+        $toggled_count
+    );
+
+    if ( $allowed_slugs ) {
+        $message .= ' Allowed slugs: ' . $allowed_slugs . '.';
+    }
+
+    echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $message ) . '</p></div>';
+} );

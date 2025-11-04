@@ -560,3 +560,148 @@ function smoothmigration_display_awards_section( int $post_id, string $context =
     echo '</div>';
 }
 
+/**
+ * Return the list of service_type slugs that should automatically display partner widgets.
+ */
+function smoothmigration_service_widget_allowed_slugs(): array {
+    $defaults = array( 'insurance' );
+
+    /**
+     * Filters the service_type slugs that are permitted to render partner widgets automatically.
+     *
+     * @param array $defaults Default allowed slugs.
+     */
+    $allowed = apply_filters( 'smoothmigration_service_widget_allowed_slugs', $defaults );
+
+    $allowed = array_filter( array_unique( array_map( 'sanitize_title', (array) $allowed ) ) );
+
+    return $allowed ?: $defaults;
+}
+
+/**
+ * Determine whether a service should display the embedded partner widget.
+ */
+function smoothmigration_service_should_display_widget( int $post_id ): bool {
+    $widget_html = (string) get_post_meta( $post_id, '_service_widget_html', true );
+    if ( $widget_html === '' ) {
+        return false;
+    }
+
+    $mode = strtolower( (string) get_post_meta( $post_id, '_service_widget_mode', true ) );
+
+    if ( in_array( $mode, array( 'off', 'disable', 'disabled', 'no' ), true ) ) {
+        return false;
+    }
+
+    if ( in_array( $mode, array( 'on', 'force', 'enabled', 'yes' ), true ) ) {
+        return true;
+    }
+
+    $allowed = smoothmigration_service_widget_allowed_slugs();
+
+    if ( empty( $allowed ) ) {
+        return true;
+    }
+
+    $term_slugs = wp_get_post_terms( $post_id, 'service_type', array( 'fields' => 'slugs' ) );
+    if ( is_wp_error( $term_slugs ) ) {
+        return false;
+    }
+
+    foreach ( (array) $term_slugs as $slug ) {
+        $slug = sanitize_title( (string) $slug );
+        foreach ( $allowed as $allowed_slug ) {
+            if ( $slug === $allowed_slug || strpos( $slug, $allowed_slug ) !== false ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Remove widget markup from services whose service_type slug is not in the allow list.
+ *
+ * @param array $allowed_slugs Optional override for allowed slugs.
+ * @param bool  $dry_run       When true, no data is deleted and stats are returned only.
+ */
+function smoothmigration_cleanup_service_widgets( array $allowed_slugs = array(), bool $dry_run = false ): array {
+    if ( empty( $allowed_slugs ) ) {
+        $allowed_slugs = smoothmigration_service_widget_allowed_slugs();
+    }
+
+    $allowed_slugs = array_filter( array_unique( array_map( 'sanitize_title', (array) $allowed_slugs ) ) );
+
+    $service_ids = get_posts( array(
+        'post_type'      => 'service',
+        'post_status'    => array( 'publish', 'draft', 'pending', 'future' ),
+        'posts_per_page' => -1,
+        'fields'         => 'ids',
+        'no_found_rows'  => true,
+    ) );
+
+    $removed = array();
+    $kept    = array();
+    $forced  = array();
+    $toggled = array();
+
+    foreach ( $service_ids as $service_id ) {
+        $widget_html = get_post_meta( $service_id, '_service_widget_html', true );
+        if ( $widget_html === '' ) {
+            continue;
+        }
+
+        $mode = strtolower( (string) get_post_meta( $service_id, '_service_widget_mode', true ) );
+
+        if ( in_array( $mode, array( 'off', 'disable', 'disabled', 'no' ), true ) ) {
+            if ( ! $dry_run ) {
+                delete_post_meta( $service_id, '_service_widget_html' );
+            }
+            $toggled[] = $service_id;
+            continue;
+        }
+
+        if ( in_array( $mode, array( 'on', 'force', 'enabled', 'yes' ), true ) ) {
+            $forced[] = $service_id;
+            $kept[]   = $service_id;
+            continue;
+        }
+
+        $term_slugs = wp_get_post_terms( $service_id, 'service_type', array( 'fields' => 'slugs' ) );
+        $term_slugs = is_wp_error( $term_slugs ) ? array() : (array) $term_slugs;
+
+        $matches_allowed = false;
+        foreach ( $term_slugs as $slug ) {
+            $slug = sanitize_title( (string) $slug );
+            foreach ( $allowed_slugs as $allowed_slug ) {
+                if ( $slug === $allowed_slug || strpos( $slug, $allowed_slug ) !== false ) {
+                    $matches_allowed = true;
+                    break 2;
+                }
+            }
+        }
+
+        if ( $matches_allowed ) {
+            $kept[] = $service_id;
+            continue;
+        }
+
+        if ( ! $dry_run ) {
+            delete_post_meta( $service_id, '_service_widget_html' );
+        }
+
+        $removed[] = $service_id;
+    }
+
+    return array(
+        'processed'     => count( $service_ids ),
+        'removed_ids'   => $removed,
+        'kept_ids'      => $kept,
+        'forced_ids'    => $forced,
+        'toggled_ids'   => $toggled,
+        'allowed_slugs' => $allowed_slugs,
+        'dry_run'       => $dry_run,
+    );
+}
+
