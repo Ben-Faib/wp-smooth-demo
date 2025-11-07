@@ -649,7 +649,11 @@ add_shortcode( 'nbc_eligibility', 'smoothmigration_nbc_eligibility_section' );
 add_shortcode( 'nbc_how_it_works', 'smoothmigration_nbc_how_it_works_section' );
 add_shortcode( 'nbc_fee_structure', 'smoothmigration_nbc_fee_structure_section' );
 add_shortcode( 'nbc_countries', 'smoothmigration_nbc_countries_section' );
-add_shortcode( 'nbc_faq', 'smoothmigration_nbc_terms_and_conditions_section' );
+add_shortcode( 'nbc_faq', 'smoothmigration_nbc_faq_section' );
+add_shortcode( 'nbc_tac', 'smoothmigration_nbc_terms_and_conditions_section' );
+
+
+
 
 add_shortcode( 'nbc_cta', function() {
     $affiliate_url = get_post_meta( get_the_ID(), '_service_affiliate_url', true );
