@@ -527,13 +527,21 @@ function smoothmigration_display_awards_section( int $post_id, string $context =
         echo '</div>';
     } elseif ( $context === 'sidebar' ) {
         // Sidebar: vertical stacked badges
-        echo '<h3 class="h5">Awards & Recognition</h3>';
+        echo (strval(get_the_ID()) === "6548") 
+    ? '<h3 class="h5">Awards</h3>' 
+    : '<h3 class="h5">Awards &amp; Recognition</h3>';
         foreach ( $awards as $award ) {
             echo smoothmigration_display_award_badge( $award, 'sidebar' );
         }
     } else {
         // Section: full accordion display
-        echo '<h2 id="awards" class="h4 mt-4">Awards & Recognition</h2>';
+        //National Bank of Canada check
+        if (strval(get_the_ID()) == "6548") {
+            echo '<h2 id="awards" class="h4 mt-4">Awards</h2>';
+        } else {
+            echo '<h2 id="awards" class="h4 mt-4">Awards &amp; Recognition</h2>';
+        }
+         
         echo '<div class="accordion" id="awardsAccordion">';
         foreach ( $awards as $index => $award ) {
             $accordion_id = 'award' . $index;

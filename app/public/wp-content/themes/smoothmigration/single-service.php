@@ -15,12 +15,22 @@ $service_terms = get_the_terms( get_the_ID(), 'service_type' );
 $term_name = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->name : '';
 $term_slug = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->slug : '';
 
+
+
 // Determine appropriate button text based on service type
 $button_text = 'Continue to Partner';
 if (strpos($term_slug, 'insurance') !== false) {
     $button_text = 'Get a Quote';
-}
+
+} elseif(get_the_ID() == "6548"){ // ID Check for National Bank of Canada
+	$button_text = "Visit site";
+} else {}
+
+$id_check = strval(get_the_ID());
+echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 ?>
+
+
 
 <main id="main" class="site-main service-single" role="main">
     <section class="service-hero py-6 text-white" style="background: linear-gradient(135deg, <?php echo esc_attr($brand_color); ?>, #0a2a36); position:relative;">
@@ -30,12 +40,19 @@ if (strpos($term_slug, 'insurance') !== false) {
 					<div class="hero-content">
 						<div class="breadcrumb small opacity-75 mb-2">Service / <?php echo esc_html( $term_name ); ?></div>
 						<h1 class="display-4 fw-bold mb-3"><?php the_title(); ?></h1>
-						<p class="lead mb-4">Trusted partner for international relocations. Learn why we recommend this provider.</p>
+						<?php if ($id_check == "6548"): ?>
+						<p class="lead mb-4">Get $600 cashback* when you open your first chequing account and up to 3 years with no monthly fee.</p>
+						<?php else: ?>
+							<p class="lead mb-4">Trusted partner for international relocations. Learn why we recommend this provider.</p>
+						<?php endif; ?>
+
+
+
 						<div class="d-flex flex-wrap gap-3">
 							<?php if ( $affiliate_url ) : ?>
-								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg">Visit Partner</a>
+								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg"><?php echo ($id_check == "6548") ? "Advice on getting settled" : "Visit Partner"; ?></a>
 							<?php endif; ?>
-							<a href="/contact" class="btn btn-outline-light btn-lg">Talk to Our Team</a>
+							<a href="/contact" class="btn btn-outline-light btn-lg"><?php echo ($id_check == "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
 						</div>
 						<?php 
 						// Display awards in hero if they exist
@@ -58,9 +75,9 @@ if (strpos($term_slug, 'insurance') !== false) {
         <div class="container">
             <ul class="nav nav-pills gap-2 py-2" id="svcTabs">
                 <li class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
-                <li class="nav-item"><a class="nav-link" href="#how">How It Helps Relocators</a></li>
-                <li class="nav-item"><a class="nav-link" href="#fees">Fees & Speed</a></li>
-                <li class="nav-item"><a class="nav-link" href="#countries">Countries</a></li>
+<li class="nav-item"><a class="nav-link" href="#how"><?php echo (strval(get_the_ID()) === "6548") ? "How they help newcomers" : "How It Helps Relocators"; ?></a></li>
+                <li class="nav-item"><a class="nav-link" href="#fees"><?php echo (strval(get_the_ID()) === "6548") ? "Fees" : "Fees & Speed"; ?></a></li>
+                <li class="nav-item"><a class="nav-link" href="#countries"><?php echo (strval(get_the_ID()) === "6548") ? "Locations" : "Countries"; ?></a></li>
                 <?php if ( function_exists( 'smoothmigration_get_service_awards' ) && ! empty( smoothmigration_get_service_awards( get_the_ID() ) ) ) : ?>
                 <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
                 <?php endif; ?>
@@ -82,6 +99,10 @@ if (strpos($term_slug, 'insurance') !== false) {
                         $svc_widget = get_post_meta( get_the_ID(), '_service_widget_html', true );
                         if ( smoothmigration_service_should_display_widget( get_the_ID() ) ) :
                         ?>
+						<?php
+                        if (strval(get_the_ID()) !== "6548") : //check for NBC page
+                        ?>
+						
                         <hr class="my-5" />
                         <div class="card shadow-sm mb-4" id="svcWidget">
                             <div class="card-body">
@@ -102,6 +123,7 @@ if (strpos($term_slug, 'insurance') !== false) {
                             </div>
                         </div>
                         <?php endif; ?>
+                        <?php endif; ?>
                         
                         <?php
                         // Display full awards section if they exist
@@ -114,11 +136,17 @@ if (strpos($term_slug, 'insurance') !== false) {
 				<div class="col-lg-4">
 					<div class="card shadow-sm mb-4">
 						<div class="card-body">
-							<h3 class="h5">Why We Recommend</h3>
+							<h3 class="h5"><?php echo ($id_check == "6548") ? "Why we recommend" : "Why We Recommend"; ?></h3>
 							<ul class="list-unstyled small mt-3">
-								<li>Vetted partner with proven track record</li>
-								<li>Trusted by expats for transparent pricing</li>
-								<li>Seamless fit in our relocation workflow</li>
+								
+								<?php if ($id_check !== "6548"): ?>
+									<li>Vetted partner with proven track record</li>
+									<li>Trusted by expats for transparent pricing</li>
+									<li>Seamless fit in our relocation workflow</li>
+								<?php else: ?>
+									<li>National Bank offers award-winning banking services for newcomers with transparent pricing and in-depth support.</li>
+								<?php endif; ?>
+
 							</ul>
 							<?php if ( $affiliate_url ) : ?>
 								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary w-100 mt-3"><?php echo esc_html( $button_text ); ?></a>
@@ -168,7 +196,7 @@ if (strpos($term_slug, 'insurance') !== false) {
                 <?php if ( $affiliate_url ) : ?>
                 <a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary"><?php echo esc_html( $button_text ); ?></a>
                 <?php endif; ?>
-                <a href="/contact" class="btn btn-outline-primary">Talk to Our Team</a>
+                <a href="/contact" class="btn btn-outline-primary"><?php echo (strval(get_the_ID()) === "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
             </div>
         </div>
     </div>
