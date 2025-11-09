@@ -52,7 +52,7 @@ $__sm_show_sparrow_btn = ! $__sm_force_hide && ($__sm_is_ca || $__sm_force_show)
                         <div class="hero-cta">
                             <a href="#property-search" class="btn btn-accent btn-lg me-3" style="margin-top: 16px;">
                                 <i class="fas fa-search me-2"></i>
-                                Start Property Searchs
+                                Start Property Search
                             </a>
                             <a href="#how-it-works" class="btn btn-outline-light btn-lg me-3" style="margin-top: 16px;">
                                 <i class="fas fa-play me-2"></i>
