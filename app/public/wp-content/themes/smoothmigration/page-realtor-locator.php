@@ -50,16 +50,16 @@ $__sm_show_sparrow_btn = ! $__sm_force_hide && ($__sm_is_ca || $__sm_force_show)
                         </div>
                         
                         <div class="hero-cta">
-                            <a href="#property-search" class="btn btn-accent btn-lg me-3">
+                            <a href="#property-search" class="btn btn-accent btn-lg me-3" style="margin-top: 16px;">
                                 <i class="fas fa-search me-2"></i>
-                                Start Property Search
+                                Start Property Searchs
                             </a>
-                            <a href="#how-it-works" class="btn btn-outline-light btn-lg">
+                            <a href="#how-it-works" class="btn btn-outline-light btn-lg me-3" style="margin-top: 16px;">
                                 <i class="fas fa-play me-2"></i>
                                 How It Works
                             </a>
 <?php if ($__sm_show_sparrow_btn) : ?>
-                            <a href="https://sparrowshare.com/housemates" class="btn btn-outline-light btn-lg ms-3" target="_blank" rel="noopener">
+                            <a href="https://sparrowshare.com/housemates?ref=d32ae1fb-1a89-40ba-9845-d5236445be3e" class="btn btn-outline-light btn-lg mt-2" target="_blank" rel="noopener">
                                 <i class="fas fa-door-open me-2"></i>
                                 Newcomer Room rentals
                             </a>
