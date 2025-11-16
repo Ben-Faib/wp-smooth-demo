@@ -524,267 +524,267 @@ function smoothmigration_nbc_terms_and_conditions_section() {
                     <div class="accordion-body">
                         <section class="terms-conditions">
 
-  <h2>Cashback Promotion – Chequing Account and Additional Cashback</h2>
+                            <h2>Cashback Promotion – Chequing Account and Additional Cashback</h2>
 
-  <p><strong>Code Offer:</strong></p>
-  <table border="1" cellspacing="0" cellpadding="8">
-    <tr><th>Partner</th><th>Code</th></tr>
-    <tr><td>finder.com</td><td>827</td></tr>
-    <tr><td>Borrowell</td><td>797</td></tr>
-    <tr><td>MoneySense</td><td>767</td></tr>
-  </table>
+                            <p><strong>Code Offer:</strong></p>
+                            <table border="1" cellspacing="0" cellpadding="8">
+                                <tr><th>Partner</th><th>Code</th></tr>
+                                <tr><td>finder.com</td><td>827</td></tr>
+                                <tr><td>Borrowell</td><td>797</td></tr>
+                                <tr><td>MoneySense</td><td>767</td></tr>
+                            </table>
 
-  <p><strong>Promotion Period:</strong> November 5, 2025 to May 5, 2026</p>
+                            <p><strong>Promotion Period:</strong> November 5, 2025 to May 5, 2026</p>
 
-  <h3>Description of the Promotion</h3>
-  <p>Up to <strong>$600 cashback</strong> after opening a chequing account and adding certain products or services, or carrying out certain transactions in the new account.</p>
+                            <h3>Description of the Promotion</h3>
+                            <p>Up to <strong>$600 cashback</strong> after opening a chequing account and adding certain products or services, or carrying out certain transactions in the new account.</p>
 
-  <h3>Eligibility Conditions</h3>
+                            <h3>Eligibility Conditions</h3>
 
-  <table border="1" cellspacing="0" cellpadding="8">
-    <tr>
-      <th>Products, Services or Transactions</th>
-      <th>Conditions</th>
-      <th>Cashback</th>
-    </tr>
-    <tr>
-      <td>New National Bank chequing account with an eligible package/offer, online services and activation of an automatic deposit</td>
-      <td>
-        <ul>
-          <li>During the promotion period, open a first chequing account as the main account holder using the redirection link on one of our partners' sites (finder.com, Borrowell, or MoneySense) and sign up for The Connected® package.</li>
-          <li>Within 120 days of opening the chequing account and signing up for the eligible package/offer, complete the following steps:
-            <ul>
-              <li>Sign up for online banking</li>
-              <li>Carry out 20 eligible transactions, including debit card purchases and bill payments using your online banking or the National Bank mobile app.</li>
-            </ul>
-          </li>
-          <li>The following transactions are excluded:
-            <ul>
-              <li>Refund of purchases (Interac®)</li>
-              <li>Reimbursement of fees</li>
-              <li>Flat monthly fee</li>
-              <li>Account handling charges</li>
-            </ul>
-          </li>
-          <li>Receive 3 eligible automatic deposits of at least $100 each within the first 120 days according to the following schedule:
-            <ul>
-              <li>1st deposit: within 60 days</li>
-              <li>2nd deposit: between 60–89 days</li>
-              <li>3rd deposit: between 90–120 days</li>
-            </ul>
-          </li>
-          <li>Maintain this package or offer for at least 120 days after opening the chequing account.</li>
-          <li>Must not have had a National Bank chequing or savings account, or specified lines of credit, in the past 36 months.</li>
-        </ul>
-      </td>
-      <td>$300 (Basic cashback)</td>
-    </tr>
-    <tr>
-      <td>Apply for a new eligible credit card</td>
-      <td>
-        <ul>
-          <li>Within 120 days, apply for and be approved as the primary cardholder for one of the following cards:
-            <ul>
-              <li>Platinum Mastercard®</li>
-              <li>World Mastercard®</li>
-              <li>World Elite Mastercard®</li>
-              <li>Mycredit Mastercard®</li>
-              <li>Allure Mastercard®</li>
-              <li>MC1 Mastercard®</li>
-              <li>Mastercard Echo® Cashback</li>
-              <li>Syncro Mastercard®</li>
-            </ul>
-          </li>
-          <li>Carry out at least 20 purchases or cash advances with the new credit card.</li>
-          <li>Excluded transactions: Mastercard cheques, interest, fees, returns, or redemptions.</li>
-          <li>Must not have been a National Bank personal credit cardholder in the past 36 months.</li>
-        </ul>
-      </td>
-      <td>+ $100</td>
-    </tr>
-    <tr>
-      <td>Automatic mortgage loan payment</td>
-      <td>Within 120 days, set up pre-authorized recurring payments from the new chequing account for a National Bank mortgage.</td>
-      <td>+ $100</td>
-    </tr>
-    <tr>
-      <td>High Interest Savings Account</td>
-      <td>
-        <ul>
-          <li>Within 15 days of opening the chequing account, open a High Interest Savings Account and deposit at least $5,000.</li>
-          <li>Maintain a minimum balance of $5,000 for 120 days.</li>
-          <li>Must not have held a National Bank High Interest Savings Account in the past 36 months.</li>
-        </ul>
-      </td>
-      <td>+ $100</td>
-    </tr>
-    <tr>
-      <th colspan="2">Total cashback if all conditions are met</th>
-      <th>Up to $600</th>
-    </tr>
-  </table>
+                            <table border="1" cellspacing="0" cellpadding="8">
+                                <tr>
+                                    <th>Products, Services or Transactions</th>
+                                    <th>Conditions</th>
+                                    <th>Cashback</th>
+                                </tr>
+                                <tr>
+                                    <td>New National Bank chequing account with an eligible package/offer, online services and activation of an automatic deposit</td>
+                                    <td>
+                                        <ul>
+                                            <li>During the promotion period, open a first chequing account as the main account holder using the redirection link on one of our partners' sites (finder.com, Borrowell, or MoneySense) and sign up for The Connected® package.</li>
+                                            <li>Within 120 days of opening the chequing account and signing up for the eligible package/offer, complete the following steps:
+                                                <ul>
+                                                    <li>Sign up for online banking</li>
+                                                    <li>Carry out 20 eligible transactions, including debit card purchases and bill payments using your online banking or the National Bank mobile app.</li>
+                                                </ul>
+                                            </li>
+                                            <li>The following transactions are excluded:
+                                                <ul>
+                                                    <li>Refund of purchases (Interac®)</li>
+                                                    <li>Reimbursement of fees</li>
+                                                    <li>Flat monthly fee</li>
+                                                    <li>Account handling charges</li>
+                                                </ul>
+                                            </li>
+                                            <li>Receive 3 eligible automatic deposits of at least $100 each within the first 120 days according to the following schedule:
+                                                <ul>
+                                                    <li>1st deposit: within 60 days</li>
+                                                    <li>2nd deposit: between 60–89 days</li>
+                                                    <li>3rd deposit: between 90–120 days</li>
+                                                </ul>
+                                            </li>
+                                            <li>Maintain this package or offer for at least 120 days after opening the chequing account.</li>
+                                            <li>Must not have had a National Bank chequing or savings account, or specified lines of credit, in the past 36 months.</li>
+                                        </ul>
+                                    </td>
+                                    <td>$300 (Basic cashback)</td>
+                                </tr>
+                                <tr>
+                                    <td>Apply for a new eligible credit card</td>
+                                    <td>
+                                        <ul>
+                                            <li>Within 120 days, apply for and be approved as the primary cardholder for one of the following cards:
+                                                <ul>
+                                                    <li>Platinum Mastercard®</li>
+                                                    <li>World Mastercard®</li>
+                                                    <li>World Elite Mastercard®</li>
+                                                    <li>Mycredit Mastercard®</li>
+                                                    <li>Allure Mastercard®</li>
+                                                    <li>MC1 Mastercard®</li>
+                                                    <li>Mastercard Echo® Cashback</li>
+                                                    <li>Syncro Mastercard®</li>
+                                                </ul>
+                                            </li>
+                                            <li>Carry out at least 20 purchases or cash advances with the new credit card.</li>
+                                            <li>Excluded transactions: Mastercard cheques, interest, fees, returns, or redemptions.</li>
+                                            <li>Must not have been a National Bank personal credit cardholder in the past 36 months.</li>
+                                        </ul>
+                                    </td>
+                                    <td>+ $100</td>
+                                </tr>
+                                <tr>
+                                    <td>Automatic mortgage loan payment</td>
+                                    <td>Within 120 days, set up pre-authorized recurring payments from the new chequing account for a National Bank mortgage.</td>
+                                    <td>+ $100</td>
+                                </tr>
+                                <tr>
+                                    <td>High Interest Savings Account</td>
+                                    <td>
+                                        <ul>
+                                            <li>Within 15 days of opening the chequing account, open a High Interest Savings Account and deposit at least $5,000.</li>
+                                            <li>Maintain a minimum balance of $5,000 for 120 days.</li>
+                                            <li>Must not have held a National Bank High Interest Savings Account in the past 36 months.</li>
+                                        </ul>
+                                    </td>
+                                    <td>+ $100</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Total cashback if all conditions are met</th>
+                                    <th>Up to $600</th>
+                                </tr>
+                            </table>
 
-  <h3>Eligible Automated Direct Deposits</h3>
-  <table border="1" cellspacing="0" cellpadding="8">
-    <tr><th>Type</th><th>Payments Canada Transaction Code</th></tr>
-    <tr><td>Payroll Deposit</td><td>200</td></tr>
-    <tr><td>Private Pension</td><td>233</td></tr>
-    <tr><td>Family Support Plan</td><td>601</td></tr>
-    <tr><td>Special Payroll</td><td>201</td></tr>
-    <tr><td>Retirement Income Fund</td><td>272</td></tr>
-    <tr><td>Income Security Benefits</td><td>603</td></tr>
-    <tr><td>Vacation Payroll</td><td>202</td></tr>
-    <tr><td>Canada Child Benefit</td><td>308</td></tr>
-    <tr><td>CNESST</td><td>605</td></tr>
-    <tr><td>Overtime Payroll</td><td>203</td></tr>
-    <tr><td>CPP (Canada Pension Plan)</td><td>310</td></tr>
-    <tr><td>Employment Assistance Allowance</td><td>607</td></tr>
-    <tr><td>Advance Pay</td><td>204</td></tr>
-    <tr><td>Old Age Security</td><td>311</td></tr>
-    <tr><td>Disability Payment</td><td>611</td></tr>
-    <tr><td>Commission Payroll</td><td>205</td></tr>
-    <tr><td>War Veterans' Allowance</td><td>312</td></tr>
-    <tr><td>Parental Insurance</td><td>612</td></tr>
-    <tr><td>Bonus Payroll</td><td>206</td></tr>
-    <tr><td>VAC (Veterans Affairs Canada)</td><td>313</td></tr>
-    <tr><td>Children Assistance</td><td>616</td></tr>
-    <tr><td>Adjustment Payroll</td><td>207</td></tr>
-    <tr><td>Public Service Superannuation</td><td>315</td></tr>
-    <tr><td>Miscellaneous Payments</td><td>450</td></tr>
-    <tr><td>Pension</td><td>230</td></tr>
-    <tr><td>Canadian Forces Superannuation</td><td>316</td></tr>
-    <tr><td>Accounts Payable</td><td>460</td></tr>
-    <tr><td>Federal Pension</td><td>231</td></tr>
-    <tr><td>Employment Insurance</td><td>318</td></tr>
-    <tr><td>Provincial Pension</td><td>232</td></tr>
-    <tr><td>Canada Disability Benefit</td><td>328</td></tr>
-  </table>
+                            <h3>Eligible Automated Direct Deposits</h3>
+                            <table border="1" cellspacing="0" cellpadding="8">
+                                <tr><th>Type</th><th>Payments Canada Transaction Code</th></tr>
+                                <tr><td>Payroll Deposit</td><td>200</td></tr>
+                                <tr><td>Private Pension</td><td>233</td></tr>
+                                <tr><td>Family Support Plan</td><td>601</td></tr>
+                                <tr><td>Special Payroll</td><td>201</td></tr>
+                                <tr><td>Retirement Income Fund</td><td>272</td></tr>
+                                <tr><td>Income Security Benefits</td><td>603</td></tr>
+                                <tr><td>Vacation Payroll</td><td>202</td></tr>
+                                <tr><td>Canada Child Benefit</td><td>308</td></tr>
+                                <tr><td>CNESST</td><td>605</td></tr>
+                                <tr><td>Overtime Payroll</td><td>203</td></tr>
+                                <tr><td>CPP (Canada Pension Plan)</td><td>310</td></tr>
+                                <tr><td>Employment Assistance Allowance</td><td>607</td></tr>
+                                <tr><td>Advance Pay</td><td>204</td></tr>
+                                <tr><td>Old Age Security</td><td>311</td></tr>
+                                <tr><td>Disability Payment</td><td>611</td></tr>
+                                <tr><td>Commission Payroll</td><td>205</td></tr>
+                                <tr><td>War Veterans' Allowance</td><td>312</td></tr>
+                                <tr><td>Parental Insurance</td><td>612</td></tr>
+                                <tr><td>Bonus Payroll</td><td>206</td></tr>
+                                <tr><td>VAC (Veterans Affairs Canada)</td><td>313</td></tr>
+                                <tr><td>Children Assistance</td><td>616</td></tr>
+                                <tr><td>Adjustment Payroll</td><td>207</td></tr>
+                                <tr><td>Public Service Superannuation</td><td>315</td></tr>
+                                <tr><td>Miscellaneous Payments</td><td>450</td></tr>
+                                <tr><td>Pension</td><td>230</td></tr>
+                                <tr><td>Canadian Forces Superannuation</td><td>316</td></tr>
+                                <tr><td>Accounts Payable</td><td>460</td></tr>
+                                <tr><td>Federal Pension</td><td>231</td></tr>
+                                <tr><td>Employment Insurance</td><td>318</td></tr>
+                                <tr><td>Provincial Pension</td><td>232</td></tr>
+                                <tr><td>Canada Disability Benefit</td><td>328</td></tr>
+                            </table>
 
-  <h3>Cashback Payment Schedule</h3>
-  <table border="1" cellspacing="0" cellpadding="8">
-    <tr>
-      <th>Opening Date of New Chequing Account</th>
-      <th>Date of Cashback Deposit</th>
-    </tr>
-    <tr><td>Nov 5 – Nov 30, 2025</td><td>By May 15, 2026</td></tr>
-    <tr><td>Dec 1 – Dec 31, 2025</td><td>By June 15, 2026</td></tr>
-    <tr><td>Jan 1 – Jan 31, 2026</td><td>By July 15, 2026</td></tr>
-    <tr><td>Feb 1 – Feb 28, 2026</td><td>By August 15, 2026</td></tr>
-    <tr><td>Mar 1 – Mar 31, 2026</td><td>By September 15, 2026</td></tr>
-    <tr><td>Apr 1 – Apr 30, 2026</td><td>By October 15, 2026</td></tr>
-    <tr><td>May 1 – May 5, 2026</td><td>By November 15, 2026</td></tr>
-  </table>
+                            <h3>Cashback Payment Schedule</h3>
+                            <table border="1" cellspacing="0" cellpadding="8">
+                                <tr>
+                                    <th>Opening Date of New Chequing Account</th>
+                                    <th>Date of Cashback Deposit</th>
+                                </tr>
+                                <tr><td>Nov 5 – Nov 30, 2025</td><td>By May 15, 2026</td></tr>
+                                <tr><td>Dec 1 – Dec 31, 2025</td><td>By June 15, 2026</td></tr>
+                                <tr><td>Jan 1 – Jan 31, 2026</td><td>By July 15, 2026</td></tr>
+                                <tr><td>Feb 1 – Feb 28, 2026</td><td>By August 15, 2026</td></tr>
+                                <tr><td>Mar 1 – Mar 31, 2026</td><td>By September 15, 2026</td></tr>
+                                <tr><td>Apr 1 – Apr 30, 2026</td><td>By October 15, 2026</td></tr>
+                                <tr><td>May 1 – May 5, 2026</td><td>By November 15, 2026</td></tr>
+                            </table>
 
-  <h3>Other Conditions</h3>
-  <ul>
-    <li>Only one cashback per chequing account.</li>
-    <li>Must be at least 14 years old to open the account.</li>
-    <li>Must keep both the chequing account and any eligible credit card for at least 12 months.</li>
-    <li>Chequing account must remain in good standing for at least 180 days (no unauthorized overdrafts or misuse).</li>
-    <li>Credit card must remain in good standing (minimum payments made on time).</li>
-    <li>Credit card approval subject to National Bank credit approval; must be 18 years or older.</li>
-    <li>Employees of National Bank, CWB®, or subsidiaries and their spouses are not eligible.</li>
-    <li>Promotion may be modified or withdrawn without notice.</li>
-    <li>Cannot be combined with other National Bank chequing cashback promotions, but may be combined with eligible credit card, mortgage, insurance, or investment promotions.</li>
-  </ul>
+                            <h3>Other Conditions</h3>
+                            <ul>
+                                <li>Only one cashback per chequing account.</li>
+                                <li>Must be at least 14 years old to open the account.</li>
+                                <li>Must keep both the chequing account and any eligible credit card for at least 12 months.</li>
+                                <li>Chequing account must remain in good standing for at least 180 days (no unauthorized overdrafts or misuse).</li>
+                                <li>Credit card must remain in good standing (minimum payments made on time).</li>
+                                <li>Credit card approval subject to National Bank credit approval; must be 18 years or older.</li>
+                                <li>Employees of National Bank, CWB®, or subsidiaries and their spouses are not eligible.</li>
+                                <li>Promotion may be modified or withdrawn without notice.</li>
+                                <li>Cannot be combined with other National Bank chequing cashback promotions, but may be combined with eligible credit card, mortgage, insurance, or investment promotions.</li>
+                            </ul>
 
-  <p><strong>Trademarks:</strong><br>
-  ® NATIONAL BANK, CWB, CRESCENDO, THE STRATEGIST, THE CONNECTED, THE TOTAL, SUPERIOR FLEX LINE, ALL-IN-ONE, MY CREDIT, ALLURE, and ECHO are registered trademarks of National Bank of Canada.<br>
-  ® Interac is a registered trademark of Interac Corp. Used under licence.<br>
-  ® Mastercard, World Mastercard, MC1, Platinum, and World Elite are registered trademarks, and the circles design is a trademark of Mastercard International Incorporated. National Bank is an authorized user.
-  </p>
+                            <p><strong>Trademarks:</strong><br>
+                            ® NATIONAL BANK, CWB, CRESCENDO, THE STRATEGIST, THE CONNECTED, THE TOTAL, SUPERIOR FLEX LINE, ALL-IN-ONE, MY CREDIT, ALLURE, and ECHO are registered trademarks of National Bank of Canada.<br>
+                            ® Interac is a registered trademark of Interac Corp. Used under licence.<br>
+                            ® Mastercard, World Mastercard, MC1, Platinum, and World Elite are registered trademarks, and the circles design is a trademark of Mastercard International Incorporated. National Bank is an authorized user.
+                            </p>
 
-</section>
-
-                    </div>
-                </div>
-            </div>
+                        </section>
+                    </div> <!-- /.accordion-body -->
+                </div> <!-- /.accordion-collapse -->
+            </div> <!-- /.accordion-item -->
             <div class="help"></div>
-        </div>
+        </div> <!-- /.accordion -->
+    </div> <!-- /.nbc-tac-section -->
+
+    <div>
+        <h3>Eligibility criteria</h3>
+        <ul>
+            <li>Be a newcomer and at least 18 years of age or older</li>
+            <li>Apply to open an account from your home country up to 90 days before you arrive in Canada, or within 5 years of your arrival</li>
+            <li>Be the only account user</li>
+            <li>The offer for newcomers is open to permanent residents, temporary workers and international students</li>
+        </ul>
+
+        <h3>Bank account for Newcomers details and conditions</h3>
+        <ul>
+            <li><strong>Three levels of savings possible on your newcomer bank account</strong></li>
+            <li><strong>1. Baseline savings of $334.92 over three years for the account</strong>
+                <ul>
+                    <li>You'll save if you meet the following conditions:</li>
+                    <li>Open a bank account online before arriving with our secure form or visit a branch upon arrival.</li>
+                    <li>Sign up for our offer for newcomers.</li>
+                    <li>Savings are based on:
+                        <ul>
+                            <li><strong>First year</strong>: no flat monthly fee (savings of $15.95/month for 12 months)</li>
+                            <li><strong>Second year</strong>: flat monthly fee of $7.98 instead of $15.95 (savings of $7.97/month for 12 months)</li>
+                            <li><strong>Third year</strong>: flat monthly fee of $11.96 instead of $15.95 (savings of $3.99/month for 12 months)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>2. Maximum savings on the account: $574.20 over 3 years</strong>
+                <ul>
+                    <li>In addition to the basic savings conditions, you must:</li>
+                    <li>Maintain a minimum daily balance of <strong>$4,500</strong></li>
+                    <li><strong>OR</strong></li>
+                    <li>Sign up for the following three products and services before the end of the first year and maintain them until the end of the special offer:
+                        <ul>
+                            <li>A <strong>Mastercard</strong>® personal credit card</li>
+                            <li><strong>Electronic bank statements</strong></li>
+                            <li><strong>Payroll deposit</strong> to your bank account at one of our branches at least once a month <strong>or</strong> payment of at least two bills per month electronically from this bank account</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>3. Maximum total savings of the offer: $683.30 over 3 years</strong>
+                <ul>
+                    <li>To reach these savings, you must meet all the conditions for maximum savings on the account (above) and take advantage of the following services:
+                        <ul>
+                            <li>First check order free ($67.10/order)</li>
+                            <li>Free paper bank statements for the first year ($42)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>Please note</strong>:
+                <ul>
+                    <li>The savings depend on meeting all the requirements for the entire duration of the offer (3 years).</li>
+                    <li>If you do not meet all the conditions in a given month, your savings will be reduced.</li>
+                    <li>If you no longer have the bank account or the Newcomer Package, the savings will no longer apply.</li>
+                </ul>
+            </li>
+            <li>At the end of the third year, the Newcomer Package will automatically be migrated to <a href="https://www.nbc.ca/personal/accounts/chequing/connected.html">The Connected® package</a>, along with any applicable benefits. No action is required on your part. You can also <a href="https://www.nbc.ca/personal/accounts/chequing.html">browse all our packages</a> to find the one that best suits your needs.</li>
+        </ul>
+
+        <h3>Legal disclaimers</h3>
+        <ul>
+            <li>TM National Bank Assistance Network is a trademark of National Bank of Canada, used under licence by authorized third parties.</li>
+            <li>^®^ Mastercard is a registered trademark, and the circles design is a trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
+            <li>^®^THE EXCHANGE and Accel are registered trademarks of Fiserv Inc.</li>
+            <li>^®^CIRRUS is a registered trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
+            <li>^®^Allpoint is a registered trademark of ATM National LLC.</li>
+            <li>PARAGON, CELPIP, CELPIT, CELTOP, CELL, LPI, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX TEST, LANGUAGE PROFICIENCY INDEX, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX PROGRAM, CAEL, CANADIAN ACADEMIC ENGLISH LANGUAGE ASSESSMENT and related logos are registered or unregistered trademarks and service marks owned or licensed by Paragon. Any unauthorized use of those trademarks is strictly prohibited, and nothing on a Website or in these General Terms of Services or any Service Terms will be construed as granting, by implication, estoppel, or otherwise, any licence or right to use any of those trademarks and service marks.</li>
+            <li>National Bank of Canada is not a licensed bank in France or other countries outside of Canada.</li>
+            <li>National Bank of Canada was named the best bank for newcomers to Canada by MoneySense in 2024. MoneySense establishes its annual rankings by selecting some of the largest financial institutions and comparing them for fees, access to credit and services offered to newcomers.</li>
+            <li>National Bank's mycredit^®^ Mastercard^®^ credit card has won the Milesopedia best credit card for newcomers in 2023. Each year, Milesopedia examines the credit card offers of the largest financial institutions and establishes its ranking according to more than 150 criteria such as fees, welcome offers, minimum income required, number of points per category, account credits, insurance, airport lounge access, etc.
+                <ul>
+                    <li>Our banking offer is available to newcomers from their home countries up to 90 days before arriving in Canada or at any point during your first 5 years in Canada. <a href="https://www.nbc.ca/personal/switch-national-bank/newcomers/celpip-cael-offer.html#notes-item-d5892ec38c">See the above terms and conditions of the offer for no fixed monthly fee for 3 years</a>. The offer may be modified, extended or withdrawn, without prior notice, at any time. The offer may not be combined or used with any other National Bank offer, promotion or benefit. Fees may apply for transactions not included in the banking offer for newcomers. For more information on transaction fees, see our <a href="https://www.nbc.ca/content/dam/bnc/particuliers/pdf/tarification-compte/brochure-fees-banking.pdf">Guide to Personal Banking Solutions</a> [PDF].</li>
+                    <li>Financing is subject to credit approval by National Bank. Certain conditions apply. Eligible credit cards: mycredit, MC1, Allure, Syncro, Platinum, ECHO Cashback, World and World Elite.</li>
+                    <li>Guarantee may be required under certain circumstances. Financing is subject to credit approval by National Bank. Certain conditions apply.</li>
+                    <li>International Transfer by Mastercard^®^ and Interac^®^ are available at a cost of $5.95 per transaction, no matter which account you hold. The amount received by the beneficiary may differ from the amount sent considering that the intermediary bank or the beneficiary's bank will apply their fees to the original transfer's amount. This service allows you to transfer funds to the United States, India, Philippines, United Kingdom and the following 19 European countries: Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, the Netherlands, Portugal, Slovakia, Slovenia and Spain.</li>
+                    <li>Telephone assistance service offered by FBA Solutions, valid for 12 months from your account opening date. The content of the packages and terms described are subject to change.</li>
+                    <li>National Bank ABMs or ABMs in THE EXCHANGEᴹᴰ network. Use all our ABM features in six languages (French, English, Spanish, Traditional Chinese, Punjabi, and Arabic).</li>
+                </ul>
+            </li>
+            <li>Locate CIRRUS, Maestro® and NYCE^®^ ABMs and payment terminals with the logos on the back of your card. You can then use your debit card at these ABMs in the United States and around the world, including our network of partners Accel^®^, Cirrus^®^ and Allpoint^®^. Administrative or exchange rate fees may apply.</li>
+        </ul>
     </div>
-<div>
-<h3>Eligibility criteria</h3>
-    <ul>
-        <li>Be a newcomer and at least 18 years of age or older</li>
-        <li>Apply to open an account from your home country up to 90 days before you arrive in Canada, or within 5 years of your arrival</li>
-        <li>Be the only account user</li>
-        <li>The offer for newcomers is open to permanent residents, temporary workers and international students</li>
-    </ul>
-
-    <h3>Bank account for Newcomers details and conditions</h3>
-    <ul>
-        <li><strong>Three levels of savings possible on your newcomer bank account</strong></li>
-        <li><strong>1. Baseline savings of $334.92 over three years for the account</strong>
-            <ul>
-                <li>You'll save if you meet the following conditions:</li>
-                <li>Open a bank account online before arriving with our secure form or visit a branch upon arrival.</li>
-                <li>Sign up for our offer for newcomers.</li>
-                <li>Savings are based on:
-                    <ul>
-                        <li><strong>First year</strong>: no flat monthly fee (savings of $15.95/month for 12 months)</li>
-                        <li><strong>Second year</strong>: flat monthly fee of $7.98 instead of $15.95 (savings of $7.97/month for 12 months)</li>
-                        <li><strong>Third year</strong>: flat monthly fee of $11.96 instead of $15.95 (savings of $3.99/month for 12 months)</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li><strong>2. Maximum savings on the account: $574.20 over 3 years</strong>
-            <ul>
-                <li>In addition to the basic savings conditions, you must:</li>
-                <li>Maintain a minimum daily balance of <strong>$4,500</strong></li>
-                <li><strong>OR</strong></li>
-                <li>Sign up for the following three products and services before the end of the first year and maintain them until the end of the special offer:
-                    <ul>
-                        <li>A <strong>Mastercard</strong>® personal credit card</li>
-                        <li><strong>Electronic bank statements</strong></li>
-                        <li><strong>Payroll deposit</strong> to your bank account at one of our branches at least once a month <strong>or</strong> payment of at least two bills per month electronically from this bank account</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li><strong>3. Maximum total savings of the offer: $683.30 over 3 years</strong>
-            <ul>
-                <li>To reach these savings, you must meet all the conditions for maximum savings on the account (above) and take advantage of the following services:
-                    <ul>
-                        <li>First check order free ($67.10/order)</li>
-                        <li>Free paper bank statements for the first year ($42)</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li><strong>Please note</strong>:
-            <ul>
-                <li>The savings depend on meeting all the requirements for the entire duration of the offer (3 years).</li>
-                <li>If you do not meet all the conditions in a given month, your savings will be reduced.</li>
-                <li>If you no longer have the bank account or the Newcomer Package, the savings will no longer apply.</li>
-            </ul>
-        </li>
-        <li>At the end of the third year, the Newcomer Package will automatically be migrated to <a href="https://www.nbc.ca/personal/accounts/chequing/connected.html">The Connected® package</a>, along with any applicable benefits. No action is required on your part. You can also <a href="https://www.nbc.ca/personal/accounts/chequing.html">browse all our packages</a> to find the one that best suits your needs.</li>
-    </ul>
-
-    <h3>Legal disclaimers</h3>
-    <ul>
-        <li>TM National Bank Assistance Network is a trademark of National Bank of Canada, used under licence by authorized third parties.</li>
-        <li>^®^ Mastercard is a registered trademark, and the circles design is a trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
-        <li>^®^THE EXCHANGE and Accel are registered trademarks of Fiserv Inc.</li>
-        <li>^®^CIRRUS is a registered trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
-        <li>^®^Allpoint is a registered trademark of ATM National LLC.</li>
-        <li>PARAGON, CELPIP, CELPIT, CELTOP, CELL, LPI, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX TEST, LANGUAGE PROFICIENCY INDEX, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX PROGRAM, CAEL, CANADIAN ACADEMIC ENGLISH LANGUAGE ASSESSMENT and related logos are registered or unregistered trademarks and service marks owned or licensed by Paragon. Any unauthorized use of those trademarks is strictly prohibited, and nothing on a Website or in these General Terms of Services or any Service Terms will be construed as granting, by implication, estoppel, or otherwise, any licence or right to use any of those trademarks and service marks.</li>
-        <li>National Bank of Canada is not a licensed bank in France or other countries outside of Canada.</li>
-        <li>National Bank of Canada was named the best bank for newcomers to Canada by MoneySense in 2024. MoneySense establishes its annual rankings by selecting some of the largest financial institutions and comparing them for fees, access to credit and services offered to newcomers.</li>
-        <li>National Bank's mycredit^®^ Mastercard^®^ credit card has won the Milesopedia best credit card for newcomers in 2023. Each year, Milesopedia examines the credit card offers of the largest financial institutions and establishes its ranking according to more than 150 criteria such as fees, welcome offers, minimum income required, number of points per category, account credits, insurance, airport lounge access, etc.
-            <ul>
-                <li>Our banking offer is available to newcomers from their home countries up to 90 days before arriving in Canada or at any point during your first 5 years in Canada. <a href="https://www.nbc.ca/personal/switch-national-bank/newcomers/celpip-cael-offer.html#notes-item-d5892ec38c">See the above terms and conditions of the offer for no fixed monthly fee for 3 years</a>. The offer may be modified, extended or withdrawn, without prior notice, at any time. The offer may not be combined or used with any other National Bank offer, promotion or benefit. Fees may apply for transactions not included in the banking offer for newcomers. For more information on transaction fees, see our <a href="https://www.nbc.ca/content/dam/bnc/particuliers/pdf/tarification-compte/brochure-fees-banking.pdf">Guide to Personal Banking Solutions</a> [PDF].</li>
-                <li>Financing is subject to credit approval by National Bank. Certain conditions apply. Eligible credit cards: mycredit, MC1, Allure, Syncro, Platinum, ECHO Cashback, World and World Elite.</li>
-                <li>Guarantee may be required under certain circumstances. Financing is subject to credit approval by National Bank. Certain conditions apply.</li>
-                <li>International Transfer by Mastercard^®^ and Interac^®^ are available at a cost of $5.95 per transaction, no matter which account you hold. The amount received by the beneficiary may differ from the amount sent considering that the intermediary bank or the beneficiary's bank will apply their fees to the original transfer's amount. This service allows you to transfer funds to the United States, India, Philippines, United Kingdom and the following 19 European countries: Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, the Netherlands, Portugal, Slovakia, Slovenia and Spain.</li>
-                <li>Telephone assistance service offered by FBA Solutions, valid for 12 months from your account opening date. The content of the packages and terms described are subject to change.</li>
-                <li>National Bank ABMs or ABMs in THE EXCHANGEᴹᴰ network. Use all our ABM features in six languages (French, English, Spanish, Traditional Chinese, Punjabi, and Arabic).</li>
-            </ul>
-        </li>
-        <li>Locate CIRRUS, Maestro® and NYCE^®^ ABMs and payment terminals with the logos on the back of your card. You can then use your debit card at these ABMs in the United States and around the world, including our network of partners Accel^®^, Cirrus^®^ and Allpoint^®^. Administrative or exchange rate fees may apply.</li>
-    </ul>
-                </div>
 
     <?php
     return ob_get_clean();
