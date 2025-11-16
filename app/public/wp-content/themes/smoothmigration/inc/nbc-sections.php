@@ -24,7 +24,7 @@ function smoothmigration_nbc_promotion_box() {
                 <i class="fa-solid fa-gift me-2"></i>Special offer for newcomers
             </h3>
             <div class="promotion-highlight mb-3 p-3 bg-light rounded">
-                <h4 class="h3 mb-2" style="color: #d4002a;">Up to $600 Cashback</h4>
+                <h4 class="h3 mb-2" style="color: #d4002a;">Up to $600 Cashback*</h4>
                 <p class="mb-0">Available from 90 days before your arrival and up to 5 years afterward</p>
             </div>
             <ul class="list-unstyled mb-0">
@@ -34,7 +34,7 @@ function smoothmigration_nbc_promotion_box() {
                 <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>$100</strong> - Set up pre-authorized mortgage payments</li>
             </ul>
             <p class="text-muted small mt-3 mb-0">
-                <i class="fa-solid fa-info-circle me-1"></i>Promotion valid from November 5, 2025, to May 5, 2026. Conditions apply.
+                <i class="fa-solid fa-info-circle me-1"></i>Promotion valid from November 5, 2025, to May 5, 2026. <a href="#nbc-terms-and-conditions-title">Terms and Conditions apply.</a>
             </p>
         </div>
     </div>
@@ -66,7 +66,8 @@ function smoothmigration_nbc_benefits_section() {
                         <i class="fa-solid fa-scale-balanced fa-2x" style="color: #d4002a;"></i>
                     </div>
                     <h3 class="h5">Legal support</h3>
-                    <p>Get 12 months of free legal assistance for everyday concerns through our Assistance Network, available 7 days a week.</p>
+                    <p>Get 12 months of free legal assistance for everyday concerns. Get 12 months of free legal assistance for everyday concerns through
+the available Assistance Network, available 7 days a week</p>
                 </div>
             </div>
             <div class="col-md-6">
@@ -127,8 +128,76 @@ function smoothmigration_nbc_eligibility_section() {
                 <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i>Applying from 90 days before arrival up to 5 years after arriving in Canada</li>
                 <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i>The sole user of the account (individual account only)</li>
             </ul>
+            <div class="container">
+        <header>
+            <h3 class="h5 mb-3">Just 2 simple steps to open your bank account</h3>
+            <p class="subtitle">Make the most of our offer and get a bank account with no fixed monthly fee for 3 years as well as other benefits.</p>
+        </header>
+        
+        <div class="intro">
+            <p>Find out if you're eligible by checking the criteria and following the steps below.</p>
+        </div>
+        
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h2 class="step-title">Open an account online</h2>
+                    <p class="step-description">Fill out an online application form. You'll need the following:</p>
+                    <div class="requirements">
+                        <ul>
+                            <li>A Canadian phone number</li>
+                            <li>One of the following documents:
+                                <ul class="nested-list">
+                                    <li>A valid and eligible foreign passport</li>
+                                    <li>A Canadian permanent resident card</li>
+                                    <li>A Canadian driver's license</li>
+                                    <li>A provincial or federal ID (except Quebec)</li>
+                                    <li>A valid Quebec Health Insurance Card</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             
-            <h3 class="h5 mb-3 mt-4">What you'll need:</h3>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h2 class="step-title">Receive a confirmation email</h2>
+                    <p class="step-description">Within a couple of days of your request, you'll receive a confirmation email with your account information. Your debit card will then be mailed to you.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <h3 class="h5 mb-3">If you are already in Canada</h3>
+            <p>To complete the online application form, you will need:</p>
+                <ul>
+                    <li>A Canadian phone number</li>
+                    <li>One of the following documents:
+                        <ul class="nested-list">
+                            <li>A valid and eligible passport from a country other than Canada</li>
+                            <li>A Canadian permanent resident card</li>
+                            <li>A Canadian driver's licence</li>
+                            <li>A Canadian identity card (except in Quebec)</li>
+                            <li>A Quebec health insurance card (new model)</li>
+                        </ul>
+                    </li>
+                </ul>
+        </div>
+        <div class="section">
+            <h3 class="h5 mb-3">If you are still in your home country and will be arriving in Canada in less than 90 days</h3>
+            <div class="no-documents">
+                No documents are required to complete your online form.
+            </div>
+        </div>
+    </div>
+
+
+
+    </div>
+            <!-- <h3 class="h5 mb-3 mt-4">What you'll need:</h3>
             <div class="row g-3">
                 <div class="col-md-6">
                     <div class="document-card p-3 bg-white rounded border">
@@ -154,7 +223,7 @@ function smoothmigration_nbc_eligibility_section() {
                         <p class="small mb-0">Job offer letter or employment contract (for direct deposit setup)</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <?php
@@ -296,12 +365,12 @@ function smoothmigration_nbc_faq_section() {
             <div class="accordion-item">
                 <h3 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                        How do I claim the $600 cashback?
+                        How do I claim the $600 cashback*?
                     </button>
                 </h3>
                 <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#nbcFaqAccordion">
                     <div class="accordion-body">
-                        The cashback is paid automatically to your chequing account within 180 days of account opening, once you've met all the conditions (account opening, direct deposit, optional credit card, savings, and mortgage setup).
+                        The cashback is paid automatically to your chequing account within 180 days of <u>account opening</u>, once you've met all the <strong><i><a href="##nbc-terms-and-conditions-title">conditions</a></i></strong> (account opening, direct deposit, optional credit card, savings, and mortgage setup).
                     </div>
                 </div>
             </div>
@@ -413,7 +482,7 @@ function smoothmigration_nbc_countries_section() {
  */
 function smoothmigration_nbc_cta_section( $affiliate_url = '' ) {
     if ( empty( $affiliate_url ) ) {
-        $affiliate_url = 'https://www.nbc.ca/personal/accounts/newcomers.html';
+        $affiliate_url = 'https://locator.nbc.ca/index.html';
     }
     
     ob_start();
@@ -424,7 +493,7 @@ function smoothmigration_nbc_cta_section( $affiliate_url = '' ) {
             <p class="lead mb-4">Join thousands of newcomers who've chosen National Bank of Canada as their trusted banking partner.</p>
             <div class="d-flex flex-wrap gap-3 justify-content-center">
                 <a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg px-5" onclick="if(window.gtag){gtag('event','cta_click',{brand:'National Bank of Canada',location:'bottom_cta'})}">
-                    <i class="fa-solid fa-arrow-right me-2"></i>Open an account
+                    <i class="fa-solid fa-arrow-right me-2"></i>Open an account online
                 </a>
                 <a href="/contact" class="btn btn-outline-light btn-lg px-5">
                     <i class="fa-solid fa-comments me-2"></i>Speak with an expert
@@ -443,7 +512,7 @@ function smoothmigration_nbc_terms_and_conditions_section() {
     ob_start();
     ?>
     <div class="nbc-tac-section mb-5" id="terms-and-conditions">
-        <h2 class="h3 mb-4">Terms and conditions</h2>
+        <h2 class="h3 mb-4" id="nbc-terms-and-conditions-title">Legal disclaimers</h2>
         <div class="accordion" id="nbcTacAccordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
@@ -630,8 +699,93 @@ function smoothmigration_nbc_terms_and_conditions_section() {
                     </div>
                 </div>
             </div>
+            <div class="help"></div>
         </div>
     </div>
+<div>
+<h3>Eligibility criteria</h3>
+    <ul>
+        <li>Be a newcomer and at least 18 years of age or older</li>
+        <li>Apply to open an account from your home country up to 90 days before you arrive in Canada, or within 5 years of your arrival</li>
+        <li>Be the only account user</li>
+        <li>The offer for newcomers is open to permanent residents, temporary workers and international students</li>
+    </ul>
+
+    <h3>Bank account for Newcomers details and conditions</h3>
+    <ul>
+        <li><strong>Three levels of savings possible on your newcomer bank account</strong></li>
+        <li><strong>1. Baseline savings of $334.92 over three years for the account</strong>
+            <ul>
+                <li>You'll save if you meet the following conditions:</li>
+                <li>Open a bank account online before arriving with our secure form or visit a branch upon arrival.</li>
+                <li>Sign up for our offer for newcomers.</li>
+                <li>Savings are based on:
+                    <ul>
+                        <li><strong>First year</strong>: no flat monthly fee (savings of $15.95/month for 12 months)</li>
+                        <li><strong>Second year</strong>: flat monthly fee of $7.98 instead of $15.95 (savings of $7.97/month for 12 months)</li>
+                        <li><strong>Third year</strong>: flat monthly fee of $11.96 instead of $15.95 (savings of $3.99/month for 12 months)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong>2. Maximum savings on the account: $574.20 over 3 years</strong>
+            <ul>
+                <li>In addition to the basic savings conditions, you must:</li>
+                <li>Maintain a minimum daily balance of <strong>$4,500</strong></li>
+                <li><strong>OR</strong></li>
+                <li>Sign up for the following three products and services before the end of the first year and maintain them until the end of the special offer:
+                    <ul>
+                        <li>A <strong>Mastercard</strong>® personal credit card</li>
+                        <li><strong>Electronic bank statements</strong></li>
+                        <li><strong>Payroll deposit</strong> to your bank account at one of our branches at least once a month <strong>or</strong> payment of at least two bills per month electronically from this bank account</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong>3. Maximum total savings of the offer: $683.30 over 3 years</strong>
+            <ul>
+                <li>To reach these savings, you must meet all the conditions for maximum savings on the account (above) and take advantage of the following services:
+                    <ul>
+                        <li>First check order free ($67.10/order)</li>
+                        <li>Free paper bank statements for the first year ($42)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Please note</strong>:
+            <ul>
+                <li>The savings depend on meeting all the requirements for the entire duration of the offer (3 years).</li>
+                <li>If you do not meet all the conditions in a given month, your savings will be reduced.</li>
+                <li>If you no longer have the bank account or the Newcomer Package, the savings will no longer apply.</li>
+            </ul>
+        </li>
+        <li>At the end of the third year, the Newcomer Package will automatically be migrated to <a href="https://www.nbc.ca/personal/accounts/chequing/connected.html">The Connected® package</a>, along with any applicable benefits. No action is required on your part. You can also <a href="https://www.nbc.ca/personal/accounts/chequing.html">browse all our packages</a> to find the one that best suits your needs.</li>
+    </ul>
+
+    <h3>Legal disclaimers</h3>
+    <ul>
+        <li>TM National Bank Assistance Network is a trademark of National Bank of Canada, used under licence by authorized third parties.</li>
+        <li>^®^ Mastercard is a registered trademark, and the circles design is a trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
+        <li>^®^THE EXCHANGE and Accel are registered trademarks of Fiserv Inc.</li>
+        <li>^®^CIRRUS is a registered trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
+        <li>^®^Allpoint is a registered trademark of ATM National LLC.</li>
+        <li>PARAGON, CELPIP, CELPIT, CELTOP, CELL, LPI, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX TEST, LANGUAGE PROFICIENCY INDEX, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX PROGRAM, CAEL, CANADIAN ACADEMIC ENGLISH LANGUAGE ASSESSMENT and related logos are registered or unregistered trademarks and service marks owned or licensed by Paragon. Any unauthorized use of those trademarks is strictly prohibited, and nothing on a Website or in these General Terms of Services or any Service Terms will be construed as granting, by implication, estoppel, or otherwise, any licence or right to use any of those trademarks and service marks.</li>
+        <li>National Bank of Canada is not a licensed bank in France or other countries outside of Canada.</li>
+        <li>National Bank of Canada was named the best bank for newcomers to Canada by MoneySense in 2024. MoneySense establishes its annual rankings by selecting some of the largest financial institutions and comparing them for fees, access to credit and services offered to newcomers.</li>
+        <li>National Bank's mycredit^®^ Mastercard^®^ credit card has won the Milesopedia best credit card for newcomers in 2023. Each year, Milesopedia examines the credit card offers of the largest financial institutions and establishes its ranking according to more than 150 criteria such as fees, welcome offers, minimum income required, number of points per category, account credits, insurance, airport lounge access, etc.
+            <ul>
+                <li>Our banking offer is available to newcomers from their home countries up to 90 days before arriving in Canada or at any point during your first 5 years in Canada. <a href="https://www.nbc.ca/personal/switch-national-bank/newcomers/celpip-cael-offer.html#notes-item-d5892ec38c">See the above terms and conditions of the offer for no fixed monthly fee for 3 years</a>. The offer may be modified, extended or withdrawn, without prior notice, at any time. The offer may not be combined or used with any other National Bank offer, promotion or benefit. Fees may apply for transactions not included in the banking offer for newcomers. For more information on transaction fees, see our <a href="https://www.nbc.ca/content/dam/bnc/particuliers/pdf/tarification-compte/brochure-fees-banking.pdf">Guide to Personal Banking Solutions</a> [PDF].</li>
+                <li>Financing is subject to credit approval by National Bank. Certain conditions apply. Eligible credit cards: mycredit, MC1, Allure, Syncro, Platinum, ECHO Cashback, World and World Elite.</li>
+                <li>Guarantee may be required under certain circumstances. Financing is subject to credit approval by National Bank. Certain conditions apply.</li>
+                <li>International Transfer by Mastercard^®^ and Interac^®^ are available at a cost of $5.95 per transaction, no matter which account you hold. The amount received by the beneficiary may differ from the amount sent considering that the intermediary bank or the beneficiary's bank will apply their fees to the original transfer's amount. This service allows you to transfer funds to the United States, India, Philippines, United Kingdom and the following 19 European countries: Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, the Netherlands, Portugal, Slovakia, Slovenia and Spain.</li>
+                <li>Telephone assistance service offered by FBA Solutions, valid for 12 months from your account opening date. The content of the packages and terms described are subject to change.</li>
+                <li>National Bank ABMs or ABMs in THE EXCHANGEᴹᴰ network. Use all our ABM features in six languages (French, English, Spanish, Traditional Chinese, Punjabi, and Arabic).</li>
+            </ul>
+        </li>
+        <li>Locate CIRRUS, Maestro® and NYCE^®^ ABMs and payment terminals with the logos on the back of your card. You can then use your debit card at these ABMs in the United States and around the world, including our network of partners Accel^®^, Cirrus^®^ and Allpoint^®^. Administrative or exchange rate fees may apply.</li>
+    </ul>
+                </div>
+
     <?php
     return ob_get_clean();
 }

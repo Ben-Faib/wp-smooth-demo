@@ -23,7 +23,7 @@ if (strpos($term_slug, 'insurance') !== false) {
     $button_text = 'Get a Quote';
 
 } elseif(get_the_ID() == "6548"){ // ID Check for National Bank of Canada
-	$button_text = "Visit site";
+	$button_text = "Open an Account";
 } else {}
 
 $id_check = strval(get_the_ID());
@@ -49,8 +49,10 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 
 
 						<div class="d-flex flex-wrap gap-3">
+							
 							<?php if ( $affiliate_url ) : ?>
-								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg"><?php echo ($id_check == "6548") ? "Advice on getting settled" : "Visit Partner"; ?></a>
+								
+								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg"><?php /*NBC Canada Check*/echo ($id_check == "6548") ? "Open an Account" : "Visit Partner"; ?></a>
 							<?php endif; ?>
 							<a href="/contact" class="btn btn-outline-light btn-lg"><?php echo ($id_check == "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
 						</div>
@@ -139,12 +141,12 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 							<h3 class="h5"><?php echo ($id_check == "6548") ? "Why we recommend" : "Why We Recommend"; ?></h3>
 							<ul class="list-unstyled small mt-3">
 								
-								<?php if ($id_check !== "6548"): ?>
+								<?php /*NBC Check*/ if ($id_check !== "6548"): ?>
 									<li>Vetted partner with proven track record</li>
 									<li>Trusted by expats for transparent pricing</li>
 									<li>Seamless fit in our relocation workflow</li>
 								<?php else: ?>
-									<li>National Bank offers award-winning banking services for newcomers with transparent pricing and in-depth support.</li>
+									<li>Best Bank for Newcomers: Vetted partner with proven track record </li>
 								<?php endif; ?>
 
 							</ul>
@@ -163,16 +165,18 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 							</div>
 						</div>
 					<?php endif; ?>
-
-					<div class="card shadow-sm">
-						<div class="card-body">
-							<h3 class="h5">Typical Timeline</h3>
-							<p class="small text-muted mb-2">Based on recent expat projects</p>
-							<div class="progress" style="height:10px;">
-								<div class="progress-bar" role="progressbar" style="width: 70%; background-color: <?php echo esc_attr($brand_color); ?>"></div>
+					<?php if (strval(get_the_ID()) !== "6548"): ?>
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h3 class="h5">Typical Timeline</h3>
+								<p class="small text-muted mb-2">Based on recent expat projects</p>
+								<div class="progress" style="height:10px;">
+									<div class="progress-bar" role="progressbar" style="width: 70%; background-color: <?php echo esc_attr($brand_color); ?>"></div>
+								</div>
 							</div>
 						</div>
-					</div>
+					<?php endif; ?>
+
 				</div>
 			</div>
 		</div>
@@ -225,7 +229,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 .service-awards{margin-top:1.5rem}
 .award-badges-hero{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
 .award-badge-hero{flex:0 0 auto}
-.award-badge-hero img{width:80px;height:80px;object-fit:contain;border-radius:50%;background:#fff;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.award-badge-hero img{width:120px;height:120px;object-fit:contain;border-radius:50%;background:#fff;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
 .award-badge-sidebar{display:flex;gap:0.75rem;align-items:center;padding:0.75rem 0;border-bottom:1px solid #eee}
 .award-badge-sidebar:last-child{border-bottom:none;padding-bottom:0}
 .award-badge-sidebar .award-badge-image{flex-shrink:0}
