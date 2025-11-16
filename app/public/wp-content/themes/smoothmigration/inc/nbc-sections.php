@@ -699,10 +699,7 @@ function smoothmigration_nbc_terms_and_conditions_section() {
                 </div> <!-- /.accordion-collapse -->
             </div> <!-- /.accordion-item -->
             <div class="help"></div>
-        </div> <!-- /.accordion -->
-    </div> <!-- /.nbc-tac-section -->
-
-    <div>
+<div>
         <h3>Eligibility criteria</h3>
         <ul>
             <li>Be a newcomer and at least 18 years of age or older</li>
@@ -785,6 +782,12 @@ function smoothmigration_nbc_terms_and_conditions_section() {
             <li>Locate CIRRUS, Maestro® and NYCE^®^ ABMs and payment terminals with the logos on the back of your card. You can then use your debit card at these ABMs in the United States and around the world, including our network of partners Accel^®^, Cirrus^®^ and Allpoint^®^. Administrative or exchange rate fees may apply.</li>
         </ul>
     </div>
+
+            
+        </div> <!-- /.accordion -->
+    </div> <!-- /.nbc-tac-section -->
+
+    
 
     <?php
     return ob_get_clean();
