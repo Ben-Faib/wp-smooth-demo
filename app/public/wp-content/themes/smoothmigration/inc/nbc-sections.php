@@ -128,107 +128,109 @@ function smoothmigration_nbc_eligibility_section() {
                 <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i>Applying from 90 days before arrival up to 5 years after arriving in Canada</li>
                 <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i>The sole user of the account (individual account only)</li>
             </ul>
+
             <div class="container">
-        <header>
-            <h3 class="h5 mb-3">Just 2 simple steps to open your bank account</h3>
-            <p class="subtitle">Make the most of our offer and get a bank account with no fixed monthly fee for 3 years as well as other benefits.</p>
-        </header>
-        
-        <div class="intro">
-            <p>Find out if you're eligible by checking the criteria and following the steps below.</p>
-        </div>
-        
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h2 class="step-title">Open an account online</h2>
-                    <p class="step-description">Fill out an online application form. You'll need the following:</p>
-                    <div class="requirements">
-                        <ul>
-                            <li>A Canadian phone number</li>
-                            <li>One of the following documents:
-                                <ul class="nested-list">
-                                    <li>A valid and eligible foreign passport</li>
-                                    <li>A Canadian permanent resident card</li>
-                                    <li>A Canadian driver's license</li>
-                                    <li>A provincial or federal ID (except Quebec)</li>
-                                    <li>A valid Quebec Health Insurance Card</li>
+                <header>
+                    <h3 class="h5 mb-3">Just 2 simple steps to open your bank account</h3>
+                    <p class="subtitle">Make the most of our offer and get a bank account with no fixed monthly fee for 3 years as well as other benefits.</p>
+                </header>
+                
+                <div class="intro">
+                    <p>Find out if you're eligible by checking the criteria and following the steps below.</p>
+                </div>
+                
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h2 class="step-title">Open an account online</h2>
+                            <p class="step-description">Fill out an online application form. You'll need the following:</p>
+                            <div class="requirements">
+                                <ul>
+                                    <li>A Canadian phone number</li>
+                                    <li>One of the following documents:
+                                        <ul class="nested-list">
+                                            <li>A valid and eligible foreign passport</li>
+                                            <li>A Canadian permanent resident card</li>
+                                            <li>A Canadian driver's license</li>
+                                            <li>A provincial or federal ID (except Quebec)</li>
+                                            <li>A valid Quebec Health Insurance Card</li>
+                                        </ul>
+                                    </li>
                                 </ul>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h2 class="step-title">Receive a confirmation email</h2>
+                            <p class="step-description">Within a couple of days of your request, you'll receive a confirmation email with your account information. Your debit card will then be mailed to you.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h3 class="h5 mb-3">If you are already in Canada</h3>
+                    <p>To complete the online application form, you will need:</p>
+                    <ul>
+                        <li>A Canadian phone number</li>
+                        <li>One of the following documents:
+                            <ul class="nested-list">
+                                <li>A valid and eligible passport from a country other than Canada</li>
+                                <li>A Canadian permanent resident card</li>
+                                <li>A Canadian driver's licence</li>
+                                <li>A Canadian identity card (except in Quebec)</li>
+                                <li>A Quebec health insurance card (new model)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3 class="h5 mb-3">If you are still in your home country and will be arriving in Canada in less than 90 days</h3>
+                    <div class="no-documents">
+                        No documents are required to complete your online form.
+                    </div>
+                </div>
+            </div> <!-- /.container -->
+        </div> <!-- /.eligibility-content -->
+
+        <!--
+        <h3 class="h5 mb-3 mt-4">What you'll need:</h3>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="document-card p-3 bg-white rounded border">
+                    <h4 class="h6 mb-2"><i class="fa-solid fa-passport me-2" style="color: #d4002a;"></i>Identification</h4>
+                    <p class="small mb-0">Valid passport or government-issued ID from your home country</p>
                 </div>
             </div>
-            
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h2 class="step-title">Receive a confirmation email</h2>
-                    <p class="step-description">Within a couple of days of your request, you'll receive a confirmation email with your account information. Your debit card will then be mailed to you.</p>
+            <div class="col-md-6">
+                <div class="document-card p-3 bg-white rounded border">
+                    <h4 class="h6 mb-2"><i class="fa-solid fa-file-certificate me-2" style="color: #d4002a;"></i>Immigration documents</h4>
+                    <p class="small mb-0">Work permit, study permit, or permanent resident card</p>
                 </div>
             </div>
-
-        </div>
-        <div class="container">
-            <h3 class="h5 mb-3">If you are already in Canada</h3>
-            <p>To complete the online application form, you will need:</p>
-                <ul>
-                    <li>A Canadian phone number</li>
-                    <li>One of the following documents:
-                        <ul class="nested-list">
-                            <li>A valid and eligible passport from a country other than Canada</li>
-                            <li>A Canadian permanent resident card</li>
-                            <li>A Canadian driver's licence</li>
-                            <li>A Canadian identity card (except in Quebec)</li>
-                            <li>A Quebec health insurance card (new model)</li>
-                        </ul>
-                    </li>
-                </ul>
-        </div>
-        <div class="section">
-            <h3 class="h5 mb-3">If you are still in your home country and will be arriving in Canada in less than 90 days</h3>
-            <div class="no-documents">
-                No documents are required to complete your online form.
+            <div class="col-md-6">
+                <div class="document-card p-3 bg-white rounded border">
+                    <h4 class="h6 mb-2"><i class="fa-solid fa-location-dot me-2" style="color: #d4002a;"></i>Proof of address</h4>
+                    <p class="small mb-0">Lease agreement, utility bill, or letter from landlord (if already in Canada)</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="document-card p-3 bg-white rounded border">
+                    <h4 class="h6 mb-2"><i class="fa-solid fa-briefcase me-2" style="color: #d4002a;"></i>Employment info</h4>
+                    <p class="small mb-0">Job offer letter or employment contract (for direct deposit setup)</p>
+                </div>
             </div>
         </div>
-    </div>
-
-
-
-    </div>
-            <!-- <h3 class="h5 mb-3 mt-4">What you'll need:</h3>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="document-card p-3 bg-white rounded border">
-                        <h4 class="h6 mb-2"><i class="fa-solid fa-passport me-2" style="color: #d4002a;"></i>Identification</h4>
-                        <p class="small mb-0">Valid passport or government-issued ID from your home country</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="document-card p-3 bg-white rounded border">
-                        <h4 class="h6 mb-2"><i class="fa-solid fa-file-certificate me-2" style="color: #d4002a;"></i>Immigration documents</h4>
-                        <p class="small mb-0">Work permit, study permit, or permanent resident card</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="document-card p-3 bg-white rounded border">
-                        <h4 class="h6 mb-2"><i class="fa-solid fa-location-dot me-2" style="color: #d4002a;"></i>Proof of address</h4>
-                        <p class="small mb-0">Lease agreement, utility bill, or letter from landlord (if already in Canada)</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="document-card p-3 bg-white rounded border">
-                        <h4 class="h6 mb-2"><i class="fa-solid fa-briefcase me-2" style="color: #d4002a;"></i>Employment info</h4>
-                        <p class="small mb-0">Job offer letter or employment contract (for direct deposit setup)</p>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-    </div>
+        -->
+    </div> <!-- /.nbc-eligibility-section -->
     <?php
     return ob_get_clean();
 }
+
 
 /**
  * NBC How It Works Section
