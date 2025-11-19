@@ -528,15 +528,6 @@ function smoothmigration_nbc_terms_and_conditions_section() {
 
                             <h2>Cashback Promotion – Chequing Account and Additional Cashback</h2>
 
-                            <p><strong>Code Offer:</strong></p>
-                            <table border="1" cellspacing="0" cellpadding="8">
-                                <tr><th>Partner</th><th>Code</th></tr>
-                                <tr><td>finder.com</td><td>827</td></tr>
-                                <tr><td>Borrowell</td><td>797</td></tr>
-                                <tr><td>MoneySense</td><td>767</td></tr>
-                            </table>
-
-                            <p><strong>Promotion Period:</strong> November 5, 2025 to May 5, 2026</p>
 
                             <h3>Description of the Promotion</h3>
                             <p>Up to <strong>$600 cashback</strong> after opening a chequing account and adding certain products or services, or carrying out certain transactions in the new account.</p>
@@ -700,8 +691,50 @@ function smoothmigration_nbc_terms_and_conditions_section() {
                     </div> <!-- /.accordion-body -->
                 </div> <!-- /.accordion-collapse -->
             </div> <!-- /.accordion-item -->
-            <div class="help"></div>
-<div>
+        <div>
+        <div class="accordion" id="nbcTacLdAccordion">
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tac2">
+                        Legal disclaimers
+                    </button>
+                </h3>
+                <div id="tac2" class="accordion-collapse collapse show" data-bs-parent="#nbcTacLdAccordion">
+                    <div class="accordion-body">
+                        <section class="terms-conditions">
+                            <h3>Legal disclaimers</h3>
+                            <ul>
+                                <li>TM National Bank Assistance Network is a trademark of National Bank of Canada, used under licence by authorized third parties.</li>
+                                <li>® Mastercard is a registered trademark, and the circles design is a trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
+                                <li>®THE EXCHANGE and Accel are registered trademarks of Fiserv Inc.</li>
+                                <li>®CIRRUS is a registered trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
+                                <li>®Allpoint is a registered trademark of ATM National LLC.</li>
+                                <li>PARAGON, CELPIP, CELPIT, CELTOP, CELL, LPI, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX TEST, LANGUAGE PROFICIENCY INDEX, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX PROGRAM, CAEL, CANADIAN ACADEMIC ENGLISH LANGUAGE ASSESSMENT and related logos are registered or unregistered trademarks and service marks owned or licensed by Paragon. Any unauthorized use of those trademarks is strictly prohibited, and nothing on a Website or in these General Terms of Services or any Service Terms will be construed as granting, by implication, estoppel, or otherwise, any licence or right to use any of those trademarks and service marks.</li>
+                                <li>National Bank of Canada is not a licensed bank in France or other countries outside of Canada.</li>
+                                <li>National Bank of Canada was named the best bank for newcomers to Canada by MoneySense in 2024. MoneySense establishes its annual rankings by selecting some of the largest financial institutions and comparing them for fees, access to credit and services offered to newcomers.</li>
+                                <li>National Bank's mycredit® Mastercard® credit card has won the Milesopedia best credit card for newcomers in 2023. Each year, Milesopedia examines the credit card offers of the largest financial institutions and establishes its ranking according to more than 150 criteria such as fees, welcome offers, minimum income required, number of points per category, account credits, insurance, airport lounge access, etc.
+                                    <ul>
+                                        <li>Our banking offer is available to newcomers from their home countries up to 90 days before arriving in Canada or at any point during your first 5 years in Canada. <a href="https://www.nbc.ca/personal/switch-national-bank/newcomers/celpip-cael-offer.html#notes-item-d5892ec38c">See the above terms and conditions of the offer for no fixed monthly fee for 3 years</a>. The offer may be modified, extended or withdrawn, without prior notice, at any time. The offer may not be combined or used with any other National Bank offer, promotion or benefit. Fees may apply for transactions not included in the banking offer for newcomers. For more information on transaction fees, see our <a href="https://www.nbc.ca/content/dam/bnc/particuliers/pdf/tarification-compte/brochure-fees-banking.pdf">Guide to Personal Banking Solutions</a> [PDF].</li>
+                                        <li>Financing is subject to credit approval by National Bank. Certain conditions apply. Eligible credit cards: mycredit, MC1, Allure, Syncro, Platinum, ECHO Cashback, World and World Elite.</li>
+                                        <li>Guarantee may be required under certain circumstances. Financing is subject to credit approval by National Bank. Certain conditions apply.</li>
+                                        <li>International Transfer by Mastercard® and Interac® are available at a cost of $5.95 per transaction, no matter which account you hold. The amount received by the beneficiary may differ from the amount sent considering that the intermediary bank or the beneficiary's bank will apply their fees to the original transfer's amount. This service allows you to transfer funds to the United States, India, Philippines, United Kingdom and the following 19 European countries: Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, the Netherlands, Portugal, Slovakia, Slovenia and Spain.</li>
+                                        <li>Telephone assistance service offered by FBA Solutions, valid for 12 months from your account opening date. The content of the packages and terms described are subject to change.</li>
+                                        <li>National Bank ABMs or ABMs in THE EXCHANGEᴹᴰ network. Use all our ABM features in six languages (French, English, Spanish, Traditional Chinese, Punjabi, and Arabic).</li>
+                                    </ul>
+                                </li>
+                                <li>Locate CIRRUS, Maestro® and NYCE® ABMs and payment terminals with the logos on the back of your card. You can then use your debit card at these ABMs in the United States and around the world, including our network of partners Accel®, Cirrus® and Allpoint®. Administrative or exchange rate fees may apply.</li>
+                            </ul>
+                        </section>
+                    </div> <!-- /.accordion-body -->
+                </div> <!-- /.accordion-collapse -->
+            </div> <!-- /.accordion-item -->
+        <div>
+
+
+
+        <br>
+
+
         <h3>Eligibility criteria</h3>
         <ul>
             <li>Be a newcomer and at least 18 years of age or older</li>
@@ -761,33 +794,9 @@ function smoothmigration_nbc_terms_and_conditions_section() {
             <li>At the end of the third year, the Newcomer Package will automatically be migrated to <a href="https://www.nbc.ca/personal/accounts/chequing/connected.html">The Connected® package</a>, along with any applicable benefits. No action is required on your part. You can also <a href="https://www.nbc.ca/personal/accounts/chequing.html">browse all our packages</a> to find the one that best suits your needs.</li>
         </ul>
 
-        <h3>Legal disclaimers</h3>
-        <ul>
-            <li>TM National Bank Assistance Network is a trademark of National Bank of Canada, used under licence by authorized third parties.</li>
-            <li>® Mastercard is a registered trademark, and the circles design is a trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
-            <li>®THE EXCHANGE and Accel are registered trademarks of Fiserv Inc.</li>
-            <li>®CIRRUS is a registered trademark of Mastercard International Incorporated. Authorized user: National Bank.</li>
-            <li>®Allpoint is a registered trademark of ATM National LLC.</li>
-            <li>PARAGON, CELPIP, CELPIT, CELTOP, CELL, LPI, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX TEST, LANGUAGE PROFICIENCY INDEX, CANADIAN ENGLISH LANGUAGE PROFICIENCY INDEX PROGRAM, CAEL, CANADIAN ACADEMIC ENGLISH LANGUAGE ASSESSMENT and related logos are registered or unregistered trademarks and service marks owned or licensed by Paragon. Any unauthorized use of those trademarks is strictly prohibited, and nothing on a Website or in these General Terms of Services or any Service Terms will be construed as granting, by implication, estoppel, or otherwise, any licence or right to use any of those trademarks and service marks.</li>
-            <li>National Bank of Canada is not a licensed bank in France or other countries outside of Canada.</li>
-            <li>National Bank of Canada was named the best bank for newcomers to Canada by MoneySense in 2024. MoneySense establishes its annual rankings by selecting some of the largest financial institutions and comparing them for fees, access to credit and services offered to newcomers.</li>
-            <li>National Bank's mycredit® Mastercard® credit card has won the Milesopedia best credit card for newcomers in 2023. Each year, Milesopedia examines the credit card offers of the largest financial institutions and establishes its ranking according to more than 150 criteria such as fees, welcome offers, minimum income required, number of points per category, account credits, insurance, airport lounge access, etc.
-                <ul>
-                    <li>Our banking offer is available to newcomers from their home countries up to 90 days before arriving in Canada or at any point during your first 5 years in Canada. <a href="https://www.nbc.ca/personal/switch-national-bank/newcomers/celpip-cael-offer.html#notes-item-d5892ec38c">See the above terms and conditions of the offer for no fixed monthly fee for 3 years</a>. The offer may be modified, extended or withdrawn, without prior notice, at any time. The offer may not be combined or used with any other National Bank offer, promotion or benefit. Fees may apply for transactions not included in the banking offer for newcomers. For more information on transaction fees, see our <a href="https://www.nbc.ca/content/dam/bnc/particuliers/pdf/tarification-compte/brochure-fees-banking.pdf">Guide to Personal Banking Solutions</a> [PDF].</li>
-                    <li>Financing is subject to credit approval by National Bank. Certain conditions apply. Eligible credit cards: mycredit, MC1, Allure, Syncro, Platinum, ECHO Cashback, World and World Elite.</li>
-                    <li>Guarantee may be required under certain circumstances. Financing is subject to credit approval by National Bank. Certain conditions apply.</li>
-                    <li>International Transfer by Mastercard® and Interac® are available at a cost of $5.95 per transaction, no matter which account you hold. The amount received by the beneficiary may differ from the amount sent considering that the intermediary bank or the beneficiary's bank will apply their fees to the original transfer's amount. This service allows you to transfer funds to the United States, India, Philippines, United Kingdom and the following 19 European countries: Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, the Netherlands, Portugal, Slovakia, Slovenia and Spain.</li>
-                    <li>Telephone assistance service offered by FBA Solutions, valid for 12 months from your account opening date. The content of the packages and terms described are subject to change.</li>
-                    <li>National Bank ABMs or ABMs in THE EXCHANGEᴹᴰ network. Use all our ABM features in six languages (French, English, Spanish, Traditional Chinese, Punjabi, and Arabic).</li>
-                </ul>
-            </li>
-            <li>Locate CIRRUS, Maestro® and NYCE® ABMs and payment terminals with the logos on the back of your card. You can then use your debit card at these ABMs in the United States and around the world, including our network of partners Accel®, Cirrus® and Allpoint®. Administrative or exchange rate fees may apply.</li>
-        </ul>
+
     </div>
 
-            
-        </div> <!-- /.accordion -->
-    </div> <!-- /.nbc-tac-section -->
 
     
 

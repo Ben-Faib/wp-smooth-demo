@@ -39,7 +39,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 				<div class="col-lg-8">
 					<div class="hero-content">
 						<div class="breadcrumb small opacity-75 mb-2">Service / <?php echo esc_html( $term_name ); ?></div>
-						<h1 class="display-4 fw-bold mb-3"><?php the_title(); ?></h1>
+						<h1 class="display-4 fw-bold mb-3 text-decoration-underline"><?php the_title(); ?></h1>
 						<?php if ($id_check == "6548"): ?>
 						<p class="lead mb-4">Get $600 cashback* when you open your first chequing account and up to 3 years with no monthly fee.</p>
 						<?php else: ?>
@@ -56,18 +56,19 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 							<?php endif; ?>
 							<a href="/contact" class="btn btn-outline-light btn-lg"><?php echo ($id_check == "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
 						</div>
-						<?php 
-						// Display awards in hero if they exist
-						if ( function_exists( 'smoothmigration_display_awards_section' ) ) {
-							smoothmigration_display_awards_section( get_the_ID(), 'hero' );
-						}
-						?>
+						
 					</div>
 				</div>
                 <div class="col-lg-4 text-center">
                     <div class="hero-logo bg-white rounded-3 p-4 shadow-sm">
                         <?php echo function_exists('smoothmigration_get_service_logo') ? smoothmigration_get_service_logo( get_the_ID(), 'dark', 'medium', array('class'=>'img-fluid') ) : ( has_post_thumbnail() ? get_the_post_thumbnail( get_the_ID(), 'medium', array('class'=>'img-fluid') ) : '' ); ?>
                     </div>
+					<?php 
+						// Display awards in hero if they exist
+						if ( function_exists( 'smoothmigration_display_awards_section' ) ) {
+							smoothmigration_display_awards_section( get_the_ID(), 'hero' );
+						}
+						?>
                 </div>
 			</div>
 		</div>
@@ -229,7 +230,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 .service-awards{margin-top:1.5rem}
 .award-badges-hero{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
 .award-badge-hero{flex:0 0 auto}
-.award-badge-hero img{width:120px;height:120px;object-fit:contain;border-radius:50%;background:#fff;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.award-badge-hero img{width:100px;height:100px;object-fit:contain;border-radius:50%;background:#fff;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
 .award-badge-sidebar{display:flex;gap:0.75rem;align-items:center;padding:0.75rem 0;border-bottom:1px solid #eee}
 .award-badge-sidebar:last-child{border-bottom:none;padding-bottom:0}
 .award-badge-sidebar .award-badge-image{flex-shrink:0}
