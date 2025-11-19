@@ -166,7 +166,8 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 							</div>
 						</div>
 					<?php endif; ?>
-					<?php if (strval(get_the_ID()) !== "6548"): ?>
+					<!--NBC Check-->
+					<?php if (strval(get_the_ID()) !== "6548"): ?> 
 						<div class="card shadow-sm">
 							<div class="card-body">
 								<h3 class="h5">Typical Timeline</h3>
