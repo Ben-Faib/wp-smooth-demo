@@ -77,14 +77,21 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
     <nav class="service-tabs bg-light border-bottom sticky-top" style="top:60px; z-index: 1000;">
         <div class="container">
             <ul class="nav nav-pills gap-2 py-2" id="svcTabs">
-                <li class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
-<li class="nav-item"><a class="nav-link" href="#how"><?php echo (strval(get_the_ID()) === "6548") ? "How they help newcomers" : "How It Helps Relocators"; ?></a></li>
-                <li class="nav-item"><a class="nav-link" href="#fees"><?php echo (strval(get_the_ID()) === "6548") ? "Fees" : "Fees & Speed"; ?></a></li>
-                <li class="nav-item"><a class="nav-link" href="#countries"><?php echo (strval(get_the_ID()) === "6548") ? "Locations" : "Countries"; ?></a></li>
-                <?php if ( function_exists( 'smoothmigration_get_service_awards' ) && ! empty( smoothmigration_get_service_awards( get_the_ID() ) ) ) : ?>
-                <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
-                <?php endif; ?>
-                <li class="nav-item"><a class="nav-link" href="#faq">FAQs</a></li>
+				<?php if ($id_check !== "6854" ) : ?>
+					<li class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
+	<li class="nav-item"><a class="nav-link" href="#how"><?php echo (strval(get_the_ID()) === "6548") ? "How they help newcomers" : "How It Helps Relocators"; ?></a></li>
+					<li class="nav-item"><a class="nav-link" href="#fees"><?php echo (strval(get_the_ID()) === "6548") ? "Fees" : "Fees & Speed"; ?></a></li>
+					<li class="nav-item"><a class="nav-link" href="#countries"><?php echo (strval(get_the_ID()) === "6548") ? "Locations" : "Countries"; ?></a></li>
+					<?php if ( function_exists( 'smoothmigration_get_service_awards' ) && ! empty( smoothmigration_get_service_awards( get_the_ID() ) ) ) : ?>
+					<li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
+					<?php endif; ?>
+					<li class="nav-item"><a class="nav-link" href="#faq">FAQs</a></li>
+				<?php else: ?>
+					<li class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
+					<li class="nav-item"><a class="nav-link" href="#canadiansim-find">Find the Perfect Plan</a></li>
+					<li class="nav-item"><a class="nav-link" href="#canadiansim-works">How it Works</a></li>
+				<?php endif; ?>
+				
             </ul>
         </div>
     </nav>
@@ -139,21 +146,34 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 				<div class="col-lg-4">
 					<div class="card shadow-sm mb-4">
 						<div class="card-body">
-							<h3 class="h5"><?php echo ($id_check == "6548") ? "Why we recommend" : "Why We Recommend"; ?></h3>
-							<ul class="list-unstyled small mt-3">
-								
-								<?php /*NBC Check*/ if ($id_check !== "6548"): ?>
-									<li>Vetted partner with proven track record</li>
-									<li>Trusted by expats for transparent pricing</li>
-									<li>Seamless fit in our relocation workflow</li>
-								<?php else: ?>
-									<li>Best Bank for Newcomers: Vetted partner with proven track record </li>
-								<?php endif; ?>
+							
+							<?php if ($id_check !== "6854") : ?>
+								<h3 class="h5"><?php echo ($id_check == "6548") ? "Why we recommend" : "Why We Recommend"; ?></h3>
+								<ul class="list-unstyled small mt-3">
+									
+									<?php /*NBC Check*/ if ($id_check !== "6548"): ?>
+										<li>Vetted partner with proven track record</li>
+										<li>Trusted by expats for transparent pricing</li>
+										<li>Seamless fit in our relocation workflow</li>
+									<?php else: ?>
+										<li>Best Bank for Newcomers: Vetted partner with proven track record </li>
+									<?php endif; ?>
 
-							</ul>
-							<?php if ( $affiliate_url ) : ?>
-								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary w-100 mt-3"><?php echo esc_html( $button_text ); ?></a>
+								</ul>
+								<?php if ( $affiliate_url ) : ?>
+									<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary w-100 mt-3"><?php echo esc_html( $button_text ); ?></a>
+								<?php endif; ?>
+							<?php else: ?>
+								<h3 class="h5">Staying for more than 90 days?</h3>
+								<a href="https://orders.canadiansim.com/Plans/?refID=SmoothMigration" target="_blank" rel="nofollow noopener" class="btn btn-primary w-100">Get your SIM Card now</a>
+								<br>
+								<h3 class="h5 mt-3">Staying for less than 90 days?</h3>
+								<a href="https://orders.canadiansim.com/Prepaid/?refID=SmoothMigration" target="_blank" rel="nofollow noopener" class="btn btn-primary w-100">Get your SIM Card now</a>
+
+
+
 							<?php endif; ?>
+
 						</div>
 					</div>
 
@@ -167,7 +187,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 						</div>
 					<?php endif; ?>
 					<!--NBC Check-->
-					<?php if (strval(get_the_ID()) !== "6548"): ?> 
+					<?php if ($id_check !== "6548"): ?> 
 						<div class="card shadow-sm">
 							<div class="card-body">
 								<h3 class="h5">Typical Timeline</h3>
