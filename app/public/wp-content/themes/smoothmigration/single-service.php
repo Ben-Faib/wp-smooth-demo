@@ -77,7 +77,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
     <nav class="service-tabs bg-light border-bottom sticky-top" style="top:60px; z-index: 1000;">
         <div class="container">
             <ul class="nav nav-pills gap-2 py-2" id="svcTabs">
-				<?php if ($id_check !== "6854" || $id_check === "6855") : ? /*CanadianSIM check */>
+				<?php if ($id_check !== "6854" || $id_check === "6855") : /*CanadianSIM check */?>
 					<li class="nav-item"><a class="nav-link active" href="#overview">Overview</a></li>
 	<li class="nav-item"><a class="nav-link" href="#how"><?php echo (strval(get_the_ID()) === "6548") ? "How they help newcomers" : "How It Helps Relocators"; ?></a></li>
 					<li class="nav-item"><a class="nav-link" href="#fees"><?php echo (strval(get_the_ID()) === "6548") ? "Fees" : "Fees & Speed"; ?></a></li>
@@ -147,7 +147,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 					<div class="card shadow-sm mb-4">
 						<div class="card-body">
 							
-							<?php if ($id_check !== "6854" || $id_check === "6855") : ? /*CanadianSIM check */>
+							<?php if ($id_check !== "6854" || $id_check === "6855") : /*CanadianSIM check */?>
 								<h3 class="h5"><?php echo ($id_check == "6548") ? "Why we recommend" : "Why We Recommend"; ?></h3>
 								<ul class="list-unstyled small mt-3">
 									
