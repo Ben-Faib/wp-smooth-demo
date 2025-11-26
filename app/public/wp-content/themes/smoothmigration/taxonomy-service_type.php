@@ -64,6 +64,7 @@ $term = get_queried_object();
                                     'airalo' => array('Best For' => 'Global eSIM coverage', 'Data Plans' => 'From $5/day'),
                                     'visible' => array('Best For' => 'US coverage', 'Data Plans' => 'Unlimited plans available'),
                                     'tesco' => array('Best For' => 'UK coverage', 'Data Plans' => 'Flexible monthly plans'),
+                                    'canadiansim' => array('Best For' => 'Canadian coverage', 'Data Plans' => 'From $1/day'),
                                 )
                             ),
                             'vehicles' => array(
