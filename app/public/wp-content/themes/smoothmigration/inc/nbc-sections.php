@@ -30,7 +30,7 @@ function smoothmigration_nbc_promotion_box() {
             <ul class="list-unstyled mb-0">
                 <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>$300</strong> - Open a chequing account with direct deposit</li>
                 <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>$100</strong> - Sign up for an eligible credit card</li>
-                <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>$50</strong> - Activate systematic savings</li>
+                <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>$100</strong> - Activate systematic savings</li>
                 <li class="mb-2"><i class="fa-solid fa-check-circle text-success me-2"></i><strong>$100</strong> - Set up pre-authorized mortgage payments</li>
             </ul>
             <p class="text-muted small mt-3 mb-0">
@@ -514,6 +514,7 @@ function smoothmigration_nbc_terms_and_conditions_section() {
     ob_start();
     ?>
     <div class="nbc-tac-section mb-5" id="terms-and-conditions">
+
         <h2 class="h3 mb-4" id="nbc-terms-and-conditions-title">Legal disclaimers</h2>
         <div class="accordion" id="nbcTacAccordion">
             <div class="accordion-item">
@@ -522,7 +523,7 @@ function smoothmigration_nbc_terms_and_conditions_section() {
                         Terms and conditions of the promotion
                     </button>
                 </h3>
-                <div id="tac1" class="accordion-collapse collapse show" data-bs-parent="#nbcTacAccordion">
+            <div id="tac1" class="accordion-collapse collapse show" data-bs-parent="#nbcTacAccordion">
                     <div class="accordion-body">
                         <section class="terms-conditions">
 
@@ -690,8 +691,9 @@ function smoothmigration_nbc_terms_and_conditions_section() {
                         </section>
                     </div> <!-- /.accordion-body -->
                 </div> <!-- /.accordion-collapse -->
-            </div> <!-- /.accordion-item -->
-        <div>
+        </div> <!-- /.accordion-item -->
+
+
         <div class="accordion" id="nbcTacLdAccordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
@@ -728,71 +730,102 @@ function smoothmigration_nbc_terms_and_conditions_section() {
                     </div> <!-- /.accordion-body -->
                 </div> <!-- /.accordion-collapse -->
             </div> <!-- /.accordion-item -->
-        <div>
+        </div>
 
+        <div class="accordion" id="nbcTacEcAccordion">
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tac3">
+                        Eligibility criteria
+                    </button>
+                </h3>
+                <div id="tac3" class="accordion-collapse collapse show" data-bs-parent="#nbcTacEcAccordion">
+                    <div class="accordion-body">
+                        <section class="terms-conditions">
+                            <h3>Eligibility criteria</h3>
+                            <ul>
+                                <li>Be a newcomer and at least 18 years of age or older</li>
+                                <li>Apply to open an account from your home country up to 90 days before you arrive in Canada, or within 5 years of your arrival</li>
+                                <li>Be the only account user</li>
+                                <li>The offer for newcomers is open to permanent residents, temporary workers and international students</li>
+                            </ul>
 
+                                                        
+                    
+                        </section>
+                    </div> <!-- /.accordion-body -->
+                </div> <!-- /.accordion-collapse -->
+            </div> <!-- /.accordion-item -->
+        </div>
 
-        <br>
+        <div class="accordion" id="nbcTacDacAccordion">
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tac4">
+                        Bank account for Newcomers details and conditions
+                    </button>
+                </h3>
+                <div id="tac4" class="accordion-collapse collapse show" data-bs-parent="#nbcTacDacAccordion">
+                    <div class="accordion-body">
+                        <section class="terms-conditions">
+                            <h3>Bank account for Newcomers details and conditions</h3>
+                            <ul>
+                                <li><strong>Three levels of savings possible on your newcomer bank account</strong></li>
+                                <li><strong>1. Baseline savings of $334.92 over three years for the account</strong>
+                                    <ul>
+                                        <li>You'll save if you meet the following conditions:</li>
+                                        <li>Open a bank account online before arriving with our secure form or visit a branch upon arrival.</li>
+                                        <li>Sign up for our offer for newcomers.</li>
+                                        <li>Savings are based on:
+                                            <ul>
+                                                <li><strong>First year</strong>: no flat monthly fee (savings of $15.95/month for 12 months)</li>
+                                                <li><strong>Second year</strong>: flat monthly fee of $7.98 instead of $15.95 (savings of $7.97/month for 12 months)</li>
+                                                <li><strong>Third year</strong>: flat monthly fee of $11.96 instead of $15.95 (savings of $3.99/month for 12 months)</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><strong>2. Maximum savings on the account: $574.20 over 3 years</strong>
+                                    <ul>
+                                        <li>In addition to the basic savings conditions, you must:</li>
+                                        <li>Maintain a minimum daily balance of <strong>$4,500</strong></li>
+                                        <li><strong>OR</strong></li>
+                                        <li>Sign up for the following three products and services before the end of the first year and maintain them until the end of the special offer:
+                                            <ul>
+                                                <li>A <strong>Mastercard</strong>® personal credit card</li>
+                                                <li><strong>Electronic bank statements</strong></li>
+                                                <li><strong>Payroll deposit</strong> to your bank account at one of our branches at least once a month <strong>or</strong> payment of at least two bills per month electronically from this bank account</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><strong>3. Maximum total savings of the offer: $683.30 over 3 years</strong>
+                                    <ul>
+                                        <li>To reach these savings, you must meet all the conditions for maximum savings on the account (above) and take advantage of the following services:
+                                            <ul>
+                                                <li>First check order free ($67.10/order)</li>
+                                                <li>Free paper bank statements for the first year ($42)</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><strong>Please note</strong>:
+                                    <ul>
+                                        <li>The savings depend on meeting all the requirements for the entire duration of the offer (3 years).</li>
+                                        <li>If you do not meet all the conditions in a given month, your savings will be reduced.</li>
+                                        <li>If you no longer have the bank account or the Newcomer Package, the savings will no longer apply.</li>
+                                    </ul>
+                                </li>
+                                <li>At the end of the third year, the Newcomer Package will automatically be migrated to <a href="https://www.nbc.ca/personal/accounts/chequing/connected.html">The Connected® package</a>, along with any applicable benefits. No action is required on your part. You can also <a href="https://www.nbc.ca/personal/accounts/chequing.html">browse all our packages</a> to find the one that best suits your needs.</li>
+                            </ul> 
+                        </section>
+                    </div> <!-- /.accordion-body -->
+                </div> <!-- /.accordion-collapse -->
+            </div> <!-- /.accordion-item -->
+        </div>
+        
 
-
-        <h3>Eligibility criteria</h3>
-        <ul>
-            <li>Be a newcomer and at least 18 years of age or older</li>
-            <li>Apply to open an account from your home country up to 90 days before you arrive in Canada, or within 5 years of your arrival</li>
-            <li>Be the only account user</li>
-            <li>The offer for newcomers is open to permanent residents, temporary workers and international students</li>
-        </ul>
-
-        <h3>Bank account for Newcomers details and conditions</h3>
-        <ul>
-            <li><strong>Three levels of savings possible on your newcomer bank account</strong></li>
-            <li><strong>1. Baseline savings of $334.92 over three years for the account</strong>
-                <ul>
-                    <li>You'll save if you meet the following conditions:</li>
-                    <li>Open a bank account online before arriving with our secure form or visit a branch upon arrival.</li>
-                    <li>Sign up for our offer for newcomers.</li>
-                    <li>Savings are based on:
-                        <ul>
-                            <li><strong>First year</strong>: no flat monthly fee (savings of $15.95/month for 12 months)</li>
-                            <li><strong>Second year</strong>: flat monthly fee of $7.98 instead of $15.95 (savings of $7.97/month for 12 months)</li>
-                            <li><strong>Third year</strong>: flat monthly fee of $11.96 instead of $15.95 (savings of $3.99/month for 12 months)</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><strong>2. Maximum savings on the account: $574.20 over 3 years</strong>
-                <ul>
-                    <li>In addition to the basic savings conditions, you must:</li>
-                    <li>Maintain a minimum daily balance of <strong>$4,500</strong></li>
-                    <li><strong>OR</strong></li>
-                    <li>Sign up for the following three products and services before the end of the first year and maintain them until the end of the special offer:
-                        <ul>
-                            <li>A <strong>Mastercard</strong>® personal credit card</li>
-                            <li><strong>Electronic bank statements</strong></li>
-                            <li><strong>Payroll deposit</strong> to your bank account at one of our branches at least once a month <strong>or</strong> payment of at least two bills per month electronically from this bank account</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><strong>3. Maximum total savings of the offer: $683.30 over 3 years</strong>
-                <ul>
-                    <li>To reach these savings, you must meet all the conditions for maximum savings on the account (above) and take advantage of the following services:
-                        <ul>
-                            <li>First check order free ($67.10/order)</li>
-                            <li>Free paper bank statements for the first year ($42)</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><strong>Please note</strong>:
-                <ul>
-                    <li>The savings depend on meeting all the requirements for the entire duration of the offer (3 years).</li>
-                    <li>If you do not meet all the conditions in a given month, your savings will be reduced.</li>
-                    <li>If you no longer have the bank account or the Newcomer Package, the savings will no longer apply.</li>
-                </ul>
-            </li>
-            <li>At the end of the third year, the Newcomer Package will automatically be migrated to <a href="https://www.nbc.ca/personal/accounts/chequing/connected.html">The Connected® package</a>, along with any applicable benefits. No action is required on your part. You can also <a href="https://www.nbc.ca/personal/accounts/chequing.html">browse all our packages</a> to find the one that best suits your needs.</li>
-        </ul>
+        
 
 
     </div>
