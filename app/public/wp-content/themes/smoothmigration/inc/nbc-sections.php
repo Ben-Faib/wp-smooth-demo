@@ -519,11 +519,11 @@ function smoothmigration_nbc_terms_and_conditions_section() {
         <div class="accordion" id="nbcTacAccordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tac1">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tac1">
                         Terms and conditions of the promotion
                     </button>
                 </h3>
-            <div id="tac1" class="accordion-collapse collapse show" data-bs-parent="#nbcTacAccordion">
+            <div id="tac1" class="accordion-collapse collapse" data-bs-parent="#nbcTacAccordion">
                     <div class="accordion-body">
                         <section class="terms-conditions">
 
@@ -697,11 +697,11 @@ function smoothmigration_nbc_terms_and_conditions_section() {
         <div class="accordion" id="nbcTacLdAccordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tac2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tac2">
                         Legal disclaimers
                     </button>
                 </h3>
-                <div id="tac2" class="accordion-collapse collapse show" data-bs-parent="#nbcTacLdAccordion">
+                <div id="tac2" class="accordion-collapse collapse" data-bs-parent="#nbcTacLdAccordion">
                     <div class="accordion-body">
                         <section class="terms-conditions">
                             <h3>Legal disclaimers</h3>
@@ -735,11 +735,11 @@ function smoothmigration_nbc_terms_and_conditions_section() {
         <div class="accordion" id="nbcTacEcAccordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tac3">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tac3">
                         Eligibility criteria
                     </button>
                 </h3>
-                <div id="tac3" class="accordion-collapse collapse show" data-bs-parent="#nbcTacEcAccordion">
+                <div id="tac3" class="accordion-collapse collapse" data-bs-parent="#nbcTacEcAccordion">
                     <div class="accordion-body">
                         <section class="terms-conditions">
                             <h3>Eligibility criteria</h3>
@@ -761,11 +761,11 @@ function smoothmigration_nbc_terms_and_conditions_section() {
         <div class="accordion" id="nbcTacDacAccordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tac4">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tac4">
                         Bank account for Newcomers details and conditions
                     </button>
                 </h3>
-                <div id="tac4" class="accordion-collapse collapse show" data-bs-parent="#nbcTacDacAccordion">
+                <div id="tac4" class="accordion-collapse collapse" data-bs-parent="#nbcTacDacAccordion">
                     <div class="accordion-body">
                         <section class="terms-conditions">
                             <h3>Bank account for Newcomers details and conditions</h3>
