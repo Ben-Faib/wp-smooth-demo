@@ -448,7 +448,7 @@ function smoothmigration_nbc_countries_section() {
             <div class="col-md-6">
                 <div class="p-4 border rounded h-100">
                     <h3 class="h5 mb-3">
-                    <img src="https://wp-smooth-demo.local/wp-content/uploads/2026/01/icon-twotones-social.svg" class="me-2" style="width:1em; height:1em; vertical-align:-0.125em;">
+                    <img src="https://smoothmigration.ca/wp-content/uploads/2026/01/icon-twotones-social.svg" class="me-2" style="width:1em; height:1em; vertical-align:-0.125em;">
                     Branches</h3>
                     <ul class="mb-0">
                         <li><strong>361+ branches</strong> across Canada</li>
@@ -462,7 +462,7 @@ function smoothmigration_nbc_countries_section() {
             <div class="col-md-6">
                 <div class="p-4 border rounded h-100">
                     <h3 class="h5 mb-3">
-                    <img src="https://wp-smooth-demo.local/wp-content/uploads/2026/01/picto-transfer-simple-international-color.svg" class="me-2" style="width:1em; height:1em; vertical-align:-0.125em;">
+                    <img src="https://smoothmigration.ca/wp-content/uploads/2026/01/picto-transfer-simple-international-color.svg" class="me-2" style="width:1em; height:1em; vertical-align:-0.125em;">
                     International access</h3>
                     <ul class="mb-0">
                         <li>Access funds abroad via <strong>Cirrus®, Maestro®, and NYCE®</strong> networks</li>
