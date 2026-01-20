@@ -229,7 +229,16 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 </main>
 
 <style>
-.sticky-cta{position:sticky;bottom:0;background:#fff}
+.sticky-cta{
+	position:sticky;
+	bottom:0;
+	background:#fff
+}
+@media only screen and (max-width: 767px) {
+    .sticky-cta {
+        display: none;
+    }
+}
 .service-tabs .nav-link{border-radius:999px}
 #svcWidget{scroll-margin-top:100px}
 #svcWidget .service-embed{position:relative;min-height:220px}

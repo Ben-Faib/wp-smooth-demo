@@ -540,7 +540,7 @@ function smoothmigration_nbc_terms_and_conditions_section() {
 
                             <h3>Eligibility Conditions</h3>
 
-                            <table border="1" cellspacing="0" cellpadding="8">
+                            <table border="1" cellspacing="0" cellpadding="8" class="table-responsive">
                                 <tr>
                                     <th>Products, Services or Transactions</th>
                                     <th>Conditions</th>
