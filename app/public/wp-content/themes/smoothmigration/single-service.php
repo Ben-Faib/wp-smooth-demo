@@ -217,12 +217,12 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
     <!-- Sticky CTA bar -->
     <!-- <div class="sticky-cta shadow-lg">
         <div class="container d-flex justify-content-between align-items-center py-2">
-            <strong><?php the_title(); ?></strong>
+            <strong><#?php the_title(); ?></strong>
             <div class="d-flex gap-2">
-                <?php if ( $affiliate_url ) : ?>
-                <a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary"><?php echo esc_html( $button_text ); ?></a>
-                <?php endif; ?>
-                <a href="/contact" class="btn btn-outline-primary"><?php echo (strval(get_the_ID()) === "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
+                <#?php if ( $affiliate_url ) : ?>
+                <a href="<#?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-primary"><#?php echo esc_html( $button_text ); ?></a>
+                <#?php endif; ?>
+                <a href="/contact" class="btn btn-outline-primary"><#?php echo (strval(get_the_ID()) === "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
             </div>
         </div>
     </div> -->
