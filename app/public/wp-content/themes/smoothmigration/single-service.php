@@ -215,7 +215,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 	</section>
 
     <!-- Sticky CTA bar -->
-    <div class="sticky-cta shadow-lg">
+    <!-- <div class="sticky-cta shadow-lg">
         <div class="container d-flex justify-content-between align-items-center py-2">
             <strong><?php the_title(); ?></strong>
             <div class="d-flex gap-2">
@@ -225,7 +225,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
                 <a href="/contact" class="btn btn-outline-primary"><?php echo (strval(get_the_ID()) === "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
             </div>
         </div>
-    </div>
+    </div> -->
 </main>
 
 <style>
