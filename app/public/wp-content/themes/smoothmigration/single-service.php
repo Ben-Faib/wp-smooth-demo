@@ -113,7 +113,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
                         if (strval(get_the_ID()) !== "6548" && strval(get_the_ID()) !== "5937") : //check for NBC page and RentGauranter page
                         ?>
 						
-                        <hr class="my-5" />
+                        <!-- <hr class="my-5" />
                         <div class="card shadow-sm mb-4" id="svcWidget">
                             <div class="card-body">
                                 <h2 class="h5 mb-3">Get a quote!</h2>
@@ -126,12 +126,12 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
                                     </div>
                                     <div class="svc-widget-target"></div>
                                     <noscript>
-                                        <?php echo do_shortcode( $svc_widget ); ?>
+                                        <//?php echo do_shortcode( $svc_widget ); ?>
                                     </noscript>
                                 </div>
-                                <template id="svcWidgetTpl"><?php echo do_shortcode( $svc_widget ); ?></template>
+                                <template id="svcWidgetTpl"><//?php echo do_shortcode( $svc_widget ); ?></template>
                             </div>
-                        </div>
+                        </div> -->
                         <?php endif; ?>
                         <?php endif; ?>
                         
