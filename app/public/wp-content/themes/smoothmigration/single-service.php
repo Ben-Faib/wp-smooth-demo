@@ -110,7 +110,7 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
                         if ( smoothmigration_service_should_display_widget( get_the_ID() ) ) :
                         ?>
 						<?php
-                        if (strval(get_the_ID()) !== "6548") : //check for NBC page
+                        if (strval(get_the_ID()) !== "6548" && strval(get_the_ID()) !== "5937") : //check for NBC page and RentGauranter page
                         ?>
 						
                         <hr class="my-5" />

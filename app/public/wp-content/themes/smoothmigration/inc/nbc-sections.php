@@ -502,7 +502,7 @@ function smoothmigration_nbc_cta_section( $affiliate_url = '' ) {
                 <a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg px-5" onclick="if(window.gtag){gtag('event','cta_click',{brand:'National Bank of Canada',location:'bottom_cta'})}">
                     <i class="fa-solid fa-arrow-right me-2"></i>Open an account online
                 </a>
-                <a href="/contact" class="btn btn-outline-light btn-lg px-5">
+                <a href="https://www.nbc.ca/personal/accounts.html" class="btn btn-outline-light btn-lg px-5">
                     <i class="fa-solid fa-comments me-2"></i>Speak with an expert
                 </a>
             </div>
