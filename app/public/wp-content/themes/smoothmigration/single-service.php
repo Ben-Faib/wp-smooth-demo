@@ -52,7 +52,18 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 							
 							<?php if ( $affiliate_url ) : ?>
 								
-								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg"><?php /*NBC Canada Check*/echo ($id_check == "6548") ? "Open an Account" : "Visit Partner"; ?></a>
+								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg">
+								<?php
+								if ($id_check == "6548") {
+									echo "Open an Account";
+								} elseif ($id_check == "6168") {
+									echo "Start Application";
+								} else {
+									echo "Visit Partner";
+								}
+								?>
+								</a>							
+
 							<?php endif; ?>
 							<a href="/contact" class="btn btn-outline-light btn-lg"><?php echo ($id_check == "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
 						</div>
