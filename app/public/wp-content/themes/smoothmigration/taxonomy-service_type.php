@@ -290,13 +290,13 @@ $term = get_queried_object();
 
 <!-- Removed per unified global Quick View modal (in footer via inc/ajax.php) -->
 <!-- My Plan Tray -->
-<div id="planTray" class="plan-tray shadow">
+<!-- <div id="planTray" class="plan-tray shadow">
     <div class="plan-header">My Plan <span class="badge bg-primary" id="planCount">0</span></div>
     <div class="plan-items" id="planItems"></div>
     <div class="plan-actions">
         <a id="planSubmit" href="/contact" class="btn btn-primary w-100">Request Help</a>
     </div>
-</div>
+</div> -->
 
 <style>
 .service-list-card{border:1px solid var(--border-light,#e6e8eb)}
