@@ -34,7 +34,7 @@ get_header();
                             </div>
                             <div class="stat-item">
                                 <div class="stat-number"><?php echo esc_html( get_option( 'sm_successful_relocations', '2500+' ) ); ?></div>
-                                <div class="stat-label">Successful Referrals</div>
+                                <div class="stat-label">Relocations</div>
                             </div>
                         </div>
                         
