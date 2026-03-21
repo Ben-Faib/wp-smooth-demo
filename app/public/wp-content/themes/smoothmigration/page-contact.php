@@ -47,6 +47,7 @@ get_header();
                                 <i class="fas fa-phone me-2"></i>
                                 Call Now!
                             </a>
+                            
                         </div>
                         
                         <div class="contact-stats mt-4">
@@ -62,6 +63,10 @@ get_header();
                                 <div class="stat-number"><?php echo esc_html( get_option( 'sm_countries_served', '5+' ) ); ?></div>
                                 <div class="stat-label">Countries</div>
                             </div>
+                        </div>
+                        <div class="duns-award mt-4" style="justify-content: left; text-align: left; font-size: 0.9rem; color: #ddd;">
+                                <img src="/wp-content/themes/smoothmigration/assets/images/duns_4.png" alt="Dun & Bradstreet 40 Under 40 Logo" class="duns-logo mt-3" loading="lazy" style="width: 100px;">
+                                <br><p style="text-align: left;">DUNS Number<br> 243276421</p>
                         </div>
                     </div>
                 </div>

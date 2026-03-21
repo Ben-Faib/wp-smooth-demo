@@ -33,8 +33,16 @@ get_header(); ?>
                         <a href="/become-a-partner" class="btn btn-accent btn-lg cta-partner">
                             <span class="icon-glow me-2"><?php echo sm_icon('handshake', 'solid', ''); ?></span>
                             Become a Partner
+
                         </a>
+                        <div style="justify-content: center; text-align: center; font-size: 0.9rem; color: #ddd;">
+                            <img src="wp-content\themes\smoothmigration\assets\images\duns_4.png" alt="Dun & Bradstreet 40 Under 40 Logo" class="duns-logo mt-3" loading="lazy" style="width: 100px;">
+                        <br><p>DUNS Number<br> 243276421</p>
+                        </div>
+                        
+
                     </div>
+                    
                     <!-- Urgency without pressure -->
                     <div class="urgency-signals mt-3">
                         <p class="urgency-text">
