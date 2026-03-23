@@ -98,7 +98,7 @@
     <!-- Tier 3: Trust Signals & Contact -->
     <div class="footer-tier-3">
       <div class="row align-items-center g-4">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <div class="footer-trust">
             <div class="trust-metrics">
               <div class="trust-metric-item">
@@ -117,7 +117,7 @@
           </div>
         </div>
         
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <div class="footer-contact" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
             <p class="footer-tagline"><strong>Ready to relocate smoothly?</strong></p>
             <p class="text-muted small mb-2">Get personalized guidance from our experts</p>
@@ -146,8 +146,27 @@
             </div>
             <p class="footer-copyright">&copy; <?php echo date_i18n( 'Y' ); ?> <span itemprop="name">Smooth Migration</span>. All Rights Reserved.</p>
             <p class="text-muted small">Free to use. We're paid by partners; we only work with vetted providers.</p>
+            
           </div>
+          
+
+
+
+
         </div>
+
+        <div class="col-lg-2 text-lg-end">
+          <div style="text-align: right; font-size: 0.9rem; color: #ddd;">
+            <img src="/wp-content/themes/smoothmigration/assets/images/duns_4.png" alt="Dun & Bradstreet 40 Under 40 Logo" class="duns-logo mt-3" loading="lazy" style="width: 100px;">
+            <br><p>DUNS Number<br> 243276421</p>
+          </div>
+
+
+        </div>
+        
+
+
+
       </div>
     </div>
   </div>

@@ -64,10 +64,7 @@ get_header();
                                 <div class="stat-label">Countries</div>
                             </div>
                         </div>
-                        <div class="duns-award mt-4" style="justify-content: left; text-align: left; font-size: 0.9rem; color: #ddd;">
-                                <img src="/wp-content/themes/smoothmigration/assets/images/duns_4.png" alt="Dun & Bradstreet 40 Under 40 Logo" class="duns-logo mt-3" loading="lazy" style="width: 100px;">
-                                <br><p style="text-align: left;">DUNS Number<br> 243276421</p>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-lg-5">

@@ -35,10 +35,7 @@ get_header(); ?>
                             Become a Partner
 
                         </a>
-                        <div style="justify-content: center; text-align: center; font-size: 0.9rem; color: #ddd;">
-                            <img src="wp-content\themes\smoothmigration\assets\images\duns_4.png" alt="Dun & Bradstreet 40 Under 40 Logo" class="duns-logo mt-3" loading="lazy" style="width: 100px;">
-                        <br><p>DUNS Number<br> 243276421</p>
-                        </div>
+                        
                         
 
                     </div>
