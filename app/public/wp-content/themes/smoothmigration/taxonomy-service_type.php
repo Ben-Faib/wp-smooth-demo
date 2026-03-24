@@ -298,8 +298,28 @@ $term = get_queried_object();
                     ?>
                     <div class="col-lg-12">
                         <?php $has_widget = get_post_meta( get_the_ID(), '_service_widget_html', true ) ? '1' : '0'; ?>
-                        <div class="card h-100 shadow-sm service-list-card" data-title="<?php echo esc_attr( get_the_title() ); ?>" data-excerpt="<?php echo esc_attr( $excerpt ); ?>" data-logo="<?php echo esc_url( $logo_src ); ?>" data-link="<?php echo esc_url( get_permalink() ); ?>" data-affiliate="<?php echo esc_url( $affiliate ?: '' ); ?>" data-service-type="<?php echo esc_attr( $service_type_slug ); ?>" data-has-widget="<?php echo esc_attr( $has_widget ); ?>">
-                            <div class="card-body d-flex align-items-center justify-content-between flex-wrap gap-3">
+
+                        <?php
+                            $custom_link = get_permalink();
+
+                            if (get_the_title() === 'National Bank of Canada') {
+                                $custom_link = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+                            }
+                            ?>
+
+                            <div class="card h-100 shadow-sm service-list-card"
+                                data-title="<?php echo esc_attr( get_the_title() ); ?>"
+                                data-excerpt="<?php echo esc_attr( $excerpt ); ?>"
+                                data-logo="<?php echo esc_url( $logo_src ); ?>"
+                                data-link="<?php echo esc_url( $custom_link ); ?>"
+                                data-affiliate="<?php echo esc_url( $affiliate ?: '' ); ?>"
+                                data-service-type="<?php echo esc_attr( $service_type_slug ); ?>"
+                                data-has-widget="<?php echo esc_attr( $has_widget ); ?>">
+
+
+
+
+                        <div class="card-body d-flex align-items-center justify-content-between flex-wrap gap-3">
                                 <div class="d-flex align-items-center gap-3">
                                     <?php echo $logo_html ?: ''; ?>
                                     <h3 class="card-title h5 mb-0"><?php the_title(); ?></h3>
@@ -309,7 +329,15 @@ $term = get_queried_object();
                                         data-service-type="<?php echo esc_attr( $service_type_slug ); ?>"
                                         data-service-type-name="<?php echo esc_attr( get_the_title() ); ?>">Quick View</button>
                                     <button class="btn btn-outline-secondary btn-sm js-add-plan" data-id="<?php the_ID(); ?>">Add to My Plan</button>
-                                    <a href="<?php the_permalink(); ?>" class="btn btn-primary btn-sm">Learn More</a>
+                                    <?php
+                                    if (get_the_title() === 'National Bank of Canada') {
+                                        $url = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+                                    } else {
+                                        $url = get_permalink();
+                                    }
+                                    ?>
+
+                                    <a href="<?php echo esc_url($url); ?>" class="btn btn-primary btn-sm" target="_blank">Learn More</a>
                                 </div>
                             </div>
                         </div>
