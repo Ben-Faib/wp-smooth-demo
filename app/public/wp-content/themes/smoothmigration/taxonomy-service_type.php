@@ -46,6 +46,7 @@ $term = get_queried_object();
 <main id="main" class="site-main py-5" role="main">
     <div class="container">
         <?php
+
         // Add quick comparison for all service types except banking-services and realtor
         $excluded_slugs = array('banking-services', 'realtor');
         if ( isset($term) && isset($term->slug) && !in_array($term->slug, $excluded_slugs) ) :
@@ -158,9 +159,15 @@ $term = get_queried_object();
                                 ))
                             ));
 
+
+
+
+                            //edit
                             foreach($posts as $p){
+
                                 $slug = sanitize_title($p->post_title);
                                 $row = null;
+
                                 foreach($current_comparison['data'] as $key=>$val){
                                     if (strpos($slug,$key)!==false){
                                         $row=$val; break;
@@ -170,14 +177,30 @@ $term = get_queried_object();
                                 if ($row) {
                                     echo '<tr>';
                                     echo '<td>'.esc_html($p->post_title).'</td>';
+
                                     foreach ($row as $value) {
                                         echo '<td>'.esc_html($value).'</td>';
                                     }
+
                                     echo '<td><a class="btn btn-outline-primary btn-sm" href="'.get_permalink($p->ID).'">Details</a></td>';
+                                    
+
                                     echo '</tr>';
                                 }
                             }
                             echo '</tbody>';
+
+
+
+
+
+
+
+
+
+
+
+
                         endif;
                         ?>
                     </table>
@@ -201,17 +224,47 @@ $term = get_queried_object();
                                 'xe' => array('Best For' => 'Larger transfers & FX tools', 'Speed' => '1–3 days'),
                                 'chime' => array('Best For' => 'US banking setup', 'Speed' => 'Same day'),
                             );
-                            $posts = get_posts(array('post_type'=>'service','numberposts'=>-1,'tax_query'=>array(array('taxonomy'=>'service_type','field'=>'slug','terms'=>array('banking-services')))));
+
+                            $posts = get_posts(array(
+                                'post_type'=>'service',
+                                'numberposts'=>-1,
+                                'tax_query'=>array(array(
+                                    'taxonomy'=>'service_type',
+                                    'field'=>'slug',
+                                    'terms'=>array('banking-services')
+                                ))
+                            ));
+
                             foreach($posts as $p){
                                 $slug = sanitize_title($p->post_title);
                                 $row = null;
-                                foreach($compare as $key=>$val){ if (strpos($slug,$key)!==false){ $row=$val; break; } }
+
+                                foreach($compare as $key=>$val){
+                                    if (strpos($slug,$key)!==false){
+                                        $row=$val; break;
+                                    }
+                                }
+
                                 $best = $row['Best For'] ?? 'Great for expats';
                                 $speed = $row['Speed'] ?? 'Varies';
-                                echo '<tr><td>'.esc_html($p->post_title).'</td><td>'.esc_html($best).'</td><td>'.esc_html($speed).'</td><td><a class="btn btn-outline-primary btn-sm" href="'.get_permalink($p->ID).'">Details</a></td></tr>';
+
+                                // ✅ Check exact title
+                                if ($p->post_title === 'National Bank of Canada') {
+                                    $url = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+                                } else {
+                                    $url = get_permalink($p->ID);
+                                }
+
+                                echo '<tr>
+                                    <td>'.esc_html($p->post_title).'</td>
+                                    <td>'.esc_html($best).'</td>
+                                    <td>'.esc_html($speed).'</td>
+                                    <td><a class="btn btn-outline-primary btn-sm" href="'.$url.'" target="_blank">Details</a></td>
+                                </tr>';
                             }
                             ?>
-                        </tbody>
+                            </tbody>
+
                     </table>
                 </div>
             </div>
