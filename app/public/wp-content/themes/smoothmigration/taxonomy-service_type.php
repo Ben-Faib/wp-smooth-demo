@@ -328,7 +328,7 @@ $term = get_queried_object();
                                     <button class="btn btn-outline-primary btn-sm btn-quick-view"
                                         data-service-type="<?php echo esc_attr( $service_type_slug ); ?>"
                                         data-service-type-name="<?php echo esc_attr( get_the_title() ); ?>">Quick View</button>
-                                    <button class="btn btn-outline-secondary btn-sm js-add-plan" data-id="<?php the_ID(); ?>">Add to My Plan</button>
+                                    <!-- <button class="btn btn-outline-secondary btn-sm js-add-plan" data-id="<?php the_ID(); ?>">Add to My Plan</button> -->
                                     <?php
                                     if (get_the_title() === 'National Bank of Canada') {
                                         $url = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
