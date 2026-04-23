@@ -14,6 +14,8 @@ $company_url = get_post_meta( get_the_ID(), '_service_company_url', true );
 $service_terms = get_the_terms( get_the_ID(), 'service_type' );
 $term_name = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->name : '';
 $term_slug = $service_terms && ! is_wp_error( $service_terms ) ? $service_terms[0]->slug : '';
+$service_slug = get_post_field( 'post_name', get_the_ID() );
+
 
 
 
@@ -27,7 +29,7 @@ if (strpos($term_slug, 'insurance') !== false) {
 } else {}
 
 $id_check = strval(get_the_ID());
-echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
+echo "<script>console.log('Debug: " . json_encode($service_slug) . "');</script>";
 ?>
 
 
@@ -65,8 +67,16 @@ echo "<script>console.log('Debug: " . json_encode($id_check) . "');</script>";
 								</a>							
 
 							<?php endif; ?>
-							<a href="/contact" class="btn btn-outline-light btn-lg"><?php echo ($id_check == "6548") ? "Talk to an expert" : "Talk to Our Team"; ?></a>
-						</div>
+								<a href="/contact" class="btn btn-outline-light btn-lg">
+									<?php 
+									if ( $service_slug === 'travelance' ) {
+										echo "Contact Travelance";
+									} else {
+										echo ($id_check == "6548") ? "Talk to an expert" : "Talk to Our Team";
+									}
+									?>
+								</a>						
+							</div>
 						
 					</div>
 				</div>
