@@ -51,31 +51,33 @@ echo "<script>console.log('Debug: " . json_encode($service_slug) . "');</script>
 
 
 						<div class="d-flex flex-wrap gap-3">
-							
-							<?php if ( $affiliate_url ) : ?>
-								
-								<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg">
-								<?php
-								if ($id_check == "6548") {
-									echo "Open an Account";
-								} elseif ($id_check == "6168") {
-									echo "Start Application";
-								} else {
-									echo "Visit Partner";
-								}
-								?>
-								</a>							
 
-							<?php endif; ?>
-								<a href="/contact" class="btn btn-outline-light btn-lg">
-									<?php 
-									if ( $service_slug === 'travelance' ) {
-										echo "Contact Travelance";
-									} else {
+								<?php if ( $affiliate_url ) : ?>
+									
+									<a href="<?php echo esc_url( $affiliate_url ); ?>" target="_blank" rel="nofollow noopener" class="btn btn-light btn-lg">
+										<?php
+										if ($id_check == "6548") {
+											echo "Open an Account";
+										} elseif ($id_check == "6168") {
+											echo "Start Application";
+										} else {
+											echo "Visit Partner";
+										}
+										?>
+									</a>
+
+								<?php endif; ?>
+
+								<?php if ( $service_slug !== 'travelance' ) : ?>
+									
+									<a href="/contact" class="btn btn-outline-light btn-lg">
+										<?php 
 										echo ($id_check == "6548") ? "Talk to an expert" : "Talk to Our Team";
-									}
-									?>
-								</a>						
+										?>
+									</a>
+
+								<?php endif; ?>
+
 							</div>
 						
 					</div>

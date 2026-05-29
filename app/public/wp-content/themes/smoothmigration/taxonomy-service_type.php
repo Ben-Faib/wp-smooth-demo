@@ -92,7 +92,7 @@ $term = get_queried_object();
                                     'lemonade' => array('Best For' => 'Tenant insurance', 'Coverage Type' => 'Rental protection'),
                                     'square' => array('Best For' => 'Canadian tenant insurance', 'Coverage Type' => 'Rental protection'),
                                     'pets' => array('Best For' => 'Canadian pet insurance', 'Coverage Type' => 'Pet health'),
-                                    'travelance' => array('Best For' => 'Canadian travel insurance', 'Coverage Type' => 'Travel medical & trip protection'),
+                                    'travelance' => array('Best For' => 'Canadian travel insurance', 'Coverage Type' => 'Travel protection'),
                                 )
                             ),
                             'visas-immigration' => array(
