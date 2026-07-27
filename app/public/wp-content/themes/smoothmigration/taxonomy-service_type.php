@@ -251,7 +251,22 @@ $term = get_queried_object();
 
                                 // ✅ Check exact title
                                 if ($p->post_title === 'National Bank of Canada') {
-                                    $url = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+                                    // Get the host name and convert it to lowercase
+                                    $host = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
+
+                                    // Strip out "www." if present so both www and non-www work
+                                    $host = preg_replace('/^www\./', '', $host);
+
+                                    if ($host === 'smoothmigration.net') {
+                                        // Code for the .net domain
+                                        $url = 'https://retail.appointment.bnc.ca/meeting-methods?category=AC&lang=en&utm_medium=SMOOTHMIGRATION&utm_source=15';
+                                    } elseif ($host === 'smoothmigration.ca') {
+                                        // Code for the .ca domain
+                                        $url = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+                                    } else {
+                                        // Fallback or local development environment
+                                        $url = get_permalink($p->ID);
+                                    }
                                 } else {
                                     $url = get_permalink($p->ID);
                                 }
@@ -304,7 +319,22 @@ $term = get_queried_object();
                             $custom_link = get_permalink();
 
                             if (get_the_title() === 'National Bank of Canada') {
-                                $custom_link = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+
+                                // Get the host name and convert it to lowercase
+                                    $host = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
+
+                                    // Strip out "www." if present so both www and non-www work
+                                    $host = preg_replace('/^www\./', '', $host);
+
+                                    if ($host === 'smoothmigration.net') {
+                                        // Code for the .net domain
+                                        $custom_link = 'https://retail.appointment.bnc.ca/meeting-methods?category=AC&lang=en&utm_medium=SMOOTHMIGRATION&utm_source=15';;
+                                    } elseif ($host === 'smoothmigration.ca') {
+                                        // Code for the .ca domain
+                                        $custom_link = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+                                    } else {
+                                        // Fallback or local development environment
+                                    }
                             }
                             ?>
 
@@ -333,7 +363,28 @@ $term = get_queried_object();
                                     <!-- <button class="btn btn-outline-secondary btn-sm js-add-plan" data-id="<?php the_ID(); ?>">Add to My Plan</button> -->
                                     <?php
                                     if (get_the_title() === 'National Bank of Canada') {
-                                        $url = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+
+                                        // Get the host name and convert it to lowercase
+                                        $host = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
+
+                                        // Strip out "www." if present so both www and non-www work
+                                        $host = preg_replace('/^www\./', '', $host);
+
+                                        if ($host === 'smoothmigration.net') {
+                                            // Code for the .net domain
+                                            $url = 'https://retail.appointment.bnc.ca/meeting-methods?category=AC&lang=en&utm_medium=SMOOTHMIGRATION&utm_source=15';
+                                        } elseif ($host === 'smoothmigration.ca') {
+                                            // Code for the .ca domain
+                                            $url = 'https://www.nbc.ca/personal/switch-national-bank/newcomers/smoothmigration-offer.html';
+                                        } else {
+                                            // Fallback or local development environment
+                                        }
+
+
+
+
+
+
                                     } else {
                                         $url = get_permalink();
                                     }
