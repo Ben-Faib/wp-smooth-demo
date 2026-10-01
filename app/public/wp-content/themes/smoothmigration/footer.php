@@ -145,7 +145,7 @@
               </a>
             </div>
             <p class="footer-copyright">&copy; <?php echo date_i18n( 'Y' ); ?> <span itemprop="name">Smooth Migration</span>. All Rights Reserved.</p>
-            <p class="text-muted small">Free to use. We're paid by partners; we only work with vetted providers.</p>
+            <p class="text-muted small">We only work with vetted providers.</p>
             
           </div>
           
