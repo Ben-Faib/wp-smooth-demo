@@ -227,7 +227,7 @@ get_header(); ?>
                     // Get services with featured images for logo carousel
                     $services = get_posts(array(
                         'post_type' => 'service',
-                        'posts_per_page' => 12,
+                        'posts_per_page' => -1,
                         'meta_query' => array(
                             array(
                                 'key' => '_thumbnail_id',
