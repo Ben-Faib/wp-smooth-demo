@@ -226,11 +226,13 @@ get_header(); ?>
                     <?php
                     // Get services with featured images for logo carousel
                     $services = get_posts(array(
-                        'post_type' => 'service',
+                        'post_type'      => 'service',
+                        'post_name__in'  => array('sirelo', 'lemonade', 'visible', 'national-bank-of-canada', 'wise', 'ownr', 'homewise'), // Service slugs
                         'posts_per_page' => -1,
-                        'meta_query' => array(
+                        'orderby'        => 'post_name__in', // Keeps them in the exact order written above
+                        'meta_query'     => array(
                             array(
-                                'key' => '_thumbnail_id',
+                                'key'     => '_thumbnail_id',
                                 'compare' => 'EXISTS'
                             )
                         )
