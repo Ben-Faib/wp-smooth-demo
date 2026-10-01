@@ -366,7 +366,7 @@ get_header();
                                 </div>
                                 <div class="hours-item">
                                     <span class="day">Sunday:</span>
-                                    <span class="time">Closed</span>
+                                    <span class="time">Client support requests only.</span>
                                 </div>
                                 <div class="emergency-note">
                                     <small class="text-muted">
